@@ -189,6 +189,7 @@ a:focus{
 .wppb-popup-lead-form .lead-form-front{
     padding: 15px;
     background-size: 100%;
+    box-sizing: border-box;
 }
 .wppb-popup-demo .wppb-popup-custom  .wppb-popup-lead-form .leadform-show-form span{
     text-align: left;

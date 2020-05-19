@@ -51,7 +51,7 @@ function initContent($column_content){
 				}elseif ( $setting_value['type'] == 'lead-form' && is_numeric($setting_value['content']) ) {
                   $popupContent .= '<div class="data-rl-editable-wrap" '.$alignMent.'>
 									<div class="actions_"><span class="dashicons dashicons-no rlRemoveElement"></span></div>
-									<div class="wppb-popup-lead-form" data-form-id="'.$setting_value['content'].'">
+									<div class="wppb-popup-lead-form" '.$uniqIdAttr.' data-form-id="'.$setting_value['content'].'">
 									'.wppb_db::lead_form_front_end()->lfb_show_front_end_forms($setting_value['content']).'
 									</div>
 									</div>';

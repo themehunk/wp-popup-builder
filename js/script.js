@@ -709,7 +709,7 @@ var Custom_popup_editor = {
 				let inputValue = sepInput.val();
 						let setHiddenInputI = jQuery('input[type="hidden"][data-global-save]');
 						let setHiddenInput = setHiddenInputI;
-						if (setHiddenInput.val()) {
+						if ( setHiddenInput.val() ) {
 							setHiddenInput = JSON.parse(setHiddenInput.val());
 						}
 				let checkArray = (typeof setHiddenInput === 'object')?true:false;
@@ -960,6 +960,7 @@ var Custom_popup_editor = {
 
 		if ( getForm.data('form-id') ) {
 			jQuery('.rl-lead-form-panel .lead-form-bulider-select select').val( getForm.attr('data-form-id') );
+			Custom_popup_editor._leadFormStyling();
 		}
 
 
@@ -982,6 +983,43 @@ var Custom_popup_editor = {
 			});
   		}
 	},
+	_leadFormStyling:function(){
+		let leadForm = jQuery('.wppb-popup-lead-form form');
+		let getInputs = jQuery('.wppb-lead-form-styling [data-lead-form]');
+
+		function leadFormInput(index, value){
+			let sepInput = jQuery(value);
+			let getData = sepInput.data('lead-form');
+			if ( getData == 'lf-form-width' ) {
+				let width = leadForm.outerWidth();
+				let pwidth = leadForm.closest('.leadform-show-form').width();
+				let getWidthInPer = Math.round((width / pwidth) * 100);
+				Custom_popup_editor._inputRange(sepInput, false, false, getWidthInPer);
+			}else if( sepInput.data('input-color') == "lf-form-color" ){
+				Custom_popup_editor._colorPickr( sepInput, leadForm ,'background-color' );
+			}else if( sepInput.data('input-color') == 'lf-submit-btn-color' ){
+				Custom_popup_editor._colorPickr( sepInput, leadForm.find('input.lf-form-submit') ,'color' );
+			}else if( sepInput.data('input-color') == 'lf-submit-btn-bcolor' ){
+				Custom_popup_editor._colorPickr( sepInput, leadForm.find('input.lf-form-submit') ,'background-color' );
+			}else if( getData == 'lf-submit-btn-font-size' ){
+				Custom_popup_editor._inputRange(sepInput, false, false, leadForm.find('input.lf-form-submit').css('font-size') );
+			}else if( sepInput.data('input-color') == 'lf-label-color' ){
+				let element = leadForm.find('.name-type.lf-field > label, .text-type.lf-field > label, .textarea-type.lf-field > label');
+				Custom_popup_editor._colorPickr( sepInput, element ,'color' );
+			}else if( getData == 'lf-label-font-size' ){
+				let element = leadForm.find('.lf-field > label').css('font-size');
+				Custom_popup_editor._inputRange(sepInput, false, false, element );
+			}
+
+
+
+		}
+
+
+		jQuery.each(getInputs, leadFormInput);
+
+		// console.log(getInputs);
+	},
 	_bind:function(){
 		jQuery(document).on('click', '.wppb-popup-custom [data-rl-editable]',Custom_popup_editor._openEditPanel);
 		jQuery(document).on('click', '.wppb-popup-custom .rlRemoveElement',Custom_popup_editor._rlRemoveElement);
@@ -996,15 +1034,16 @@ var Custom_popup_editor = {
 		jQuery(document).on('click', '.prebulilt-popup-inner [data-layout]', Custom_popup_editor._chooseLayout);
 		jQuery(document).on('click', '.wppb-popup-name-init', Custom_popup_editor._popupName);
 
-	},
-	_emToPxUnit:function(sum,param){
-		if (param == 'px') {
-			return sum * 10;
-		}else if (param == 'em') {
-			return sum % 10;
-		}
-	},
-	_chooseImage:function(e){
+	}
+	// ,
+	// _emToPxUnit:function(sum,param){
+	// 	if (param == 'px') {
+	// 		return sum * 10;
+	// 	}else if (param == 'em') {
+	// 		return sum % 10;
+	// 	}
+	// }
+	,_chooseImage:function(e){
 		e.preventDefault();
     	let this_button = jQuery(this);
     	custom_uploader = wp.media({

@@ -548,6 +548,57 @@
 					<?php echo wppb_db::lead_form_opt(); ?>
 				</select>
 			</div>
+			<div class="wppb-lead-form-styling">
+				<!-- form-style -->
+				<div class="wppb-lf-form-style">
+					<div class="rl_i_editor-header-title">
+						<label>Form Setting</label>
+					</div>
+
+					<?php 
+					echo $wp_builder_obj->range_slider('Form Width', 'lf-form-width', ['title'=>'%','min'=>"20",'max'=>100,'value'=>100], false, 'data-lead-form'); 
+					echo $wp_builder_obj->color('Background Color','background-color','data-lead-form','lf-form-color');
+					?>
+
+
+
+				</div>
+				<!-- heading style -->
+				<!-- <div class="wppb-lf-heading-style">
+					<div class="rl_i_editor-header-title">
+						<label>Heading Setting </label>
+					</div>
+				</div> -->
+				<!-- input style -->
+				<!-- <div class="wppb-lf-input-style">
+					<div class="rl_i_editor-header-title">
+						<label>Input Setting </label>
+					</div>
+				</div> -->
+				<!-- label style -->
+				<div class="wppb-lf-label-style">
+					<div class="rl_i_editor-header-title">
+						<label>Label Setting </label>
+					</div>
+					<?php 
+					echo $wp_builder_obj->color('Color','color','data-lead-form','lf-label-color');
+					echo $wp_builder_obj->range_slider('Font Size', 'lf-label-font-size', ['title'=>'px','min'=>"10",'max'=>100,'value'=>10], false, 'data-lead-form'); 
+					?>
+				</div>
+				<!-- button style -->
+				<div class="wppb-lf-button-style">
+					<div class="rl_i_editor-header-title">
+						<label>Submit Button Setting </label>
+					</div>
+				<?php 
+				echo $wp_builder_obj->color('Color','color','data-lead-form','lf-submit-btn-color');
+				echo $wp_builder_obj->color('Background Color','background-color','data-lead-form','lf-submit-btn-bcolor');
+				echo $wp_builder_obj->range_slider('Font Size', 'lf-submit-btn-font-size', ['title'=>'px','min'=>"10",'max'=>100,'value'=>10], false, 'data-lead-form'); 
+				?>
+				</div>
+
+			</div>
+
 		</section>
 		<!-- add lead form -->
 	</div>
