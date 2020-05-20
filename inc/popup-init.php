@@ -49,9 +49,14 @@ function initContent($column_content){
 									<span data-rl-editable="link" '.$contentAttr.'>'.$setting_value['content'].'</span>
 								</div>';
 				}elseif ( $setting_value['type'] == 'lead-form' && is_numeric($setting_value['content']) ) {
-                  $popupContent .= '<div class="data-rl-editable-wrap" '.$alignMent.'>
-									<div class="actions_"><span class="dashicons dashicons-no rlRemoveElement"></span></div>
-									<div class="wppb-popup-lead-form" '.$uniqIdAttr.' data-form-id="'.$setting_value['content'].'">
+				  	$formStyles = '';
+					if ( isset($setting_value['styles']) ) {
+				  		$formStyles = htmlspecialchars( json_encode($setting_value['styles']), ENT_COMPAT );
+				  		$formStyles = 'data-form-styles="'.$formStyles.'"';
+					}
+              $popupContent .= '<div class="data-rl-editable-wrap" '.$alignMent.'>
+								<div class="actions_"><span class="dashicons dashicons-no rlRemoveElement"></span></div>
+								<div class="wppb-popup-lead-form" '.$uniqIdAttr.' data-form-id="'.$setting_value['content'].'" '.$formStyles.'>
 									'.wppb_db::lead_form_front_end()->lfb_show_front_end_forms($setting_value['content']).'
 									</div>
 									</div>';

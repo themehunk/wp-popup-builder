@@ -180,9 +180,13 @@ public function wppb_html($setting,$inline=false){
           'layout' => '',
           'close-btn'=>'',
           'style'=>'',
+          'lead-form' => ''
           );
       $popupFrontSetting = ['close-type'=>3,'outside-color'=>'#535353F2','effect'=>1,'popup-delay-open'=>3,'popup-delay-close'=>0];
       $allSetting = unserialize($setting);   
+      
+      // print_r($allSetting);
+
         foreach ($allSetting as $setting_value) {
           if (isset($setting_value['content']) && is_array($setting_value['content'])) {
             if ($setting_value['type'] == 'global-setting') {
@@ -250,8 +254,26 @@ public function wppb_initContent($column_content,$parentId){
                                <img  class="'.$uniqIdAttr.'" src="'.$setting_value['image-url'].'">
                               </div>';
                 }elseif ( $setting_value['type'] == 'lead-form' && is_numeric($setting_value['content']) ) {
+
+                  if ( isset($setting_value['styles']) && $uniqIdAttr ) {
+                        if ( isset($setting_value['styles']['form-style']) ){
+                              $popupContent['style'] .= "#".$parentId.' #'.$uniqIdAttr.' form{'.$setting_value['styles']['form-style'].';}';
+                          }
+                        if ( isset($setting_value['styles']['submit-style']) ){
+                            $popupContent['style'] .= "#".$parentId.' #'.$uniqIdAttr.' form input[type="submit"]{'.$setting_value['styles']['submit-style'].';}';
+                        }
+                        if ( isset($setting_value['styles']['label-style']) ){
+                            $popupContent['style'] .= "#".$parentId.' #'.$uniqIdAttr.' form .lf-field > label{'.$setting_value['styles']['label-style'].';}';
+                        }
+
+                        if ( isset($setting_value['styles']['heading-style']) ){
+                            $popupContent['style'] .= "#".$parentId.' #'.$uniqIdAttr.' form > h2{'.$setting_value['styles']['heading-style'].';}';
+                        }
+
+                  }
+
                   $popupContent['content'] .= '<div class="data-rl-editable-wrap" '.$alignMent.'>
-                  <div class="wppb-popup-lead-form" data-form-id="'.$setting_value['content'].'">
+                  <div class="wppb-popup-lead-form" id="'.$uniqIdAttr.'">
                   '.self::lead_form_front_end()->lfb_show_front_end_forms($setting_value['content']).'
                   </div>
                   </div>';

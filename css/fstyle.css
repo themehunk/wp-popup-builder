@@ -189,12 +189,13 @@ font-weight: 600;
     font-size: 22px;
     font-weight: 500;
     color: rgba(82, 82, 82, 1);
+    line-height: 1;
 }
 .wppb-popup-lead-form .leadform-show-form label{
-       margin: 5px 0;
+         margin: 5px 0;
     font-size: 15px;
     color: rgba(82, 82, 82, 1);
-    line-height: 24px;
+    line-height: 1;
 }
 
 /*widget*/
@@ -228,7 +229,7 @@ font-weight: 600;
 
 /*effect css */
     /*effect one*/
-    /*.wppb-effect-one{
+    .wppb-effect-one{
           opacity: 0;
         align-items: center;
     }
@@ -238,7 +239,7 @@ font-weight: 600;
     .wppb-effect-one.wppb_popup_shut{
         opacity: 1;
         animation:effect_one_close .5s 0s 1 normal ease-in forwards;
-    }*/
+    }
     /*effect two*/
     /*.wppb-effect-two > div{
         perspective: 108px;
