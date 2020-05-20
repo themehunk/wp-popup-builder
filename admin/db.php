@@ -3,7 +3,7 @@
 
 if ( ! class_exists( 'wppb_db' ) ) return;
 
-require_once(LFB_PLUGIN_PATH.'inc/front-end.php');
+// if(!class_exists( 'LFB_SAVE_DB' )) require_once(LFB_PLUGIN_PATH.'inc/front-end.php');
 
 class wppb_db{
   private static $db;

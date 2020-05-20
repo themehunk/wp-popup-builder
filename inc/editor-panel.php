@@ -549,8 +549,15 @@
 				</select>
 			</div>
 			<div class="wppb-lead-form-styling">
+				<div class="rl_i_editor-item-content-header">
+					<nav class="rl-clear">
+						<span data-editor-tab="form-style" class="active_">Form</span>
+						<span data-editor-tab="form-content">Form Content</span>
+					</nav>
+				</div>
+
 				<!-- form-style -->
-				<div class="wppb-lf-form-style">
+				<div class="rl_i_editor-item-content-i rl_i_editor-item-content-form-style active_  wppb-lf-form-style">
 					<div class="rl_i_editor-header-title">
 						<label>Form Setting</label>
 					</div>
@@ -564,7 +571,7 @@
 
 				</div>
 				<!-- heading style -->
-				<div class="wppb-lf-heading-style">
+				<div class="rl_i_editor-item-content-i rl_i_editor-item-content-form-content wppb-lf-content-style">
 					<div class="rl_i_editor-header-title">
 						<label>Heading Setting </label>
 					</div>
@@ -572,9 +579,7 @@
 					echo $wp_builder_obj->color('Color','color','data-lead-form','lf-heading-color');
 					echo $wp_builder_obj->range_slider('Font Size', 'lf-heading-font-size', ['title'=>'px','min'=>"10",'max'=>100,'value'=>10], false, 'data-lead-form'); 
 					?>
-				</div>
 				<!-- label style -->
-				<div class="wppb-lf-label-style">
 					<div class="rl_i_editor-header-title">
 						<label>Label Setting </label>
 					</div>
@@ -582,9 +587,7 @@
 					echo $wp_builder_obj->color('Color','color','data-lead-form','lf-label-color');
 					echo $wp_builder_obj->range_slider('Font Size', 'lf-label-font-size', ['title'=>'px','min'=>"10",'max'=>100,'value'=>10], false, 'data-lead-form'); 
 					?>
-				</div>
 				<!-- button style -->
-				<div class="wppb-lf-button-style">
 					<div class="rl_i_editor-header-title">
 						<label>Submit Button Setting </label>
 					</div>
