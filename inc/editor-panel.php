@@ -564,17 +564,15 @@
 
 				</div>
 				<!-- heading style -->
-				<!-- <div class="wppb-lf-heading-style">
+				<div class="wppb-lf-heading-style">
 					<div class="rl_i_editor-header-title">
 						<label>Heading Setting </label>
 					</div>
-				</div> -->
-				<!-- input style -->
-				<!-- <div class="wppb-lf-input-style">
-					<div class="rl_i_editor-header-title">
-						<label>Input Setting </label>
-					</div>
-				</div> -->
+					<?php 
+					echo $wp_builder_obj->color('Color','color','data-lead-form','lf-heading-color');
+					echo $wp_builder_obj->range_slider('Font Size', 'lf-heading-font-size', ['title'=>'px','min'=>"10",'max'=>100,'value'=>10], false, 'data-lead-form'); 
+					?>
+				</div>
 				<!-- label style -->
 				<div class="wppb-lf-label-style">
 					<div class="rl_i_editor-header-title">
