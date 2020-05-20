@@ -70,6 +70,16 @@ var Business_news_letter = {
 			let overlayStyle = Custom_popup_editor._removeStyle(overlayImage,"background-image",false)
 			if(overlayStyle) contentGlobal['overlay-style'] = overlayStyle;
 
+			if ( jQuery('.wppb-popup-lead-form form').length ) {
+				let leadForm = jQuery('.wppb-popup-lead-form form');
+				let leadFormStyle = {};
+				if ( leadForm.attr('style') ) leadFormStyle['form-style'] = leadForm.attr('style');
+				if ( leadForm.find('h2').attr('style') ) leadFormStyle['heading-style'] = leadForm.children('h2').attr('style');
+				if ( leadForm.find('.text-type.lf-field > label').attr('style') ) leadFormStyle['label-style'] = leadForm.find('.text-type.lf-field > label').attr('style');
+				if ( leadForm.find('.lf-form-submit').attr('style') ) leadFormStyle['submit-style'] = leadForm.find('.lf-form-submit').attr('style');
+				contentGlobal['lead-form'] = leadFormStyle;
+			}
+
 			return {type:'global-setting',content:contentGlobal };
 	},
 	_saveData:function(){
@@ -128,6 +138,8 @@ var Business_news_letter = {
 								let saveAttrData = '';
 								if ( checkInput.hasClass('wppb-popup-lead-form') ) {
 									saveAttrData = {type:'lead-form',content:checkInput.attr('data-form-id')};
+									if (checkInput.attr('data-uniqid'))saveAttrData['id'] = checkInput.attr('data-uniqid');
+
 								}else{
 									saveAttrData = {type:checkInput.data('rl-editable'),content:checkInput.html()};
 									if (checkInput.attr('style'))saveAttrData['style'] = checkInput.attr('style');
@@ -310,6 +322,7 @@ var Custom_popup_editor = {
 		});
 		Custom_popup_editor._dragAndShort();
 		Custom_popup_editor._globalSettingInit();
+		Custom_popup_editor._leadFormInit();
 	},
 	_dragAndShort:function(){
 		jQuery( ".wppb-popup-custom .rlEditorDropable" ).sortable({
@@ -909,7 +922,6 @@ var Custom_popup_editor = {
 		jQuery('.rl_i_editor-item-content').hide();
 	},
 	_chooseLayout:function(){
-
 		let clickedLaout = jQuery(this);
 		let getLayout = clickedLaout.data('layout');
 		    getLayout =   jQuery('.prebuilt-pupup-layout-container > div[data-layout="'+getLayout+'"]').html();
@@ -983,6 +995,25 @@ var Custom_popup_editor = {
 			});
   		}
 	},
+	_leadFormInit:function(){
+			let contentGlobal = jQuery('input[type="hidden"][data-global-save]');
+			contentGlobal = contentGlobal.val() ? JSON.parse(contentGlobal.val()) : '';
+				let leadForm = jQuery('.wppb-popup-custom .wppb-popup-lead-form form');
+			if ( contentGlobal['lead-form'] && leadForm.length ) {
+				console.log(contentGlobal['lead-form']);
+				if (contentGlobal['lead-form']['submit-style']) {
+					leadForm.find('.lf-form-submit').attr('style',contentGlobal['lead-form']['submit-style']);
+				}
+				if (contentGlobal['lead-form']['form-style']) {
+					leadForm.attr('style',contentGlobal['lead-form']['form-style']);
+				}
+				if (contentGlobal['lead-form']['label-style']) {
+				let element = leadForm.find('.name-type.lf-field > label, .text-type.lf-field > label, .textarea-type.lf-field > label');
+					element.attr('style',contentGlobal['lead-form']['label-style']);
+				}
+			}
+			console.log(contentGlobal);
+	},
 	_leadFormStyling:function(){
 		let leadForm = jQuery('.wppb-popup-lead-form form');
 		let getInputs = jQuery('.wppb-lead-form-styling [data-lead-form]');
@@ -1011,14 +1042,22 @@ var Custom_popup_editor = {
 				Custom_popup_editor._inputRange(sepInput, false, false, element );
 			}
 
-
-
 		}
 
 
 		jQuery.each(getInputs, leadFormInput);
 
 		// console.log(getInputs);
+	},
+	_leadFormStylingSet:function(){
+		let input_ = jQuery(this);
+		let dataCheck = input_.data('lead-form');
+		let inputVal = input_.val();
+		let leadForm = jQuery('.wppb-popup-lead-form form');
+		if (dataCheck == 'lf-form-width') {
+			leadForm.css('width',inputVal+'%');
+		}
+		console.log(input_);
 	},
 	_bind:function(){
 		jQuery(document).on('click', '.wppb-popup-custom [data-rl-editable]',Custom_popup_editor._openEditPanel);
@@ -1033,6 +1072,8 @@ var Custom_popup_editor = {
 
 		jQuery(document).on('click', '.prebulilt-popup-inner [data-layout]', Custom_popup_editor._chooseLayout);
 		jQuery(document).on('click', '.wppb-popup-name-init', Custom_popup_editor._popupName);
+		
+		jQuery(document).on('keyup change', '.wppb-lead-form-styling [data-lead-form]',Custom_popup_editor._leadFormStylingSet);
 
 	}
 	// ,
