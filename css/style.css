@@ -68,7 +68,7 @@
     justify-content: space-between;
 }
 .business-popup-view,.wppb-popup-setting{
-        color: #ee5a36;
+        color: #6747E6;
     cursor: pointer;
     text-decoration: none;
     letter-spacing: .03rem;
@@ -83,7 +83,7 @@
 }
 .business-popup-view:hover, 
 .wppb-popup-setting:hover{
-    color: #ee5a36;
+    color: #6747E6;
 }
 .business-popup-view:after,
 .wppb-popup-setting:after{
@@ -96,7 +96,7 @@
 }
 .business-popup-view:hover:after,
 .wppb-popup-setting:hover:after{
-    background-color: #ee5a36;
+    background-color: #6747E6;
     transform: scale(1);
 }
 /*popup update page*/
@@ -114,7 +114,7 @@
     padding: .7rem 3rem;
     letter-spacing: .05rem;
     font-size: 17px;
-    background: #ee5a36;
+    background: #6747E6;
     color: white;
     border: none;
     margin: 0 1rem;
@@ -143,7 +143,7 @@ business popup editor settings
 ----------------------*/
 .wppb-popup-cmn-nav {
         position: relative;
-    background: #ee5a36;
+    background: #6747E6;
 }
 .wppb-popup-cmn-container{
         margin: 3rem 1.3rem 0px 0;
@@ -160,11 +160,11 @@ business popup editor settings
     font-size: 15px;
     letter-spacing: .03rem;
     transition: .3s all ease;
-    border-right: 1px solid #fd7c5d;
+    border-right: 1px solid #7d60f1;
 }
 .wppb-popup-cmn-nav-item > a:hover, 
 .wppb-popup-cmn-nav-item > a.active{
-    background: #883117;
+    background: #5635D8;
 }
 .wppb-popup-cmn-nav-item > a:focus{
     outline: none;

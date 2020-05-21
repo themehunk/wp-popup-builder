@@ -589,7 +589,7 @@ label[data-range-output]{
     transition: .3s all cubic-bezier(0.54, 1.18, 1, 1.01);
 }
 .wppb-popup-checkbox > input:checked + label{
-        background-color: #ee5a36;
+        background-color: #6747E6;
 }
 .wppb-popup-checkbox > input:checked + label:before{
     transform: translate(148%, -51%);
@@ -631,7 +631,7 @@ label[data-range-output]{
     0%{
     }
     100%{
-        border-bottom: 15px solid #ee5a36;
+        border-bottom: 15px solid #6747E6;
     }
 }
 
