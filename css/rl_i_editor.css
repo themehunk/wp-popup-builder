@@ -556,7 +556,10 @@ label[data-range-output]{
     display: none;
     padding-bottom: 20px;
 }
-
+.lead-form-bulider-select select{
+        width: 100%;
+    padding: 5px 11px;
+}
 
 
 /*check box*/

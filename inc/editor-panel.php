@@ -33,21 +33,9 @@
 			<span class="bottomCarret dashicons dashicons-arrow-right"></span>
 		</div>
 		<section data-toggle-action="global-setting" class="rl_i_editor-global-setting rl_i_editor-element-item">
-			<div class="rl_i_editor-header-title">
-				<label>Popup Background Setting </label>
-			</div>
+			<?php $wp_builder_obj->header_title('Popup Background Setting') ?>
 			<!-- overlay image -->
-			<div  class="rl_i_editor-item-content-items title_ inline__">
-				<div class="rl_i_range-font-size">
-					<div class="wppb-popup-checkbox-container">
-						<label class="wppb-popup-checkbox-title">Background Image</label>
-						<div class="wppb-popup-checkbox">
-							<input id="global-overlay-image" type="checkbox" data-global-input="global-overlay-image">
-							<label for="global-overlay-image"></label>
-						</div>
-					</div>
-				</div>
-			</div>
+			<?php echo $wp_builder_obj->checkbox('global-overlay-image','Background Image','data-global-input="global-overlay-image"'); ?>
 		<section class="global-overlay-image">
 			<div class="rl_i_editor-item-content-items image_">
 				<div class="rl-i-choose-image">
@@ -62,42 +50,34 @@
 								<input id="image-setting-left-top1" type="radio" name="background-position" data-global-input='background-position' value="left top">
 								<label for="image-setting-left-top1"><span class="dashicons dashicons-arrow-up-alt rotat-45"></span></label>
 							</div>
-
 							<div>
 								<input id="image-setting-center-top1" type="radio" name="background-position" data-global-input='background-position' value="center top">
 								<label for="image-setting-center-top1"><span class="dashicons dashicons-arrow-up-alt"></span></label>
 							</div>
-
 							<div>
 								<input id="image-setting-right-top1" type="radio" name="background-position" data-global-input='background-position' value="right top">
 								<label for="image-setting-right-top1"><span class="dashicons dashicons-arrow-up-alt rotat45"></span></label>
 							</div>
-
 							<div>
 								<input id="image-setting-left-center1" type="radio" name="background-position" data-global-input='background-position' value="left center">
 								<label for="image-setting-left-center1"><span class="dashicons dashicons-arrow-left-alt"></span></label>
 							</div>
-
 							<div>
 								<input id="image-setting-center-center1" type="radio" name="background-position" data-global-input='background-position' value="center center">
 								<label for="image-setting-center-center1"><span class="dashicons dashicons-move"></span></label>
 							</div>
-
 							<div>
 								<input id="image-setting-center-right1" type="radio" name="background-position" data-global-input='background-position' value="center right">
 								<label for="image-setting-center-right1"><span class="dashicons dashicons-arrow-right-alt"></span></label>
 							</div>
-
 							<div>
 								<input id="image-setting-bottom-left1" type="radio" name="background-position" data-global-input='background-position' value="bottom left">
 								<label for="image-setting-bottom-left1"><span class="dashicons dashicons-arrow-down-alt rotat45"></span></label>
 							</div>
-
 							<div>
 								<input id="image-setting-bottom-center1" type="radio" name="background-position" data-global-input='background-position' value="bottom center">
 								<label for="image-setting-bottom-center1"><span class="dashicons dashicons-arrow-down-alt"></span></label>
 							</div>
-
 							<div>
 								<input id="image-setting-bottom-right1" type="radio" name="background-position" data-global-input='background-position' value="bottom right">
 								<label for="image-setting-bottom-right1"><span class="dashicons dashicons-arrow-down-alt rotat-45"></span></label>
@@ -109,69 +89,22 @@
 								<?php echo $wp_builder_obj->select("data-global-input='background-size'",[ ['Auto','auto'],['Contain','contain'],['Cover','cover'] ]); ?>
 							</div>
 						</div>
-						
 					</div>
-					
 			</div>
 		</section>
-		<!-- overlay color -->
-			<?php echo $wp_builder_obj->color('Background Color','background-color','data-global-input','overlay-color'); ?>
-		<!-- outside color -->
-			<?php echo $wp_builder_obj->color('Outside Color','background-color','data-global-input','outside-color'); ?>
-			<!-- widdth -->
-			<div class="rl_i_editor-header-title">
-				<label>Popup Typography</label>
-			</div>
-			<?php echo $wp_builder_obj->range_slider('Popup Width', 'main-wrapper', ['title'=>'px','min'=>200,'max'=>800,'value'=>200] ,'wrapper-width'); ?>
+			<?php 
+				// overlay color / outside color / popup width 
+				$wp_builder_obj->color('Background Color','background-color','data-global-input','overlay-color'); 
+				$wp_builder_obj->color('Outside Color','background-color','data-global-input','outside-color');
+				$wp_builder_obj->header_title('Popup Typography');
+				$wp_builder_obj->range_slider('Popup Width', 'main-wrapper', ['title'=>'px','min'=>200,'max'=>800,'value'=>200] ,'wrapper-width');
+			?>
 			<!-- height -->
-			<div  class="rl_i_editor-item-content-items title_ inline__">
-				<div class="rl_i_range-font-size">
-					<div class="wppb-popup-checkbox-container">
-						<label class="wppb-popup-checkbox-title">Popup Height Auto/Custom</label>
-						<div class="wppb-popup-checkbox">
-							<input id="wrapper-height-auto-custom" type="checkbox" data-global-input="wrapper-height-check">
-							<label for="wrapper-height-auto-custom"></label>
-						</div>
-					</div>
-				</div>
-			</div>
+			<?php echo $wp_builder_obj->checkbox('wrapper-height','Popup Height Auto/Custom','data-global-input="wrapper-height-check"'); ?>
 			<section class="global-wrapper-height-custom-auto">
-			<?php echo $wp_builder_obj->range_slider('Custom Height','main-wrapper-height', ['title'=>'px','min'=>150,'max'=>1000,'value'=>200] ,'wrapper-height'); ?>
+			<?php  $wp_builder_obj->range_slider('Custom Height','main-wrapper-height', ['title'=>'px','min'=>150,'max'=>1000,'value'=>200] ,'wrapper-height'); ?>
 			</section>
-			<!-- padding  -->
-				<div class="rl_i_editor-item-content-items title_ inline_">
-					<div class="rl_i_range-font-size"><label>Popup Padding in px</label></div>
-					</div>
-					<div class="rl_i_editor-item-content-items inline_">
-						<div class="rl_i_editor-item-content-padding_ paraMeterContainer__">
-							<ul class="ul-inputs-margin-padding rl-clear">
-								<li>
-									<input type="number" value="" data-global-input="main-wrapper" data-padding="top">
-								</li>
-								<li>
-									<input type="number" value="" data-global-input="main-wrapper" data-padding="right">
-								</li>
-								<li>
-									<input type="number" value="" data-global-input="main-wrapper" data-padding="bottom">
-								</li>
-								<li>
-									<input type="number" value="" data-global-input="main-wrapper" data-padding="left">
-								</li>
-								<li class="padding-origin_ margin-padding-origin">
-									<input id="padding-origin_global_wrap" type="checkbox" data-global-input="main-wrapper" data-origin="padding">
-									<label for="padding-origin_global_wrap"><span class="dashicons dashicons-admin-links"></span></label>
-								</li>
-							</ul>							
-							<ul class="ul-inputs-text rl-clear">
-								<li>TOP</li>
-								<li>RIGHT</li>
-								<li>BOTTOM</li>
-								<li>LEFT</li>
-								<li></li>
-							</ul>
-						</div>
-					</div>
-			
+			<?php $wp_builder_obj->margin_padding('main-wrapper', 'Popup Padding in px', 'data-global-input', 'p'); ?>
 			<div class="rl_i_editor-item-content-items rl-two-column-width">
 				<label>Container Width</label>
 				<div>
@@ -183,7 +116,6 @@
 					<input type="number" data-global-input="column-width" data-column="2">
 				</div>
 			</div>
-
 		</section>
 		<!-- timer section -->
 			<div data-toggle="popup-timer-opt" class="rl_i_editor-element-Toggle outer-toggle">
@@ -191,8 +123,10 @@
 				<span class="bottomCarret dashicons dashicons-arrow-right"></span>
 			</div>
 			<section data-toggle-action="popup-timer-opt" class="rl-popup-timer-opt rl-display-none">
-			<?php echo $wp_builder_obj->range_slider('Popup Appear Delay', 'popup-delay-open', ['title'=>'Second','min'=>3,'max'=>60,'value'=>4] ,'popup-timer-appear-delay'); ?>
-			<?php echo $wp_builder_obj->range_slider( 'Popup Auto Close', 'popup-delay-close', ['title'=>'Second','min'=>0,'max'=>500,'value'=>0] ,'popup-timer-autoclose'); ?>
+				<?php 
+					$wp_builder_obj->range_slider('Popup Appear Delay', 'popup-delay-open', ['title'=>'Second','min'=>3,'max'=>60,'value'=>4] ,'popup-timer-appear-delay');
+					$wp_builder_obj->range_slider( 'Popup Auto Close', 'popup-delay-close', ['title'=>'Second','min'=>0,'max'=>500,'value'=>0] ,'popup-timer-autoclose'); 
+				?>
 			</section>
 		<!-- timer section -->
 		<!-- Close button setting -->
@@ -201,102 +135,37 @@
 			<span class="bottomCarret dashicons dashicons-arrow-right"></span>
 		</div>
 		<section data-toggle-action="close-btn-setting" class="">
-
 			<div class="rl_i_editor-item-content-items title_ inline__">
 				<label>Popup Close option By Click</label>
 			</div>
 			<div class="rl_i_editor-item-content-items inline__">
 							<div class="rl_i_editor-item-color">
-								<select data-cmn="close-btn" data-global-input="close-option">
-									<option value="1">Click On Icon</option>
-									<option value="2">Click On Icon and Outside</option>
-									<option value="3" selected="selected">Click On Outside</option>
-								</select>
+								<?php 
+								echo $wp_builder_obj->select('data-cmn="close-btn" data-global-input="close-option"',[ ['Click On Icon',1],['Click On Icon and Outside',2],['Click On Outside',3,true] ]); 
+								?>
 							</div>
 			</div>
-			
 			<section class="close-btn-container">				
-			<?php echo $wp_builder_obj->color('Icon Color','color','data-global-input','close-btn-color'); ?>
-			<?php echo $wp_builder_obj->color('Icon Background Color','background-color','data-global-input','close-btn-bg-color'); ?>
-					<!-- text font size -->
-				<?php echo $wp_builder_obj->range_slider( "Icon Font Size", 'close-font-size', ['title'=>'px','min'=>10,'max'=>100,'value'=>18,"attr"=>'data-cmn="close-btn"']); ?>
-					<!-- padding  -->
-				<div class="rl_i_editor-item-content-items title_ inline_">
-					<div class="rl_i_range-font-size"><label>Icon Padding in px</label></div>
-					</div>
-					<div class="rl_i_editor-item-content-items inline_">
-						<div class="rl_i_editor-item-content-padding_ paraMeterContainer__">
-							<ul class="ul-inputs-margin-padding rl-clear">
-								<li>
-									<input type="number" value="" data-cmn="close-btn" data-global-input="close-btn" data-padding="top">
-								</li>
-								<li>
-									<input type="number" value="" data-cmn="close-btn" data-global-input="close-btn" data-padding="right">
-								</li>
-								<li>
-									<input type="number" value="" data-cmn="close-btn" data-global-input="close-btn" data-padding="bottom">
-								</li>
-								<li>
-									<input type="number" value="" data-cmn="close-btn" data-global-input="close-btn" data-padding="left">
-								</li>
-								<li class="padding-origin_ margin-padding-origin">
-									<input id="padding-origin_global_close-btn" type="checkbox" data-cmn="close-btn" data-global-input="close-btn" data-origin="padding">
-									<label for="padding-origin_global_close-btn"><span class="dashicons dashicons-admin-links"></span></label>
-								</li>
-							</ul>							
-							<ul class="ul-inputs-text rl-clear">
-								<li>TOP</li>
-								<li>RIGHT</li>
-								<li>BOTTOM</li>
-								<li>LEFT</li>
-								<li></li>
-							</ul>
-						</div>
-					</div>
+			<?php 
+			 	$wp_builder_obj->color('Icon Color','color','data-global-input','close-btn-color',"data-cmn='close-btn'");
+				$wp_builder_obj->color('Icon Background Color','background-color','data-global-input','close-btn-bg-color',"data-cmn='close-btn'"); 
+				$wp_builder_obj->range_slider( "Icon Font Size", 'close-font-size', ['title'=>'px','min'=>10,'max'=>100,'value'=>18,"attr"=>'data-cmn="close-btn"']);
+				$wp_builder_obj->margin_padding('close-btn', 'Icon Padding in px', 'data-global-input', 'p', 'data-cmn="close-btn"'); 
+			?>
+
+
 					<div class="rl_i_editor-item-content-items title_ inline_">
 						<div class="rl_i_range-font-size">
 							<label>Button Margin</label>
 						</div>
 					</div>
-					<?php echo $wp_builder_obj->range_slider('Top', 'close-btn', ['title'=>'%','min'=>"-20",'max'=>100,'value'=>18,"attr"=>'data-cmn="close-btn" data-margin="top"'], "close-btn-margin-top"); ?>
-					<?php echo $wp_builder_obj->range_slider('Right','close-btn', ['title'=>'%','min'=>"-20",'max'=>100,'value'=>18,"attr"=>'data-cmn="close-btn" data-margin="right"'], "close-btn-margin-right"); ?>
-					<!-- border -->
-					<section class="content-style-border">
-						<div  class="rl_i_editor-item-content-items title_ inline__">
-							<div class="rl_i_range-font-size">
-								<div class="wppb-popup-checkbox-container">
-									<label class="wppb-popup-checkbox-title">Border</label>
-									<div class="wppb-popup-checkbox">
-										<input id="border-enable-label-11-close-btn" data-cmn="close-btn" type="checkbox" data-global-input="close-btn" data-border='border-enable'>
-										<label for="border-enable-label-11-close-btn"></label>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div  class="rl_i_editor-item-content-items content-border">
-							<div>
-								<label>Border Width</label>
-								<input type="number" value="" data-cmn="close-btn" data-global-input="close-btn" data-border="width">
-							</div>
-							<div>
-								<label>Border radius</label>
-								<input type="number" value="" data-cmn="close-btn" data-global-input="close-btn" data-border="radius">
-							</div>
-							<div>
-								<label>Border Color</label>
-								<label class="color-output" data-cmn="close-btn" data-input-color="1" data-global-input='border-color'></label>
-							</div>
-							<div>
-								<label>Border Style</label>
-								<?php echo $wp_builder_obj->select('data-cmn="close-btn" data-global-input="close-btn" data-border="border-style"',[ ['solid','solid'],['dashed','dashed'],['dotted','dotted'],['double','double'],['groove','groove'],['ridge','ridge'] ]); ?>
-							</div>
-						</div>
-					</section>
-					<!-- border -->
-
+					<?php 
+						$wp_builder_obj->range_slider('Top', 'close-btn', ['title'=>'%','min'=>"-20",'max'=>100,'value'=>18,"attr"=>'data-cmn="close-btn" data-margin="top"'], "close-btn-margin-top");
+						$wp_builder_obj->range_slider('Right','close-btn', ['title'=>'%','min'=>"-20",'max'=>100,'value'=>18,"attr"=>'data-cmn="close-btn" data-margin="right"'], "close-btn-margin-right"); 
+						$wp_builder_obj->border('close-btn','data-global-input',"data-cmn='close-btn'"); 
+					?>
 			</section>
 		<!-- Close button setting -->
-
 		</section>
 		<!-- global setting -->
 		<section class="rl_i_editor-item-content">
@@ -371,7 +240,7 @@
 				<!-- style -->
 				<div class="rl_i_editor-item-content-i rl_i_editor-item-content-style">
 					<!-- width -->
-		<?php echo $wp_builder_obj->range_slider( 'Width', 'item-width', ['title'=>'%','min'=>1,'value'=>20,'max'=>100],false, 'data-editor-input' ); ?>
+		<?php  $wp_builder_obj->range_slider( 'Width', 'item-width', ['title'=>'%','min'=>1,'value'=>20,'max'=>100],false, 'data-editor-input' ); ?>
 					<!-- text alignment -->
 						<div class="rl_i_editor-item-content-items item-alignment_ inline__">
 							<label>Container Alignment</label>
@@ -392,13 +261,14 @@
 								</ul>
 							</div>
 						</div>
-				<!-- text color -->
-					<?php echo $wp_builder_obj->color('Text Color','color','data-editor-input'); ?>
-					<?php echo $wp_builder_obj->color('Background Color','background-color','data-editor-input'); ?>
-				<!-- text font size -->
-					<?php echo $wp_builder_obj->range_slider( "Font Size", 'font-size', ['title'=>'px','min'=>10,'value'=>30,'max'=>100,"container-class"=>'item-text'], false , 'data-editor-input' ); ?>
-					<?php echo $wp_builder_obj->range_slider( "Letter Spacing", 'letter-spacing', ['title'=>'px','min'=>'-5','value'=>1,'max'=>50,"container-class"=>'item-text'], false , 'data-editor-input' ); ?>
-					<?php echo $wp_builder_obj->range_slider( 'Line Height', 'line-height', ['title'=>'px','min'=>'-5','value'=>1,'max'=>100,"container-class"=>'item-text'], false , 'data-editor-input' ); ?>
+					<?php 
+					// text color/ background-color / font-size / letter-spacing / line height
+						$wp_builder_obj->color('Text Color','color','data-editor-input'); 
+						$wp_builder_obj->color('Background Color','background-color','data-editor-input');
+						$wp_builder_obj->range_slider( "Font Size", 'font-size', ['title'=>'px','min'=>10,'value'=>30,'max'=>100,"container-class"=>'item-text'], false , 'data-editor-input' );
+						$wp_builder_obj->range_slider( "Letter Spacing", 'letter-spacing', ['title'=>'px','min'=>'-5','value'=>1,'max'=>50,"container-class"=>'item-text'], false , 'data-editor-input' );
+						$wp_builder_obj->range_slider( 'Line Height', 'line-height', ['title'=>'px','min'=>'-5','value'=>1,'max'=>100,"container-class"=>'item-text'], false , 'data-editor-input' ); 
+						?>
 					<!-- font weight -->
 					<div class="rl_i_editor-item-content-items item-text inline__">
 							<label>Font Weight</label>
@@ -407,108 +277,11 @@
 								
 							</div>
 						</div>
-					<!-- font weight -->
-
-					<!-- margin  -->
-					<div class="rl_i_editor-item-content-items title_ inline_">
-						<div class="rl_i_range-font-size">
-							<label>Margin in px</label>
-						</div>
-					</div>
-					<div class="rl_i_editor-item-content-items inline_">
-						<div class="rl_i_editor-item-content-margin_ paraMeterContainer__">
-							<ul class="ul-inputs-margin-padding rl-clear">
-								<li>
-									<input type="number" value="" data-editor-input="margin" data-margin="top">
-								</li>
-								<li>
-									<input type="number" value="" data-editor-input="margin" data-margin="right">
-								</li>
-								<li>
-									<input type="number" value="" data-editor-input="margin" data-margin="bottom">
-								</li>
-								<li>
-									<input type="number" value="" data-editor-input="margin" data-margin="left">
-								</li>
-								<li class="margin-origin_ margin-padding-origin">
-									<input id="margin-origin_" type="checkbox" data-editor-input="margin-origin">
-									<label for="margin-origin_"><span class="dashicons dashicons-admin-links"></span></label>
-								</li>
-							</ul>
-							<ul class="ul-inputs-text rl-clear">
-								<li>TOP</li>
-								<li>RIGHT</li>
-								<li>BOTTOM</li>
-								<li>LEFT</li>
-								<li></li>
-							</ul>
-						</div>
-					</div>
-					<!-- padding  -->
-					<div class="rl_i_editor-item-content-items title_ inline_">
-					<div class="rl_i_range-font-size"><label>Padding in px</label></div>
-					</div>
-					<div class="rl_i_editor-item-content-items inline_">
-						<div class="rl_i_editor-item-content-padding_ paraMeterContainer__">
-							<ul class="ul-inputs-margin-padding rl-clear">
-								<li>
-									<input type="number" value="" data-editor-input="padding" data-padding="top">
-								</li>
-								<li>
-									<input type="number" value="" data-editor-input="padding" data-padding="right">
-								</li>
-								<li>
-									<input type="number" value="" data-editor-input="padding" data-padding="bottom">
-								</li>
-								<li>
-									<input type="number" value="" data-editor-input="padding" data-padding="left">
-								</li>
-								<li class="padding-origin_ margin-padding-origin">
-									<input id="padding-origin_" type="checkbox" data-editor-input="padding-origin">
-									<label for="padding-origin_"><span class="dashicons dashicons-admin-links"></span></label>
-								</li>
-							</ul>							
-							<ul class="ul-inputs-text rl-clear">
-								<li>TOP</li>
-								<li>RIGHT</li>
-								<li>BOTTOM</li>
-								<li>LEFT</li>
-								<li></li>
-							</ul>
-						</div>
-					</div>
-					<!-- border -->
-					<section class="content-style-border">
-						<div  class="rl_i_editor-item-content-items title_ inline__">
-							<div class="rl_i_range-font-size">
-								<div class="wppb-popup-checkbox-container">
-									<label class="wppb-popup-checkbox-title">Border</label>
-									<div class="wppb-popup-checkbox">
-										<input id="border-enable-label-11" data-border='1' type="checkbox" data-editor-input="border-enable">
-										<label for="border-enable-label-11"></label>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div  class="rl_i_editor-item-content-items content-border">
-							<div>
-								<label>Border Width</label>
-								<input type="number" value="" data-editor-input="border" data-border="width">
-							</div>
-							<div>
-								<label>Border radius</label>
-								<input type="number" value="" data-editor-input="border" data-border="radius">
-							</div>
-							<div>
-								<label>Border Color</label>
-								<label class="color-output" data-input-color="1" data-editor-input='border-color'></label>
-							</div>
-							<div>
-							<label>Border Style</label>							
-								<?php echo $wp_builder_obj->select('data-editor-input="border" data-border="border-style"',[ ['solid','solid'],['dashed','dashed'],['dotted','dotted'],['double','double'],['groove','groove'],['ridge','ridge'] ]); ?>
-							</div>
-						</div>
-					</section>
+					<?php 
+						  $wp_builder_obj->margin_padding('margin', 'Margin in px', 'data-editor-input', 'm');
+						  $wp_builder_obj->margin_padding('padding', 'Padding in px', 'data-editor-input', 'p');
+						  $wp_builder_obj->border('border','data-editor-input'); 
+					?>
 					<!-- border -->
 				</div>
 				<!-- style -->
@@ -523,13 +296,7 @@
 			<section data-toggle-action="popup-delete-opt" class="rl-popup-delete-opt rl-display-none">
 				<div>
 					<div class="popup-delete-wrap"><?php echo $popupSetData['deletebtn']; ?></div>
-						<div class="wppb-popup-checkbox-container">
-							<label class="wppb-popup-checkbox-title">Activate</label>
-							<div class="wppb-popup-checkbox">
-								<input id="wppb_popup--<?php echo $wppb_popup_id ?>" type="checkbox" class="wppb_popup_setting_active" data-bid="<?php echo $wppb_popup_id ?>" <?php echo $popup_is_active ?>>
-								<label for="wppb_popup--<?php echo $wppb_popup_id ?>"></label>
-							</div>
-						</div>
+					<?php echo $wp_builder_obj->checkbox('popup_setting_active','Activate','class="wppb_popup_setting_active" data-bid="'.$wppb_popup_id.'"'.$popup_is_active); ?>
 				</div>
 			</section>
 		<?php } ?>
@@ -539,9 +306,11 @@
 			<div class="rl_i_editor-element-Toggle">
 				<span>Lead Form Form</span>
 			</div>
-			<div class="rl_i_editor-header-title">
+			
+			<div class="rl_i_editor-item-content-items title_ inline__">
 				<label>Choose Lead Form</label>
 			</div>
+
 			<div class="rl_i_editor-item-content-items lead-form-bulider-select">
 				<select>
 					<option>Select Form</option>
@@ -555,56 +324,35 @@
 						<span data-editor-tab="form-content">Form Content</span>
 					</nav>
 				</div>
-
 				<!-- form-style -->
 				<div class="rl_i_editor-item-content-i rl_i_editor-item-content-form-style active_  wppb-lf-form-style">
-					<div class="rl_i_editor-header-title">
-						<label>Form Setting</label>
-					</div>
-
 					<?php 
-					echo $wp_builder_obj->range_slider('Form Width', 'lf-form-width', ['title'=>'%','min'=>"20",'max'=>100,'value'=>100], false, 'data-lead-form'); 
-					echo $wp_builder_obj->color('Background Color','background-color','data-lead-form','lf-form-color');
+						$wp_builder_obj->header_title('Form Setting');
+						$wp_builder_obj->range_slider('Form Width', 'lf-form-width', ['title'=>'%','min'=>"20",'max'=>100,'value'=>100], false, 'data-lead-form'); 
+						$wp_builder_obj->color('Background Color','background-color','data-lead-form','lf-form-color');
+						$wp_builder_obj->border('form-border','data-lead-form'); 
 					?>
-
-
-
 				</div>
 				<!-- heading style -->
 				<div class="rl_i_editor-item-content-i rl_i_editor-item-content-form-content wppb-lf-content-style">
-					<div class="rl_i_editor-header-title">
-						<label>Heading Setting </label>
-					</div>
 					<?php 
-					echo $wp_builder_obj->color('Color','color','data-lead-form','lf-heading-color');
-					echo $wp_builder_obj->range_slider('Font Size', 'lf-heading-font-size', ['title'=>'px','min'=>"10",'max'=>100,'value'=>10], false, 'data-lead-form'); 
+					$wp_builder_obj->header_title('Heading Setting');
+					$wp_builder_obj->color('Color','color','data-lead-form','lf-heading-color');
+					$wp_builder_obj->range_slider('Font Size', 'lf-heading-font-size', ['title'=>'px','min'=>"10",'max'=>100,'value'=>10], false, 'data-lead-form');
+					$wp_builder_obj->header_title('Label Setting');
+					$wp_builder_obj->color('Color','color','data-lead-form','lf-label-color');
+					$wp_builder_obj->range_slider('Font Size', 'lf-label-font-size', ['title'=>'px','min'=>"10",'max'=>100,'value'=>10], false, 'data-lead-form');
+					$wp_builder_obj->header_title('Submit Button Setting');
+					$wp_builder_obj->color('Color','color','data-lead-form','lf-submit-btn-color');
+					$wp_builder_obj->color('Background Color','background-color','data-lead-form','lf-submit-btn-bcolor');
+					$wp_builder_obj->range_slider('Font Size', 'lf-submit-btn-font-size', ['title'=>'px','min'=>"10",'max'=>100,'value'=>10], false, 'data-lead-form'); 
 					?>
-				<!-- label style -->
-					<div class="rl_i_editor-header-title">
-						<label>Label Setting </label>
-					</div>
-					<?php 
-					echo $wp_builder_obj->color('Color','color','data-lead-form','lf-label-color');
-					echo $wp_builder_obj->range_slider('Font Size', 'lf-label-font-size', ['title'=>'px','min'=>"10",'max'=>100,'value'=>10], false, 'data-lead-form'); 
-					?>
-				<!-- button style -->
-					<div class="rl_i_editor-header-title">
-						<label>Submit Button Setting </label>
-					</div>
-				<?php 
-				echo $wp_builder_obj->color('Color','color','data-lead-form','lf-submit-btn-color');
-				echo $wp_builder_obj->color('Background Color','background-color','data-lead-form','lf-submit-btn-bcolor');
-				echo $wp_builder_obj->range_slider('Font Size', 'lf-submit-btn-font-size', ['title'=>'px','min'=>"10",'max'=>100,'value'=>10], false, 'data-lead-form'); 
-				?>
 				</div>
-
 			</div>
-
 		</section>
 		<!-- add lead form -->
 	</div>
 	</div>
-
 			<div class="rl_i_editor-footer">
 				<div class="rl_i_editor-footer-area">
 					<?php echo $popupSetData['savebtn']; ?>
