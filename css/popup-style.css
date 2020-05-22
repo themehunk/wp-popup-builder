@@ -126,12 +126,12 @@ a:focus{
     outline: 1px dashed #c1c1c130;
 }
 .wppb-popup-custom [data-rl-editable]:hover,
-.wppb-popup-lead-form:hover{
+.wppb-popup-custom .wppb-popup-lead-form:hover{
     outline: 1px dashed #ee5a3691;
     cursor: pointer;
 }
 .wppb-popup-custom [data-rl-editable]:before,
-.wppb-popup-lead-form:before{
+.wppb-popup-custom .wppb-popup-lead-form:before{
         content: "\f464";
     font-family: dashicons;
     font-style: normal;
@@ -152,7 +152,7 @@ a:focus{
     box-sizing: border-box;
 }
 .wppb-popup-custom [data-rl-editable]:after,
-.wppb-popup-lead-form:after{
+.wppb-popup-custom .wppb-popup-lead-form:after{
         position: absolute;
     background: #424241b8;
     width: 100%;
@@ -166,8 +166,8 @@ a:focus{
 }
 .wppb-popup-custom [data-rl-editable]:hover:before,
 [data-rl-editable]:hover:after,
-.wppb-popup-lead-form:hover:before,
-.wppb-popup-lead-form:hover:after{
+.wppb-popup-custom .wppb-popup-lead-form:hover:before,
+.wppb-popup-custom .wppb-popup-lead-form:hover:after{
     display: block;
 }
 .wppb-popup-custom img[data-rl-editable]:hover{
@@ -428,6 +428,7 @@ a:focus{
     font-size: 20px;
     border: none;
     cursor: pointer;
+        z-index: 5;
 }
 .wppb-custom-popup-section img{
     max-width: 100%;
@@ -469,7 +470,7 @@ a:focus{
     align-items: center;
 }
 .wppb-custom-popup-heading > a{
-        background: #ee5a36;
+        background: #6747E6;
     display: block;
     padding: 6px 7px;
     color: white;

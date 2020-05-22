@@ -65,34 +65,38 @@ function initContent($column_content){
 		return $popupContent;
 	}
 
-function popup_layout($popupSetData,$layout=''){
-		$overlay_image = $popupSetData['overlay-image-url']?'background-image:url('.$popupSetData['overlay-image-url'].');':'';
-		$overlayStyle = $overlay_image?$overlay_image.$popupSetData['overlay-style']:'';
+	function popup_layout($popupSetData,$layout=''){
+			$overlay_image = $popupSetData['overlay-image-url']?'background-image:url('.$popupSetData['overlay-image-url'].');':'';
+			$overlayStyle = $overlay_image?$overlay_image.$popupSetData['overlay-style']:'';
 
-		$globalHeight = $popupSetData["wrapper-height"] != 'auto'?$popupSetData["wrapper-height"].'px;':$popupSetData["wrapper-height"].';';
-		$globalStyle = "padding:".$popupSetData["global-padding"].";height:".$globalHeight;
+			$globalHeight = $popupSetData["wrapper-height"] != 'auto'?$popupSetData["wrapper-height"].'px;':$popupSetData["wrapper-height"].';';
+			$globalStyle = "padding:".$popupSetData["global-padding"].";height:".$globalHeight;
 
-		$return = '<div class="wppb-popup-custom-wrapper" style="width:'.$popupSetData["wrapper-width"].'px;">
-		         <div class="wppb-popup-overlay-custom-img" data-overlay-image="'.$popupSetData['overlay-image-url'].'" style="'.$overlayStyle.'"></div>
-		          <div class="wppb-popup-custom-overlay" style="background-color:'.$popupSetData['overlay-color'].';"></div>
-		              <div class="wppb-popup-custom-content" style="'.$globalStyle.'">
-			            '.$popupSetData["close-btn"].$popupSetData["content"].'
-		              </div>
-		        </div>';
-		return $return;
-}
+			$return = '<div class="wppb-popup-custom-wrapper" style="width:'.$popupSetData["wrapper-width"].'px;">
+			         <div class="wppb-popup-overlay-custom-img" data-overlay-image="'.$popupSetData['overlay-image-url'].'" style="'.$overlayStyle.'"></div>
+			          <div class="wppb-popup-custom-overlay" style="background-color:'.$popupSetData['overlay-color'].';"></div>
+			              <div class="wppb-popup-custom-content" style="'.$globalStyle.'">
+				            '.$popupSetData["close-btn"].$popupSetData["content"].'
+			              </div>
+			        </div>';
+			return $return;
+	}
 
-
-	public function color($title,$prop,$type,$color_id=1){
+// builder function
+	public function header_title($title){
+		echo '<div class="rl_i_editor-header-title">
+						<label>'.$title.'</label>
+					</div>';
+	}
+	public function color($title,$prop,$type,$color_id=1,$attr=''){
 		if ($title && $prop && $type) {
-			$typeAndProp = $type.'="'.$prop.'"';
-			return '<div class="rl_i_editor-item-content-items item-text inline__"><label>'.$title.'</label>
+			$typeAndProp = $type.'="'.$prop.'"' . $attr;
+			echo '<div class="rl_i_editor-item-content-items item-text inline__"><label>'.$title.'</label>
 					<div class="rl_i_editor-item-color">
 						<label class="color-output" data-input-color="'.$color_id.'" '.$typeAndProp.'></label>
 					</div>
 				</div>';
 		}
-
 	}
 
 	public function range_slider($title, $id, $arr, $id_two=false, $type_ = "data-global-input"){
@@ -105,7 +109,7 @@ function popup_layout($popupSetData,$layout=''){
 
  			$attr .=  $type_.'="'.$id.'"';
  			$container = isset( $arr['container-class'] ) ? $arr['container-class'] : '';
-		 	return '<div  class="rl_i_editor-item-content-items  '.$container.' title_ inline__">
+		 	echo '<div  class="rl_i_editor-item-content-items  '.$container.' title_ inline__">
 						<div class="rl_i_range-font-size"><label>'.$title.'</label></div>
 					</div>
 					<div  class="rl_i_editor-item-content-items inline__ '.$container.'">
@@ -123,12 +127,92 @@ function popup_layout($popupSetData,$layout=''){
 			if ( is_array($option) ) {
 				foreach ($option as $value) {
 						if ( isset($value[0]) && isset($value[1]) ) {
-							$return	.= "<option value='".$value[1]."'>".$value[0]."</option>";
+							$selected = isset($value[2]) ? 'selected="selected"':'';
+							$return	.= "<option value='".$value[1]."' ".$selected.">".$value[0]."</option>";
 						}
 					}	
 				}	
 			$return	.= "</select>";
 			return $return;
+		}
+	public function checkbox($id,$title,$attr){
+			return '<div  class="rl_i_editor-item-content-items title_ inline__">
+			<div class="rl_i_range-font-size">
+					<div class="wppb-popup-checkbox-container">
+						<label class="wppb-popup-checkbox-title">'.$title.'</label>
+						<div class="wppb-popup-checkbox">
+							<input id="wppb_popup__checkbox__label_id-'.$id.'" type="checkbox" '.$attr.'>
+							<label for="wppb_popup__checkbox__label_id-'.$id.'"></label>
+						</div>
+					</div>
+				</div>
+				</div>';
+		}
+	public function border($id,$type,$attr = ''){
+		$data_attr = $type.'="'.$id.'"' . $attr;
+		$border = $this->select($data_attr.' data-border="border-style"',[ ['solid','solid'],['dashed','dashed'],['dotted','dotted'],['double','double'],['groove','groove'],['ridge','ridge'] ]);
+				$return =  '<section class="content-style-border">
+					<div  class="rl_i_editor-item-content-items title_ inline__">
+						'.$this->checkbox($id,"Border",$data_attr.' data-border="border-enable"').'
+					</div>
+					<div  class="rl_i_editor-item-content-items content-border">
+						<div>
+							<label>Border Width</label>
+							<input type="number" value="" '.$data_attr.' data-border="width">
+						</div>
+						<div>
+							<label>Border radius</label>
+							<input type="number" value="" '.$data_attr.' data-border="radius">
+						</div>
+						<div>
+							<label>Border Color</label>
+							<label class="color-output" '.$data_attr.' data-input-color="border-color"></label>
+						</div>
+						<div>
+							<label>Border Style</label>
+							'.$border.'
+						</div>
+					</div>
+				</section>';
+				echo $return;
+	}
+
+	public function margin_padding($id,$title,$type,$margin_padding,$attr=''){
+		$attr = $type."='".$id."'" .$attr;
+		$parameter = $margin_padding == "m" ? 'margin' : 'padding';
+		$return = '<div class="rl_i_editor-item-content-items title_ inline_">
+		<div class="rl_i_range-font-size"><label>'.$title.'</label></div>
+		</div>
+			<div class="rl_i_editor-item-content-items inline_">
+				<div class="rl_i_editor-item-content-padding_ paraMeterContainer__">
+					<ul class="ul-inputs-margin-padding rl-clear">
+						<li>
+							<input type="number" value="" '.$attr.' data-'.$parameter.'="top">
+						</li>
+						<li>
+							<input type="number" value="" '.$attr.' data-'.$parameter.'="right">
+						</li>
+						<li>
+							<input type="number" value="" '.$attr.' data-'.$parameter.'="bottom">
+						</li>
+						<li>
+							<input type="number" value="" '.$attr.' data-'.$parameter.'="left">
+						</li>
+						<li class="padding-origin_ margin-padding-origin">
+							<input id="m__p_origin-'.$parameter.'-'.$id.'" type="checkbox" '.$attr.' data-origin="'.$parameter.'">
+							<label for="m__p_origin-'.$parameter.'-'.$id.'"><span class="dashicons dashicons-admin-links"></span></label>
+						</li>
+					</ul>							
+					<ul class="ul-inputs-text rl-clear">
+						<li>TOP</li>
+						<li>RIGHT</li>
+						<li>BOTTOM</li>
+						<li>LEFT</li>
+						<li></li>
+					</ul>
+				</div>
+			</div>';
+			echo $return;
 		}
 
 // class end
