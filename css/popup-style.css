@@ -195,7 +195,6 @@ a:focus{
     text-align: left;
 }
 .wppb-popup-lead-form .leadform-show-form input[type='submit']{
-    min-height: 38px;
     padding: 10px 30px;
     border-color: #000;
     border-radius: 3px;
@@ -210,7 +209,13 @@ a:focus{
     transition: all .3s;
     white-space: inherit;
 }
-.wppb-popup-lead-form .leadform-show-form input:not([type='submit']),
+.wppb-popup-lead-form.lf_submit_center .submit-type.lf-field{
+    text-align: center;
+}
+.wppb-popup-lead-form.lf_submit_right .submit-type.lf-field{
+    text-align: right;
+}
+.wppb-popup-lead-form .leadform-show-form input:not([type='submit']):not([type='checkbox']),
 .wppb-popup-lead-form .leadform-show-form textarea{
          width: 100%;
     border: 1px solid gainsboro;

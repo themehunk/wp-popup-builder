@@ -133,7 +133,13 @@ var Business_news_letter = {
 												if ( leadForm.attr('style') ) leadFormStyle['form-style'] = leadForm.attr('style');
 												if ( leadForm.find('h2').attr('style') ) leadFormStyle['heading-style'] = leadForm.children('h2').attr('style');
 												if ( leadForm.find('.text-type.lf-field > label').attr('style') ) leadFormStyle['label-style'] = leadForm.find('.text-type.lf-field > label').attr('style');
+
+												if ( leadForm.find('.text-type.lf-field input').attr('style') ) leadFormStyle['field-style'] = leadForm.find('.text-type.lf-field input').attr('style');
+
 												if ( leadForm.find('.lf-form-submit').attr('style') ) leadFormStyle['submit-style'] = leadForm.find('.lf-form-submit').attr('style');
+
+												if ( leadForm.find('.lf-form-submit').attr('data-alignment') ) leadFormStyle['submit-align'] = leadForm.find('.lf-form-submit').attr('data-alignment');
+
 												saveAttrData['styles'] = leadFormStyle;
 
 								}else{
@@ -726,11 +732,11 @@ var Custom_popup_editor = {
 						}else if ( sepInput.data('padding') ) {
 							let optPerform = jQuery('.wppb-popup-custom .wppb-popup-custom-content');
 							Custom_popup_editor._globalPadding('padding',sepInput,optPerform,inputValue);
-							if(checkArray)setHiddenInput['global-padding'] = optPerform.css('padding');
+							// if(checkArray)setHiddenInput['global-padding'] = optPerform.css('padding');
 						}else if ( sepInput.data('origin') == 'padding' ) {
 							let optPerform = jQuery('.wppb-popup-custom .wppb-popup-custom-content');
 							Custom_popup_editor._globalPadding('padding-origin',sepInput,optPerform,inputValue);
-							if(checkArray)setHiddenInput['global-padding'] = optPerform.css('padding');
+							// if(checkArray)setHiddenInput['global-padding'] = optPerform.css('padding');
 						}
 				}else if(inputData == 'main-wrapper-height'){
 						jQuery('.wppb-popup-custom .wppb-popup-custom-content').css('height',inputValue+'px');
@@ -1000,15 +1006,24 @@ var Custom_popup_editor = {
 					let leadFormStyle_ = leadForm.data('form-styles');					
 					leadForm = leadForm.find('form');
 					if ( leadFormStyle_ ) {
+
 						if (leadFormStyle_['submit-style']) {
 							leadForm.find('.lf-form-submit').attr('style',leadFormStyle_['submit-style']);
 						}
+						if (leadFormStyle_['submit-align']) {
+							leadForm.find('.lf-form-submit').attr('data-alignment',leadFormStyle_['submit-align']);
+						}
+
 						if (leadFormStyle_['form-style']) {
 							leadForm.attr('style',leadFormStyle_['form-style']);
 						}
 						if (leadFormStyle_['label-style']) {
 						let element = leadForm.find('.name-type.lf-field > label, .text-type.lf-field > label, .textarea-type.lf-field > label');
 							element.attr('style',leadFormStyle_['label-style']);
+						}
+						if (leadFormStyle_['field-style']) {
+						let element = leadForm.find('.lf-field input, .lf-field textarea');
+							element.not('input[type="submit"]').attr('style',leadFormStyle_['field-style']);
 						}
 						if (leadFormStyle_['heading-style']) {
 						let element = leadForm.children('h2');
@@ -1075,6 +1090,26 @@ var Custom_popup_editor = {
 						Custom_popup_editor._colorPickr(sepInput,leadForm,'border-color');
 					}
 
+			}else if (getData == 'form-heading-enable') {
+				leadForm.children('h2').css('display') != 'none' ? sepInput.prop('checked', true) : sepInput.prop('checked', false);
+			}else if( sepInput.data('input-color') == 'lf-field-color' ){
+				let element = leadForm.find('.name-type.lf-field input, .text-type.lf-field input, .textarea-type.lf-field textarea');
+				Custom_popup_editor._colorPickr( sepInput, element ,'color' );
+			}else if( sepInput.data('input-color') == 'lf-field-background-color' ){
+				let element = leadForm.find('.name-type.lf-field input, .text-type.lf-field input, .textarea-type.lf-field textarea');
+				Custom_popup_editor._colorPickr( sepInput, element ,'background-color' );
+			}else if( getData == 'lf-field-font-size' ){
+				let element = leadForm.find('.lf-field input').css('font-size');
+				Custom_popup_editor._inputRange(sepInput, false, false, element );
+			}else if ( getData == 'lf-submit-padding') {
+				let paddings = leadForm.find('input.lf-form-submit').css('padding-'+sepInput.data('padding'));
+				if(paddings || paddings == '0') sepInput.val(parseInt(paddings));
+			}else if ( getData == 'submit-font-weight'){
+				let fontWeight = leadForm.find('input.lf-form-submit').css('font-weight');
+				if(fontWeight || fontWeight == '0') sepInput.val(parseInt(fontWeight));
+			}else if (getData == 'lf-submit-aliment') {
+				let getAlignment = leadForm.find('.submit-type.lf-field').css('text-align');
+				if(getAlignment == sepInput.val()) sepInput.prop('checked',true);
 			}
 
 
@@ -1091,17 +1126,33 @@ var Custom_popup_editor = {
 		let dataCheck = input_.data('lead-form');
 		let inputVal = input_.val();
 		let leadForm = jQuery('.wppb-popup-lead-form form');
+
 		if (dataCheck == 'lf-form-width') {
 			leadForm.css('width',inputVal+'%');
 		}else if (dataCheck == 'lf-label-font-size') {
 			leadForm.find('.lf-field > label').css('font-size',inputVal+'px');
+		}else if (dataCheck == 'lf-field-font-size') {
+			leadForm.find('.lf-field input, .textarea-type.lf-field textarea').not('input[type="submit"]').css('font-size',inputVal+'px');
 		}else if( dataCheck == 'lf-submit-btn-font-size'){
 			leadForm.find('input.lf-form-submit').css('font-size',inputVal+'px');
 		}else if( dataCheck == 'lf-heading-font-size'){
 			leadForm.children('h2').css('font-size',inputVal+'px');
 		}else if (dataCheck == 'form-border') {
 				Custom_popup_editor._borderFn('border',leadForm,input_,inputVal);
+		}else if ( dataCheck == 'form-heading-enable') {
+			input_.prop('checked') == true ? leadForm.children('h2').show() : leadForm.children('h2').hide();
+		}else if ( input_.data('padding') ) {
+			Custom_popup_editor._globalPadding('padding', input_ ,leadForm.find('input.lf-form-submit') ,inputVal);
+		}else if ( input_.data('origin') == 'padding' ) {
+			Custom_popup_editor._globalPadding('padding-origin', input_ ,leadForm.find('input.lf-form-submit') ,inputVal);
+		}else if ( dataCheck == 'submit-font-weight') {
+			leadForm.find('input.lf-form-submit').css('font-weight',inputVal);
+		}else if (dataCheck == 'lf-submit-aliment') {
+				leadForm.find('input.lf-form-submit').attr('data-alignment',inputVal);
+				leadForm.find('.submit-type.lf-field').css('text-align',inputVal);
 		}
+
+
 	},
 	_bind:function(){
 		jQuery(document).on('click', '.wppb-popup-custom [data-rl-editable]',Custom_popup_editor._openEditPanel);
@@ -1120,14 +1171,6 @@ var Custom_popup_editor = {
 		jQuery(document).on('keyup change', '.wppb-lead-form-styling [data-lead-form]',Custom_popup_editor._leadFormStylingSet);
 
 	}
-	// ,
-	// _emToPxUnit:function(sum,param){
-	// 	if (param == 'px') {
-	// 		return sum * 10;
-	// 	}else if (param == 'em') {
-	// 		return sum % 10;
-	// 	}
-	// }
 	,_chooseImage:function(e){
 		e.preventDefault();
     	let this_button = jQuery(this);

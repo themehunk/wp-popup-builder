@@ -136,14 +136,14 @@
 		</div>
 		<section data-toggle-action="close-btn-setting" class="">
 			<div class="rl_i_editor-item-content-items title_ inline__">
-				<label>Popup Close option By Click</label>
+				<label class="rl-sub-title">Popup Close option By Click</label>
 			</div>
 			<div class="rl_i_editor-item-content-items inline__">
-							<div class="rl_i_editor-item-color">
-								<?php 
-								echo $wp_builder_obj->select('data-cmn="close-btn" data-global-input="close-option"',[ ['Click On Icon',1],['Click On Icon and Outside',2],['Click On Outside',3,true] ]); 
-								?>
-							</div>
+					<div class="rl_i_editor-item-color">
+						<?php 
+						echo $wp_builder_obj->select('data-cmn="close-btn" data-global-input="close-option"',[ ['Click On Icon',1],['Click On Icon and Outside',2],['Click On Outside',3,true] ]); 
+						?>
+					</div>
 			</div>
 			<section class="close-btn-container">				
 			<?php 
@@ -152,18 +152,16 @@
 				$wp_builder_obj->range_slider( "Icon Font Size", 'close-font-size', ['title'=>'px','min'=>10,'max'=>100,'value'=>18,"attr"=>'data-cmn="close-btn"']);
 				$wp_builder_obj->margin_padding('close-btn', 'Icon Padding in px', 'data-global-input', 'p', 'data-cmn="close-btn"'); 
 			?>
-
-
-					<div class="rl_i_editor-item-content-items title_ inline_">
-						<div class="rl_i_range-font-size">
-							<label>Button Margin</label>
-						</div>
-					</div>
-					<?php 
-						$wp_builder_obj->range_slider('Top', 'close-btn', ['title'=>'%','min'=>"-20",'max'=>100,'value'=>18,"attr"=>'data-cmn="close-btn" data-margin="top"'], "close-btn-margin-top");
-						$wp_builder_obj->range_slider('Right','close-btn', ['title'=>'%','min'=>"-20",'max'=>100,'value'=>18,"attr"=>'data-cmn="close-btn" data-margin="right"'], "close-btn-margin-right"); 
-						$wp_builder_obj->border('close-btn','data-global-input',"data-cmn='close-btn'"); 
-					?>
+			<div class="rl_i_editor-item-content-items title_ inline_">
+				<div class="rl_i_range-font-size">
+					<label class="rl-sub-title">Button Margin</label>
+				</div>
+			</div>
+			<?php 
+				$wp_builder_obj->range_slider('Top', 'close-btn', ['title'=>'%','min'=>"-20",'max'=>100,'value'=>18,"attr"=>'data-cmn="close-btn" data-margin="top"'], "close-btn-margin-top");
+				$wp_builder_obj->range_slider('Right','close-btn', ['title'=>'%','min'=>"-20",'max'=>100,'value'=>18,"attr"=>'data-cmn="close-btn" data-margin="right"'], "close-btn-margin-right"); 
+				$wp_builder_obj->border('close-btn','data-global-input',"data-cmn='close-btn'"); 
+			?>
 			</section>
 		<!-- Close button setting -->
 		</section>
@@ -181,7 +179,7 @@
 					<div>
 						<!-- image -->
 						<div class="rl_i_editor-item-content-items item-image image_">
-							<label>Choose Image</label>
+							<label class="rl-sub-title">Choose Image</label>
 							<div class="rl-i-choose-image">
 								<div data-editor-input='img' class="rl-i-choose-image-wrap" style="background-image: url(<?php echo WPPB_URL ?>img/blank-img.png);">
 									<div class="rl-i-choose-image-inside-wrap"><span class="iconPlus dashicons dashicons-plus"></span></div>
@@ -190,12 +188,12 @@
 						</div>
 						<!-- title -->
 						<div class="rl_i_editor-item-content-items item-text item-title_ block__">
-							<label class="rl_i_editor-title">Title</label>
+							<label class="rl_i_editor-title rl-sub-title">Title</label>
 							<textarea data-editor-input='title'></textarea>
 						</div>
 						<!-- link -->
 						<div class="rl_i_editor-item-content-items item-link_ block__">
-							<label class="rl_i_editor-title">Link</label>
+							<label class="rl_i_editor-title rl-sub-title">Link</label>
 							<div class="rl_i_editor-anchor">
 								<div class="rl_i_editor-anchor-input">
 									<input type="text" data-editor-input='link'>
@@ -217,7 +215,7 @@
 						</div>
 						<!-- text alignment -->
 						<div class="rl_i_editor-item-content-items item-text item-alignment_ inline__">
-							<label>Alignment</label>
+							<label class="rl-sub-title">Alignment</label>
 							<div class="rl_text-alignment">
 								<ul class="text-alignment-choice">
 									<li>
@@ -243,7 +241,7 @@
 		<?php  $wp_builder_obj->range_slider( 'Width', 'item-width', ['title'=>'%','min'=>1,'value'=>20,'max'=>100],false, 'data-editor-input' ); ?>
 					<!-- text alignment -->
 						<div class="rl_i_editor-item-content-items item-alignment_ inline__">
-							<label>Container Alignment</label>
+							<label class="rl-sub-title">Container Alignment</label>
 							<div class="rl_text-alignment">
 								<ul class="text-alignment-choice">
 									<li>
@@ -271,12 +269,12 @@
 						?>
 					<!-- font weight -->
 					<div class="rl_i_editor-item-content-items item-text inline__">
-							<label>Font Weight</label>
-							<div class="rl_i_editor-item-color">
-								<?php echo $wp_builder_obj->select('data-editor-input="font-weight"',[ [200,200],[300,300],[400,400],[500,500],[600,600],[700,700],[800,800],[900,900] ]); ?>
-								
-							</div>
+						<label class="rl-sub-title">Font Weight</label>
+						<div class="rl_i_editor-item-color">
+							<?php echo $wp_builder_obj->select('data-editor-input="font-weight"',[ [200,200],[300,300],[400,400],[500,500],[600,600],[700,700],[800,800],[900,900] ]); ?>
+							
 						</div>
+					</div>
 					<?php 
 						  $wp_builder_obj->margin_padding('margin', 'Margin in px', 'data-editor-input', 'm');
 						  $wp_builder_obj->margin_padding('padding', 'Padding in px', 'data-editor-input', 'p');
@@ -308,7 +306,7 @@
 			</div>
 			
 			<div class="rl_i_editor-item-content-items title_ inline__">
-				<label>Choose Lead Form</label>
+				<label class="rl-sub-title">Choose Lead Form</label>
 			</div>
 
 			<div class="rl_i_editor-item-content-items lead-form-bulider-select">
@@ -335,18 +333,54 @@
 				</div>
 				<!-- heading style -->
 				<div class="rl_i_editor-item-content-i rl_i_editor-item-content-form-content wppb-lf-content-style">
-					<?php 
+				  <?php 
 					$wp_builder_obj->header_title('Heading Setting');
+					echo $wp_builder_obj->checkbox("form-heading-enable","Heading Enable",'data-lead-form="form-heading-enable"');
 					$wp_builder_obj->color('Color','color','data-lead-form','lf-heading-color');
 					$wp_builder_obj->range_slider('Font Size', 'lf-heading-font-size', ['title'=>'px','min'=>"10",'max'=>100,'value'=>10], false, 'data-lead-form');
 					$wp_builder_obj->header_title('Label Setting');
 					$wp_builder_obj->color('Color','color','data-lead-form','lf-label-color');
 					$wp_builder_obj->range_slider('Font Size', 'lf-label-font-size', ['title'=>'px','min'=>"10",'max'=>100,'value'=>10], false, 'data-lead-form');
+
+					$wp_builder_obj->header_title('Field Setting');
+					$wp_builder_obj->color('Color','color','data-lead-form','lf-field-color');
+					$wp_builder_obj->color('Background Color','background-color','data-lead-form','lf-field-background-color');
+					$wp_builder_obj->range_slider('Font Size', 'lf-field-font-size', ['title'=>'px','min'=>"10",'max'=>100,'value'=>10], false, 'data-lead-form');
+
 					$wp_builder_obj->header_title('Submit Button Setting');
 					$wp_builder_obj->color('Color','color','data-lead-form','lf-submit-btn-color');
 					$wp_builder_obj->color('Background Color','background-color','data-lead-form','lf-submit-btn-bcolor');
 					$wp_builder_obj->range_slider('Font Size', 'lf-submit-btn-font-size', ['title'=>'px','min'=>"10",'max'=>100,'value'=>10], false, 'data-lead-form'); 
 					?>
+
+					<div class="rl_i_editor-item-content-items item-alignment_ inline__">
+							<label class="rl-sub-title">Button Alignment</label>
+							<div class="rl_text-alignment">
+								<ul class="text-alignment-choice">
+									<li>
+										<input id="_lf_sub_btn_alignment_left" data-lead-form="lf-submit-aliment" type="radio" name="lf-sub-btn-alignment" value="left">
+										<label for="_lf_sub_btn_alignment_left" class="dashicons dashicons-editor-alignleft"></label>
+									</li>
+									<li>
+										<input id="_lf_sub_btn_alignment_center" data-lead-form="lf-submit-aliment" type="radio" name="lf-sub-btn-alignment" value="center">
+										<label for="_lf_sub_btn_alignment_center" class="dashicons dashicons-editor-aligncenter"></label>
+									</li>
+									<li>
+										<input id="_lf_sub_btn_alignment_right" data-lead-form="lf-submit-aliment" type="radio" name="lf-sub-btn-alignment" value="right">
+										<label for="_lf_sub_btn_alignment_right" class="dashicons dashicons-editor-alignright"></label>
+									</li>
+								</ul>
+							</div>
+						</div>
+
+					<div class="rl_i_editor-item-content-items item-text inline__">
+						<label class="rl-sub-title">Font Weight</label>
+						<div class="rl_i_editor-item-color">
+							<?php echo $wp_builder_obj->select('data-lead-form="submit-font-weight"',[ [200,200],[300,300],[400,400],[500,500],[600,600],[700,700],[800,800],[900,900] ]); ?>
+							
+						</div>
+					</div>
+					<?php $wp_builder_obj->margin_padding('lf-submit-padding', 'Padding in px', 'data-lead-form', 'p'); ?>
 				</div>
 			</div>
 		</section>

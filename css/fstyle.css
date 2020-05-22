@@ -156,7 +156,7 @@ font-weight: 600;
     box-sizing: border-box;
 }
 .wppb-popup-lead-form .leadform-show-form input[type='submit']{
-    min-height: 38px;
+    min-height: unset;
     padding: 10px 30px;
     border-color: #000;
     border-radius: 3px;
@@ -170,6 +170,12 @@ font-weight: 600;
     -moz-transition: all .3s;
     transition: all .3s;
     white-space: inherit;
+}
+.wppb-popup-lead-form.lf_submit_center .submit-type.lf-field{
+    text-align: center;
+}
+.wppb-popup-lead-form.lf_submit_right .submit-type.lf-field{
+    text-align: right;
 }
 .wppb-popup-lead-form .leadform-show-form input:not([type='submit']),
 .wppb-popup-lead-form .leadform-show-form textarea{

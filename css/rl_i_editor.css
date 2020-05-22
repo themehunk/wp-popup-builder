@@ -40,10 +40,11 @@
     height: 100%;
 }
 .rl_i_editor-header{
-	    background: #607D8B;
+	 background: #DEDEDE;
     height: 50px;
     position: relative;
-    color: white;
+    color: #6647E6;
+    font-weight: 500;
 }
 .rl_i_editor-header-area{
     height: 100%;
@@ -60,9 +61,10 @@
 }
 
 .rl_i_editor-content-area{
-        height: 100%;
+     height: 100%;
     overflow: scroll;
-    color: #9a9a9a;
+    color: #616161;
+    font-weight: 500;
 }
 .rl_i_editor-content-area label{
     cursor: default;
@@ -89,7 +91,7 @@
     /*padding: 12px;*/
 }
 .rl_i_editor-element-Toggle {
-        background-color: #efefef;
+     background-color: #F5F5F5;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -115,15 +117,15 @@
 }
 .rl_i_editor-element-add-item-list  > li > span,
 .wppb-popup-custom span.ui-draggable.ui-draggable-dragging{
-        text-align: center;
-    background: #efefef;
+    text-align: center;
+    background: #EDF7FB;
     display: block;
-    color: #959494;
-    margin: 8px 5px;
+    color: #775DE4;
+    margin: 8px 8px;
     padding: 7px 0px;
     font-size: 12px;
-    width: 59px;
-    height: 58px;
+    width: 70px;
+    height: 60px;
 }
 .rl_i_editor-element-add-item-list  > li > span > .text-icon,
 .wppb-popup-custom span.ui-draggable.ui-draggable-dragging .text-icon{
@@ -174,7 +176,7 @@
     flex-direction: column;
 }
 .rl_i_editor-item-content-items > label{
-        font-size: 12px;
+        font-size: 11px;
     cursor: default;
 }
 .rl_i_editor-item-content-items.block__ > label{
@@ -438,6 +440,7 @@ label[data-range-output]{
     margin: 0;
     text-align: center;
     font-size: 9px;
+    color: #bdbdbd;
 }
 .ul-inputs-margin-padding li:not(:last-child){
         border-right: 1px solid #dcdcdc;
@@ -496,12 +499,13 @@ label[data-range-output]{
     margin-left: 2px;
 }
 .rl_i_editor-header-title{
-        padding: 10px;
-    border-bottom: 1px solid #dcdcdc;
+         padding: 10px;
+    border-bottom: 1px solid #BDE6F5;
+    background: #F1F9FC;
 }
 .rl_i_editor-header-title > label{
-        font-size: 14px;
-    color: #565656;
+     font-size: 14px;
+    color: #6647E6;
 }
 
 .rl_i_editor-footer-area > button{
@@ -523,6 +527,11 @@ label[data-range-output]{
 }
 .rl-popup-delete-opt > div > div{
     flex: 1;
+}
+.rl-sub-title{
+         color: #bdbdbd;
+    font-size: 11px;
+    letter-spacing: .5px;
 }
 .popup-delete-wrap > button{
          background-color: red;
