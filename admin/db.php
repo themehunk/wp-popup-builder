@@ -256,24 +256,33 @@ public function wppb_initContent($column_content,$parentId){
                 }elseif ( $setting_value['type'] == 'lead-form' && is_numeric($setting_value['content']) ) {
 
                   if ( isset($setting_value['styles']) && $uniqIdAttr ) {
+                        $allUniqueId = "#".$parentId.' #'.$uniqIdAttr;
                         if ( isset($setting_value['styles']['form-style']) ){
-                              $popupContent['style'] .= "#".$parentId.' #'.$uniqIdAttr.' form{'.$setting_value['styles']['form-style'].';}';
+                              $popupContent['style'] .= $allUniqueId.' form{'.$setting_value['styles']['form-style'].';}';
                           }
                         if ( isset($setting_value['styles']['submit-style']) ){
-                            $popupContent['style'] .= "#".$parentId.' #'.$uniqIdAttr.' form input[type="submit"]{'.$setting_value['styles']['submit-style'].';}';
+                            $popupContent['style'] .= $allUniqueId.' form input[type="submit"]{'.$setting_value['styles']['submit-style'].';}';
                         }
                         if ( isset($setting_value['styles']['label-style']) ){
-                            $popupContent['style'] .= "#".$parentId.' #'.$uniqIdAttr.' form .lf-field > label{'.$setting_value['styles']['label-style'].';}';
+                            $popupContent['style'] .= $allUniqueId.' form .lf-field > label{'.$setting_value['styles']['label-style'].';}';
                         }
 
                         if ( isset($setting_value['styles']['heading-style']) ){
-                            $popupContent['style'] .= "#".$parentId.' #'.$uniqIdAttr.' form > h2{'.$setting_value['styles']['heading-style'].';}';
+                            $popupContent['style'] .= $allUniqueId.' form > h2{'.$setting_value['styles']['heading-style'].';}';
+                        }
+
+                        if ( isset($setting_value['styles']['field-style']) ){
+                            $popupContent['style'] .= $allUniqueId.' form .lf-field input:not([type="submit"]),'.$allUniqueId.'form .lf-field texarea{'.$setting_value['styles']['field-style'].';}';
+                        }
+                        $submitAlign = '';
+                        if (isset($setting_value['styles']['submit-align'])) {
+                          $submitAlign = 'lf_submit_'.$setting_value['styles']['submit-align'];
                         }
 
                   }
 
                   $popupContent['content'] .= '<div class="data-rl-editable-wrap" '.$alignMent.'>
-                  <div class="wppb-popup-lead-form" id="'.$uniqIdAttr.'">
+                  <div class="wppb-popup-lead-form '.$submitAlign.'" id="'.$uniqIdAttr.'">
                   '.self::lead_form_front_end()->lfb_show_front_end_forms($setting_value['content']).'
                   </div>
                   </div>';

@@ -54,9 +54,14 @@ function initContent($column_content){
 				  		$formStyles = htmlspecialchars( json_encode($setting_value['styles']), ENT_COMPAT );
 				  		$formStyles = 'data-form-styles="'.$formStyles.'"';
 					}
+
+                    $submitAlign = '';
+                    if (isset($setting_value['styles']['submit-align'])) {
+                      $submitAlign = 'lf_submit_'.$setting_value['styles']['submit-align'];
+                    }
               $popupContent .= '<div class="data-rl-editable-wrap" '.$alignMent.'>
 								<div class="actions_"><span class="dashicons dashicons-no rlRemoveElement"></span></div>
-								<div class="wppb-popup-lead-form" '.$uniqIdAttr.' data-form-id="'.$setting_value['content'].'" '.$formStyles.'>
+								<div class="wppb-popup-lead-form '.$submitAlign.'" '.$uniqIdAttr.' data-form-id="'.$setting_value['content'].'" '.$formStyles.'>
 									'.wppb_db::lead_form_front_end()->lfb_show_front_end_forms($setting_value['content']).'
 									</div>
 									</div>';
@@ -91,7 +96,7 @@ function initContent($column_content){
 	public function color($title,$prop,$type,$color_id=1,$attr=''){
 		if ($title && $prop && $type) {
 			$typeAndProp = $type.'="'.$prop.'"' . $attr;
-			echo '<div class="rl_i_editor-item-content-items item-text inline__"><label>'.$title.'</label>
+			echo '<div class="rl_i_editor-item-content-items item-text inline__"><label class="rl-sub-title">'.$title.'</label>
 					<div class="rl_i_editor-item-color">
 						<label class="color-output" data-input-color="'.$color_id.'" '.$typeAndProp.'></label>
 					</div>
@@ -110,7 +115,7 @@ function initContent($column_content){
  			$attr .=  $type_.'="'.$id.'"';
  			$container = isset( $arr['container-class'] ) ? $arr['container-class'] : '';
 		 	echo '<div  class="rl_i_editor-item-content-items  '.$container.' title_ inline__">
-						<div class="rl_i_range-font-size"><label>'.$title.'</label></div>
+						<div class="rl_i_range-font-size"><label class="rl-sub-title">'.$title.'</label></div>
 					</div>
 					<div  class="rl_i_editor-item-content-items inline__ '.$container.'">
 						<div class="rl_i_range-font-size">
@@ -119,7 +124,7 @@ function initContent($column_content){
 						<div class="data-range-output">
 							<input type="number" data-range-output="'.$id_two.'" '.$attrTwo.'>
 						</div>
-						<label class="param-title">'.$title_.'</label>
+						<label class="param-title rl-sub-title">'.$title_.'</label>
 					</div>';
 		 }
 	public function select($attr,$option){
@@ -139,7 +144,7 @@ function initContent($column_content){
 			return '<div  class="rl_i_editor-item-content-items title_ inline__">
 			<div class="rl_i_range-font-size">
 					<div class="wppb-popup-checkbox-container">
-						<label class="wppb-popup-checkbox-title">'.$title.'</label>
+						<label class="wppb-popup-checkbox-title rl-sub-title">'.$title.'</label>
 						<div class="wppb-popup-checkbox">
 							<input id="wppb_popup__checkbox__label_id-'.$id.'" type="checkbox" '.$attr.'>
 							<label for="wppb_popup__checkbox__label_id-'.$id.'"></label>
@@ -157,19 +162,19 @@ function initContent($column_content){
 					</div>
 					<div  class="rl_i_editor-item-content-items content-border">
 						<div>
-							<label>Border Width</label>
+							<label class="rl-sub-title">Border Width</label>
 							<input type="number" value="" '.$data_attr.' data-border="width">
 						</div>
 						<div>
-							<label>Border radius</label>
+							<label class="rl-sub-title">Border radius</label>
 							<input type="number" value="" '.$data_attr.' data-border="radius">
 						</div>
 						<div>
-							<label>Border Color</label>
+							<label class="rl-sub-title">Border Color</label>
 							<label class="color-output" '.$data_attr.' data-input-color="border-color"></label>
 						</div>
 						<div>
-							<label>Border Style</label>
+							<label class="rl-sub-title">Border Style</label>
 							'.$border.'
 						</div>
 					</div>
@@ -181,7 +186,7 @@ function initContent($column_content){
 		$attr = $type."='".$id."'" .$attr;
 		$parameter = $margin_padding == "m" ? 'margin' : 'padding';
 		$return = '<div class="rl_i_editor-item-content-items title_ inline_">
-		<div class="rl_i_range-font-size"><label>'.$title.'</label></div>
+		<div class="rl_i_range-font-size"><label class="rl-sub-title">'.$title.'</label></div>
 		</div>
 			<div class="rl_i_editor-item-content-items inline_">
 				<div class="rl_i_editor-item-content-padding_ paraMeterContainer__">
