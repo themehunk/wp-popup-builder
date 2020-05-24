@@ -77,6 +77,24 @@ function initContent($column_content){
 			$globalHeight = $popupSetData["wrapper-height"] != 'auto'?$popupSetData["wrapper-height"].'px;':$popupSetData["wrapper-height"].';';
 			$globalStyle = "padding:".$popupSetData["global-padding"].";height:".$globalHeight;
 
+			$return = $popupSetData["close-btn"].'<div class="wppb-popup-custom-wrapper" style="'.$popupSetData["wrapper-style"].'">
+			         <div class="wppb-popup-overlay-custom-img" data-overlay-image="'.$popupSetData['overlay-image-url'].'" style="'.$overlayStyle.'"></div>
+			          <div class="wppb-popup-custom-overlay" style="background-color:'.$popupSetData['overlay-color'].';"></div>
+			              <div class="wppb-popup-custom-content" style="'.$globalStyle.'">
+				            '.$popupSetData["content"].'
+			              </div>
+			        </div>';
+			return $return;
+	}
+
+
+	function popup_layout___($popupSetData,$layout=''){
+			$overlay_image = $popupSetData['overlay-image-url']?'background-image:url('.$popupSetData['overlay-image-url'].');':'';
+			$overlayStyle = $overlay_image?$overlay_image.$popupSetData['overlay-style']:'';
+
+			$globalHeight = $popupSetData["wrapper-height"] != 'auto'?$popupSetData["wrapper-height"].'px;':$popupSetData["wrapper-height"].';';
+			$globalStyle = "padding:".$popupSetData["global-padding"].";height:".$globalHeight;
+
 			$return = '<div class="wppb-popup-custom-wrapper" style="width:'.$popupSetData["wrapper-width"].'px;">
 			         <div class="wppb-popup-overlay-custom-img" data-overlay-image="'.$popupSetData['overlay-image-url'].'" style="'.$overlayStyle.'"></div>
 			          <div class="wppb-popup-custom-overlay" style="background-color:'.$popupSetData['overlay-color'].';"></div>
@@ -87,7 +105,7 @@ function initContent($column_content){
 			return $return;
 	}
 
-// builder function
+// builder internal tools function
 	public function header_title($title){
 		echo '<div class="rl_i_editor-header-title">
 						<label>'.$title.'</label>
@@ -218,6 +236,30 @@ function initContent($column_content){
 				</div>
 			</div>';
 			echo $return;
+		}
+
+		public function alignment($title,$id,$type,$attr=''){
+				$attr_ = $type."='".$id."'" . $attr;
+				$return = '<div class="rl_i_editor-item-content-items item-alignment_ inline__">
+				<label class="rl-sub-title">'.$title.'</label>
+				<div class="rl_text-alignment">
+					<ul class="text-alignment-choice">
+						<li>
+							<input id="_alignment_label_'.$id.'_left" '.$attr_.' type="radio" name="'.$id.'" value="left">
+							<label for="_alignment_label_'.$id.'_left" class="dashicons dashicons-editor-alignleft"></label>
+						</li>
+						<li>
+							<input id="_alignment_label_'.$id.'_center" '.$attr_.' type="radio" name="'.$id.'" value="center">
+							<label for="_alignment_label_'.$id.'_center" class="dashicons dashicons-editor-aligncenter"></label>
+						</li>
+						<li>
+							<input id="_alignment_label_'.$id.'_right" '.$attr_.' type="radio" name="'.$id.'" value="right">
+							<label for="_alignment_label_'.$id.'_right" class="dashicons dashicons-editor-alignright"></label>
+						</li>
+					</ul>
+				</div>
+			</div>';
+			return $return;
 		}
 
 // class end

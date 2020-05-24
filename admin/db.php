@@ -169,7 +169,7 @@ public function wppb_html($setting,$inline=false){
 // echo "<pre>";
     if ($setting && @unserialize( $setting )) {
         $popupSetData = array(
-          'wrapper-width'=>'550',
+          'wrapper-style'=>'width:550px;',
           'wrapper-height'=>'auto',
           'overlay-image-url'=>'',
           'overlay-style'=>"",
@@ -303,12 +303,12 @@ public function wppb_initContent($column_content,$parentId){
     $globalHeight = $popupSetData["wrapper-height"] != 'auto'?$popupSetData["wrapper-height"].'px;':$popupSetData["wrapper-height"].';';
     $globalStyle = "padding:".$popupSetData["global-padding"].";height:".$globalHeight;
 
-    $return = '<div class="wppb-popup-custom-wrapper" style="width:'.$popupSetData["wrapper-width"].'px;">
+    $return = $popupSetData["close-btn"].'<div class="wppb-popup-custom-wrapper" style="'.$popupSetData["wrapper-style"].'">
             <input type="hidden" name="popup-setting-front" value="'.$popupSetData["front-setting"].'">
              <div class="wppb-popup-overlay-custom-img" style="'.$overlayStyle.'"></div>
               <div class="wppb-popup-custom-overlay" style="background-color:'.$popupSetData['overlay-color'].';"></div>
                   <div class="wppb-popup-custom-content" style="'.$globalStyle.'">
-                  '.$popupSetData["close-btn"].$popupSetData["content"].'
+                  '.$popupSetData["content"].'
                   </div>
             </div>';
     return $internal_Css.$return;

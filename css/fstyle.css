@@ -53,6 +53,9 @@ font-weight: 600;
     justify-content: center;
     display: flex;
 }
+#wppbPopupShow > div{
+    position: relative;
+}
 /*demo and front css */
 .wppb-popup-main-wrap.inline_ .wppb-popup-custom-wrapper{
        margin: 15px 0;
@@ -137,6 +140,7 @@ font-weight: 600;
     font-size: 20px;
     border: none;
     cursor: pointer;
+    z-index: 1000;
 }
 .wppb-popup-main-wrap .wppb-popup-close-btn:focus{
     box-shadow: none;

@@ -1,6 +1,6 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit; 
 $popupSetData = array(
-					'wrapper-width'=>'550',
+					'wrapper-style'=>'width:550px;',
 					'wrapper-height'=>'auto',
 					'overlay-image-url'=>'',
 					'overlay-style'=>"",
