@@ -7,6 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 			foreach ($custom_popup_all as $popupKey => $popupValue) {
 					
 					$popupSetData = array(
+						'wrapper-style'=>'width:unset;',
 						'wrapper-height'=>'auto',
 						'overlay-image-url'=>'',
 						'overlay-style'=>"",
@@ -36,7 +37,6 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 							}
 						}
 					}
-					$popupSetData['wrapper-width'] = false;
 					$column_making++;
 					$business_id 	   = isset($popupValue->BID)?$popupValue->BID:"";
 					if ($column_making == 1) $popup_html_all_custom .= '<div class="wppb-popup-row wppb-popup_clear">';

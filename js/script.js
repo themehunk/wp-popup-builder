@@ -844,29 +844,47 @@ var Custom_popup_editor = {
 		jQuery('.rl_i_editor-item-content').hide();
 	},
 	_chooseLayout:function(){
-		let clickedLaout = jQuery(this);
-		let getLayout = clickedLaout.data('layout');
-		    getLayout =   jQuery('.prebuilt-pupup-layout-container > div[data-layout="'+getLayout+'"]').html();
-		let putLayout = jQuery('.wppb-popup-custom');
-		let saveLAyout = {layout:clickedLaout.attr('data-layout')};
-		let setHiddenInputI = jQuery('input[type="hidden"][data-global-save]');
-		setHiddenInputI.val( JSON.stringify(saveLAyout) );
-		putLayout.html(getLayout);
-		jQuery('.prebulit-demo-popup').hide();
-		jQuery('.wppb-popup-name').show();
+		let layoutName = jQuery('.wppb-popup-name-layout input[name="wppb-popup-layout"]');
+		let popupName = jQuery('.wppb-popup-name-layout input[name="wppb-popup-name"]');
+		let checkRadio = false;
+		jQuery.each(layoutName, (index,value)=> {
+			let radio_ = jQuery(value);
+			if (radio_.prop('checked') == true) checkRadio = true;
+		}); 
+		if (checkRadio == true && popupName.val() != '') {
+			jQuery('.wppb-popup-name-init').removeClass('business_disabled');
+		}else{
+			jQuery('.wppb-popup-name-init').addClass('business_disabled');
+		}
+
+// 		.wppb-popup-name-layout input[name="wppb-popup-name"]
+// .wppb-popup-name-layout input[name="wppb-popup-layout"]
+
+		// let getLayout = clickedLaout.data('layout');
+		//     getLayout =   jQuery('.prebuilt-pupup-layout-container > div[data-layout="'+getLayout+'"]').html();
+		// let putLayout = jQuery('.wppb-popup-custom > div');
+		// let saveLAyout = {layout:clickedLaout.attr('data-layout')};
+		// let setHiddenInputI = jQuery('input[type="hidden"][data-global-save]');
+		// setHiddenInputI.val( JSON.stringify(saveLAyout) );
+		// putLayout.html(getLayout);
+
+
+
+		// jQuery('.prebulit-demo-popup').hide();
+		// jQuery('.wppb-popup-name').show();
 	},
 	_popupName:function(){
-		let inputValue = jQuery('input[name="wppb-popup-name"]').val();
-			if (inputValue) {
+
+		let layoutName = jQuery('.wppb-popup-name-layout input[name="wppb-popup-layout"]:checked').val();
+		let popupName = jQuery('.wppb-popup-name-layout input[name="wppb-popup-name"]').val();
+			if (layoutName && popupName) {
+				let saveLAyout = {layout:layoutName,'popup-name':popupName};
 				let setHiddenInputI = jQuery('input[type="hidden"][data-global-save]');
-				let setHiddenInput = setHiddenInputI;
-				if (setHiddenInput.val()) {
-					setHiddenInput = JSON.parse(setHiddenInput.val());
-				}
-				let checkArray = (typeof setHiddenInput === 'object')?true:false;
-				if(checkArray)setHiddenInput['popup-name'] = inputValue;
-				if (checkArray)setHiddenInputI.val( JSON.stringify(setHiddenInput) );
-				jQuery('.wppb-popup-name').hide();
+				setHiddenInputI.val( JSON.stringify(saveLAyout) );
+				let getLayout = jQuery('.prebuilt-pupup-layout-container > div[data-layout="'+layoutName+'"]').html();
+				let putLayout = jQuery('.wppb-popup-custom > div');
+				putLayout.html(getLayout);
+				jQuery('.wppb-popup-name-layout').hide();
 				jQuery('.wppb-popup-custom').show();
 				jQuery('.rl_i_editor-inner-wrap-mask').remove();
 				Custom_popup_editor._dragAndShort();
@@ -874,6 +892,22 @@ var Custom_popup_editor = {
 			}else{
 				alert('fill the popup name');
 			}
+	},
+	_bind:function(){
+		jQuery(document).on('click', '.wppb-popup-custom [data-rl-editable]',Custom_popup_editor._openEditPanel);
+		jQuery(document).on('click', '.wppb-popup-custom .rlRemoveElement',Custom_popup_editor._rlRemoveElement);
+		jQuery(document).on('click', '.rl-i-choose-image',Custom_popup_editor._chooseImage);
+		jQuery(document).on('keyup change', '[data-editor-input]',Custom_popup_editor._changedSetEditor);
+		jQuery(document).on('keyup change', '[data-global-input]', Custom_popup_editor._globalSetEditor);
+		jQuery(document).on('change', '.lead-form-bulider-select > select', Custom_popup_editor._leadFormChoose);
+		jQuery(document).on('click', '.wppb-popup-lead-form', Custom_popup_editor._leadFormOpenPanel);
+
+		jQuery(document).on('keyup', '.wppb-popup-name-layout input[name="wppb-popup-name"]', Custom_popup_editor._chooseLayout);
+		jQuery(document).on('click', '.wppb-popup-name-layout input[name="wppb-popup-layout"]', Custom_popup_editor._chooseLayout);
+
+		jQuery(document).on('click', '.wppb-popup-name-init', Custom_popup_editor._popupName);
+
+		jQuery(document).on('keyup change', '.wppb-lead-form-styling [data-lead-form]',Custom_popup_editor._leadFormStylingSet);
 	},
 	_leadFormOpenPanel:function(){
 		let getForm = jQuery(this);
@@ -1046,18 +1080,6 @@ var Custom_popup_editor = {
 				}
 		}
 		// console.log(dataCheck);
-	},
-	_bind:function(){
-		jQuery(document).on('click', '.wppb-popup-custom [data-rl-editable]',Custom_popup_editor._openEditPanel);
-		jQuery(document).on('click', '.wppb-popup-custom .rlRemoveElement',Custom_popup_editor._rlRemoveElement);
-		jQuery(document).on('click', '.rl-i-choose-image',Custom_popup_editor._chooseImage);
-		jQuery(document).on('keyup change', '[data-editor-input]',Custom_popup_editor._changedSetEditor);
-		jQuery(document).on('keyup change', '[data-global-input]', Custom_popup_editor._globalSetEditor);
-		jQuery(document).on('change', '.lead-form-bulider-select > select', Custom_popup_editor._leadFormChoose);
-		jQuery(document).on('click', '.wppb-popup-lead-form', Custom_popup_editor._leadFormOpenPanel);
-		jQuery(document).on('click', '.prebulilt-popup-inner [data-layout]', Custom_popup_editor._chooseLayout);
-		jQuery(document).on('click', '.wppb-popup-name-init', Custom_popup_editor._popupName);
-		jQuery(document).on('keyup change', '.wppb-lead-form-styling [data-lead-form]',Custom_popup_editor._leadFormStylingSet);
 	}
 	,_chooseImage:function(e){
 		e.preventDefault();
@@ -1184,5 +1206,4 @@ var Custom_popup_editor = {
 	Custom_popup_editor.init();
 	Business_news_letter.init();
 })(jQuery);
-// kk
 // https://app.slack.com/client/T9BQYES21/DK4UD39SQ?cdn_fallback=2
