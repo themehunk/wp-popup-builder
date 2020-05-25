@@ -8,11 +8,8 @@ var Business_news_letter = {
 		this_btn.addClass('rlLoading');
 		let saveData = Business_news_letter._saveData();
 		
-		
 		console.log(saveData);
-
 		// return;
-
 			let data_ = {action:'custom_insert',htmldata:saveData};
 			let returnData = Business_news_letter._ajaxFunction(data_);
 			returnData.success(function(response){
@@ -24,8 +21,6 @@ var Business_news_letter = {
 						location.reload();
 		        	}
 			});
-
-
 	},
 	_updateAddon:function(){
 		let this_btn = jQuery(this);
@@ -34,7 +29,6 @@ var Business_news_letter = {
 	
 		console.log(saveData);
 		// return;
-
 		let bid = this_btn.data('bid');
 			let data_ = {action:'custom_update',htmldata:saveData,bid:bid};
 			let returnData = Business_news_letter._ajaxFunction(data_);
@@ -46,13 +40,10 @@ var Business_news_letter = {
 			});
 	},
 	_initGlobalSave:function(inputs){
-
 			let contentGlobal = jQuery('input[type="hidden"][data-global-save]');
 			contentGlobal = contentGlobal.val() ? JSON.parse(contentGlobal.val()) : {};
 			let outerParent = jQuery('.wppb-popup-custom');
-			
 			let overlayImage = outerParent.find('[data-overlay-image]');
-			let wrapperWidth = outerParent.find('.wppb-popup-custom-wrapper');
 			// overlay color set
 			let overLayColor = outerParent.find('.wppb-popup-custom-overlay');
 			overLayColor = Custom_popup_editor._checkStyle(overLayColor,'background-color');
@@ -66,7 +57,10 @@ var Business_news_letter = {
 			if(outSideColor) contentGlobal['global-padding'] = globalPadding;
 
 			if(overlayImage.attr('data-overlay-image'))contentGlobal['overlay-image-url'] = overlayImage.attr('data-overlay-image');
-			contentGlobal['wrapper-width'] = parseInt(wrapperWidth.css('width'));
+			let wrapperWidth = outerParent.find('.wppb-popup-custom-wrapper');
+			// contentGlobal['wrapper-width'] = parseInt(wrapperWidth.css('width'));
+			if ( wrapperWidth.attr('style') )contentGlobal['wrapper-style'] = wrapperWidth.attr('style');
+
 			let overlayStyle = Custom_popup_editor._removeStyle(overlayImage,"background-image",false)
 			if(overlayStyle) contentGlobal['overlay-style'] = overlayStyle;
 			return {type:'global-setting',content:contentGlobal };
@@ -78,10 +72,6 @@ var Business_news_letter = {
 		
 		let getSaveGlobal = Business_news_letter._initGlobalSave();
 		if (!jQuery.isEmptyObject(getSaveGlobal.content)) saveData.push(getSaveGlobal);
-
-		// console.log(getSaveData);
-		// console.log(getSaveGlobal);
-		// console.log(getSaveDataWrap);
 
 		// find all wrap 
 		jQuery.each(getSaveDataWrap,(Wrap_index,Wrap_value)=>{
@@ -219,17 +209,12 @@ var Business_news_letter = {
 		var bid = thisCheckBox.closest('.wppb-opt-page-opt').data('bid');
 		var option_key = thisCheckBox.data('name');
 		let option_value = thisCheckBox.prop('checked') == true?1:0;
-		// console.log(bid);
-		// console.log(option_key);
-		// return;
-
 		// disable all on enable all pages and post
 		var checkBoxDisable = thisCheckBox.closest('.wppb-popup-checkbox');
 			checkBoxDisable.addClass('business_disabled');
 		let data_ = {action:'option_update',popup_id:bid,option_key:option_key,option_value:option_value};
 			let returnData = Business_news_letter._ajaxFunction(data_);
 			returnData.success(function(response){
-				console.log(response);
 				if (response) {
 		        		jQuery('.wppb-popup-optSaved-msg').fadeIn('slow');
 		        		if (response == 22){
@@ -265,12 +250,10 @@ var Business_news_letter = {
 	    	let isActive 	= this_button.prop('checked') == true?1:0;
 			this_button.addClass('business_disabled');
 			let data_ = {action:'popup_active',popup_id:popup_id,is_active:isActive};
-			
 			let returnData = Business_news_letter._ajaxFunction(data_);
 			returnData.success(function(response){
 				console.log(response);
 			});
-
 	},
 	_bind(){
 		jQuery(document).on('click', '.wppb_popup_saveAddon', Business_news_letter._saveBusinessAddon);
@@ -280,12 +263,8 @@ var Business_news_letter = {
 
 		jQuery(document).on('change', '.wppb-popup-option input[type="checkbox"]', Business_news_letter._businessOptionUpdate);
 		jQuery(document).on('change','.wppb_popup_setting_active', Business_news_letter._savePopupActiveDeactive);
-
 	}
-		// alert('hdhdh');
-
 }
-
 // business popup editor functionlity
 var Custom_popup_editor = {
 	init:function(){
@@ -297,13 +276,10 @@ var Custom_popup_editor = {
 		jQuery('.rl_i_editor-item-content-header [data-editor-tab]').click(function(){
 			let thisButton = jQuery(this);
 			thisButton.closest('.rl_i_editor-item-content-header').siblings('.rl_i_editor-item-content-i').removeClass('active_');
-			// jQuery('.rl_i_editor-item-content-i').removeClass('active_');
 			thisButton.addClass('active_').siblings().removeClass('active_');
 			jQuery('.rl_i_editor-item-content-'+thisButton.data('editor-tab')).addClass('active_');
 		});
-
 		jQuery('[data-toggle]').click(function(){
-
 			// close container while open content style
 			let clickTarget = jQuery(this);
 			clickTarget.siblings().removeClass('rl-active');
@@ -433,8 +409,6 @@ var Custom_popup_editor = {
 				seperateInput.val("");
 			}
 			// reset value
-
-
 			if((clickedObjData1 == 'text' || clickedObjData1 == 'link' || clickedObjData1 == 'heading') && seperateInputData1 == 'title'){
 				// get text of clicked item 
 				seperateInput.val(clickedObj.html());
@@ -442,20 +416,14 @@ var Custom_popup_editor = {
 				// get link href of clicked item
 				clickedObj.data('editor-link')?seperateInput.val(clickedObj.data('editor-link')):seperateInput.val('#');
 			}else if(clickedObj.data('editor-link') && seperateInputData1 == '_linktarget'){
-				
 				if (clickedObj.data('editor-link-target') == 1 && seperateInput.val() == 1) {
 					seperateInput.prop('checked',true);
 				}else if (seperateInput.val() == 0) {
 					seperateInput.prop('checked',true);
 				}
-			}else if(seperateInput.data('input-color')){
-				// get color and init of clicked item
-				if (seperateInputData1 == 'border') {
-					Custom_popup_editor._colorPickr(seperateInput,clickedObj,'border-color');
-				}else{
+			}else if( seperateInput.data('input-color') && seperateInputData1 != 'border'){
 					Custom_popup_editor._colorPickr(seperateInput,clickedObj,seperateInputData1);
-				}
-			}else if(seperateInputData1 == 'alignment'){
+			}else if(seperateInputData1 == 'text-alignment-choice'){
 				let getAlignment = clickedObj.css('text-align');
 				if (seperateInput.val() == getAlignment){
 					seperateInput.prop('checked',true);
@@ -489,27 +457,11 @@ var Custom_popup_editor = {
 				if (jQuery('.getChangeImage_').length)jQuery('.getChangeImage_').removeClass('getChangeImage_');
 				clickedObj.addClass('getChangeImage_');
 			}else if(seperateInputData1 == "border"){
-				if (seperateInput.data('border') == 'width'){
-					seperateInput.val(parseInt(clickedObj.css('border-width')));
-				}else if (seperateInput.data('border') == 'radius') {
-					seperateInput.val(parseInt(clickedObj.css('border-radius')));
-				}else if(seperateInput.data('border') == 'border-enable'){
-						let checkBorder = Custom_popup_editor._checkStyle(clickedObj,'border');
-						if (checkBorder){
-							seperateInput.prop('checked',true);
-							jQuery('.content-border').show();
-						}else{
-							seperateInput.prop('checked',false);
-							jQuery('.content-border').hide();
-						}
-				}
+				Custom_popup_editor.__borderGet(clickedObj,seperateInput);
 			}else if (seperateInputData1 == 'font-weight') {
 				let fontWeight = clickedObj.css('font-weight');
 					seperateInput.val(fontWeight);
 			}
-
-			// console.log(seperateInput);
-			// console.log(value);
 		}
 		jQuery.each(allInputs,initInput_);
 	},
@@ -527,7 +479,7 @@ var Custom_popup_editor = {
 			}else if (changeData == '_linktarget' && clickedObj.data('editor-link')) {
 				// set link href of clicked item
 				clickedObj.attr('data-editor-link-target',changeValue);
-			}else if(changeData == 'alignment'){
+			}else if(changeData == 'text-alignment-choice'){
 				// set aligment clicked item
 				clickedObj.css('text-align',changeValue);
 			}else if (changeData == 'font-size') {
@@ -546,24 +498,15 @@ var Custom_popup_editor = {
 			}else if (changeData == 'content-alignment') {
 				Custom_popup_editor._contentAlign(clickedObj,changeValue);
 			}else if (changeData == 'border') {
-				Custom_popup_editor._borderFn(changeData,clickedObj,changedInput,changeValue);
-
+				Custom_popup_editor._borderFn(clickedObj,changedInput,changeValue);
 			}else if (changeData == 'font-weight') {
 				clickedObj.css('font-weight',changeValue);
 			}
-
-			// console.log(changeData);
-			// console.log(changedInput);
-			// console.log(changeValue);
-
 	},
 	_globalSettingInit:function(){
 		let inputs = jQuery('[data-global-input]');
-		if (inputs.length) jQuery.each(inputs,globalInit_);
-		
+		if (inputs.length) jQuery.each(inputs,globalInit_);		
 		function globalInit_(ind,value){//loop
-
-
 			let sepInput = jQuery(value);
 			let dataInput = sepInput.data('global-input');
 			let sepInputDataClr = sepInput.data('input-color');
@@ -573,18 +516,18 @@ var Custom_popup_editor = {
 			if ( setHiddenInput.val() ) {
 				setHiddenInput = JSON.parse(setHiddenInput.val());
 			}
-			
 			// console.log(sepInput);
 			// console.log(value);
-
 			if (dataInput == 'main-wrapper') {
-
 				if(sepInput.data('show-range') == "wrapper-width"){
 					Custom_popup_editor._inputRange(sepInput,jQuery('.wppb-popup-custom .wppb-popup-custom-wrapper'),'width');
 				}else if ( sepInput.data('padding') ) {
 					let paddings = jQuery('.wppb-popup-custom .wppb-popup-custom-content').css('padding-'+sepInput.data('padding'));
 					sepInput.val( parseInt(paddings) );
 				}
+			}else if( dataInput == 'global-border'){
+				let globalBorder = jQuery('.wppb-popup-custom .wppb-popup-custom-wrapper');
+				Custom_popup_editor.__borderGet(globalBorder,sepInput);
 			}else if (dataInput == 'main-wrapper-height') {
 					Custom_popup_editor._inputRange(sepInput,jQuery('.wppb-popup-custom .wppb-popup-custom-content'),'height');
 			}else if(dataInput=='wrapper-height-check'){
@@ -599,7 +542,6 @@ var Custom_popup_editor = {
 			}else if (sepInputDataClr == 'overlay-color' || sepInputDataClr == 'outside-color' ) {
 				let colorObj = sepInputDataClr == 'outside-color' ? jQuery('.wppb-popup-custom') : jQuery('.wppb-popup-custom .wppb-popup-custom-overlay'); 
 				Custom_popup_editor._colorPickr(sepInput,colorObj,dataInput);
-			
 			}else if (dataInput == 'overlay-image') {
 				let imgUrl = jQuery('.wppb-popup-custom .wppb-popup-overlay-custom-img').css('background-image');
 				let popupUrl = jQuery('input[name="popup-url"]').val();
@@ -615,7 +557,6 @@ var Custom_popup_editor = {
 					imageCheckbox.prop('checked',false);
 				}
 			}else if(dataInput == "background-position"){
-				// console.log(sepInput);
 					let getElemStyle = jQuery('.wppb-popup-custom .wppb-popup-overlay-custom-img').attr('style');
 					let saparateStyle = Custom_popup_editor._inlineCssSeparate(getElemStyle);
 					if ('background-position' in saparateStyle && sepInput.val() == saparateStyle['background-position']) {
@@ -628,7 +569,6 @@ var Custom_popup_editor = {
 					 getElemStyle = getElemStyle.css('background-size');
 					 sepInput.val(getElemStyle);
 			}else if( sepInput.data('cmn') == 'close-btn'){
-			// console.log(value);
 						let closeBtn = jQuery('.wppb-popup-custom .wppb-popup-close-btn');
 						if (dataInput == 'close-option') {
 								if (setHiddenInput['close-type']) {
@@ -650,34 +590,15 @@ var Custom_popup_editor = {
 									let checkStyle = Custom_popup_editor._checkStyle( closeBtn, sepInput.data('margin') );
 									let putParam = checkStyle?parseInt(checkStyle):5;
 									Custom_popup_editor._inputRange(sepInput,closeBtn,sepInput.data('margin'),putParam);
-							}else if( sepInput.data('border') == 'border-enable' ){
-									let checkBorder = Custom_popup_editor._checkStyle(closeBtn,'border');
-									let container = sepInput.closest('.content-style-border').find('.content-border');
-										if (checkBorder){
-											sepInput.prop('checked',true);
-											container.show();
-										}else{
-											sepInput.prop('checked',false);
-											container.hide();
-										}
-							}else if( sepInput.data('border') == 'width' ){
-								let getWidth = closeBtn.css('border-width');
-								sepInput.val( parseInt(getWidth) );
-							}else if( sepInput.data('border') == 'radius' ){
-									let getRadius = closeBtn.css('border-radius');
-									sepInput.val( parseInt(getRadius) );
-							}else if ( sepInput.data('input-color') == 'border-color' ) {
-								Custom_popup_editor._colorPickr(sepInput,closeBtn,'border-color');
+							}else if (sepInput.data('border') || sepInput.data('input-color') == 'border-color') {
+								Custom_popup_editor.__borderGet(closeBtn,sepInput);
 							}
 						}else{
 							jQuery('.close-btn-container').hide();
 						}
-
 			}else if(dataInput == "column-width"){
-
 			let get_wrap = jQuery('.wppb-popup-custom .wppb-popup-rl-wrap');
 			let getColumn = get_wrap.find('.wppb-popup-rl-column');
-
 					if (getColumn.length == 2) {
 						jQuery('.rl-two-column-width').show();
 						if (sepInput.data('column') == 1) {
@@ -692,8 +613,6 @@ var Custom_popup_editor = {
 					}else{
 						jQuery('.rl-two-column-width').hide();
 					}
-					
-
 				}else if (dataInput == 'popup-delay-open') {
 					let popupDalay = setHiddenInput['popup-delay-open'] ? setHiddenInput['popup-delay-open'] : 3;
 					Custom_popup_editor._inputRange( sepInput, false, false, popupDalay );
@@ -728,21 +647,20 @@ var Custom_popup_editor = {
 
 						if (sepInput.data('show-range') == 'wrapper-width') {
 							jQuery('.wppb-popup-custom .wppb-popup-custom-wrapper').css('width',inputValue);
-							if(checkArray)setHiddenInput['wrapper-width'] = inputValue;
 						}else if ( sepInput.data('padding') ) {
 							let optPerform = jQuery('.wppb-popup-custom .wppb-popup-custom-content');
 							Custom_popup_editor._globalPadding('padding',sepInput,optPerform,inputValue);
-							// if(checkArray)setHiddenInput['global-padding'] = optPerform.css('padding');
 						}else if ( sepInput.data('origin') == 'padding' ) {
 							let optPerform = jQuery('.wppb-popup-custom .wppb-popup-custom-content');
 							Custom_popup_editor._globalPadding('padding-origin',sepInput,optPerform,inputValue);
-							// if(checkArray)setHiddenInput['global-padding'] = optPerform.css('padding');
 						}
+				}else if(inputData == 'global-border'){
+					let globalBorder = jQuery('.wppb-popup-custom .wppb-popup-custom-wrapper');
+					Custom_popup_editor._borderFn(globalBorder,sepInput,inputValue);
 				}else if(inputData == 'main-wrapper-height'){
 						jQuery('.wppb-popup-custom .wppb-popup-custom-content').css('height',inputValue+'px');
 					if(checkArray)setHiddenInput['wrapper-height'] = inputValue;
 				}else if(inputData == 'wrapper-height-check'){
-					
 					if (sepInput.prop('checked') === false) {
 						jQuery('.wppb-popup-custom .wppb-popup-custom-content').css('height','auto');
 						if(checkArray)setHiddenInput['wrapper-height'] = 'auto';
@@ -765,13 +683,11 @@ var Custom_popup_editor = {
 							imageContainer.hide();
 							jQuery('.wppb-popup-custom .wppb-popup-overlay-custom-img').attr('data-overlay-image','none').css('background-image','none');
 							if ('overlay-image-url' in setHiddenInput) delete setHiddenInput['overlay-image-url'];
-
 						}
 				}else if (inputData == 'close-font-size') {
 					jQuery('.wppb-popup-custom .wppb-popup-close-btn').css('font-size',inputValue+'px');
 				}else if (inputData == 'close-option') {
 							if(checkArray)setHiddenInput['close-type'] = inputValue;
-
 							if (inputValue == 1 || inputValue == 2) {
 								let closeBtn = '<span class="wppb-popup-close-btn dashicons dashicons-no-alt"></span>';
 								jQuery('.wppb-popup-custom .wppb-popup-custom-content').prepend(closeBtn);
@@ -781,7 +697,6 @@ var Custom_popup_editor = {
 								jQuery('.wppb-popup-custom .wppb-popup-close-btn').remove();
 								jQuery('.close-btn-container').hide();
 							}
-
 				}else if ( inputData == 'close-btn' ) {
 							let optPerform = jQuery('.wppb-popup-custom .wppb-popup-close-btn');
 						if ( sepInput.data('padding') ) {
@@ -791,17 +706,11 @@ var Custom_popup_editor = {
 						}else if ( sepInput.data('margin') ) {
 							optPerform.css( sepInput.data('margin'), inputValue+'%');
 						}else if ( sepInput.data('border') ) {
-							if ( sepInput.data('border') == 'border-enable' ) {
-								Custom_popup_editor._borderFn( 'border-enable', optPerform,sepInput,inputValue);
-							}else{
-								Custom_popup_editor._borderFn( 'border' , optPerform,sepInput,inputValue);
-							}
+								Custom_popup_editor._borderFn(optPerform,sepInput,inputValue);
 						}
 				}else if (inputData == 'column-width') {
-
 					let get_wrap = jQuery('.wppb-popup-custom .wppb-popup-rl-wrap');
 					let getColumn = get_wrap.find('.wppb-popup-rl-column');
-
 					if (sepInput.data('column') == 1) {
 						jQuery(getColumn[0]).css('width',inputValue+'%');
 						jQuery(getColumn[1]).css('width',(100 - inputValue)+'%');
@@ -811,17 +720,13 @@ var Custom_popup_editor = {
 						jQuery(getColumn[0]).css('width',(100 - inputValue)+'%');
 						sepInput.siblings('input').val( 100 - inputValue );
 					}
-
 				}else if (inputData == 'popup-delay-open'){
 					if(checkArray)setHiddenInput['popup-delay-open'] = inputValue;
 				}else if (inputData == 'popup-delay-close'){
 					if(checkArray)setHiddenInput['popup-delay-close'] = inputValue;
 				}
-
 				if (checkArray)setHiddenInputI.val( JSON.stringify(setHiddenInput) );
-
 		}
-
 	},
 	_marginPadding:function(changeData,changedInput,clickedObj,changeValue){
 		if(changedInput.data('origin') && changeData == 'margin'){
@@ -859,9 +764,30 @@ var Custom_popup_editor = {
 		}
 
 	},
-	_borderFn:function(changeData,clickedObj,changedInput,changeValue){
+	__borderGet:function(elementBorder,input_){
+		if( input_.data('border') == 'border-enable' ){
+			let checkBorder = Custom_popup_editor._checkStyle(elementBorder,'border');
+			let container = input_.closest('.content-style-border').find('.content-border');
+				if (checkBorder){
+					input_.prop('checked',true);
+					container.show();
+				}else{
+					input_.prop('checked',false);
+					container.hide();
+				}
+			}else if( input_.data('border') == 'width' ){
+				let getWidth = elementBorder.css('border-width');
+				input_.val( parseInt(getWidth) );
+			}else if( input_.data('border') == 'radius' ){
+					let getRadius = elementBorder.css('border-radius');
+					input_.val( parseInt(getRadius) );
+			}else if ( input_.data('input-color') == 'border-color' ) {
+				Custom_popup_editor._colorPickr(input_,elementBorder,'border-color');
+			}
+	},
+	_borderFn:function(clickedObj,changedInput,changeValue){
 		let container = changedInput.closest('.content-style-border');
-		if (changedInput.data('border') == 'border-enable') {
+		if (changedInput.data('border') && changedInput.data('border') == 'border-enable') {
 			if (changedInput.prop('checked')) {
 				clickedObj.css("border",'1px solid orange');
 				container.find('.content-border').show();
@@ -869,7 +795,7 @@ var Custom_popup_editor = {
 				container.find('.content-border').hide();
 				Custom_popup_editor._removeStyle(clickedObj,'border');
 			}
-		}else if (changeData == 'border' && container.find('[type="checkbox"][data-border]').prop('checked')) {
+		}else if (changedInput.data('border') && container.find('[type="checkbox"][data-border]').prop('checked')) {
 			let checkProp = changedInput.data('border');
 			if (checkProp == 'width') {
 				clickedObj.css('border-width',changeValue);
@@ -901,7 +827,6 @@ var Custom_popup_editor = {
 	},
 	_contentAlign:function(clickedObj,changeValue){
 		let alignContent = clickedObj.closest('.data-rl-editable-wrap');
-		
 		if (changeValue == 'center') {
 			alignContent.css('justify-content','center');
 			clickedObj.attr('data-content-alignment','center');
@@ -912,7 +837,6 @@ var Custom_popup_editor = {
 			alignContent.css('justify-content','unset');
 			if(clickedObj.data('content-alignment'))clickedObj.removeAttr('data-content-alignment');
 		}
-
 	},
 	_rlRemoveElement:function(){
 		let button = jQuery(this);
@@ -920,40 +844,70 @@ var Custom_popup_editor = {
 		jQuery('.rl_i_editor-item-content').hide();
 	},
 	_chooseLayout:function(){
-		let clickedLaout = jQuery(this);
-		let getLayout = clickedLaout.data('layout');
-		    getLayout =   jQuery('.prebuilt-pupup-layout-container > div[data-layout="'+getLayout+'"]').html();
-		let putLayout = jQuery('.wppb-popup-custom');
-		let saveLAyout = {layout:clickedLaout.attr('data-layout')};
-		let setHiddenInputI = jQuery('input[type="hidden"][data-global-save]');
-		setHiddenInputI.val( JSON.stringify(saveLAyout) );
-		putLayout.html(getLayout);
-		jQuery('.prebulit-demo-popup').hide();
-		jQuery('.wppb-popup-name').show();
+		let layoutName = jQuery('.wppb-popup-name-layout input[name="wppb-popup-layout"]');
+		let popupName = jQuery('.wppb-popup-name-layout input[name="wppb-popup-name"]');
+		let checkRadio = false;
+		jQuery.each(layoutName, (index,value)=> {
+			let radio_ = jQuery(value);
+			if (radio_.prop('checked') == true) checkRadio = true;
+		}); 
+		if (checkRadio == true && popupName.val() != '') {
+			jQuery('.wppb-popup-name-init').removeClass('business_disabled');
+		}else{
+			jQuery('.wppb-popup-name-init').addClass('business_disabled');
+		}
+
+// 		.wppb-popup-name-layout input[name="wppb-popup-name"]
+// .wppb-popup-name-layout input[name="wppb-popup-layout"]
+
+		// let getLayout = clickedLaout.data('layout');
+		//     getLayout =   jQuery('.prebuilt-pupup-layout-container > div[data-layout="'+getLayout+'"]').html();
+		// let putLayout = jQuery('.wppb-popup-custom > div');
+		// let saveLAyout = {layout:clickedLaout.attr('data-layout')};
+		// let setHiddenInputI = jQuery('input[type="hidden"][data-global-save]');
+		// setHiddenInputI.val( JSON.stringify(saveLAyout) );
+		// putLayout.html(getLayout);
+
+
+
+		// jQuery('.prebulit-demo-popup').hide();
+		// jQuery('.wppb-popup-name').show();
 	},
 	_popupName:function(){
-		let inputValue = jQuery('input[name="wppb-popup-name"]').val();
 
-			if (inputValue) {
-
+		let layoutName = jQuery('.wppb-popup-name-layout input[name="wppb-popup-layout"]:checked').val();
+		let popupName = jQuery('.wppb-popup-name-layout input[name="wppb-popup-name"]').val();
+			if (layoutName && popupName) {
+				let saveLAyout = {layout:layoutName,'popup-name':popupName};
 				let setHiddenInputI = jQuery('input[type="hidden"][data-global-save]');
-				let setHiddenInput = setHiddenInputI;
-				if (setHiddenInput.val()) {
-					setHiddenInput = JSON.parse(setHiddenInput.val());
-				}
-				let checkArray = (typeof setHiddenInput === 'object')?true:false;
-				if(checkArray)setHiddenInput['popup-name'] = inputValue;
-				if (checkArray)setHiddenInputI.val( JSON.stringify(setHiddenInput) );
-				jQuery('.wppb-popup-name').hide();
+				setHiddenInputI.val( JSON.stringify(saveLAyout) );
+				let getLayout = jQuery('.prebuilt-pupup-layout-container > div[data-layout="'+layoutName+'"]').html();
+				let putLayout = jQuery('.wppb-popup-custom > div');
+				putLayout.html(getLayout);
+				jQuery('.wppb-popup-name-layout').hide();
 				jQuery('.wppb-popup-custom').show();
 				jQuery('.rl_i_editor-inner-wrap-mask').remove();
 				Custom_popup_editor._dragAndShort();
 				Custom_popup_editor._globalSettingInit();
-
 			}else{
 				alert('fill the popup name');
 			}
-	
+	},
+	_bind:function(){
+		jQuery(document).on('click', '.wppb-popup-custom [data-rl-editable]',Custom_popup_editor._openEditPanel);
+		jQuery(document).on('click', '.wppb-popup-custom .rlRemoveElement',Custom_popup_editor._rlRemoveElement);
+		jQuery(document).on('click', '.rl-i-choose-image',Custom_popup_editor._chooseImage);
+		jQuery(document).on('keyup change', '[data-editor-input]',Custom_popup_editor._changedSetEditor);
+		jQuery(document).on('keyup change', '[data-global-input]', Custom_popup_editor._globalSetEditor);
+		jQuery(document).on('change', '.lead-form-bulider-select > select', Custom_popup_editor._leadFormChoose);
+		jQuery(document).on('click', '.wppb-popup-lead-form', Custom_popup_editor._leadFormOpenPanel);
+
+		jQuery(document).on('keyup', '.wppb-popup-name-layout input[name="wppb-popup-name"]', Custom_popup_editor._chooseLayout);
+		jQuery(document).on('click', '.wppb-popup-name-layout input[name="wppb-popup-layout"]', Custom_popup_editor._chooseLayout);
+
+		jQuery(document).on('click', '.wppb-popup-name-init', Custom_popup_editor._popupName);
+
+		jQuery(document).on('keyup change', '.wppb-lead-form-styling [data-lead-form]',Custom_popup_editor._leadFormStylingSet);
 	},
 	_leadFormOpenPanel:function(){
 		let getForm = jQuery(this);
@@ -972,8 +926,6 @@ var Custom_popup_editor = {
 			jQuery('.rl-lead-form-panel .lead-form-bulider-select select').val( getForm.attr('data-form-id') );
 			Custom_popup_editor._leadFormStyling();
 		}
-
-
 	},
 	_leadFormChoose:function(){
 		let select = jQuery(this);
@@ -983,7 +935,6 @@ var Custom_popup_editor = {
 			let returnData = Business_news_letter._ajaxFunction(data_);
 			returnData.success(function(response){
 				if (response && response != 0) {
-					
 					let replace_form = "<div class='wppb-popup-lead-form' data-form-id='"+form_id+"'>"+response+"</div>"; 
 					letExistForm = jQuery('.wppb-popup-lead-form[data-form-id]');
 					if ( letExistForm.length ) {
@@ -1006,14 +957,12 @@ var Custom_popup_editor = {
 					let leadFormStyle_ = leadForm.data('form-styles');					
 					leadForm = leadForm.find('form');
 					if ( leadFormStyle_ ) {
-
 						if (leadFormStyle_['submit-style']) {
 							leadForm.find('.lf-form-submit').attr('style',leadFormStyle_['submit-style']);
 						}
 						if (leadFormStyle_['submit-align']) {
 							leadForm.find('.lf-form-submit').attr('data-alignment',leadFormStyle_['submit-align']);
 						}
-
 						if (leadFormStyle_['form-style']) {
 							leadForm.attr('style',leadFormStyle_['form-style']);
 						}
@@ -1029,8 +978,6 @@ var Custom_popup_editor = {
 						let element = leadForm.children('h2');
 							element.attr('style',leadFormStyle_['heading-style']);
 						}
-
-
 					}
 			});			
 	},
@@ -1038,14 +985,9 @@ var Custom_popup_editor = {
 		jQuery('.wppb-lead-form-styling').show();
 		let leadForm = jQuery('.wppb-popup-lead-form form');
 		let getInputs = jQuery('.wppb-lead-form-styling [data-lead-form]');
-
 		function leadFormInput(index, value){
-		// console.log(value);
-
 			let sepInput = jQuery(value);
 			let getData = sepInput.data('lead-form');
-		// console.log(getData);
-
 			if ( getData == 'lf-form-width' ) {
 				let width = leadForm.outerWidth();
 				let pwidth = leadForm.closest('.leadform-show-form').width();
@@ -1069,27 +1011,9 @@ var Custom_popup_editor = {
 			}else if( getData == 'lf-label-font-size' ){
 				let element = leadForm.find('.lf-field > label').css('font-size');
 				Custom_popup_editor._inputRange(sepInput, false, false, element );
-			}else if ( getData == 'form-border') {				
-					if( sepInput.data('border') == 'border-enable' ){
-					let checkBorder = Custom_popup_editor._checkStyle(leadForm,'border');
-					let container = sepInput.closest('.content-style-border').find('.content-border');
-						if (checkBorder){
-							sepInput.prop('checked',true);
-							container.show();
-						}else{
-							sepInput.prop('checked',false);
-							container.hide();
-						}
-					}else if( sepInput.data('border') == 'width' ){
-						let getWidth = leadForm.css('border-width');
-						sepInput.val( parseInt(getWidth) );
-					}else if( sepInput.data('border') == 'radius' ){
-							let getRadius = leadForm.css('border-radius');
-							sepInput.val( parseInt(getRadius) );
-					}else if ( sepInput.data('input-color') == 'border-color' ) {
-						Custom_popup_editor._colorPickr(sepInput,leadForm,'border-color');
-					}
-
+			}else if ( getData == 'form-border' || getData ==  'lf-submit-border' || getData == 'lf-field-border') {
+					let elementBorder = getData == 'form-border' ? leadForm : (getData == 'lf-field-border') ? leadForm.find('.lf-field input, .textarea-type.lf-field textarea').not('input[type="submit"]') : leadForm.find('input.lf-form-submit');
+					Custom_popup_editor.__borderGet(elementBorder,sepInput);
 			}else if (getData == 'form-heading-enable') {
 				leadForm.children('h2').css('display') != 'none' ? sepInput.prop('checked', true) : sepInput.prop('checked', false);
 			}else if( sepInput.data('input-color') == 'lf-field-color' ){
@@ -1110,13 +1034,11 @@ var Custom_popup_editor = {
 			}else if (getData == 'lf-submit-aliment') {
 				let getAlignment = leadForm.find('.submit-type.lf-field').css('text-align');
 				if(getAlignment == sepInput.val()) sepInput.prop('checked',true);
+			}else if( getData == 'form-margin-center' ){
+				let getMargin = Custom_popup_editor._checkStyle(leadForm,'margin');
+				getMargin == 'auto' ? sepInput.prop('checked',true) : sepInput.prop('checked',false);
 			}
-
-
-
 		}
-
-
 		jQuery.each(getInputs, leadFormInput);
 
 		// console.log(getInputs);
@@ -1126,7 +1048,6 @@ var Custom_popup_editor = {
 		let dataCheck = input_.data('lead-form');
 		let inputVal = input_.val();
 		let leadForm = jQuery('.wppb-popup-lead-form form');
-
 		if (dataCheck == 'lf-form-width') {
 			leadForm.css('width',inputVal+'%');
 		}else if (dataCheck == 'lf-label-font-size') {
@@ -1137,8 +1058,9 @@ var Custom_popup_editor = {
 			leadForm.find('input.lf-form-submit').css('font-size',inputVal+'px');
 		}else if( dataCheck == 'lf-heading-font-size'){
 			leadForm.children('h2').css('font-size',inputVal+'px');
-		}else if (dataCheck == 'form-border') {
-				Custom_popup_editor._borderFn('border',leadForm,input_,inputVal);
+		}else if (dataCheck == 'form-border' || dataCheck == 'lf-submit-border' || dataCheck == 'lf-field-border') {				
+				let elementBorder = dataCheck == 'form-border' ? leadForm : (dataCheck == 'lf-field-border') ? leadForm.find('.lf-field input, .textarea-type.lf-field textarea').not('input[type="submit"]') : leadForm.find('input.lf-form-submit');
+				Custom_popup_editor._borderFn(elementBorder,input_,inputVal);
 		}else if ( dataCheck == 'form-heading-enable') {
 			input_.prop('checked') == true ? leadForm.children('h2').show() : leadForm.children('h2').hide();
 		}else if ( input_.data('padding') ) {
@@ -1150,26 +1072,14 @@ var Custom_popup_editor = {
 		}else if (dataCheck == 'lf-submit-aliment') {
 				leadForm.find('input.lf-form-submit').attr('data-alignment',inputVal);
 				leadForm.find('.submit-type.lf-field').css('text-align',inputVal);
+		}else if (dataCheck == 'form-margin-center') {
+				if (input_.prop('checked') == true) {
+					leadForm.css('margin','auto');
+				}else{
+					Custom_popup_editor._removeStyle(leadForm,'margin');
+				}
 		}
-
-
-	},
-	_bind:function(){
-		jQuery(document).on('click', '.wppb-popup-custom [data-rl-editable]',Custom_popup_editor._openEditPanel);
-		jQuery(document).on('click', '.wppb-popup-custom .rlRemoveElement',Custom_popup_editor._rlRemoveElement);
-		jQuery(document).on('click', '.rl-i-choose-image',Custom_popup_editor._chooseImage);
-		jQuery(document).on('keyup change', '[data-editor-input]',Custom_popup_editor._changedSetEditor);
-		jQuery(document).on('keyup change', '[data-global-input]', Custom_popup_editor._globalSetEditor);
-
-		jQuery(document).on('change', '.lead-form-bulider-select > select', Custom_popup_editor._leadFormChoose);
-		jQuery(document).on('click', '.wppb-popup-lead-form', Custom_popup_editor._leadFormOpenPanel);
-
-
-		jQuery(document).on('click', '.prebulilt-popup-inner [data-layout]', Custom_popup_editor._chooseLayout);
-		jQuery(document).on('click', '.wppb-popup-name-init', Custom_popup_editor._popupName);
-		
-		jQuery(document).on('keyup change', '.wppb-lead-form-styling [data-lead-form]',Custom_popup_editor._leadFormStylingSet);
-
+		// console.log(dataCheck);
 	}
 	,_chooseImage:function(e){
 		e.preventDefault();
@@ -1181,16 +1091,13 @@ var Custom_popup_editor = {
 			multiple: false 
 		}).on('select', function() {
 			let attachment = custom_uploader.state().get('selection').first().toJSON();
-
 			let putImageInner = this_button.find('.rl-i-choose-image-wrap');
 			if (putImageInner.data('global-input')) {
 				jQuery('.wppb-popup-custom .wppb-popup-overlay-custom-img').css('background-image', 'url('+attachment.url+')').attr('data-overlay-image',attachment.url);
 			}else{
 				jQuery('.getChangeImage_').attr('src',attachment.url);
 			}
-
 			putImageInner.css('background-image', 'url('+attachment.url+')');
-
 		}).open();
 	},
 	_inlineCssSeparate:function(inline_css){
@@ -1225,7 +1132,6 @@ var Custom_popup_editor = {
 							if (key.indexOf(removeStyle) == 0)continue;
 							newStyle += key+':'+saparateStyle[key]+";";
 						}
-
 						if (apply_) {
 							element.attr('style',newStyle);
 						}else{
@@ -1300,10 +1206,4 @@ var Custom_popup_editor = {
 	Custom_popup_editor.init();
 	Business_news_letter.init();
 })(jQuery);
-
-
-// hello
-
-
-
 // https://app.slack.com/client/T9BQYES21/DK4UD39SQ?cdn_fallback=2

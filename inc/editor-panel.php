@@ -33,9 +33,9 @@
 			<span class="bottomCarret dashicons dashicons-arrow-right"></span>
 		</div>
 		<section data-toggle-action="global-setting" class="rl_i_editor-global-setting rl_i_editor-element-item">
-			<?php $wp_builder_obj->header_title('Popup Background Setting') ?>
-			<!-- overlay image -->
-			<?php echo $wp_builder_obj->checkbox('global-overlay-image','Background Image','data-global-input="global-overlay-image"'); ?>
+			<?php $wp_builder_obj->header_title('Popup Background Setting');
+			echo $wp_builder_obj->checkbox('global-overlay-image','Background Image','data-global-input="global-overlay-image"'); 
+			?>
 		<section class="global-overlay-image">
 			<div class="rl_i_editor-item-content-items image_">
 				<div class="rl-i-choose-image">
@@ -98,13 +98,15 @@
 				$wp_builder_obj->color('Outside Color','background-color','data-global-input','outside-color');
 				$wp_builder_obj->header_title('Popup Typography');
 				$wp_builder_obj->range_slider('Popup Width', 'main-wrapper', ['title'=>'px','min'=>200,'max'=>800,'value'=>200] ,'wrapper-width');
+				echo $wp_builder_obj->checkbox('wrapper-height','Popup Height Auto/Custom','data-global-input="wrapper-height-check"');
 			?>
-			<!-- height -->
-			<?php echo $wp_builder_obj->checkbox('wrapper-height','Popup Height Auto/Custom','data-global-input="wrapper-height-check"'); ?>
 			<section class="global-wrapper-height-custom-auto">
 			<?php  $wp_builder_obj->range_slider('Custom Height','main-wrapper-height', ['title'=>'px','min'=>150,'max'=>1000,'value'=>200] ,'wrapper-height'); ?>
 			</section>
-			<?php $wp_builder_obj->margin_padding('main-wrapper', 'Popup Padding in px', 'data-global-input', 'p'); ?>
+			<?php 
+				$wp_builder_obj->margin_padding('main-wrapper', 'Popup Padding in px', 'data-global-input', 'p'); 
+				$wp_builder_obj->border('global-border','data-global-input'); 
+			?>
 			<div class="rl_i_editor-item-content-items rl-two-column-width">
 				<label>Container Width</label>
 				<div>
@@ -140,9 +142,7 @@
 			</div>
 			<div class="rl_i_editor-item-content-items inline__">
 					<div class="rl_i_editor-item-color">
-						<?php 
-						echo $wp_builder_obj->select('data-cmn="close-btn" data-global-input="close-option"',[ ['Click On Icon',1],['Click On Icon and Outside',2],['Click On Outside',3,true] ]); 
-						?>
+					<?php echo $wp_builder_obj->select('data-cmn="close-btn" data-global-input="close-option"',[ ['Click On Icon',1],['Click On Icon and Outside',2],['Click On Outside',3,true] ]); ?>
 					</div>
 			</div>
 			<section class="close-btn-container">				
@@ -214,52 +214,15 @@
 							</div>
 						</div>
 						<!-- text alignment -->
-						<div class="rl_i_editor-item-content-items item-text item-alignment_ inline__">
-							<label class="rl-sub-title">Alignment</label>
-							<div class="rl_text-alignment">
-								<ul class="text-alignment-choice">
-									<li>
-										<input id="_alignment_left" data-editor-input="alignment" type="radio" name="text-alignment-choice" value="left">
-										<label for="_alignment_left" class="dashicons dashicons-editor-alignleft"></label>
-									</li>
-									<li>
-										<input id="_alignment_center" data-editor-input="alignment" type="radio" name="text-alignment-choice" value="center">
-										<label for="_alignment_center" class="dashicons dashicons-editor-aligncenter"></label>
-									</li>
-									<li>
-										<input id="_alignment_right" data-editor-input="alignment" type="radio" name="text-alignment-choice" value="right">
-										<label for="_alignment_right" class="dashicons dashicons-editor-alignright"></label>
-									</li>
-								</ul>
-							</div>
-						</div>
+						<?php echo $wp_builder_obj->alignment('Alignment','text-alignment-choice','data-editor-input'); ?>
 					</div>
 				</div>
 				<!-- style -->
 				<div class="rl_i_editor-item-content-i rl_i_editor-item-content-style">
 					<!-- width -->
-		<?php  $wp_builder_obj->range_slider( 'Width', 'item-width', ['title'=>'%','min'=>1,'value'=>20,'max'=>100],false, 'data-editor-input' ); ?>
-					<!-- text alignment -->
-						<div class="rl_i_editor-item-content-items item-alignment_ inline__">
-							<label class="rl-sub-title">Container Alignment</label>
-							<div class="rl_text-alignment">
-								<ul class="text-alignment-choice">
-									<li>
-										<input id="_content_alignment_left" data-editor-input="content-alignment" type="radio" name="item-alignment-choice" value="left">
-										<label for="_content_alignment_left" class="dashicons dashicons-editor-alignleft"></label>
-									</li>
-									<li>
-										<input id="_content_alignment_center" data-editor-input="content-alignment" type="radio" name="item-alignment-choice" value="center">
-										<label for="_content_alignment_center" class="dashicons dashicons-editor-aligncenter"></label>
-									</li>
-									<li>
-										<input id="_content_alignment_right" data-editor-input="content-alignment" type="radio" name="item-alignment-choice" value="right">
-										<label for="_content_alignment_right" class="dashicons dashicons-editor-alignright"></label>
-									</li>
-								</ul>
-							</div>
-						</div>
-					<?php 
+					<?php  
+					$wp_builder_obj->range_slider( 'Width', 'item-width', ['title'=>'%','min'=>1,'value'=>20,'max'=>100],false, 'data-editor-input' );
+					echo $wp_builder_obj->alignment('Container Alignment','content-alignment','data-editor-input'); 
 					// text color/ background-color / font-size / letter-spacing / line height
 						$wp_builder_obj->color('Text Color','color','data-editor-input'); 
 						$wp_builder_obj->color('Background Color','background-color','data-editor-input');
@@ -327,13 +290,15 @@
 					<?php 
 						$wp_builder_obj->header_title('Form Setting');
 						$wp_builder_obj->range_slider('Form Width', 'lf-form-width', ['title'=>'%','min'=>"20",'max'=>100,'value'=>100], false, 'data-lead-form'); 
+						// echo $wp_builder_obj->checkbox($id,$title,$attr);
+						echo $wp_builder_obj->checkbox("form-margin-center","Form Centered",'data-lead-form="form-margin-center"');
 						$wp_builder_obj->color('Background Color','background-color','data-lead-form','lf-form-color');
 						$wp_builder_obj->border('form-border','data-lead-form'); 
 					?>
 				</div>
 				<!-- heading style -->
 				<div class="rl_i_editor-item-content-i rl_i_editor-item-content-form-content wppb-lf-content-style">
-				  <?php 
+				 <?php 
 					$wp_builder_obj->header_title('Heading Setting');
 					echo $wp_builder_obj->checkbox("form-heading-enable","Heading Enable",'data-lead-form="form-heading-enable"');
 					$wp_builder_obj->color('Color','color','data-lead-form','lf-heading-color');
@@ -346,33 +311,15 @@
 					$wp_builder_obj->color('Color','color','data-lead-form','lf-field-color');
 					$wp_builder_obj->color('Background Color','background-color','data-lead-form','lf-field-background-color');
 					$wp_builder_obj->range_slider('Font Size', 'lf-field-font-size', ['title'=>'px','min'=>"10",'max'=>100,'value'=>10], false, 'data-lead-form');
+					$wp_builder_obj->border('lf-field-border','data-lead-form'); 
 
 					$wp_builder_obj->header_title('Submit Button Setting');
 					$wp_builder_obj->color('Color','color','data-lead-form','lf-submit-btn-color');
 					$wp_builder_obj->color('Background Color','background-color','data-lead-form','lf-submit-btn-bcolor');
 					$wp_builder_obj->range_slider('Font Size', 'lf-submit-btn-font-size', ['title'=>'px','min'=>"10",'max'=>100,'value'=>10], false, 'data-lead-form'); 
-					?>
-
-					<div class="rl_i_editor-item-content-items item-alignment_ inline__">
-							<label class="rl-sub-title">Button Alignment</label>
-							<div class="rl_text-alignment">
-								<ul class="text-alignment-choice">
-									<li>
-										<input id="_lf_sub_btn_alignment_left" data-lead-form="lf-submit-aliment" type="radio" name="lf-sub-btn-alignment" value="left">
-										<label for="_lf_sub_btn_alignment_left" class="dashicons dashicons-editor-alignleft"></label>
-									</li>
-									<li>
-										<input id="_lf_sub_btn_alignment_center" data-lead-form="lf-submit-aliment" type="radio" name="lf-sub-btn-alignment" value="center">
-										<label for="_lf_sub_btn_alignment_center" class="dashicons dashicons-editor-aligncenter"></label>
-									</li>
-									<li>
-										<input id="_lf_sub_btn_alignment_right" data-lead-form="lf-submit-aliment" type="radio" name="lf-sub-btn-alignment" value="right">
-										<label for="_lf_sub_btn_alignment_right" class="dashicons dashicons-editor-alignright"></label>
-									</li>
-								</ul>
-							</div>
-						</div>
-
+					$wp_builder_obj->border('lf-submit-border','data-lead-form');
+					echo $wp_builder_obj->alignment('Button Alignment','lf-submit-aliment','data-lead-form'); 
+				?>
 					<div class="rl_i_editor-item-content-items item-text inline__">
 						<label class="rl-sub-title">Font Weight</label>
 						<div class="rl_i_editor-item-color">

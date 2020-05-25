@@ -1,6 +1,6 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit; 
 $popupSetData = array(
-					'wrapper-width'=>'550',
+					'wrapper-style'=>'width:550px;',
 					'wrapper-height'=>'auto',
 					'overlay-image-url'=>'',
 					'overlay-style'=>"",
@@ -84,7 +84,7 @@ if (isset($_GET['custom-popup']) && is_numeric($_GET['custom-popup'])) {
 			</div>
 
 		<?php 
-			if ( $_GET['custom-popup'] == '')include_once 'prebuilt-popup.php'; 
+			if ( $_GET['custom-popup'] == '') include_once 'prebuilt-popup.php'; 
 			include_once 'popup-custom.php'; 
 		?>
 
