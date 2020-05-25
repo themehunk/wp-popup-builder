@@ -34,7 +34,7 @@ a:focus{
     display: none;
 }
 .prebulilt-popup-inner label{
-    background-color: #ebe8f9;
+        background-color: #ebe8f9;
     height: 102px;
     border-radius: 14px;
     display: flex;
@@ -44,6 +44,7 @@ a:focus{
     font-size: 20px;
     cursor: pointer;
     position: relative;
+    transition: .4s all linear;
 }
 .prebulilt-popup-inner label:hover{
         background-color: #d9d7e2;
