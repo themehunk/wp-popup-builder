@@ -121,15 +121,15 @@
 				<ul>
 					<li>
 						<input id='wppb-popup-layout-label__layout-1' type="radio" name="wppb-popup-layout" value="layout-1">
-						<label for="wppb-popup-layout-label__layout-1">one column</label>
+						<label for="wppb-popup-layout-label__layout-1"><img src="<?php echo WPPB_URL ?>img/layout-2.png"></label>
 					</li>
 					<li>
 						<input id='wppb-popup-layout-label__layout-2' type="radio" name="wppb-popup-layout" value="layout-2">
-						<label for="wppb-popup-layout-label__layout-2">left image</label>
+						<label for="wppb-popup-layout-label__layout-2"><img src="<?php echo WPPB_URL ?>img/layout-1.png"></label>
 					</li>
 					<li>
 						<input id='wppb-popup-layout-label__layout-3' type="radio" name="wppb-popup-layout" value="layout-3">
-						<label for="wppb-popup-layout-label__layout-3">right image</label>
+						<label for="wppb-popup-layout-label__layout-3"><img src="<?php echo WPPB_URL ?>img/layout-2.png"></label>
 					</li>
 				</ul>
 			</div>
