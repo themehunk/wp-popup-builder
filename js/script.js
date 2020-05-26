@@ -39,6 +39,19 @@ var Business_news_letter = {
 		        	}
 			});
 	},
+	_exportPopup:function(){
+		let saveData = Business_news_letter._saveData();
+		let uniqId = Math.floor(Math.random() * Date.now());
+		let filename = 'wppb-'+uniqId+'-builder.json';
+		let jsonStr = JSON.stringify(saveData);
+		let anchor_ = document.createElement('a');
+		anchor_.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(jsonStr));
+		anchor_.setAttribute('download', filename);
+		anchor_.style.display = 'none';
+		document.body.appendChild(anchor_);
+		anchor_.click();
+		document.body.removeChild(anchor_);
+	},
 	_initGlobalSave:function(inputs){
 			let contentGlobal = jQuery('input[type="hidden"][data-global-save]');
 			contentGlobal = contentGlobal.val() ? JSON.parse(contentGlobal.val()) : {};
@@ -263,6 +276,9 @@ var Business_news_letter = {
 
 		jQuery(document).on('change', '.wppb-popup-option input[type="checkbox"]', Business_news_letter._businessOptionUpdate);
 		jQuery(document).on('change','.wppb_popup_setting_active', Business_news_letter._savePopupActiveDeactive);
+
+		jQuery(document).on('click','.wppb-export-sub', Business_news_letter._exportPopup);
+		
 	}
 }
 // business popup editor functionlity
