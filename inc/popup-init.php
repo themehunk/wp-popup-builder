@@ -87,23 +87,95 @@ function initContent($column_content){
 			return $return;
 	}
 
+// popup page list of all popupSetData
+public function wppbPopupList($allSetting,$column_making,$business_id,$countPopup,$isActive=false){
+		$popupSetData = array( 
+				'wrapper-style'		=>'',
+				'wrapper-height'	=>'auto',
+				'overlay-image-url' =>'',
+				'overlay-style'		=>"",
+				'overlay-color'		=>'#28292C91',
+				'outside-color'		=>'#cdcbcb',
+				'content' 			=> '',
+				'global-padding'	=>'23px 37px',
+				'layout' 			=> '',
+				'close-btn' 		=> '',
+				'popup-name' 		=> 'New Popup name'
+			);
+		$returnHtml = '';
+		foreach ($allSetting as $setting_value) {
+			if (isset($setting_value['content']) && is_array($setting_value['content'])) {
+				if ($setting_value['type'] == 'global-setting') {
+						foreach ($setting_value['content'] as $contentkey_ => $contentvalue_) {
+							if(isset($popupSetData[$contentkey_]) )$popupSetData[$contentkey_] = $contentvalue_;
+						}
+				}elseif ($setting_value['type'] == 'wrap' ) {
+					$popupContentColumn = $this->initColumn($setting_value['content']);
+					$popupSetData['content'] =	'<div data-rl-wrap="" class="wppb-popup-rl-wrap rl-clear">'.$popupContentColumn.'</div>';
+				}
+			}
+		}
+		$popup_is_active = $isActive?"checked='checked'":"";
+		$business_id 	   = $business_id?$business_id:"";
+		if ($column_making == 1) $returnHtml .= '<div class="wppb-popup-row wppb-popup_clear">';
+		$returnHtml .= '<div class="wppb-popup-column-three">
+									<div class="wppb-popup-demo">
+										<div class="tempIdShow">'.$popupSetData['popup-name'].'</div>
+										<div class="wppb-popup-demo-wrapper">'.$this->popup_layout($popupSetData).'</div>
+										<div class="wppb-popup-demo-settings">
+											<div class="wppb-popup-setting-btns">
+												
+												<div class="wppb-popup-checkbox">
+													<input id="business_popup--'.$business_id.'" type="checkbox" class="wppb_popup_setting_active" data-bid="'.$business_id.'" '.$popup_is_active.'>
+													<label for="business_popup--'.$business_id.'"></label>
+												</div>
+												<a class="wppb-popup-setting can_disable" href="'.esc_url(WPPB_PAGE_URL.'&custom-popup='.$business_id).'">'.__("<span class='dashicons dashicons-admin-generic'></span> Settings","wppb").'</a>
 
-	function popup_layout___($popupSetData,$layout=''){
-			$overlay_image = $popupSetData['overlay-image-url']?'background-image:url('.$popupSetData['overlay-image-url'].');':'';
-			$overlayStyle = $overlay_image?$overlay_image.$popupSetData['overlay-style']:'';
+											</div>
+										</div>
+									</div>
+							</div>';
+		if($countPopup == ($column_making)){
+			$returnHtml .= '</div>';
+		}elseif(($column_making) % 3 === 0){
+			$returnHtml .= '</div><div class="wppb-popup-row wppb-popup_clear">';
+		}
+		return $returnHtml;
+}
 
-			$globalHeight = $popupSetData["wrapper-height"] != 'auto'?$popupSetData["wrapper-height"].'px;':$popupSetData["wrapper-height"].';';
-			$globalStyle = "padding:".$popupSetData["global-padding"].";height:".$globalHeight;
+	// popup page list of all popupSetData
+	// public function wppbPopupList__($popupSetData,$column_making,$business_id,$countPopup,$isActive=false){
+	// 			$returnHtml = '';
+	// 			$popup_is_active = $isActive?"checked='checked'":"";
+	// 			$business_id 	   = $business_id?$business_id:"";
+	// 			if ($column_making == 1) $returnHtml .= '<div class="wppb-popup-row wppb-popup_clear">';
+	// 			$returnHtml .= '<div class="wppb-popup-column-three">
+	// 										<div class="wppb-popup-demo">
+	// 											<div class="tempIdShow">'.$popupSetData['popup-name'].'</div>
+	// 											<div class="wppb-popup-demo-wrapper">'.$this->popup_layout($popupSetData).'</div>
+	// 											<div class="wppb-popup-demo-settings">
+	// 												<div class="wppb-popup-setting-btns">
+														
+	// 													<div class="wppb-popup-checkbox">
+	// 														<input id="business_popup--'.$business_id.'" type="checkbox" class="wppb_popup_setting_active" data-bid="'.$business_id.'" '.$popup_is_active.'>
+	// 														<label for="business_popup--'.$business_id.'"></label>
+	// 													</div>
+	// 													<a class="wppb-popup-setting can_disable" href="'.esc_url(WPPB_PAGE_URL.'&custom-popup='.$business_id).'">'.__("<span class='dashicons dashicons-admin-generic'></span> Settings","wppb").'</a>
 
-			$return = '<div class="wppb-popup-custom-wrapper" style="width:'.$popupSetData["wrapper-width"].'px;">
-			         <div class="wppb-popup-overlay-custom-img" data-overlay-image="'.$popupSetData['overlay-image-url'].'" style="'.$overlayStyle.'"></div>
-			          <div class="wppb-popup-custom-overlay" style="background-color:'.$popupSetData['overlay-color'].';"></div>
-			              <div class="wppb-popup-custom-content" style="'.$globalStyle.'">
-				            '.$popupSetData["close-btn"].$popupSetData["content"].'
-			              </div>
-			        </div>';
-			return $return;
-	}
+	// 												</div>
+	// 											</div>
+	// 										</div>
+	// 								</div>';
+	// 			if($countPopup == ($column_making)){
+	// 				$returnHtml .= '</div>';
+	// 			}elseif(($column_making) % 3 === 0){
+	// 				$returnHtml .= '</div><div class="wppb-popup-row wppb-popup_clear">';
+	// 			}
+	// 			return $returnHtml;
+	// }
+
+
+
 
 // builder internal tools function
 	public function header_title($title){
