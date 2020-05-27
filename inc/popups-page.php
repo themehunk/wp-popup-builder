@@ -3,71 +3,30 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 	$custom_popup_all = wppb_db::getCustomPopup();
 	$popup_html_all_custom = '';
 	$column_making = 0;
-	if (!empty($custom_popup_all)) {
-			foreach ($custom_popup_all as $popupKey => $popupValue) {
-					
-					$popupSetData = array(
-						'wrapper-style'=>'width:unset;',
-						'wrapper-height'=>'auto',
-						'overlay-image-url'=>'',
-						'overlay-style'=>"",
-						'overlay-color'=>'#28292C91',
-						'outside-color'=>'#cdcbcb',
-						'content' => '',
-						'global_content'=>'',
-						'global-padding'=>'23px 37px',
-						'layout' => '',
-						'close-btn' => '',
-						'popup-name' => 'New Popup'
-						);
 
-					$allSetting = unserialize($popupValue->setting);
-					$popup_is_active = $popupValue->is_active?"checked='checked'":"";
-
-		// print_r($popupValue);
-
-					foreach ($allSetting as $setting_value) {
-						if (isset($setting_value['content']) && is_array($setting_value['content'])) {
-							if ($setting_value['type'] == 'global-setting') {
-									foreach ($setting_value['content'] as $contentkey_ => $contentvalue_) {
-										if(isset($popupSetData[$contentkey_]) )$popupSetData[$contentkey_] = $contentvalue_;
-									}
-							}if ($setting_value['type'] == 'wrap' ) {
-								$popupSetData['content'] =	'<div data-rl-wrap="" class="wppb-popup-rl-wrap rl-clear">'.$wp_builder_obj->initColumn($setting_value['content']).'</div>';
-							}
-						}
-					}
-					$column_making++;
-					$business_id 	   = isset($popupValue->BID)?$popupValue->BID:"";
-					if ($column_making == 1) $popup_html_all_custom .= '<div class="wppb-popup-row wppb-popup_clear">';
-
-					$popup_html_all_custom .= '<div class="wppb-popup-column-three">
-												<div class="wppb-popup-demo">
-													<div class="tempIdShow">'.$popupSetData['popup-name'].'</div>
-													<div class="wppb-popup-demo-wrapper">'.$wp_builder_obj->popup_layout($popupSetData).'</div>
-													<div class="wppb-popup-demo-settings">
-														<div class="wppb-popup-setting-btns">
-															
-															<div class="wppb-popup-checkbox">
-																<input id="business_popup--'.$business_id.'" type="checkbox" class="wppb_popup_setting_active" data-bid="'.$business_id.'" '.$popup_is_active.'>
-																<label for="business_popup--'.$business_id.'"></label>
-															</div>
-															<a class="wppb-popup-setting can_disable" href="'.esc_url(WPPB_PAGE_URL.'&custom-popup='.$business_id).'">'.__("<span class='dashicons dashicons-admin-generic'></span> Settings","wppb").'</a>
-
-														</div>
-													</div>
-
-												</div>
-										</div>';
-
-					if(count($custom_popup_all) == ($column_making)){
-						$popup_html_all_custom .= '</div>';
-					}elseif(($column_making) % 3 === 0){
-						$popup_html_all_custom .= '</div><div class="wppb-popup-row wppb-popup_clear">';
-					}			
-			}
+if (!empty($custom_popup_all)) {
+	foreach ($custom_popup_all as $popupValue) {
+		$allSetting = unserialize($popupValue->setting);
+		$column_making++;
+		$business_id 	   		= isset($popupValue->BID)?$popupValue->BID:"";
+		$customPopupCount 		= count($custom_popup_all);
+		$popup_html_all_custom .= $wp_builder_obj->wppbPopupList( $allSetting,$column_making,$business_id,$customPopupCount,$popupValue->is_active );			
 	}
-// echo "</pre>";
+}
+
+
+$prebuiltJsonFile = file_get_contents(WPPB_URL.'inc/wppb-builder.json');
+$prebuiltJsonFile = json_decode($prebuiltJsonFile,true);
+$countColumn = 0;
+if (is_array($prebuiltJsonFile)) {
+	foreach ($prebuiltJsonFile as $prebuilt_value) {
+		$countColumn++;
+		$popup_html_all_custom .= $wp_builder_obj->wppbPopupList( $prebuilt_value,$countColumn,"no business id",count($prebuiltJsonFile) );			
+
+	}
+}
+
+	
 
 ?>
 
