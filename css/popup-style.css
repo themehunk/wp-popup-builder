@@ -27,9 +27,6 @@ a:focus{
     grid-template-columns: repeat(5, 18% );
     justify-content: space-between;
 }
-.prebulilt-popup-inner li{
-
-}
 .prebulilt-popup-inner input{
     display: none;
 }

@@ -11,6 +11,7 @@
 		</div>
 	<div class="rl_i_editor-content">
 	<div class="rl_i_editor-content-area">
+		<button class="wppb-export-sub">Export Popup</button>
 		<!-- content -->
 		<div data-toggle="add-itemes" class="rl_i_editor-element-Toggle outer-toggle rl-active">
 			<span>Content</span>

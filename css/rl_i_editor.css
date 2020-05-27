@@ -21,6 +21,23 @@
     box-shadow: 0px 5px 10px 0px #D0EAF5;
     width: 25%;
 }
+/*popup export section*/
+.wppb-export-sub{
+        background-color: #6747e6;
+    color: white;
+    margin: 10px 0 0 10px;
+    border: none;
+    padding: 4px 11px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.wppb-export-sub:focus{
+    outline: none;
+    box-shadow: none;
+    border:none;
+}
+/*popup export section*/
+
 .rl_i_editor-inner-wrap{
     height: 100%;
     position: relative;
