@@ -1,8 +1,4 @@
 <div class="rl_i_editor-inner-wrap">
-	<?php 
-	if(!isset($wppb_popup_id)) { ?>
-		<div class="rl_i_editor-inner-wrap-mask"></div>
-	<?php } ?>
 	<div class="rl_i_editor-wrap-in">
 		<div class="rl_i_editor-header">
 			<div class="rl_i_editor-header-area">
@@ -34,6 +30,8 @@
 			<span class="bottomCarret dashicons dashicons-arrow-right"></span>
 		</div>
 		<section data-toggle-action="global-setting" class="rl_i_editor-global-setting rl_i_editor-element-item">
+			<?php $wp_builder_obj->header_title('Popup Name'); ?>
+			<input data-global-input="popup-name" type="text" name="global-popup-name">			
 			<?php $wp_builder_obj->header_title('Popup Background Setting');
 			echo $wp_builder_obj->checkbox('global-overlay-image','Background Image','data-global-input="global-overlay-image"'); 
 			?>

@@ -116,6 +116,7 @@ font-weight: 600;
     font-weight: normal;
     letter-spacing: 1px;
     padding: 1px 0;
+    box-sizing: border-box;
 }
 .wppb-popup-main-wrap .wppb-popup-rl-wrap a:focus{
     text-decoration: none;

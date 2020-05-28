@@ -42,16 +42,6 @@
     height: 100%;
     position: relative;
 }
-.rl_i_editor-inner-wrap-mask{
-        height: 100%;
-    position: absolute;
-    background: #5d54546e;
-    width: 100%;
-    display: block;
-    top: 0;
-    left: 0;
-    z-index: 2;
-}
 .rl_i_editor-wrap-in{
 	    position: relative;
     height: 100%;
@@ -647,7 +637,12 @@ label[data-range-output]{
     color: #d87777;
     box-shadow: 0px 0px 1px 1px #d0cccc;
 }
-
+input[name="global-popup-name"]{
+        margin: 10px;
+    width: 83%;
+    border: 1px solid #dcdcdc;
+    color: #b1afaf;
+}
 /*ui drag drop style*/
 .ui-state-highlight{
     border-bottom: 0px;
