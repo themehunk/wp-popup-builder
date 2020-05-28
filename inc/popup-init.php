@@ -48,7 +48,7 @@ function initContent($column_content){
 									<span class="dashicons dashicons-no rlRemoveElement"></span></div>
 									<span data-rl-editable="link" '.$contentAttr.'>'.$setting_value['content'].'</span>
 								</div>';
-				}elseif ( $setting_value['type'] == 'lead-form' && is_numeric($setting_value['content']) ) {
+				}elseif ( $setting_value['type'] == 'lead-form' && ( isset($setting_value['content']) && is_numeric($setting_value['content']) ) ) {
 				  	$formStyles = '';
 					if ( isset($setting_value['styles']) ) {
 				  		$formStyles = htmlspecialchars( json_encode($setting_value['styles']), ENT_COMPAT );

@@ -298,6 +298,7 @@ var Custom_popup_editor = {
 			thisButton.addClass('active_').siblings().removeClass('active_');
 			jQuery('.rl_i_editor-item-content-'+thisButton.data('editor-tab')).addClass('active_');
 		});
+
 		jQuery('[data-toggle]').click(function(){
 			// close container while open content style
 			let clickTarget = jQuery(this);
@@ -951,13 +952,13 @@ var Custom_popup_editor = {
 			returnData.success(function(response){
 				if (response && response != 0) {
 					let replace_form = "<div class='wppb-popup-lead-form' data-form-id='"+form_id+"'>"+response+"</div>"; 
-					letExistForm = jQuery('.wppb-popup-lead-form[data-form-id]');
+					letExistForm = jQuery('.wppb-popup-custom .wppb-popup-lead-form[data-form-id]');
 					if ( letExistForm.length ) {
 						let getStyles = letExistForm.attr('data-form-styles'); 
 						replace_form = jQuery(replace_form).attr('data-form-styles' ,getStyles);
 						letExistForm.replaceWith(replace_form);
 					}else{
-						jQuery('#lf-business-popup').replaceWith(replace_form);
+						jQuery('.wppb-popup-custom #lf-business-popup').replaceWith(replace_form);
 					}
 					Custom_popup_editor._leadFormInit();
 					Custom_popup_editor._leadFormStyling();

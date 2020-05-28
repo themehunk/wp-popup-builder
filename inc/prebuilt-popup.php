@@ -3,10 +3,10 @@
 $prebuiltJsonFile = file_get_contents(WPPB_URL.'inc/wppb-builder.json');
 
 // replace of image url with plugin path
-	$getBeofrehttp_str 	 = strstr($prebuiltJsonFile,"plugins/wp-popup-builder/img/",true); 
-	$getPosOfhttp_str   = strrpos($getBeofrehttp_str,'http');
-	$replacedUrl_jsonData  = substr($getBeofrehttp_str,$getPosOfhttp_str).'plugins/wp-popup-builder/';
-	$prebuiltJsonFile = str_replace($replacedUrl_jsonData,WPPB_URL,$prebuiltJsonFile);
+	$getBeofrehttp_str 	 	= strstr($prebuiltJsonFile,"plugins/wp-popup-builder/img/",true); 
+	$getPosOfhttp_str   	= $getBeofrehttp_str ? strrpos($getBeofrehttp_str,'http') : false;
+	$replacedUrl_jsonData  	= $getPosOfhttp_str ? substr($getBeofrehttp_str,$getPosOfhttp_str).'plugins/wp-popup-builder/':false;
+	$prebuiltJsonFile 		= $replacedUrl_jsonData ? str_replace($replacedUrl_jsonData,WPPB_URL,$prebuiltJsonFile) : $prebuiltJsonFile;
 // replace of image url with plugin path
 
 
@@ -30,8 +30,19 @@ if (is_array($prebuiltJsonFile)) {
 			<input type="text" name="wppb-popup-name">
 		</div>
 	</div>
+
+
+
+	<div class="rl_i_editor-item-content-header">
+		<nav class="rl-clear">
+			<span data-editor-tab="choose-layout" class="active_">choose lay out</span>
+			<span data-editor-tab="prebuilt-layout">prebuilt popup</span>
+		</nav>
+	</div>	
+
+
 	<!-- popup name  -->
-	<div class="prebulit-demo-popup">
+	<div class="prebulit-demo-popup rl_i_editor-item-content-i active_ rl_i_editor-item-content-choose-layout">
 	<!-- prebuilt popup section -->
 		<section class="prebuilt-pupup-layout-container">
 				<!-- layout 1 -->
@@ -133,9 +144,9 @@ if (is_array($prebuiltJsonFile)) {
 	<!-- layout 3 -->
 		</section>
 	<!-- prebuilt popup section -->
-		<div class="wppb-popup-name">
+		<!-- <div class="wppb-popup-name">
 			<div><span>Choose Layout</span></div>
-		</div>																		
+		</div>		 -->																
 
 		<div class="prebulilt-popup-inner">
 			<ul>
@@ -157,11 +168,7 @@ if (is_array($prebuiltJsonFile)) {
 
 <!-- prebuilt json file  -->
 
-<section class="wppb-prebuilt-popup-json">
-	<div class="wppb-popup-name">
-			<div><span>Prebuilt Layout</span></div>
-		</div>	
-
+<section class="wppb-prebuilt-popup-json rl_i_editor-item-content-i rl_i_editor-item-content-prebuilt-layout">
 	<?php echo $jsonPopupDemo;?>
 </section>
 
