@@ -1,9 +1,29 @@
+<?php 
+// prebuilt popup json 
+$prebuiltJsonFile = file_get_contents(WPPB_URL.'inc/wppb-builder.json');
+
+// replace of image url with plugin path
+	$getBeofrehttp_str 	 = strstr($prebuiltJsonFile,"plugins/wp-popup-builder/img/",true); 
+	$getPosOfhttp_str   = strrpos($getBeofrehttp_str,'http');
+	$replacedUrl_jsonData  = substr($getBeofrehttp_str,$getPosOfhttp_str).'plugins/wp-popup-builder/';
+	$prebuiltJsonFile = str_replace($replacedUrl_jsonData,WPPB_URL,$prebuiltJsonFile);
+// replace of image url with plugin path
+
+
+$prebuiltJsonFile = json_decode($prebuiltJsonFile,true);
+$countColumn = 0;
+$jsonPopupDemo = '';
+
+if (is_array($prebuiltJsonFile)) {
+	foreach ($prebuiltJsonFile as $prebuilt_value) {
+		$countColumn++;
+		$jsonPopupDemo .= $wp_builder_obj->wppbPopupList_json( $prebuilt_value,$countColumn,count($prebuiltJsonFile) );			
+	}
+}
+?>
+
 <section class="wppb-popup-name-layout">
 	<!-- popup name  -->
-	<div class="wppb-popup-name wppb-heading">
-		<span class="heading_">Create New Popup</span>
-	</div>
-
 	<div class="wppb-popup-name">
 		<div>
 			<span>Enter Popup name</span>
@@ -113,29 +133,39 @@
 	<!-- layout 3 -->
 		</section>
 	<!-- prebuilt popup section -->
+		<div class="wppb-popup-name">
+			<div><span>Choose Layout</span></div>
+		</div>																		
+
+		<div class="prebulilt-popup-inner">
+			<ul>
+				<li>
+					<input id='wppb-popup-layout-label__layout-1' type="radio" name="wppb-popup-layout" value="layout-1">
+					<label for="wppb-popup-layout-label__layout-1"><img src="<?php echo WPPB_URL ?>img/layout-1.png"></label>
+				</li>
+				<li>
+					<input id='wppb-popup-layout-label__layout-2' type="radio" name="wppb-popup-layout" value="layout-2">
+					<label for="wppb-popup-layout-label__layout-2"><img src="<?php echo WPPB_URL ?>img/layout-2.png"></label>
+				</li>
+				<li>
+					<input id='wppb-popup-layout-label__layout-3' type="radio" name="wppb-popup-layout" value="layout-3">
+					<label for="wppb-popup-layout-label__layout-3"><img src="<?php echo WPPB_URL ?>img/layout-3.png"></label>
+				</li>
+			</ul>
+		</div>
+</div>
+
+<!-- prebuilt json file  -->
+
+<section class="wppb-prebuilt-popup-json">
 	<div class="wppb-popup-name">
-		<div><span>Choose Layout</span></div>
-	</div>
+			<div><span>Prebuilt Layout</span></div>
+		</div>	
 
-			<div class="prebulilt-popup-inner">
-				<ul>
-					<li>
-						<input id='wppb-popup-layout-label__layout-1' type="radio" name="wppb-popup-layout" value="layout-1">
-						<label for="wppb-popup-layout-label__layout-1"><img src="<?php echo WPPB_URL ?>img/layout-1.png"></label>
-					</li>
-					<li>
-						<input id='wppb-popup-layout-label__layout-2' type="radio" name="wppb-popup-layout" value="layout-2">
-						<label for="wppb-popup-layout-label__layout-2"><img src="<?php echo WPPB_URL ?>img/layout-2.png"></label>
-					</li>
-					<li>
-						<input id='wppb-popup-layout-label__layout-3' type="radio" name="wppb-popup-layout" value="layout-3">
-						<label for="wppb-popup-layout-label__layout-3"><img src="<?php echo WPPB_URL ?>img/layout-3.png"></label>
-					</li>
-				</ul>
-			</div>
+	<?php echo $jsonPopupDemo;?>
+</section>
 
-
-	</div>
+<!-- prebuilt json file  -->
 
 	<div class="wp-popup-name-layout-name-init">
 		<button class="wppb-popup-name-init business_disabled">NEXT</button>

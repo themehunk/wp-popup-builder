@@ -51,7 +51,6 @@ if (isset($_GET['custom-popup']) && is_numeric($_GET['custom-popup'])) {
 }
 // echo "</pre>";
 
-
 ?>
 
 <div class="wppb-popup-cmn-container">
@@ -88,7 +87,7 @@ if (isset($_GET['custom-popup']) && is_numeric($_GET['custom-popup'])) {
 			include_once 'popup-custom.php'; 
 		?>
 
-		<div class="rl_i_editor-main-container">
+		<div class="rl_i_editor-main-container <?php echo $_GET['custom-popup'] == ''?'rl-display-none':'' ?>">
 			<?php include_once "editor-panel.php"; ?>
 		</div>
 

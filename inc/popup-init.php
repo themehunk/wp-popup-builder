@@ -87,9 +87,9 @@ function initContent($column_content){
 			return $return;
 	}
 
-// popup page list of all popupSetData
-public function wppbPopupList($allSetting,$column_making,$business_id,$countPopup,$isActive=false){
-		$popupSetData = array( 
+// popup page list of all popupSetData content
+public function wppbPopupContent($allSetting){
+			$popupSetData = array( 
 				'wrapper-style'		=>'',
 				'wrapper-height'	=>'auto',
 				'overlay-image-url' =>'',
@@ -102,7 +102,6 @@ public function wppbPopupList($allSetting,$column_making,$business_id,$countPopu
 				'close-btn' 		=> '',
 				'popup-name' 		=> 'New Popup name'
 			);
-		$returnHtml = '';
 		foreach ($allSetting as $setting_value) {
 			if (isset($setting_value['content']) && is_array($setting_value['content'])) {
 				if ($setting_value['type'] == 'global-setting') {
@@ -113,8 +112,19 @@ public function wppbPopupList($allSetting,$column_making,$business_id,$countPopu
 					$popupContentColumn = $this->initColumn($setting_value['content']);
 					$popupSetData['content'] =	'<div data-rl-wrap="" class="wppb-popup-rl-wrap rl-clear">'.$popupContentColumn.'</div>';
 				}
-			}
+			}else if ($setting_value['type'] == "close-btn") {
+					$uniqIdAttr = isset($setting_value["id"])?'data-uniqid="'.$setting_value["id"].'"':'';
+					$styleClose = isset( $setting_value['style'] )?"style='".$setting_value['style']."'":'';
+					$popupSetData["close-btn"] ='<span '.$uniqIdAttr.' class="wppb-popup-close-btn dashicons dashicons-no-alt" '.$styleClose.'></span>';
+					
+				}
 		}
+		return $popupSetData;
+}
+// popup page list of all popupSetData
+public function wppbPopupList($allSetting,$column_making,$business_id,$countPopup,$isActive=false){
+		$popupSetData = $this->wppbPopupContent($allSetting);
+		$returnHtml = '';
 		$popup_is_active = $isActive?"checked='checked'":"";
 		$business_id 	   = $business_id?$business_id:"";
 		if ($column_making == 1) $returnHtml .= '<div class="wppb-popup-row wppb-popup_clear">';
@@ -143,36 +153,24 @@ public function wppbPopupList($allSetting,$column_making,$business_id,$countPopu
 		return $returnHtml;
 }
 
-	// popup page list of all popupSetData
-	// public function wppbPopupList__($popupSetData,$column_making,$business_id,$countPopup,$isActive=false){
-	// 			$returnHtml = '';
-	// 			$popup_is_active = $isActive?"checked='checked'":"";
-	// 			$business_id 	   = $business_id?$business_id:"";
-	// 			if ($column_making == 1) $returnHtml .= '<div class="wppb-popup-row wppb-popup_clear">';
-	// 			$returnHtml .= '<div class="wppb-popup-column-three">
-	// 										<div class="wppb-popup-demo">
-	// 											<div class="tempIdShow">'.$popupSetData['popup-name'].'</div>
-	// 											<div class="wppb-popup-demo-wrapper">'.$this->popup_layout($popupSetData).'</div>
-	// 											<div class="wppb-popup-demo-settings">
-	// 												<div class="wppb-popup-setting-btns">
-														
-	// 													<div class="wppb-popup-checkbox">
-	// 														<input id="business_popup--'.$business_id.'" type="checkbox" class="wppb_popup_setting_active" data-bid="'.$business_id.'" '.$popup_is_active.'>
-	// 														<label for="business_popup--'.$business_id.'"></label>
-	// 													</div>
-	// 													<a class="wppb-popup-setting can_disable" href="'.esc_url(WPPB_PAGE_URL.'&custom-popup='.$business_id).'">'.__("<span class='dashicons dashicons-admin-generic'></span> Settings","wppb").'</a>
+// popup page list of all popupSetData json file
+public function wppbPopupList_json($allSetting,$column_making,$countPopup){
+		$popupSetData = $this->wppbPopupContent($allSetting);
+		$LayOutName = isset($popupSetData['layout']) && $popupSetData['layout'] ? 'data-layout="'.$popupSetData['layout'].'"' : '';
+		$returnHtml = '';
+		if ($column_making == 1) $returnHtml .= '<div class="wppb-popup-row wppb-popup_clear">';
+		$returnHtml .= '<div class="wppb-popup-column-three">
+								<input id="wppb-popup-layout-label__layout--'.$column_making.'" type="radio" name="wppb-popup-layout" value="prebuilt" '.$LayOutName.'>
+								<label for="wppb-popup-layout-label__layout--'.$column_making.'" class="wppb-popup-json-label">'.$this->popup_layout($popupSetData).'</label>
+						</div>';
+		if($countPopup == ($column_making)){
+			$returnHtml .= '</div>';
+		}elseif(($column_making) % 3 === 0){
+			$returnHtml .= '</div><div class="wppb-popup-row wppb-popup_clear">';
+		}
+		return $returnHtml;
+}
 
-	// 												</div>
-	// 											</div>
-	// 										</div>
-	// 								</div>';
-	// 			if($countPopup == ($column_making)){
-	// 				$returnHtml .= '</div>';
-	// 			}elseif(($column_making) % 3 === 0){
-	// 				$returnHtml .= '</div><div class="wppb-popup-row wppb-popup_clear">';
-	// 			}
-	// 			return $returnHtml;
-	// }
 
 
 

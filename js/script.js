@@ -71,11 +71,14 @@ var Business_news_letter = {
 
 			if(overlayImage.attr('data-overlay-image'))contentGlobal['overlay-image-url'] = overlayImage.attr('data-overlay-image');
 			let wrapperWidth = outerParent.find('.wppb-popup-custom-wrapper');
-			// contentGlobal['wrapper-width'] = parseInt(wrapperWidth.css('width'));
 			if ( wrapperWidth.attr('style') )contentGlobal['wrapper-style'] = wrapperWidth.attr('style');
 
 			let overlayStyle = Custom_popup_editor._removeStyle(overlayImage,"background-image",false)
 			if(overlayStyle) contentGlobal['overlay-style'] = overlayStyle;
+			// popup name
+			let popupName = jQuery('input[name="global-popup-name"]').val();
+			contentGlobal['popup-name'] = popupName;
+
 			return {type:'global-setting',content:contentGlobal };
 	},
 	_saveData:function(){
@@ -446,7 +449,7 @@ var Custom_popup_editor = {
 				}
 			}else if(seperateInput.attr('type') == 'range'){
 				if (seperateInputData1 == 'item-width') {
-						let width = clickedObj.width();
+						let width = clickedObj.outerWidth();
 						let pwidth = clickedObj.parent().width();
 						let getWidthInPer = Math.round((width / pwidth) * 100);
 					Custom_popup_editor._inputRange(seperateInput,clickedObj,seperateInputData1,getWidthInPer);
@@ -510,6 +513,7 @@ var Custom_popup_editor = {
 			}else if(changeData == 'margin'|| changeData == 'padding'){
 				Custom_popup_editor._marginPadding(changeData,changedInput,clickedObj,changeValue);
 			}else if(changeData == 'item-width'){
+				console.log(changeValue);
 				clickedObj.css('width',changeValue+'%');
 			}else if (changeData == 'content-alignment') {
 				Custom_popup_editor._contentAlign(clickedObj,changeValue);
@@ -541,6 +545,9 @@ var Custom_popup_editor = {
 					let paddings = jQuery('.wppb-popup-custom .wppb-popup-custom-content').css('padding-'+sepInput.data('padding'));
 					sepInput.val( parseInt(paddings) );
 				}
+			}else if(dataInput == 'popup-name'){
+				setHiddenInput['popup-name'] ? sepInput.val( setHiddenInput['popup-name'] ) : sepInput.val( 'Enter Popup Name' );
+
 			}else if( dataInput == 'global-border'){
 				let globalBorder = jQuery('.wppb-popup-custom .wppb-popup-custom-wrapper');
 				Custom_popup_editor.__borderGet(globalBorder,sepInput);
@@ -872,37 +879,28 @@ var Custom_popup_editor = {
 		}else{
 			jQuery('.wppb-popup-name-init').addClass('business_disabled');
 		}
-
-// 		.wppb-popup-name-layout input[name="wppb-popup-name"]
-// .wppb-popup-name-layout input[name="wppb-popup-layout"]
-
-		// let getLayout = clickedLaout.data('layout');
-		//     getLayout =   jQuery('.prebuilt-pupup-layout-container > div[data-layout="'+getLayout+'"]').html();
-		// let putLayout = jQuery('.wppb-popup-custom > div');
-		// let saveLAyout = {layout:clickedLaout.attr('data-layout')};
-		// let setHiddenInputI = jQuery('input[type="hidden"][data-global-save]');
-		// setHiddenInputI.val( JSON.stringify(saveLAyout) );
-		// putLayout.html(getLayout);
-
-
-
-		// jQuery('.prebulit-demo-popup').hide();
-		// jQuery('.wppb-popup-name').show();
 	},
 	_popupName:function(){
+		let layOutRadio = jQuery('.wppb-popup-name-layout input[name="wppb-popup-layout"]:checked');
+		let layoutName  = layOutRadio.val();
+		let popupName   = jQuery('.wppb-popup-name-layout input[name="wppb-popup-name"]').val();
 
-		let layoutName = jQuery('.wppb-popup-name-layout input[name="wppb-popup-layout"]:checked').val();
-		let popupName = jQuery('.wppb-popup-name-layout input[name="wppb-popup-name"]').val();
 			if (layoutName && popupName) {
+				let getLayout = '';
+				if (layoutName == 'prebuilt') {
+					getLayout = layOutRadio.siblings('label').html();
+					layoutName = layOutRadio.data('layout') ? layOutRadio.data('layout') : '';
+				}else{
+					getLayout = jQuery('.prebuilt-pupup-layout-container > div[data-layout="'+layoutName+'"]').html();
+				}
 				let saveLAyout = {layout:layoutName,'popup-name':popupName};
 				let setHiddenInputI = jQuery('input[type="hidden"][data-global-save]');
 				setHiddenInputI.val( JSON.stringify(saveLAyout) );
-				let getLayout = jQuery('.prebuilt-pupup-layout-container > div[data-layout="'+layoutName+'"]').html();
 				let putLayout = jQuery('.wppb-popup-custom > div');
 				putLayout.html(getLayout);
 				jQuery('.wppb-popup-name-layout').hide();
-				jQuery('.wppb-popup-custom').show();
-				jQuery('.rl_i_editor-inner-wrap-mask').remove();
+				jQuery('.wppb-popup-custom, .rl_i_editor-main-container').show();
+				// jQuery('.rl_i_editor-inner-wrap-mask').remove();
 				Custom_popup_editor._dragAndShort();
 				Custom_popup_editor._globalSettingInit();
 			}else{
@@ -929,6 +927,7 @@ var Custom_popup_editor = {
 		let getForm = jQuery(this);
 		jQuery('.rl-lead-form-panel').slideDown('fast');
 		// close container while open content style
+		jQuery('.rl-editable-key-action').removeClass('rl-editable-key-action');
 		let toggleContainer = jQuery(".rl_i_editor-element-Toggle");
 		jQuery.each(toggleContainer,(index,value)=>{
 			let separateToggle = jQuery(value);

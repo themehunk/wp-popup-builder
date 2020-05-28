@@ -14,20 +14,6 @@ if (!empty($custom_popup_all)) {
 	}
 }
 
-
-$prebuiltJsonFile = file_get_contents(WPPB_URL.'inc/wppb-builder.json');
-$prebuiltJsonFile = json_decode($prebuiltJsonFile,true);
-$countColumn = 0;
-if (is_array($prebuiltJsonFile)) {
-	foreach ($prebuiltJsonFile as $prebuilt_value) {
-		$countColumn++;
-		$popup_html_all_custom .= $wp_builder_obj->wppbPopupList( $prebuilt_value,$countColumn,"no business id",count($prebuiltJsonFile) );			
-
-	}
-}
-
-	
-
 ?>
 
 <div id="wppb-popup-demos-container">
