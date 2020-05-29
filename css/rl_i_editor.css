@@ -150,10 +150,10 @@
 .rl_i_editor-item-content{
      display: none; 
 }
-.rl_i_editor-item-content .rl_i_editor-item-content-header > nav {
+.rl_i_editor-main-container .rl_i_editor-item-content-header > nav {
         background-color: #efefef;
 }
-.rl_i_editor-item-content .rl_i_editor-item-content-header > nav > span{
+.rl_i_editor-main-container .rl_i_editor-item-content-header > nav > span{
        width: 50%;
     float: left;
     cursor: pointer;
@@ -161,10 +161,11 @@
     text-align: center;
     position: relative;
 }
-.rl_i_editor-item-content .rl_i_editor-item-content-header > nav > span.active_{
+.rl_i_editor-main-container .rl_i_editor-item-content-header > nav > span.active_{
     background-color: #777777;
     color: white;
 }
+
 .rl_i_editor-item-content-i{
      display: none; 
 }
