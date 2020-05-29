@@ -273,24 +273,31 @@ a:focus{
     opacity: 1;
 }
 /*editable section */
-.rl-editable-key-action{
+
+.rl-editable-key-action:not(img){
         position: relative;
     outline: 1px solid #6747e6;
+    outline-offset: -1px;
+    outline-style: dotted;
 }
-.wppb-popup-custom [data-rl-editable]:hover,
-.wppb-popup-custom .wppb-popup-lead-form:hover{
-       outline: 1px solid #6747e6;
+.wppb-popup-custom [data-rl-editable]:not([data-rl-editable="image"]):hover,
+.wppb-popup-custom .wppb-popup-lead-form:hover,
+.wppb-popup-custom .data-rl-editable-wrap.wrap-image_:hover{
+          outline: 1px solid #6747e6;
     cursor: pointer;
+    outline-offset: -1px;
+    outline-style: dotted;
 }
 .wppb-popup-custom [data-rl-editable]:before,
-.wppb-popup-custom .wppb-popup-lead-form:before{
-        content: 'text';
+.wppb-popup-custom .wppb-popup-lead-form:before,
+.wppb-popup-custom .data-rl-editable-wrap.wrap-image_:before{
+        content: 'Text';
     font-size: 14px;
     position: absolute;
     background: #6747e6;
     color: #f3f3f3;
     left: 0px;
-    top: -18px;
+    top: -16px;
     display: none;
     z-index: 2;
     padding: 0px 10px;
@@ -298,46 +305,26 @@ a:focus{
     border-radius: 3px 3px 0px 0px;
 }
 .wppb-popup-custom [data-rl-editable="heading"]:before{
-        content: 'heading';
+        content: 'Heading';
 }
-.wppb-popup-custom [data-rl-editable="image"]:before{
-        content: 'image';
+.wppb-popup-custom .data-rl-editable-wrap.wrap-image_:before{
+        content: 'Image';
 }
 .wppb-popup-custom [data-rl-editable="link"]:before{
-        content: 'link';
+        content: 'Link';
 }
 .wppb-popup-custom .wppb-popup-lead-form:before{
-        content: 'form';
-}
-.wppb-popup-custom [data-rl-editable]:after,
-.wppb-popup-custom .wppb-popup-lead-form:after{
-        position: absolute;
-    width: 100%;
-    height: 100%;
-    display: block;
-    z-index: 1;
-    content: "";
-    top: 0;
-    left: 0;
-    display: none;
+        content: 'Form';
 }
 .wppb-popup-custom [data-rl-editable]:hover:before,
-[data-rl-editable]:hover:after,
 .wppb-popup-custom .wppb-popup-lead-form:hover:before,
-.wppb-popup-custom .wppb-popup-lead-form:hover:after{
+.wppb-popup-custom .data-rl-editable-wrap.wrap-image_:hover:before{
     display: block;
 }
-.wppb-popup-custom img[data-rl-editable]:hover{
-    opacity: .7;
-}
-
 .wppb-popup-demo .wppb-popup-custom span.text-heading{
         font-size: 27px;
     font-weight: 500;
 }
-
-
-
 /*lead form builder design*/
 .wppb-popup-lead-form{
     width: 100%;

@@ -29,6 +29,8 @@ var Business_news_letter = {
 	
 		console.log(saveData);
 		// return;
+
+
 		let bid = this_btn.data('bid');
 			let data_ = {action:'custom_update',htmldata:saveData,bid:bid};
 			let returnData = Business_news_letter._ajaxFunction(data_);
@@ -69,7 +71,13 @@ var Business_news_letter = {
 			globalPadding = Custom_popup_editor._checkStyle(globalPadding,'padding');
 			if(outSideColor) contentGlobal['global-padding'] = globalPadding;
 
-			if(overlayImage.attr('data-overlay-image'))contentGlobal['overlay-image-url'] = overlayImage.attr('data-overlay-image');
+			// if(overlayImage.attr('data-overlay-image') || overlayImage.attr('data-overlay-image'))contentGlobal['overlay-image-url'] = overlayImage.attr('data-overlay-image');
+			if(overlayImage.attr('data-overlay-image')){
+				contentGlobal['overlay-image-url'] = overlayImage.attr('data-overlay-image');
+			}else{
+				if(contentGlobal['overlay-image-url']) delete contentGlobal['overlay-image-url'];
+			}
+
 			let wrapperWidth = outerParent.find('.wppb-popup-custom-wrapper');
 			if ( wrapperWidth.attr('style') )contentGlobal['wrapper-style'] = wrapperWidth.attr('style');
 
@@ -410,11 +418,11 @@ var Custom_popup_editor = {
 		});
 
 		if (clickedObjData1 != "image") {
-			jQuery('.item-image').not('.rl_i_editor-global-setting .item-image').hide();
-			jQuery('.item-text').show();
+			jQuery('.rl_i_editor-item-content .item-image').hide();
+			jQuery('.rl_i_editor-item-content .item-text').show();
 		}else if (clickedObjData1 == "image") {
-			jQuery('.item-image').show();
-			jQuery('.item-text').hide();
+			jQuery('.rl_i_editor-item-content .item-image').show();
+			jQuery('.rl_i_editor-item-content .item-text').hide();
 		}
 		// close container while open content style
 		wrapperContent.slideDown('slow');
@@ -705,8 +713,8 @@ var Custom_popup_editor = {
 							jQuery('.global-overlay-image .rl-i-choose-image-wrap').css('background-image', imgUrl);
 						}else{
 							imageContainer.hide();
-							jQuery('.wppb-popup-custom .wppb-popup-overlay-custom-img').attr('data-overlay-image','none').css('background-image','none');
-							if ('overlay-image-url' in setHiddenInput) delete setHiddenInput['overlay-image-url'];
+							jQuery('.wppb-popup-custom .wppb-popup-overlay-custom-img').css('background-image','none');
+							jQuery('.wppb-popup-custom .wppb-popup-overlay-custom-img').removeAttr('data-overlay-image');
 						}
 				}else if (inputData == 'close-font-size') {
 					jQuery('.wppb-popup-custom .wppb-popup-close-btn').css('font-size',inputValue+'px');
