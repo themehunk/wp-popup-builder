@@ -2,20 +2,33 @@
 // prebuilt popup json 
 $prebuiltJsonFile = file_get_contents(WPPB_URL.'inc/wppb-builder.json');
 
-// replace of image url with plugin path
-	$getBeofrehttp_str 	 	= strstr($prebuiltJsonFile,"plugins/wp-popup-builder/img/",true); 
-	$getPosOfhttp_str   	= $getBeofrehttp_str ? strrpos($getBeofrehttp_str,'http') : false;
-	$replacedUrl_jsonData  	= $getPosOfhttp_str ? substr($getBeofrehttp_str,$getPosOfhttp_str).'plugins/wp-popup-builder/':false;
-	$prebuiltJsonFile 		= $replacedUrl_jsonData ? str_replace($replacedUrl_jsonData,WPPB_URL,$prebuiltJsonFile) : $prebuiltJsonFile;
-// replace of image url with plugin path
+function wppb_changeFilePath($arr,$path){
+	$return = [];
+	if ( is_array($arr) ) {
+		foreach($arr as $key => $value){
+	          if( is_array($value) ){
+	              $return[$key] = wppb_changeFilePath( $value, $path );
+	          }else{
+	      			if( $key == 'image-url' || $key == 'overlay-image-url'){
+						 $Exp = explode('/', $value);
+			             $End = end($Exp);
+			             $return[$key] = $path.$End;
+			          }else{
+	              		$return[$key] = $value;
+			          }
+	          } //else
+        } //foreach
+	}
+	return $return;
+}
 
 
 $prebuiltJsonFile = json_decode($prebuiltJsonFile,true);
 $countColumn = 0;
 $jsonPopupDemo = '';
-
 if (is_array($prebuiltJsonFile)) {
 	foreach ($prebuiltJsonFile as $prebuilt_value) {
+		$prebuilt_value =  wppb_changeFilePath($prebuilt_value,WPPB_URL."img/");
 		$countColumn++;
 		$jsonPopupDemo .= $wp_builder_obj->wppbPopupList_json( $prebuilt_value,$countColumn,count($prebuiltJsonFile) );			
 	}
