@@ -1007,7 +1007,7 @@ var Custom_popup_editor = {
 	},
 	_leadFormStyling:function(){
 		jQuery('.wppb-lead-form-styling').show();
-		let leadForm = jQuery('.wppb-popup-lead-form form');
+		let leadForm = jQuery('.wppb-popup-custom .wppb-popup-lead-form form');
 		let getInputs = jQuery('.wppb-lead-form-styling [data-lead-form]');
 		function leadFormInput(index, value){
 			let sepInput = jQuery(value);
@@ -1071,7 +1071,7 @@ var Custom_popup_editor = {
 		let input_ = jQuery(this);
 		let dataCheck = input_.data('lead-form');
 		let inputVal = input_.val();
-		let leadForm = jQuery('.wppb-popup-lead-form form');
+		let leadForm = jQuery('.wppb-popup-custom .wppb-popup-lead-form form');
 		if (dataCheck == 'lf-form-width') {
 			leadForm.css('width',inputVal+'%');
 		}else if (dataCheck == 'lf-label-font-size') {
