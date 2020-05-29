@@ -118,7 +118,9 @@ a:focus{
 .wppb-popup-name-layout .rl_i_editor-item-content-header > nav span.active_{
         background: #6747e6;
 }
-
+.wppb-prebuilt-popup-json .wppb-popup-row{
+        margin-bottom: 20px;
+}
 
 
 
