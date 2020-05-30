@@ -1,4 +1,5 @@
-<?php if ( ! defined( 'ABSPATH' ) ) exit; 
+<?php 
+if ( ! defined( 'ABSPATH' ) ) exit; 
 $popupSetData = array(
 					'wrapper-style'=>'width:550px;',
 					'wrapper-height'=>'auto',

@@ -1,4 +1,5 @@
-<?php if ( ! defined( 'ABSPATH' ) ) exit;
+<?php 
+if ( ! defined( 'ABSPATH' ) ) exit;
 class wp_popup_builder_init{
 
 function initColumn($column){

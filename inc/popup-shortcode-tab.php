@@ -1,4 +1,5 @@
-<?php if ( ! defined( 'ABSPATH' )) exit;	
+<?php 
+if ( ! defined( 'ABSPATH' )) exit;	
 	$options = ['pages','post','home_page'];
 	$check_option = [];
 	foreach ($options as $options_value) {
