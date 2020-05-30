@@ -185,7 +185,7 @@ public function wppbPopupList_json($allSetting,$column_making,$countPopup){
 		if ($title && $prop && $type) {
 			$typeAndProp = $type.'="'.$prop.'"' . $attr;
 			echo '<div class="rl_i_editor-item-content-items item-text inline__"><label class="rl-sub-title">'.$title.'</label>
-					<div class="rl_i_editor-item-color">
+					<div>
 						<label class="color-output" data-input-color="'.$color_id.'" '.$typeAndProp.'></label>
 					</div>
 				</div>';
@@ -211,8 +211,8 @@ public function wppbPopupList_json($allSetting,$column_making,$countPopup){
 						</div>
 						<div class="data-range-output">
 							<input type="number" data-range-output="'.$id_two.'" '.$attrTwo.'>
+							<label class="param-title rl-sub-title">'.$title_.'</label>
 						</div>
-						<label class="param-title rl-sub-title">'.$title_.'</label>
 					</div>';
 		 }
 	public function select($attr,$option){
@@ -245,25 +245,23 @@ public function wppbPopupList_json($allSetting,$column_making,$countPopup){
 		$data_attr = $type.'="'.$id.'"' . $attr;
 		$border = $this->select($data_attr.' data-border="border-style"',[ ['solid','solid'],['dashed','dashed'],['dotted','dotted'],['double','double'],['groove','groove'],['ridge','ridge'] ]);
 				$return =  '<section class="content-style-border">
-					<div  class="rl_i_editor-item-content-items title_ inline__">
 						'.$this->checkbox($id,"Border",$data_attr.' data-border="border-enable"').'
-					</div>
 					<div  class="rl_i_editor-item-content-items content-border">
 						<div>
 							<label class="rl-sub-title">Border Width</label>
-							<input type="number" value="" '.$data_attr.' data-border="width">
+							<div><input type="number" value="" '.$data_attr.' data-border="width"></div>
 						</div>
 						<div>
 							<label class="rl-sub-title">Border radius</label>
-							<input type="number" value="" '.$data_attr.' data-border="radius">
+							<div><input type="number" value="" '.$data_attr.' data-border="radius"></div>
 						</div>
 						<div>
 							<label class="rl-sub-title">Border Color</label>
-							<label class="color-output" '.$data_attr.' data-input-color="border-color"></label>
+							<div><label class="color-output" '.$data_attr.' data-input-color="border-color"></label></div>
 						</div>
 						<div>
 							<label class="rl-sub-title">Border Style</label>
-							'.$border.'
+							<div>'.$border.'</div>
 						</div>
 					</div>
 				</section>';
