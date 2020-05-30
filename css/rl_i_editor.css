@@ -394,6 +394,9 @@ label.color-output {
 .rl_i_editor-item-content-items.inline__ .rl_i_range-font-size{
         flex: 2;
 }
+.rl_i_editor-item-content-items.inline__ .rl_i_range-font-size.range_{
+        margin-top: -3px;
+}
 
 .rl_i_editor-item-content-items.inline__ .rl_i_range-font-size label>span.dashicons-desktop{
         height: auto;
@@ -415,6 +418,9 @@ label.color-output {
   border-radius: 50%;
   background: #9b9b9b;
   cursor: pointer;
+}
+.rl_i_editor-item-content-items.inline__ input[type=range]::-webkit-slider-thumb:hover{
+    box-shadow:0px 0px 4px 8px #9be4ff33;
 }
 label[data-range-output]{
         width: 35px;

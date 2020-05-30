@@ -7,14 +7,9 @@ var Business_news_letter = {
 		let this_btn = jQuery(this);
 		this_btn.addClass('rlLoading');
 		let saveData = Business_news_letter._saveData();
-		
-		console.log(saveData);
-		// return;
 			let data_ = {action:'custom_insert',htmldata:saveData};
 			let returnData = Business_news_letter._ajaxFunction(data_);
 			returnData.success(function(response){
-				console.log(response);
-				// return;
 				if (response && response != 0) {
 		        		let pathName = window.location.pathname + window.location.search + "=" +response;
 						window.history.replaceState(null,null,pathName);
@@ -26,16 +21,10 @@ var Business_news_letter = {
 		let this_btn = jQuery(this);
 		this_btn.addClass('rlLoading');
 		let saveData = Business_news_letter._saveData();
-	
-		console.log(saveData);
-		// return;
-
-
 		let bid = this_btn.data('bid');
 			let data_ = {action:'custom_update',htmldata:saveData,bid:bid};
 			let returnData = Business_news_letter._ajaxFunction(data_);
 			returnData.success(function(response){
-				// console.log(response);
 				if (response || response == 0) {
 		        		setTimeout(()=>this_btn.removeClass('rlLoading'),1000);
 		        	}
@@ -71,32 +60,26 @@ var Business_news_letter = {
 			globalPadding = Custom_popup_editor._checkStyle(globalPadding,'padding');
 			if(outSideColor) contentGlobal['global-padding'] = globalPadding;
 
-			// if(overlayImage.attr('data-overlay-image') || overlayImage.attr('data-overlay-image'))contentGlobal['overlay-image-url'] = overlayImage.attr('data-overlay-image');
 			if(overlayImage.attr('data-overlay-image')){
 				contentGlobal['overlay-image-url'] = overlayImage.attr('data-overlay-image');
 			}else{
 				if(contentGlobal['overlay-image-url']) delete contentGlobal['overlay-image-url'];
 			}
-
 			let wrapperWidth = outerParent.find('.wppb-popup-custom-wrapper');
 			if ( wrapperWidth.attr('style') )contentGlobal['wrapper-style'] = wrapperWidth.attr('style');
-
 			let overlayStyle = Custom_popup_editor._removeStyle(overlayImage,"background-image",false)
 			if(overlayStyle) contentGlobal['overlay-style'] = overlayStyle;
 			// popup name
 			let popupName = jQuery('input[name="global-popup-name"]').val();
 			contentGlobal['popup-name'] = popupName;
-
 			return {type:'global-setting',content:contentGlobal };
 	},
 	_saveData:function(){
 		let getSaveData = jQuery('.wppb-popup-custom');
 		let getSaveDataWrap = getSaveData.find('[data-rl-wrap]');
 		let saveData = [];
-		
 		let getSaveGlobal = Business_news_letter._initGlobalSave();
 		if (!jQuery.isEmptyObject(getSaveGlobal.content)) saveData.push(getSaveGlobal);
-
 		// find all wrap 
 		jQuery.each(getSaveDataWrap,(Wrap_index,Wrap_value)=>{
 			let get_column = jQuery(Wrap_value).find('[data-rl-column]');
@@ -168,8 +151,6 @@ var Business_news_letter = {
 										saveAttrData['image-url'] = checkInput.attr('src');
 									}
 								}
-
-
 								content_data.push(saveAttrData);
 							});
 							return content_data;
@@ -201,7 +182,6 @@ var Business_news_letter = {
 			let data_ = {action:'delete_popup',bid:bid};
 			let returnData = Business_news_letter._ajaxFunction(data_);
 			returnData.success(function(response){
-				console.log(response);
 				if (response || response == 0) {
 		        		setTimeout(()=>{
 		        		let pathName = window.location.pathname + "?page=wppb";
@@ -276,7 +256,6 @@ var Business_news_letter = {
 			let data_ = {action:'popup_active',popup_id:popup_id,is_active:isActive};
 			let returnData = Business_news_letter._ajaxFunction(data_);
 			returnData.success(function(response){
-				console.log(response);
 			});
 	},
 	_bind(){
@@ -339,10 +318,6 @@ var Custom_popup_editor = {
 	      connectToSortable: ".wppb-popup-custom .rlEditorDropable",
 	      helper: "clone",
 	      revert: "invalid",
-	      // cursor: "move",
-	      start:function(event,ui){
-	      	// let uiElement = ui.helper;
-	      },
 	      stop:function(event,ui){
 	      	Custom_popup_editor._initAfterDrag(ui.helper);
 	      }
@@ -545,8 +520,6 @@ var Custom_popup_editor = {
 			if ( setHiddenInput.val() ) {
 				setHiddenInput = JSON.parse(setHiddenInput.val());
 			}
-			// console.log(sepInput);
-			// console.log(value);
 			if (dataInput == 'main-wrapper') {
 				if(sepInput.data('show-range') == "wrapper-width"){
 					Custom_popup_editor._inputRange(sepInput,jQuery('.wppb-popup-custom .wppb-popup-custom-wrapper'),'width');
@@ -653,18 +626,12 @@ var Custom_popup_editor = {
 					Custom_popup_editor._inputRange( sepInput, false, false, popupDalayClose );
 				}
 
-			// console.log(value);
 		}//loop
 
 
 	},
 	_globalSetEditor:function(e){
 		let sepInput = jQuery(this);
-
-		// console.log( sepInput[0] );
-		// console.log( sepInput.val() );
-		// return;
-
 		if (sepInput) {
 				let checkDatatype = sepInput.data('type');
 				let inputData = sepInput.data('global-input');
@@ -722,7 +689,7 @@ var Custom_popup_editor = {
 							if(checkArray)setHiddenInput['close-type'] = inputValue;
 							if (inputValue == 1 || inputValue == 2) {
 								let closeBtn = '<span class="wppb-popup-close-btn dashicons dashicons-no-alt"></span>';
-								jQuery('.wppb-popup-custom .wppb-popup-custom-content').prepend(closeBtn);
+								if( !jQuery('.wppb-popup-custom .wppb-popup-close-btn').length ) jQuery('.wppb-popup-custom > div').prepend(closeBtn);
 								jQuery('.close-btn-container').show();
 								Custom_popup_editor._globalSettingInit();
 							}else{

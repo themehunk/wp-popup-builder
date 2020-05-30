@@ -39,7 +39,6 @@ if (isset($_POST['htmldata'])) {
     }
 }
 public function popup_update(){
-  // print_r($_POST);
   // for html data update
       if (isset($_POST['bid']) && is_numeric($_POST['bid']) && isset($_POST['htmldata'])) {
           $popupData = $this->arrayValueSanetize($_POST['htmldata']);
@@ -166,7 +165,6 @@ public function uniq_class($arr){
 
 // popup html creating
 public function wppb_html($setting,$inline=false){
-// echo "<pre>";
     if ($setting && @unserialize( $setting )) {
         $popupSetData = array(
           'wrapper-style'=>'width:550px;',
@@ -184,9 +182,6 @@ public function wppb_html($setting,$inline=false){
           );
       $popupFrontSetting = ['close-type'=>3,'outside-color'=>'#535353F2','effect'=>1,'popup-delay-open'=>3,'popup-delay-close'=>0];
       $allSetting = unserialize($setting);   
-      
-      // print_r($allSetting);
-
         foreach ($allSetting as $setting_value) {
           if (isset($setting_value['content']) && is_array($setting_value['content'])) {
             if ($setting_value['type'] == 'global-setting') {

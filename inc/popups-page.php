@@ -20,8 +20,8 @@ if (!empty($custom_popup_all)) {
 
 <section id="wppb-custom-popup-section" class="wppb-custom-popup-section">
 		<div class="wppb-custom-popup-heading">
-			<h1>Business Popup List </h1>
-			<a href="<?php echo esc_url(WPPB_PAGE_URL.'&custom-popup') ?>"> <span class="dashicons dashicons-edit"></span> Add New Popup</a>
+			<h1><?php _e('Business Popup List','wppb'); ?></h1>
+			<a href="<?php echo esc_url(WPPB_PAGE_URL.'&custom-popup','wppb') ?>"> <span class="dashicons dashicons-edit"></span> <?php _e('Add New Popup','wppb'); ?></a>
 		</div>
 		<?php echo $popup_html_all_custom ?>
 </section>
