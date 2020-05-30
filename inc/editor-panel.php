@@ -43,7 +43,7 @@
 					</div>
 				</div>
 				<div class="background-image-setting">
-						<span>Background Position</span>
+						<span class="rl-sub-title">Background Position</span>
 						<div class="background-image-setting-position">
 							<div>
 								<input id="image-setting-left-top1" type="radio" name="background-position" data-global-input='background-position' value="left top">
@@ -83,8 +83,8 @@
 							</div>
 						</div>
 						<div class="rl_i_editor-item-content-items inline__">
-							<label>Background Size</label>
-							<div class="rl_i_editor-item-color">
+							<label class="rl-sub-title">Background Size</label>
+							<div>
 								<?php echo $wp_builder_obj->select("data-global-input='background-size'",[ ['Auto','auto'],['Contain','contain'],['Cover','cover'] ]); ?>
 							</div>
 						</div>
@@ -107,10 +107,10 @@
 				$wp_builder_obj->border('global-border','data-global-input'); 
 			?>
 			<div class="rl_i_editor-item-content-items rl-two-column-width">
-				<label>Container Width</label>
+				<label class="rl-sub-title">Container Width</label>
 				<div>
-					<label>Column One %</label>
-					<label>Column Two %</label>
+					<label class="rl-sub-title">Column One %</label>
+					<label class="rl-sub-title">Column Two %</label>
 				</div>
 				<div>
 					<input type="number" data-global-input="column-width" data-column="1">
@@ -125,8 +125,8 @@
 			</div>
 			<section data-toggle-action="popup-timer-opt" class="rl-popup-timer-opt rl-display-none">
 				<?php 
-					$wp_builder_obj->range_slider('Popup Appear Delay', 'popup-delay-open', ['title'=>'Second','min'=>3,'max'=>60,'value'=>4] ,'popup-timer-appear-delay');
-					$wp_builder_obj->range_slider( 'Popup Auto Close', 'popup-delay-close', ['title'=>'Second','min'=>0,'max'=>500,'value'=>0] ,'popup-timer-autoclose'); 
+					$wp_builder_obj->range_slider('Popup Appear Delay in Second', 'popup-delay-open', ['title'=>'sec','min'=>3,'max'=>60,'value'=>4] ,'popup-timer-appear-delay');
+					$wp_builder_obj->range_slider( 'Popup Auto Close in Second', 'popup-delay-close', ['title'=>'sec','min'=>0,'max'=>500,'value'=>0] ,'popup-timer-autoclose'); 
 				?>
 			</section>
 		<!-- timer section -->
@@ -140,7 +140,7 @@
 				<label class="rl-sub-title">Popup Close option By Click</label>
 			</div>
 			<div class="rl_i_editor-item-content-items inline__">
-					<div class="rl_i_editor-item-color">
+					<div>
 					<?php echo $wp_builder_obj->select('data-cmn="close-btn" data-global-input="close-option"',[ ['Click On Icon',1],['Click On Icon and Outside',2],['Click On Outside',3,true] ]); ?>
 					</div>
 			</div>
@@ -232,7 +232,7 @@
 					<!-- font weight -->
 					<div class="rl_i_editor-item-content-items item-text inline__">
 						<label class="rl-sub-title">Font Weight</label>
-						<div class="rl_i_editor-item-color">
+						<div>
 							<?php echo $wp_builder_obj->select('data-editor-input="font-weight"',[ [200,200],[300,300],[400,400],[500,500],[600,600],[700,700],[800,800],[900,900] ]); ?>
 							
 						</div>
@@ -321,7 +321,7 @@
 				?>
 					<div class="rl_i_editor-item-content-items item-text inline__">
 						<label class="rl-sub-title">Font Weight</label>
-						<div class="rl_i_editor-item-color">
+						<div>
 							<?php echo $wp_builder_obj->select('data-lead-form="submit-font-weight"',[ [200,200],[300,300],[400,400],[500,500],[600,600],[700,700],[800,800],[900,900] ]); ?>
 							
 						</div>

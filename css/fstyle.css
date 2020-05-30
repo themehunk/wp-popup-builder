@@ -131,6 +131,7 @@ font-weight: 600;
 .wppb-popup-main-wrap .wppb-popup-rl-wrap img{
     max-width: 100%;
     max-height: 100%;
+    box-sizing: border-box;
 }
 .wppb-popup-main-wrap .wppb-popup-close-btn{
         right: 5%;
