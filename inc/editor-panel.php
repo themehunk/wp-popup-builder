@@ -136,6 +136,9 @@
 			<span class="bottomCarret dashicons dashicons-arrow-right"></span>
 		</div>
 		<section data-toggle-action="close-btn-setting" class="">
+				
+
+
 			<div class="rl_i_editor-item-content-items title_ inline__">
 				<label class="rl-sub-title">Popup Close option By Click</label>
 			</div>
@@ -144,24 +147,38 @@
 					<?php echo $wp_builder_obj->select('data-cmn="close-btn" data-global-input="close-option"',[ ['Click On Icon',1],['Click On Icon and Outside',2],['Click On Outside',3,true] ]); ?>
 					</div>
 			</div>
-			<section class="close-btn-container">				
-			<?php 
-			 	$wp_builder_obj->color('Icon Color','color','data-global-input','close-btn-color',"data-cmn='close-btn'");
-				$wp_builder_obj->color('Icon Background Color','background-color','data-global-input','close-btn-bg-color',"data-cmn='close-btn'"); 
-				$wp_builder_obj->range_slider( "Icon Font Size", 'close-font-size', ['title'=>'px','min'=>10,'max'=>100,'value'=>18,"attr"=>'data-cmn="close-btn"']);
-				$wp_builder_obj->margin_padding('close-btn', 'Icon Padding in px', 'data-global-input', 'p', 'data-cmn="close-btn"'); 
-			?>
-			<div class="rl_i_editor-item-content-items title_ inline_">
-				<div class="rl_i_range-font-size">
-					<label class="rl-sub-title">Button Margin</label>
+
+			<div class="close-btn-container">
+				<div class="rl_i_editor-item-content-header">
+						<nav class="rl-clear">
+							<span data-editor-tab="close-btn-alignment" class="active_">Alignment</span>
+							<span data-editor-tab="close-btn-style">Style</span>
+						</nav>
+					</div>
+
+				<div class="rl_i_editor-item-content-i rl_i_editor-item-content-close-btn-alignment active_">
+					<div class="rl_i_editor-item-content-items title_ inline_">
+						<div class="rl_i_range-font-size">
+							<label class="rl-sub-title">Button Margin</label>
+						</div>
+					</div>
+					<?php 
+						$wp_builder_obj->range_slider('Top', 'close-btn', ['title'=>'%','min'=>"-20",'max'=>100,'value'=>18,"attr"=>'data-cmn="close-btn" data-margin="top"'], "close-btn-margin-top");
+						$wp_builder_obj->range_slider('Right','close-btn', ['title'=>'%','min'=>"-20",'max'=>100,'value'=>18,"attr"=>'data-cmn="close-btn" data-margin="right"'], "close-btn-margin-right"); 
+					$wp_builder_obj->margin_padding('close-btn', 'Icon Padding in px', 'data-global-input', 'p', 'data-cmn="close-btn"'); 
+					?>
 				</div>
+
+				<section class="rl_i_editor-item-content-i rl_i_editor-item-content-close-btn-style">				
+				<?php 
+				 	$wp_builder_obj->color('Icon Color','color','data-global-input','close-btn-color',"data-cmn='close-btn'");
+					$wp_builder_obj->color('Icon Background Color','background-color','data-global-input','close-btn-bg-color',"data-cmn='close-btn'"); 
+					$wp_builder_obj->range_slider( "Icon Font Size", 'close-font-size', ['title'=>'px','min'=>10,'max'=>100,'value'=>18,"attr"=>'data-cmn="close-btn"']);
+						$wp_builder_obj->border('close-btn','data-global-input',"data-cmn='close-btn'"); 
+				?>
+				
+				</section>
 			</div>
-			<?php 
-				$wp_builder_obj->range_slider('Top', 'close-btn', ['title'=>'%','min'=>"-20",'max'=>100,'value'=>18,"attr"=>'data-cmn="close-btn" data-margin="top"'], "close-btn-margin-top");
-				$wp_builder_obj->range_slider('Right','close-btn', ['title'=>'%','min'=>"-20",'max'=>100,'value'=>18,"attr"=>'data-cmn="close-btn" data-margin="right"'], "close-btn-margin-right"); 
-				$wp_builder_obj->border('close-btn','data-global-input',"data-cmn='close-btn'"); 
-			?>
-			</section>
 		<!-- Close button setting -->
 		</section>
 		<!-- global setting -->
