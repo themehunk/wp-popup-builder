@@ -248,7 +248,7 @@ public function wppb_initContent($column_content,$parentId){
                   $popupContent['content'] .= '<div class="data-rl-editable-wrap wrap-image_" '.$alignMent.'>
                                <img  class="'.$uniqIdAttr.'" src="'.$setting_value['image-url'].'">
                               </div>';
-                }elseif ( $setting_value['type'] == 'lead-form' && is_numeric($setting_value['content']) ) {
+                }elseif ( $setting_value['type'] == 'lead-form' && isset($setting_value['content']) && is_numeric($setting_value['content']) && self::lead_form_front_end() ) {
 
                   if ( isset($setting_value['styles']) && $uniqIdAttr ) {
                         $allUniqueId = "#".$parentId.' #'.$uniqIdAttr;
@@ -331,7 +331,7 @@ public static function lead_form_db(){
   }
 
 public function get_lead_form_ajx(){
-  if (isset($_POST['form_id']) && is_numeric($_POST['form_id']) ) {
+  if ( isset($_POST['form_id']) && is_numeric($_POST['form_id']) && self::lead_form_front_end() ) {
       $form_id = $_POST['form_id'];
       return self::lead_form_front_end()->lfb_show_front_end_forms($form_id);
   }

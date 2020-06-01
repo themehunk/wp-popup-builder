@@ -1,6 +1,5 @@
 <?php 
 if ( ! defined( 'ABSPATH' ) ) exit;
-
 class wppb_ajax extends wppb_db{
 	public static $instance;
 	 function __construct(){

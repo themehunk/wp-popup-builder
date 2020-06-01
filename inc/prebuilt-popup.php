@@ -44,14 +44,14 @@ if (is_array($prebuiltJsonFile)) {
 
 	<div class="rl_i_editor-item-content-header">
 		<nav class="rl-clear">
-			<span data-editor-tab="choose-layout" class="active_"><?php _e('choose lay out','wppb'); ?></span>
-			<span data-editor-tab="prebuilt-layout"><?php _e('prebuilt popup','wppb'); ?></span>
+			<span data-editor-tab="prebuilt-layout" class="active_"><?php _e('prebuilt popup','wppb'); ?></span>
+			<span data-editor-tab="choose-layout"><?php _e('choose lay out','wppb'); ?></span>
 		</nav>
 	</div>	
 
 
 	<!-- popup name  -->
-	<div class="prebulit-demo-popup rl_i_editor-item-content-i active_ rl_i_editor-item-content-choose-layout">
+	<div class="prebulit-demo-popup rl_i_editor-item-content-i rl_i_editor-item-content-choose-layout">
 	<!-- prebuilt popup section -->
 		<section class="prebuilt-pupup-layout-container">
 				<!-- layout 1 -->
@@ -173,7 +173,7 @@ if (is_array($prebuiltJsonFile)) {
 
 <!-- prebuilt json file  -->
 
-<section class="wppb-prebuilt-popup-json rl_i_editor-item-content-i rl_i_editor-item-content-prebuilt-layout">
+<section class="wppb-prebuilt-popup-json rl_i_editor-item-content-i rl_i_editor-item-content-prebuilt-layout active_">
 	<?php echo $jsonPopupDemo;?>
 </section>
 

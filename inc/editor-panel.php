@@ -1,3 +1,9 @@
+<?php 
+if ( ! defined( 'ABSPATH' ) ) exit;
+	$leadFormInstall = wppb_db::lead_form_front_end() ? true : false;
+	$LfbPluginPath = '<a href="'.admin_url('plugin-install.php?s=lead+form+builder&tab=search&type=term').'" class="install-lead-form-btn">Click Here To Install Lead Form</a>';
+?>
+
 <div class="rl_i_editor-inner-wrap">
 	<div class="rl_i_editor-wrap-in">
 		<div class="rl_i_editor-header">
@@ -15,12 +21,18 @@
 		</div>
 		<section data-toggle-action="add-itemes" class="rl_i_editor-element-item">
 			<div class="rl_i_editor-element-add-item">
+					<?php if (!$leadFormInstall) echo $LfbPluginPath; ?>
 				<ul class="rl_i_editor-element-add-item-list rl-clear">
 					<li><span data-item-drag="text"><i class="text-icon"><?php _e("T",'wppb'); ?></i><?php _e("Text",'wppb'); ?></span></li>
 					<li><span data-item-drag="heading"><i class="text-icon"><?php _e("H",'wppb'); ?></i><?php _e("Heading",'wppb'); ?></span></li>
 					<li><span data-item-drag="link"><i class="text-icon dashicons dashicons-admin-links"></i><?php _e("Button",'wppb'); ?></span></li>
 					<li><span data-item-drag="image"><i class="text-icon dashicons dashicons-format-image"></i><?php _e("Image",'wppb'); ?></span></li>
+					
+					<?php if ($leadFormInstall) { ?>
 					<li><span data-item-drag="lead-form"><i class="text-icon dashicons dashicons-feedback"></i><?php _e("Form",'wppb'); ?></span></li>
+					<?php }else{ ?>
+					<li><span class="business_disabled"><i class="text-icon dashicons dashicons-feedback"></i><?php _e("Form",'wppb'); ?></span></li>
+					<?php } ?>
 				</ul>
 			</div>
 		</section>
