@@ -656,7 +656,7 @@ input[name="global-popup-name"]{
     border: 1px solid #dcdcdc;
     color: #b1afaf;
 }
-.install-lead-form-btn{
+.add-lead-form-plugin{
         margin: 0 0 5px 34px;
     display: block;
     background: #6747e6;
@@ -666,7 +666,7 @@ input[name="global-popup-name"]{
     width: fit-content;
     border-radius: 4px;
 }
-.install-lead-form-btn:hover{
+.add-lead-form-plugin:hover{
     color: white;
 }
 /*ui drag drop style*/

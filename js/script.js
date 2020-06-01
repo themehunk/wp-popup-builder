@@ -258,6 +258,56 @@ var Business_news_letter = {
 			returnData.success(function(response){
 			});
 	},
+
+	_installNow: function(event){
+			event.preventDefault();
+			var $button 	= jQuery( event.target );
+				jQuery(this).addClass('rlLoading');
+				$document   = jQuery(document);
+			if ( $button.hasClass( 'updating-message' ) || $button.hasClass( 'button-disabled' ) ) {
+				return;
+			}
+			if ( wp.updates.shouldRequestFilesystemCredentials && ! wp.updates.ajaxLocked ) {
+				wp.updates.requestFilesystemCredentials( event );
+
+				$document.on( 'credential-modal-cancel', function() {
+					var $message = jQuery( '.install-lead-form-btn' );
+					$message
+						.addClass('active-lead-form-btn')
+						.removeClass( 'updating-message install-lead-form-btn' )
+						.text( wp.updates.l10n.installNow );
+					wp.a11y.speak( wp.updates.l10n.updateCancel, 'polite' );
+				} );
+			}
+			wp.updates.installPlugin( {
+				slug: 'lead-form-builder'
+			} );
+	},
+	_activatePlugin: function( event, response ) {
+			event.preventDefault();
+			jQuery(this).addClass('rlLoading');
+			var $message = jQuery( '.install-lead-form-btn' );
+			let timining = 100;
+			if ( 0 === $message.length ) {
+				$message = jQuery( '.active-lead-form-btn' );
+				timining = 1000;
+			}
+			setTimeout( function(){
+					let data_ = {action:'activate_lead_form'};
+					let returnData = Business_news_letter._ajaxFunction(data_);
+					returnData.success(function(response){
+						if (response.success) {
+							location.reload();
+						}
+					});
+			},timining );
+
+		},
+		_pluginInstalling: function(event, args) {
+			event.preventDefault();
+			let leadFormBtn = jQuery( '.install-lead-form-btn' );
+			leadFormBtn.addClass('updating-message');
+		},
 	_bind(){
 		jQuery(document).on('click', '.wppb_popup_saveAddon', Business_news_letter._saveBusinessAddon);
 		jQuery(document).on('click', '.wppb_popup_updateAddon', Business_news_letter._updateAddon);
@@ -268,6 +318,12 @@ var Business_news_letter = {
 		jQuery(document).on('change','.wppb_popup_setting_active', Business_news_letter._savePopupActiveDeactive);
 
 		jQuery(document).on('click','.wppb-export-sub', Business_news_letter._exportPopup);
+
+		// lead form install
+			jQuery( document ).on('click' , '.install-lead-form-btn', Business_news_letter._installNow );
+			jQuery( document ).on('click' , '.active-lead-form-btn', Business_news_letter._activatePlugin);
+			jQuery( document ).on('wp-plugin-install-success' , Business_news_letter._activatePlugin);
+			jQuery( document ).on('wp-plugin-installing'      , Business_news_letter._pluginInstalling);
 		
 	}
 }
@@ -1031,8 +1087,6 @@ var Custom_popup_editor = {
 			}
 		}
 		jQuery.each(getInputs, leadFormInput);
-
-		// console.log(getInputs);
 	},
 	_leadFormStylingSet:function(){
 		let input_ = jQuery(this);
@@ -1070,7 +1124,6 @@ var Custom_popup_editor = {
 					Custom_popup_editor._removeStyle(leadForm,'margin');
 				}
 		}
-		// console.log(dataCheck);
 	}
 	,_chooseImage:function(e){
 		e.preventDefault();
@@ -1197,4 +1250,3 @@ var Custom_popup_editor = {
 	Custom_popup_editor.init();
 	Business_news_letter.init();
 })(jQuery);
-// https://app.slack.com/client/T9BQYES21/DK4UD39SQ?cdn_fallback=2

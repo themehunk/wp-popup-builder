@@ -1,7 +1,12 @@
 <?php 
 if ( ! defined( 'ABSPATH' ) ) exit;
-	$leadFormInstall = wppb_db::lead_form_front_end() ? true : false;
-	$LfbPluginPath = '<a href="'.admin_url('plugin-install.php?s=lead+form+builder&tab=search&type=term').'" class="install-lead-form-btn">Click Here To Install Lead Form</a>';
+
+	$LfbPluginPath = false;
+	if ( file_exists( WP_PLUGIN_DIR . '/lead-form-builder/lead-form-builder.php' ) && is_plugin_inactive( 'lead-form-builder/lead-form-builder.php' )){
+		$LfbPluginPath = '<a href="#" class="add-lead-form-plugin active-lead-form-btn">Activate Lead Form</a>';
+	} elseif ( ! file_exists( WP_PLUGIN_DIR . '/lead-form-builder/lead-form-builder.php' ) ) {
+		$LfbPluginPath = '<a href="#" class="add-lead-form-plugin install-lead-form-btn">Install Lead Form</a>';
+	}
 ?>
 
 <div class="rl_i_editor-inner-wrap">
@@ -21,14 +26,14 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 		</div>
 		<section data-toggle-action="add-itemes" class="rl_i_editor-element-item">
 			<div class="rl_i_editor-element-add-item">
-					<?php if (!$leadFormInstall) echo $LfbPluginPath; ?>
+					<?php if ($LfbPluginPath) echo $LfbPluginPath; ?>
 				<ul class="rl_i_editor-element-add-item-list rl-clear">
 					<li><span data-item-drag="text"><i class="text-icon"><?php _e("T",'wppb'); ?></i><?php _e("Text",'wppb'); ?></span></li>
 					<li><span data-item-drag="heading"><i class="text-icon"><?php _e("H",'wppb'); ?></i><?php _e("Heading",'wppb'); ?></span></li>
 					<li><span data-item-drag="link"><i class="text-icon dashicons dashicons-admin-links"></i><?php _e("Button",'wppb'); ?></span></li>
 					<li><span data-item-drag="image"><i class="text-icon dashicons dashicons-format-image"></i><?php _e("Image",'wppb'); ?></span></li>
 					
-					<?php if ($leadFormInstall) { ?>
+					<?php if (!$LfbPluginPath) { ?>
 					<li><span data-item-drag="lead-form"><i class="text-icon dashicons dashicons-feedback"></i><?php _e("Form",'wppb'); ?></span></li>
 					<?php }else{ ?>
 					<li><span class="business_disabled"><i class="text-icon dashicons dashicons-feedback"></i><?php _e("Form",'wppb'); ?></span></li>
