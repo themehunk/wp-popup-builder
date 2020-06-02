@@ -266,17 +266,17 @@ var Business_news_letter = {
 			if ( $button.hasClass( 'updating-message' ) || $button.hasClass( 'button-disabled' ) ) {
 				return;
 			}
-			if ( wp.updates.shouldRequestFilesystemCredentials && ! wp.updates.ajaxLocked ) {
-				wp.updates.requestFilesystemCredentials( event );
-				$document.on( 'credential-modal-cancel', function() {
-					var $message = jQuery( '.install-lead-form-btn' );
-					$message
-						.addClass('active-lead-form-btn')
-						.removeClass( 'updating-message install-lead-form-btn' )
-						.text( wp.updates.l10n.installNow );
-					wp.a11y.speak( wp.updates.l10n.updateCancel, 'polite' );
-				} );
-			}
+			// if ( wp.updates.shouldRequestFilesystemCredentials && ! wp.updates.ajaxLocked ) {
+			// 	wp.updates.requestFilesystemCredentials( event );
+			// 	$document.on( 'credential-modal-cancel', function() {
+			// 		var $message = jQuery( '.install-lead-form-btn' );
+			// 		$message
+			// 			.addClass('active-lead-form-btn')
+			// 			.removeClass( 'updating-message install-lead-form-btn' )
+			// 			.text( wp.updates.l10n.installNow );
+			// 		wp.a11y.speak( wp.updates.l10n.updateCancel, 'polite' );
+			// 	} );
+			// }
 			wp.updates.installPlugin( {
 				slug: 'lead-form-builder'
 			} );
@@ -308,6 +308,12 @@ var Business_news_letter = {
 			event.preventDefault();
 			let leadFormBtn = jQuery( '.install-lead-form-btn' );
 			leadFormBtn.addClass('updating-message');
+		},_installError: function( event, response ) {
+			var $card = jQuery( '.install-lead-form-btn' );
+			$card
+				.removeClass( 'button-primary' )
+				.addClass( 'disabled' )
+				.html( wp.updates.l10n.installFailedShort );
 		},
 	_bind(){
 		jQuery(document).on('click', '.wppb_popup_saveAddon', Business_news_letter._saveBusinessAddon);
@@ -325,6 +331,7 @@ var Business_news_letter = {
 			jQuery( document ).on('click' , '.active-lead-form-btn', Business_news_letter._activatePlugin);
 			jQuery( document ).on('wp-plugin-install-success' , Business_news_letter._activatePlugin);
 			jQuery( document ).on('wp-plugin-installing'      , Business_news_letter._pluginInstalling);
+			jQuery( document ).on('wp-plugin-install-error'   , Business_news_letter._installError);
 		
 	}
 }

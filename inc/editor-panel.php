@@ -32,15 +32,6 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 					<li><span data-item-drag="link"><i class="text-icon dashicons dashicons-admin-links"></i><?php _e("Button",'wppb'); ?></span></li>
 					<li><span data-item-drag="image"><i class="text-icon dashicons dashicons-format-image"></i><?php _e("Image",'wppb'); ?></span></li>
 					<li><span data-item-drag="lead-form"><i class="text-icon dashicons dashicons-feedback"></i><?php _e("Form",'wppb'); ?></span></li>
-
-					<!-- <?php if (!$LfbPluginPath) { ?>
-					<li><span data-item-drag="lead-form"><i class="text-icon dashicons dashicons-feedback"></i><?php _e("Form",'wppb'); ?></span></li>
-					<?php }else{ ?>
-					<li><span class="business_disabled"><i class="text-icon dashicons dashicons-feedback"></i><?php _e("Form",'wppb'); ?></span></li>
-					<?php } ?> -->
-
-
-
 				</ul>
 			</div>
 		</section>
