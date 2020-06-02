@@ -341,7 +341,7 @@ a:focus{
     text-align: left;
 }
 .wppb-popup-lead-form .leadform-show-form input[type='submit']{
-    padding: 10px 30px;
+       padding: 10px 30px;
     border-color: #000;
     border-radius: 3px;
     text-transform: uppercase;
@@ -354,6 +354,8 @@ a:focus{
     -moz-transition: all .3s;
     transition: all .3s;
     white-space: inherit;
+    width: fit-content;
+    max-width: unset;
 }
 .wppb-popup-lead-form.lf_submit_center .submit-type.lf-field{
     text-align: center;

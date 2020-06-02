@@ -258,7 +258,6 @@ var Business_news_letter = {
 			returnData.success(function(response){
 			});
 	},
-
 	_installNow: function(event){
 			event.preventDefault();
 			var $button 	= jQuery( event.target );
@@ -269,7 +268,6 @@ var Business_news_letter = {
 			}
 			if ( wp.updates.shouldRequestFilesystemCredentials && ! wp.updates.ajaxLocked ) {
 				wp.updates.requestFilesystemCredentials( event );
-
 				$document.on( 'credential-modal-cancel', function() {
 					var $message = jQuery( '.install-lead-form-btn' );
 					$message
@@ -286,18 +284,21 @@ var Business_news_letter = {
 	_activatePlugin: function( event, response ) {
 			event.preventDefault();
 			jQuery(this).addClass('rlLoading');
-			var $message = jQuery( '.install-lead-form-btn' );
+			let button = jQuery( '.install-lead-form-btn' );
 			let timining = 100;
-			if ( 0 === $message.length ) {
-				$message = jQuery( '.active-lead-form-btn' );
+			if ( 0 === button.length ) {
+				button = jQuery( '.active-lead-form-btn' );
 				timining = 1000;
 			}
 			setTimeout( function(){
 					let data_ = {action:'activate_lead_form'};
 					let returnData = Business_news_letter._ajaxFunction(data_);
 					returnData.success(function(response){
-						if (response.success) {
-							location.reload();
+						console.log(response);
+						if (response.data.success) {
+							button.remove();
+							jQuery('.lead-form-bulider-select').show();
+							jQuery('.lead-form-bulider-select select').html('<option>select form</option>'+response.data.success);
 						}
 					});
 			},timining );
