@@ -1,4 +1,5 @@
-<?php if ( ! defined( 'ABSPATH' ) ) exit;
+<?php 
+if ( ! defined( 'ABSPATH' ) ) exit;
 class wp_popup_builder_init{
 
 function initColumn($column){
@@ -48,7 +49,8 @@ function initContent($column_content){
 									<span class="dashicons dashicons-no rlRemoveElement"></span></div>
 									<span data-rl-editable="link" '.$contentAttr.'>'.$setting_value['content'].'</span>
 								</div>';
-				}elseif ( $setting_value['type'] == 'lead-form' && ( isset($setting_value['content']) && is_numeric($setting_value['content']) ) ) {
+				}elseif ( $setting_value['type'] == 'lead-form' && ( isset($setting_value['content']) && is_numeric($setting_value['content']) ) && wppb_db::lead_form_front_end() ) {
+					$leadForm_Form = wppb_db::lead_form_front_end()->lfb_show_front_end_forms($setting_value['content']);
 				  	$formStyles = '';
 					if ( isset($setting_value['styles']) ) {
 				  		$formStyles = htmlspecialchars( json_encode($setting_value['styles']), ENT_COMPAT );
@@ -59,12 +61,13 @@ function initContent($column_content){
                     if (isset($setting_value['styles']['submit-align'])) {
                       $submitAlign = 'lf_submit_'.$setting_value['styles']['submit-align'];
                     }
-              $popupContent .= '<div class="data-rl-editable-wrap" '.$alignMent.'>
+              		$popupContent .= '<div class="data-rl-editable-wrap" '.$alignMent.'>
 								<div class="actions_"><span class="dashicons dashicons-no rlRemoveElement"></span></div>
 								<div class="wppb-popup-lead-form '.$submitAlign.'" '.$uniqIdAttr.' data-form-id="'.$setting_value['content'].'" '.$formStyles.'>
-									'.wppb_db::lead_form_front_end()->lfb_show_front_end_forms($setting_value['content']).'
+									'.$leadForm_Form.'
 									</div>
 									</div>';
+
                 }
 			}
 		return $popupContent;
@@ -134,12 +137,11 @@ public function wppbPopupList($allSetting,$column_making,$business_id,$countPopu
 										<div class="wppb-popup-demo-wrapper">'.$this->popup_layout($popupSetData).'</div>
 										<div class="wppb-popup-demo-settings">
 											<div class="wppb-popup-setting-btns">
-												
 												<div class="wppb-popup-checkbox">
 													<input id="business_popup--'.$business_id.'" type="checkbox" class="wppb_popup_setting_active" data-bid="'.$business_id.'" '.$popup_is_active.'>
 													<label for="business_popup--'.$business_id.'"></label>
 												</div>
-												<a class="wppb-popup-setting can_disable" href="'.esc_url(WPPB_PAGE_URL.'&custom-popup='.$business_id).'">'.__("<span class='dashicons dashicons-admin-generic'></span> Settings","wppb").'</a>
+												<a class="wppb-popup-setting can_disable" href="'.esc_url(WPPB_PAGE_URL.'&custom-popup='.$business_id).'"><span class="dashicons dashicons-admin-generic"></span> '.__("Settings","wppb").'</a>
 
 											</div>
 										</div>
@@ -206,7 +208,7 @@ public function wppbPopupList_json($allSetting,$column_making,$countPopup){
 						<div class="rl_i_range-font-size"><label class="rl-sub-title">'.$title.'</label></div>
 					</div>
 					<div  class="rl_i_editor-item-content-items inline__ '.$container.'">
-						<div class="rl_i_range-font-size">
+						<div class="range_ rl_i_range-font-size">
 							<input data-show-range="'.$id_two.'" type="range" '.$attr.'>
 						</div>
 						<div class="data-range-output">
@@ -248,19 +250,19 @@ public function wppbPopupList_json($allSetting,$column_making,$countPopup){
 						'.$this->checkbox($id,"Border",$data_attr.' data-border="border-enable"').'
 					<div  class="rl_i_editor-item-content-items content-border">
 						<div>
-							<label class="rl-sub-title">Border Width</label>
+							<label class="rl-sub-title">'.__('Border Width','wppb').'</label>
 							<div><input type="number" value="" '.$data_attr.' data-border="width"></div>
 						</div>
 						<div>
-							<label class="rl-sub-title">Border radius</label>
+							<label class="rl-sub-title">'.__('Border radius','wppb').'</label>
 							<div><input type="number" value="" '.$data_attr.' data-border="radius"></div>
 						</div>
 						<div>
-							<label class="rl-sub-title">Border Color</label>
+							<label class="rl-sub-title">'.__('Border Color','wppb').'</label>
 							<div><label class="color-output" '.$data_attr.' data-input-color="border-color"></label></div>
 						</div>
 						<div>
-							<label class="rl-sub-title">Border Style</label>
+							<label class="rl-sub-title">'.__('Border Style','wppb').'</label>
 							<div>'.$border.'</div>
 						</div>
 					</div>
@@ -295,10 +297,10 @@ public function wppbPopupList_json($allSetting,$column_making,$countPopup){
 						</li>
 					</ul>							
 					<ul class="ul-inputs-text rl-clear">
-						<li>TOP</li>
-						<li>RIGHT</li>
-						<li>BOTTOM</li>
-						<li>LEFT</li>
+						<li>'.__('TOP','wppb').'</li>
+						<li>'.__('RIGHT','wppb').'</li>
+						<li>'.__('BOTTOM','wppb').'</li>
+						<li>'.__('LEFT','wppb').'</li>
 						<li></li>
 					</ul>
 				</div>

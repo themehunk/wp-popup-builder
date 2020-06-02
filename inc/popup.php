@@ -1,4 +1,5 @@
-<?php if ( ! defined( 'ABSPATH' ) ) exit; 
+<?php 
+if ( ! defined( 'ABSPATH' ) ) exit; 
 $popupSetData = array(
 					'wrapper-style'=>'width:550px;',
 					'wrapper-height'=>'auto',
@@ -24,9 +25,8 @@ if (isset($_GET['custom-popup']) && is_numeric($_GET['custom-popup'])) {
 		$popup_is_active = $customAddon->is_active?"checked='checked'":"";
 		$allSetting = unserialize($customAddon->setting);
 		$wppb_popup_id = $customAddon->BID;
-		$popupSetData['savebtn'] = '<button data-bid="'.$wppb_popup_id.'" class="wppb_popup_updateAddon">Update</button>';
-		$popupSetData['deletebtn'] = '<button data-bid="'.$wppb_popup_id.'" class="wppb_popup_deleteAddon">Delete</button>';
-			// print_r($allSetting);
+		$popupSetData['savebtn'] = '<button data-bid="'.$wppb_popup_id.'" class="wppb_popup_updateAddon">'.__('Update','wppb').'</button>';
+		$popupSetData['deletebtn'] = '<button data-bid="'.$wppb_popup_id.'" class="wppb_popup_deleteAddon">'.__('Delete','wppb').'</button>';
 			foreach ($allSetting as $setting_value) {
 				if (isset($setting_value['content']) && is_array($setting_value['content'])) {
 					if ($setting_value['type'] == 'global-setting') {

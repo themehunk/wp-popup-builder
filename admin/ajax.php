@@ -1,6 +1,5 @@
 <?php 
 if ( ! defined( 'ABSPATH' ) ) exit;
-
 class wppb_ajax extends wppb_db{
 	public static $instance;
 	 function __construct(){
@@ -12,6 +11,8 @@ class wppb_ajax extends wppb_db{
 			add_action('wp_ajax_popup_active', array($this,'update'));
 
 			add_action('wp_ajax_getLeadForm', array($this,'getLeadForm'));
+
+			add_action('wp_ajax_activate_lead_form', array($this,'lead_form_plugin_activate'));
 	}
 	public static function get(){
 		return self::$instance ? self::$instance : self::$instance = new self();
@@ -41,6 +42,29 @@ class wppb_ajax extends wppb_db{
 	}
 
 	// lead form
+	
+	// install lead form 
+	public function lead_form_plugin_activate() {
+			$plugin_init = '/lead-form-builder/lead-form-builder.php';
+			$activate = activate_plugin( $plugin_init, '', false, true );
+			if ( is_wp_error( $activate ) ) {
+				wp_send_json_error(
+					array(
+						'success' => false,
+						'message' => $activate->get_error_message(),
+					)
+				);
+			}
+			wp_send_json_success(
+				array(
+					'success' => true,
+					'message' => __( 'Plugin Successfully Activated', 'wppb' ),
+				)
+			);
+		die();
+	}
+
+
 	public function getLeadForm(){
 		$result = $this->get_lead_form_ajx();
 		echo $result?$result:0;

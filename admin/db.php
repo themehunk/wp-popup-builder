@@ -1,5 +1,5 @@
-
-<?php if ( ! defined( 'ABSPATH' ) ) exit; 
+<?php
+if ( ! defined( 'ABSPATH' ) ) exit; 
 
 if ( ! class_exists( 'wppb_db' ) ) return;
 
@@ -39,7 +39,6 @@ if (isset($_POST['htmldata'])) {
     }
 }
 public function popup_update(){
-  // print_r($_POST);
   // for html data update
       if (isset($_POST['bid']) && is_numeric($_POST['bid']) && isset($_POST['htmldata'])) {
           $popupData = $this->arrayValueSanetize($_POST['htmldata']);
@@ -166,7 +165,6 @@ public function uniq_class($arr){
 
 // popup html creating
 public function wppb_html($setting,$inline=false){
-// echo "<pre>";
     if ($setting && @unserialize( $setting )) {
         $popupSetData = array(
           'wrapper-style'=>'width:550px;',
@@ -184,9 +182,6 @@ public function wppb_html($setting,$inline=false){
           );
       $popupFrontSetting = ['close-type'=>3,'outside-color'=>'#535353F2','effect'=>1,'popup-delay-open'=>3,'popup-delay-close'=>0];
       $allSetting = unserialize($setting);   
-      
-      // print_r($allSetting);
-
         foreach ($allSetting as $setting_value) {
           if (isset($setting_value['content']) && is_array($setting_value['content'])) {
             if ($setting_value['type'] == 'global-setting') {
@@ -253,7 +248,7 @@ public function wppb_initContent($column_content,$parentId){
                   $popupContent['content'] .= '<div class="data-rl-editable-wrap wrap-image_" '.$alignMent.'>
                                <img  class="'.$uniqIdAttr.'" src="'.$setting_value['image-url'].'">
                               </div>';
-                }elseif ( $setting_value['type'] == 'lead-form' && is_numeric($setting_value['content']) ) {
+                }elseif ( $setting_value['type'] == 'lead-form' && isset($setting_value['content']) && is_numeric($setting_value['content']) && self::lead_form_front_end() ) {
 
                   if ( isset($setting_value['styles']) && $uniqIdAttr ) {
                         $allUniqueId = "#".$parentId.' #'.$uniqIdAttr;
@@ -336,7 +331,7 @@ public static function lead_form_db(){
   }
 
 public function get_lead_form_ajx(){
-  if (isset($_POST['form_id']) && is_numeric($_POST['form_id']) ) {
+  if ( isset($_POST['form_id']) && is_numeric($_POST['form_id']) && self::lead_form_front_end() ) {
       $form_id = $_POST['form_id'];
       return self::lead_form_front_end()->lfb_show_front_end_forms($form_id);
   }

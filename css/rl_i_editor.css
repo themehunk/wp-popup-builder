@@ -394,6 +394,9 @@ label.color-output {
 .rl_i_editor-item-content-items.inline__ .rl_i_range-font-size{
         flex: 2;
 }
+.rl_i_editor-item-content-items.inline__ .rl_i_range-font-size.range_{
+        margin-top: -3px;
+}
 
 .rl_i_editor-item-content-items.inline__ .rl_i_range-font-size label>span.dashicons-desktop{
         height: auto;
@@ -415,6 +418,9 @@ label.color-output {
   border-radius: 50%;
   background: #9b9b9b;
   cursor: pointer;
+}
+.rl_i_editor-item-content-items.inline__ input[type=range]::-webkit-slider-thumb:hover{
+    box-shadow:0px 0px 4px 8px #9be4ff33;
 }
 label[data-range-output]{
         width: 35px;
@@ -649,6 +655,19 @@ input[name="global-popup-name"]{
     width: 83%;
     border: 1px solid #dcdcdc;
     color: #b1afaf;
+}
+.add-lead-form-plugin{
+        margin: 0 0 5px 34px;
+    display: block;
+    background: #6747e6;
+    color: white;
+    text-decoration: none;
+    padding: 4px;
+    width: fit-content;
+    border-radius: 4px;
+}
+.add-lead-form-plugin:hover{
+    color: white;
 }
 /*ui drag drop style*/
 .ui-state-highlight{
