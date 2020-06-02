@@ -1,7 +1,7 @@
 <?php
 /*
   Plugin Name: WordPress Popup Builder
-  Description: ThemeHunk Business Popup Free WordPress Plugin is specially built to show Lightbox Popup on your Page, Posts and Custom Posts. It contains ready to use popups with editing options and powerful animation effects. It will display all changes in real time. Just customize the desired popup and use it.
+  Description: ThemeHunk Business Popup Free WordPress Plugin is specially built to show Lightbox Popup on your Page, Posts and Custom Posts. It contains ready to use popups with editing options and powerful animation effects. It will display all changes in real time. Just customize the desired popup and use it. sg->
   Version: 1.0
   Author: ThemeHunk
   Author URI: http://www.themehunk.com/
