@@ -657,12 +657,12 @@ input[name="global-popup-name"]{
     color: #b1afaf;
 }
 .add-lead-form-plugin{
-        margin: 0 0 5px 34px;
+        margin: 0 10px;
     display: block;
     background: #6747e6;
     color: white;
     text-decoration: none;
-    padding: 4px;
+    padding: 5px 8px;
     width: fit-content;
     border-radius: 4px;
 }

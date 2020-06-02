@@ -237,6 +237,86 @@ font-weight: 600;
             max-width: 90%;
         }
 
+        .wppb-popup-main-wrap .wppb-popup-rl-wrap span, .wppb-popup-main-wrap .wppb-popup-rl-wrap a {
+            font-size: calc(16px / 100 * 70);
+            margin: calc(3px / 100 * 70) 0;
+            letter-spacing: calc(1px / 100 * 70);
+            padding: calc(1px / 100 * 70) 0;
+        }
+
+        .wppb-popup-main-wrap .wppb-popup-rl-wrap span.text-heading,
+        .wppb-popup-main-wrap .wppb-popup-rl-wrap a.text-heading {
+            font-size: calc(27px / 100 * 70);
+        }
+
+        .wppb-popup-lead-form .leadform-show-form{
+            padding: calc(4px / 100 * 70);
+        }
+        .wppb-popup-lead-form .leadform-show-form div.lf-field{
+            margin:0;
+            box-sizing: border-box;
+        }
+        .wppb-popup-lead-form .leadform-show-form input[type='submit']{
+            min-height: unset;
+            padding: calc(10px / 100 * 70) calc(30px / 100 * 70);
+            border-color: #000;
+            border-radius: calc(3px / 100 * 70);
+            text-transform: uppercase;
+            font-size: calc(18px / 100 * 70);
+            font-weight: 700;
+            color: #fff;
+            cursor: pointer;
+            background: #0C0C10;
+            -webkit-transition: all .3s;
+            -moz-transition: all .3s;
+            transition: all .3s;
+            white-space: inherit;
+        }
+        .wppb-popup-lead-form.lf_submit_center .submit-type.lf-field{
+            text-align: center;
+        }
+        .wppb-popup-lead-form.lf_submit_right .submit-type.lf-field{
+            text-align: right;
+        }
+        .wppb-popup-lead-form .leadform-show-form input:not([type='submit']),
+        .wppb-popup-lead-form .leadform-show-form textarea{
+                border: calc(1px / 100 * 70) solid gainsboro;
+            color: #272525;
+            margin: calc(2px / 100 * 70) 0;
+            padding: calc(3px / 100 * 70) calc(6px / 100 * 70) !important;
+            height: auto;
+            line-height: calc(19px / 100 * 70);
+        }
+        .wppb-popup-lead-form .leadform-show-form textarea{
+                min-height: calc(60px / 100 * 70);
+        }
+        .wppb-popup-lead-form .leadform-show-form h2{
+                margin: calc(5px / 100 * 70) 0;
+            line-height: calc(24px / 100 * 70);
+            font-size: calc(22px / 100 * 70);
+            font-weight: 500;
+            color: rgba(82, 82, 82, 1);
+            line-height: 1;
+        }
+        .wppb-popup-lead-form .leadform-show-form label{
+                 margin: calc(5px / 100 * 70) 0;
+            font-size: calc(15px / 100 * 70);
+            color: rgba(82, 82, 82, 1);
+            line-height: 1;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 
 /*effect css */

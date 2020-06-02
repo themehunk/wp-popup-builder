@@ -57,7 +57,7 @@ class wppb_ajax extends wppb_db{
 			}
 			wp_send_json_success(
 				array(
-					'success' => true,
+					'success' => self::lead_form_opt(),
 					'message' => __( 'Plugin Successfully Activated', 'wppb' ),
 				)
 			);
