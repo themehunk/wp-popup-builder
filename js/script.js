@@ -266,17 +266,17 @@ var Business_news_letter = {
 			if ( $button.hasClass( 'updating-message' ) || $button.hasClass( 'button-disabled' ) ) {
 				return;
 			}
-			// if ( wp.updates.shouldRequestFilesystemCredentials && ! wp.updates.ajaxLocked ) {
-			// 	wp.updates.requestFilesystemCredentials( event );
-			// 	$document.on( 'credential-modal-cancel', function() {
-			// 		var $message = jQuery( '.install-lead-form-btn' );
-			// 		$message
-			// 			.addClass('active-lead-form-btn')
-			// 			.removeClass( 'updating-message install-lead-form-btn' )
-			// 			.text( wp.updates.l10n.installNow );
-			// 		wp.a11y.speak( wp.updates.l10n.updateCancel, 'polite' );
-			// 	} );
-			// }
+			if ( wp.updates.shouldRequestFilesystemCredentials && ! wp.updates.ajaxLocked ) {
+				wp.updates.requestFilesystemCredentials( event );
+				$document.on( 'credential-modal-cancel', function() {
+					var $message = jQuery( '.install-lead-form-btn' );
+					$message
+						.addClass('active-lead-form-btn')
+						.removeClass( 'updating-message install-lead-form-btn' )
+						.text( wp.updates.l10n.installNow );
+					wp.a11y.speak( wp.updates.l10n.updateCancel, 'polite' );
+				} );
+			}
 			wp.updates.installPlugin( {
 				slug: 'lead-form-builder'
 			} );
@@ -986,12 +986,14 @@ var Custom_popup_editor = {
 		let select = jQuery(this);
 		let form_id = select.val();
   		if ( parseInt(form_id) ) {
+			let letExistForm = jQuery('.wppb-popup-custom .wppb-popup-lead-form[data-form-id]');
+			letExistForm.length ? letExistForm.addClass('rlLoading') : jQuery('.wppb-popup-custom #lf-business-popup').addClass('rlLoading');
+
   			let data_ = {action:'getLeadForm',form_id:form_id};
 			let returnData = Business_news_letter._ajaxFunction(data_);
 			returnData.success(function(response){
 				if (response && response != 0) {
 					let replace_form = "<div class='wppb-popup-lead-form' data-form-id='"+form_id+"'>"+response+"</div>"; 
-					letExistForm = jQuery('.wppb-popup-custom .wppb-popup-lead-form[data-form-id]');
 					if ( letExistForm.length ) {
 						let getStyles = letExistForm.attr('data-form-styles'); 
 						replace_form = jQuery(replace_form).attr('data-form-styles' ,getStyles);
@@ -999,8 +1001,10 @@ var Custom_popup_editor = {
 					}else{
 						jQuery('.wppb-popup-custom #lf-business-popup').replaceWith(replace_form);
 					}
+
 					Custom_popup_editor._leadFormInit();
 					Custom_popup_editor._leadFormStyling();
+
 				}
 			});
   		}
