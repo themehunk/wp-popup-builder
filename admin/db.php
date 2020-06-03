@@ -287,12 +287,10 @@ public function wppb_initContent($column_content,$parentId){
   }
 
   public function wppb_layout($popupSetData,$layout=''){
-
     $internal_Css = '';
     if ( $popupSetData['style'] ) {
         $internal_Css = "<div><style>".$popupSetData['style']."</style></div>";
     }
-
     $overlay_image = $popupSetData['overlay-image-url']?'background-image:url('.$popupSetData['overlay-image-url'].');':'';
     $overlayStyle = $overlay_image?$overlay_image.$popupSetData['overlay-style']:'';
     $globalHeight = $popupSetData["wrapper-height"] != 'auto'?$popupSetData["wrapper-height"].'px;':$popupSetData["wrapper-height"].';';
@@ -307,6 +305,32 @@ public function wppb_initContent($column_content,$parentId){
                   </div>
             </div>';
     return $internal_Css.$return;
+}
+
+public function _px_convert_responsive($cssMainStr){
+      $css = explode(';',$cssMainStr);
+      $get_px_arr = [];
+      foreach($css as $value){
+          if( $value && substr_count($value , 'px') ){
+            $removeProp = substr($value, strrpos($value,":")+1 );
+            $expPxParam = explode('px',$removeProp);
+            
+            foreach($expPxParam as $explV){
+              if($explV && is_numeric($explV)){
+                $getParam = trim($explV);
+                $get_px_arr[$getParam] = $getParam;
+              }
+            } 
+
+          }
+      }
+      $css_con = $cssMainStr;
+      foreach($get_px_arr as $number_px){
+        $param = $number_px / 7;
+        $param = round($param,2);
+        $css_con = str_replace($number_px.'px',$param.'px',$css_con);
+      }
+      return $css_con;
 }
 
 // lead form -------------- function --------------- 

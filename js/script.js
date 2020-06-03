@@ -1001,10 +1001,8 @@ var Custom_popup_editor = {
 					}else{
 						jQuery('.wppb-popup-custom #lf-business-popup').replaceWith(replace_form);
 					}
-
 					Custom_popup_editor._leadFormInit();
 					Custom_popup_editor._leadFormStyling();
-
 				}
 			});
   		}

@@ -20,15 +20,15 @@ if ( is_array( $responseResult_ ) && ! is_wp_error( $responseResult_ ) ) {
 	<!-- popup name  -->
 	<div class="wppb-popup-name">
 		<div>
-			<span><?php _e('Enter Popup name','wppb'); ?></span>
+			<span><?php _e('Enter Popup Name','wppb'); ?></span>
 			<input type="text" name="wppb-popup-name">
 		</div>
 	</div>
 
 	<div class="rl_i_editor-item-content-header">
 		<nav class="rl-clear">
-			<span data-editor-tab="prebuilt-layout" class="active_"><?php _e('prebuilt popup','wppb'); ?></span>
-			<span data-editor-tab="choose-layout"><?php _e('choose lay out','wppb'); ?></span>
+			<span data-editor-tab="prebuilt-layout" class="active_"><?php _e('Prebuilt Popup','wppb'); ?></span>
+			<span data-editor-tab="choose-layout"><?php _e('Choose Layout','wppb'); ?></span>
 		</nav>
 	</div>	
 

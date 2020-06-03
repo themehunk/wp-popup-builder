@@ -573,6 +573,7 @@ a:focus{
 .wppb-custom-popup-heading{
     display: flex;
     align-items: center;
+    margin-top: 50px;
 }
 .wppb-custom-popup-heading > a{
         background: #6747E6;
