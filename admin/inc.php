@@ -47,8 +47,6 @@ class wppb {
 
 	public function enqueue_admin_script($hook){
 			if('toplevel_page_wppb'!=$hook) return;
-    	
-
 		  wp_enqueue_style( 'color-pickr', WPPB_URL . 'js/color/nano.min.css',false);
 		  wp_enqueue_script( 'color-pickr', WPPB_URL . 'js/color/pickr.es5.min.js', array ( 'jquery' ), 1, true);
 
@@ -57,7 +55,7 @@ class wppb {
 		  wp_enqueue_style( 'wppb-style', WPPB_URL . 'css/popup-style.css',false);
 		  wp_enqueue_style( 'wppb-rl', WPPB_URL . 'css/rl_i_editor.css',false);
 		  wp_enqueue_media();
-		  wp_enqueue_script( 'wppb-js', WPPB_URL . 'js/script.js', array ( 'jquery','jquery-ui-draggable' ), 1, true);
+		  wp_enqueue_script( 'wppb-js', WPPB_URL . 'js/script.js', array ( 'jquery','jquery-ui-draggable', 'wp-util', 'updates' ), 1, true);
 		  wp_localize_script('wppb-js', 'wppb_ajax_backend', array('wppb_ajax_url' => admin_url('admin-ajax.php')));
 	}
 

@@ -173,11 +173,27 @@ public function wppbPopupList_json($allSetting,$column_making,$countPopup){
 		return $returnHtml;
 }
 
-
-
-
-
 // builder internal tools function
+	public function wppb_changeFilePath($arr,$path){
+		$return = [];
+		if ( is_array($arr) ) {
+			foreach($arr as $key => $value){
+		          if( is_array($value) ){
+		              $return[$key] = $this->wppb_changeFilePath( $value, $path );
+		          }else{
+		      			if( $key == 'image-url' || $key == 'overlay-image-url'){
+							 $Exp = explode('/', $value);
+				             $End = end($Exp);
+				             $return[$key] = $path.$End;
+				          }else{
+		              		$return[$key] = $value;
+				          }
+		          } //else
+	        } //foreach
+		}
+		return $return;
+	}
+
 	public function header_title($title){
 		echo '<div class="rl_i_editor-header-title">
 						<label>'.$title.'</label>
