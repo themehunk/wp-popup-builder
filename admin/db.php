@@ -184,7 +184,7 @@ public function wppb_html($setting,$inline=false){
       $popupFrontSetting = ['close-type'=>3,'outside-color'=>'#535353F2','effect'=>1,'popup-delay-open'=>3,'popup-delay-close'=>0];
       $allSetting = unserialize($setting);  
 
-      print_r($allSetting);
+      // print_r($allSetting);
         foreach ($allSetting as $setting_value) {
           if (isset($setting_value['content']) && is_array($setting_value['content'])) {
             
@@ -211,7 +211,7 @@ public function wppb_html($setting,$inline=false){
 
         }
         $popupSetData['front-setting'] = htmlspecialchars( json_encode( $popupFrontSetting ), ENT_COMPAT );
-        return $this->wppb_layout($popupSetData,$globalId);
+        return $this->wppb_layout($popupSetData);
     }
 }
 
@@ -257,6 +257,7 @@ public function wppb_initContent($column_content,$parentId){
                               </div>';
                 }elseif ( $setting_value['type'] == 'lead-form' && isset($setting_value['content']) && is_numeric($setting_value['content']) && self::lead_form_front_end() ) {
 
+                  $submitAlign = '';
                   if ( isset($setting_value['styles']) && $uniqIdAttr ) {
                         $allUniqueId = "#".$parentId.' #'.$uniqIdAttr;
                         if ( isset($setting_value['styles']['form-style']) ){
@@ -276,7 +277,6 @@ public function wppb_initContent($column_content,$parentId){
                         if ( isset($setting_value['styles']['field-style']) ){
                             $popupContent['style'] .= $allUniqueId.' form .lf-field input:not([type="submit"]),'.$allUniqueId.'form .lf-field texarea{'.$setting_value['styles']['field-style'].';}';
                         }
-                        $submitAlign = '';
                         if (isset($setting_value['styles']['submit-align'])) {
                           $submitAlign = 'lf_submit_'.$setting_value['styles']['submit-align'];
                         }
