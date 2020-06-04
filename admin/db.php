@@ -364,7 +364,7 @@ public function _responsiveCss3($cssProp_value,$arg=false){
             rsort($get_px_arr);
           $css_con = $cssProp_value[1];
               foreach($get_px_arr as $number_px){
-                $param = ($number_px / 100) * 70;
+                $param = $arg == 'border-radius' ? $number_px : ($number_px / 100) * 60;
                 $param = number_format((float)$param, 2, '.', '');
                 if ($arg == 'font-size' && $param < 10) {
                     $param = 10;

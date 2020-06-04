@@ -231,7 +231,6 @@ font-weight: 600;
         }
         .wppb-popup-main-wrap .wppb-popup-custom-wrapper{
             width: unset!important;
-            /*max-width: 90%;*/
         }
         #wppbPopupShow > div{
             max-width: 80%;
@@ -285,16 +284,6 @@ font-weight: 600;
             max-height: 100px;
             overflow-y: scroll;
         }
-
-
-
-
-
-
-
-
-
-
 
 }
 
