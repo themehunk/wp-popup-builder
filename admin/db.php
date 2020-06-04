@@ -314,7 +314,7 @@ public function wppb_initContent($column_content,$parentId){
                 $internal_Css = "<div>
                   <style>".$popupSetData['style']."
                     @media only screen and (max-width: 480px){
-                     ".$this->_px_convert_responsive($popupSetData['style'])." 
+                     ".$this->_responsiveCss($popupSetData['style'])." 
                     }
                   </style>
                 </div>";
@@ -322,31 +322,57 @@ public function wppb_initContent($column_content,$parentId){
     return $internal_Css.$return;
 }
 
-public function _px_convert_responsive($cssMainStr){
-      $css = explode(';',$cssMainStr);
-      $get_px_arr = [];
-      foreach($css as $value){
-          if( $value && substr_count($value , 'px') ){
-            $removeProp = substr($value, strrpos($value,":")+1 );
-            $expPxParam = explode('px',$removeProp);
-            
-            foreach($expPxParam as $explV){
-              if($explV && is_numeric($explV) && $explV > 0){
-                $getParam = trim($explV);
-                $get_px_arr[$getParam] = $getParam;
-              }
-            } 
-
+public function _responsiveCss($cssMainStr){
+    $css = explode('}',$cssMainStr);
+        $returnCss = '';
+        $get_px_arr = [];
+        foreach($css as $css_value){
+          if ( $css_value && substr_count($css_value , 'px') > 0 ) {
+            $id_css_Prop = explode('{', $css_value);
+            if ( $this->_responsiveCss2($id_css_Prop) ) {
+          $returnCss .= $id_css_Prop[0].'{'.$this->_responsiveCss2($id_css_Prop).'}';
+            }
           }
+        }
+        return $returnCss;
+}
+public function _responsiveCss2($id_css_Prop){
+    $cssProp = explode(';', $id_css_Prop[1]);
+    $returnWprop = ''; 
+      foreach ($cssProp as $cssProp_value) {
+        if (substr_count($cssProp_value , 'px') > 0) {
+          $cssProp_value = explode(':', $cssProp_value);
+          if ( $this->_responsiveCss3($cssProp_value)) {
+            $propertyType = trim($cssProp_value[0]);
+            $returnWprop .= $propertyType.':'.$this->_responsiveCss3($cssProp_value,$propertyType).';';
+          }
+        }
       }
-      rsort($get_px_arr);
-      $css_con = $cssMainStr;
-      foreach($get_px_arr as $number_px){
-        $param = ($number_px / 100) * 70;
-        $param = number_format((float)$param, 2, '.', '');
-        $css_con = str_replace($number_px.'px',$param.'px',$css_con);
-      }
-      return $css_con;
+      return $returnWprop;
+}
+public function _responsiveCss3($cssProp_value,$arg=false){
+        $get_px_arr = [];
+        $css_con = false;
+        $cssParameter  = explode('px', $cssProp_value[1]);
+        foreach ($cssParameter as $value) {
+          if (is_numeric($value) && $value > 0) {
+            $get_px_arr[] = trim($value);
+          }
+        }
+
+        if (!empty($get_px_arr)) {
+            rsort($get_px_arr);
+          $css_con = $cssProp_value[1];
+              foreach($get_px_arr as $number_px){
+                $param = ($number_px / 100) * 70;
+                $param = number_format((float)$param, 2, '.', '');
+                if ($arg == 'font-size' && $param < 10) {
+                    $param = 10;
+                }
+                $css_con = str_replace($number_px.'px',$param.'px',$css_con);
+              }
+        }
+         return $css_con;
 }
 
 // lead form -------------- function --------------- 
