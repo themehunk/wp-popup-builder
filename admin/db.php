@@ -178,24 +178,31 @@ public function wppb_html($setting,$inline=false){
           'layout' => '',
           'close-btn'=>'',
           'style'=>'',
-          'lead-form' => ''
+          'lead-form' => '',
+          'global-content-id'=>false
           );
       $popupFrontSetting = ['close-type'=>3,'outside-color'=>'#535353F2','effect'=>1,'popup-delay-open'=>3,'popup-delay-close'=>0];
-      $allSetting = unserialize($setting);   
+      $allSetting = unserialize($setting);  
+
+      print_r($allSetting);
         foreach ($allSetting as $setting_value) {
           if (isset($setting_value['content']) && is_array($setting_value['content'])) {
-            if ($setting_value['type'] == 'global-setting') {
-                foreach ($setting_value['content'] as $contentkey_ => $contentvalue_) {
-                  $popupSetData[$contentkey_] = $contentvalue_;
-                  if (isset($popupFrontSetting[$contentkey_]))$popupFrontSetting[$contentkey_] = $contentvalue_;
+            
+                if ($setting_value['type'] == 'global-setting') {
+                    foreach ($setting_value['content'] as $contentkey_ => $contentvalue_) {
+                      $popupSetData[$contentkey_] = $contentvalue_;
+                      if (isset($popupFrontSetting[$contentkey_]))$popupFrontSetting[$contentkey_] = $contentvalue_;
+                    }
+                    if ( isset($setting_value['id']) ) $popupSetData['global-content-id'] = $setting_value['id'];
+
+                }elseif ($setting_value['type'] == 'wrap' ) {
+                  $data_layout = $popupSetData['layout'] == 'layout-3' || $popupSetData['layout'] == 'layout-2'?'two-column':'';
+                  $Wrap_uniq_id = isset( $setting_value['id'] ) ? $setting_value['id'] : '';
+                  $popupColumnContent = $this->wppb_initColumn($setting_value['content'],$Wrap_uniq_id);
+                  $popupSetData["content"] .= '<div id="'.$Wrap_uniq_id.'" class="'.$data_layout.' wppb-popup-rl-wrap rl-clear">'.$popupColumnContent['content'].'</div>';
+                  $popupSetData["style"] .= $popupColumnContent['style'];
                 }
-            }elseif ($setting_value['type'] == 'wrap' ) {
-              $data_layout = $popupSetData['layout'] == 'layout-3' || $popupSetData['layout'] == 'layout-2'?'two-column':'';
-              $Wrap_uniq_id = isset( $setting_value['id'] ) ? $setting_value['id'] : '';
-              $popupColumnContent = $this->wppb_initColumn($setting_value['content'],$Wrap_uniq_id);
-              $popupSetData["content"] .= '<div id="'.$Wrap_uniq_id.'" class="'.$data_layout.' wppb-popup-rl-wrap rl-clear">'.$popupColumnContent['content'].'</div>';
-              $popupSetData["style"] .= $popupColumnContent['style'];
-            }
+
           }else if ($setting_value['type'] == "close-btn" && !$inline) {
             $Wrap_uniq_id = isset( $setting_value['id'] ) ? $setting_value['id'] : '';
             $popupSetData["style"] .= isset( $setting_value['style'] )?"#".$Wrap_uniq_id."{".$setting_value['style']."}":'';
@@ -204,7 +211,7 @@ public function wppb_html($setting,$inline=false){
 
         }
         $popupSetData['front-setting'] = htmlspecialchars( json_encode( $popupFrontSetting ), ENT_COMPAT );
-        return $this->wppb_layout($popupSetData);
+        return $this->wppb_layout($popupSetData,$globalId);
     }
 }
 
@@ -287,23 +294,31 @@ public function wppb_initContent($column_content,$parentId){
   }
 
   public function wppb_layout($popupSetData,$layout=''){
-    $internal_Css = '';
-    if ( $popupSetData['style'] ) {
-        $internal_Css = "<div><style>".$popupSetData['style']."</style></div>";
-    }
     $overlay_image = $popupSetData['overlay-image-url']?'background-image:url('.$popupSetData['overlay-image-url'].');':'';
     $overlayStyle = $overlay_image?$overlay_image.$popupSetData['overlay-style']:'';
     $globalHeight = $popupSetData["wrapper-height"] != 'auto'?$popupSetData["wrapper-height"].'px;':$popupSetData["wrapper-height"].';';
-    $globalStyle = "padding:".$popupSetData["global-padding"].";height:".$globalHeight;
+
+    $popupSetData['style'] .= "#".$popupSetData["global-content-id"]."{padding:".$popupSetData["global-padding"].";height:".$globalHeight.'}';
 
     $return = $popupSetData["close-btn"].'<div class="wppb-popup-custom-wrapper" style="'.$popupSetData["wrapper-style"].'">
             <input type="hidden" name="popup-setting-front" value="'.$popupSetData["front-setting"].'">
              <div class="wppb-popup-overlay-custom-img" style="'.$overlayStyle.'"></div>
               <div class="wppb-popup-custom-overlay" style="background-color:'.$popupSetData['overlay-color'].';"></div>
-                  <div class="wppb-popup-custom-content" style="'.$globalStyle.'">
+                  <div id="'.$popupSetData["global-content-id"].'" class="wppb-popup-custom-content">
                   '.$popupSetData["content"].'
                   </div>
             </div>';
+
+            $internal_Css = '';
+            if ( $popupSetData['style'] ) {
+                $internal_Css = "<div>
+                  <style>".$popupSetData['style']."
+                    @media only screen and (max-width: 480px){
+                     ".$this->_px_convert_responsive($popupSetData['style'])." 
+                    }
+                  </style>
+                </div>";
+            }
     return $internal_Css.$return;
 }
 
@@ -316,7 +331,7 @@ public function _px_convert_responsive($cssMainStr){
             $expPxParam = explode('px',$removeProp);
             
             foreach($expPxParam as $explV){
-              if($explV && is_numeric($explV)){
+              if($explV && is_numeric($explV) && $explV > 0){
                 $getParam = trim($explV);
                 $get_px_arr[$getParam] = $getParam;
               }
@@ -324,10 +339,11 @@ public function _px_convert_responsive($cssMainStr){
 
           }
       }
+      rsort($get_px_arr);
       $css_con = $cssMainStr;
       foreach($get_px_arr as $number_px){
-        $param = $number_px / 7;
-        $param = round($param,2);
+        $param = ($number_px / 100) * 70;
+        $param = number_format((float)$param, 2, '.', '');
         $css_con = str_replace($number_px.'px',$param.'px',$css_con);
       }
       return $css_con;
