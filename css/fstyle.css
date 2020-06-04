@@ -229,9 +229,11 @@ font-weight: 600;
         }
         .wppb-popup-main-wrap .wppb-popup-custom-wrapper{
             width: unset!important;
-            max-width: 90%;
+            /*max-width: 90%;*/
         }
-
+        #wppbPopupShow > div{
+            max-width: 80%;
+        }
         .wppb-popup-main-wrap .wppb-popup-rl-wrap span, .wppb-popup-main-wrap .wppb-popup-rl-wrap a {
             font-size: calc(16px / 100 * 70);
             margin: calc(3px / 100 * 70) 0;
