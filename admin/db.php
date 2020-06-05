@@ -394,7 +394,7 @@ public static function lead_form_db(){
 
 public function get_lead_form_ajx(){
   if ( isset($_POST['form_id']) && is_numeric($_POST['form_id']) && self::lead_form_front_end() ) {
-      $form_id = $_POST['form_id'];
+      $form_id = intval($_POST['form_id']);
       return self::lead_form_front_end()->lfb_show_front_end_forms($form_id);
   }
 }

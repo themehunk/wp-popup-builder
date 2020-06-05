@@ -107,6 +107,10 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 				$wp_builder_obj->color(__('Background Color','wppb'),'background-color','data-global-input','overlay-color'); 
 				$wp_builder_obj->color(__('Outside Color','wppb'),'background-color','data-global-input','outside-color');
 				$wp_builder_obj->header_title(__('Popup Typography','wppb'));
+				echo $wp_builder_obj->box_shadow('box-shadow-global','data-global-input');
+			?>
+
+			<?php 
 				$wp_builder_obj->range_slider(__('Popup Width','wppb'), 'main-wrapper', ['title'=>'px','min'=>200,'max'=>800,'value'=>200] ,'wrapper-width');
 				echo $wp_builder_obj->checkbox('wrapper-height',__('Popup Height Auto/Custom','wppb'),'data-global-input="wrapper-height-check"');
 			?>
