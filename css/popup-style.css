@@ -333,9 +333,11 @@ a:focus{
     padding: 4px;
 }
 .wppb-popup-lead-form .lead-form-front{
-    padding: 15px;
+        padding: 15px;
     background-size: 100%;
     box-sizing: border-box;
+    max-height: 250px;
+    overflow-y: scroll;
 }
 .wppb-popup-demo .wppb-popup-custom  .wppb-popup-lead-form .leadform-show-form span{
     text-align: left;
