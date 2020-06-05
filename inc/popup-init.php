@@ -285,6 +285,35 @@ public function wppbPopupList_json($allSetting,$column_making,$countPopup){
 				</section>';
 				echo $return;
 	}
+public function box_shadow($id,$type,$attr=''){
+		$data_attr = $type.'="'.$id.'"' . $attr;
+	$return = '<section class="content-style-border content-style-box-shadow">
+					'.$this->checkbox($type,'Box Shadow',$data_attr.' data-shadow="enable"').'
+						<div  class="rl_i_editor-item-content-items content-border content-box-shadow">
+							<div>
+								<label class="rl-sub-title">X Offset</label>
+								<div><input type="number" value="" '.$data_attr.'  data-shadow="x-offset"></div>
+							</div>
+							<div>
+								<label class="rl-sub-title">Y Offset</label>
+								<div><input type="number" value="" '.$data_attr.' data-shadow="y-offset"></div>
+							</div>
+							<div>
+								<label class="rl-sub-title">Blur</label>
+								<div><input type="number" value="" '.$data_attr.' data-shadow="blur"></div>
+							</div>
+							<div>
+								<label class="rl-sub-title">Spread</label>
+								<div><input type="number" value="" '.$data_attr.' data-shadow="spread"></div>
+							</div>
+							<div>
+								<label class="rl-sub-title">Color</label>
+								<div><label class="color-output" '.$data_attr.' data-shadow="color"></label></div>
+							</div>
+						</div>
+					</section>';
+		return $return;
+}
 
 	public function margin_padding($id,$title,$type,$margin_padding,$attr=''){
 		$attr = $type."='".$id."'" .$attr;

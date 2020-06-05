@@ -40,7 +40,6 @@ class wppb_ajax extends wppb_db{
 			echo $result?$result:0;
 		die();
 	}
-
 	// lead form
 	
 	// install lead form 

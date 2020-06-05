@@ -133,7 +133,10 @@ a:focus{
     padding: 12px 30px;
     box-sizing: border-box;
 }
-.wp-popup-name-layout-name-init .wppb-popup-name-init{
+.wp-popup-name-layout-name-init-2{
+    text-align: right;
+}
+.wppb-popup-name-init{
         background-color: #6747e6;
     border: none;
     color: white;
@@ -239,9 +242,11 @@ a:focus{
     /*border-radius: inherit;*/
 }
 .wppb-popup-custom-content{
-        z-index: 4;
-        position: relative;
-        padding: 23px 37px 23px;
+    max-height: 430px;
+    overflow-y: scroll;
+    z-index: 4;
+    position: relative;
+    padding: 23px 37px 23px;
 }
 .wppb-popup-custom img{
     max-width: 100%;
@@ -336,8 +341,8 @@ a:focus{
         padding: 15px;
     background-size: 100%;
     box-sizing: border-box;
-    max-height: 250px;
-    overflow-y: scroll;
+    /*max-height: 250px;*/
+    /*overflow-y: scroll;*/
 }
 .wppb-popup-demo .wppb-popup-custom  .wppb-popup-lead-form .leadform-show-form span{
     text-align: left;
@@ -371,7 +376,7 @@ a:focus{
     border: 1px solid gainsboro;
     color: #272525;
     margin: 2px 0;
-    padding: 3px 6px !important;
+    padding: 3px 6px;
     height: auto;
     min-height: 38px;
     font-size: 14px;

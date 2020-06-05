@@ -1,5 +1,8 @@
 <?php 
 if ( ! defined( 'ABSPATH' ) ) exit; 
+
+$get_CustomPopup = isset($_GET['custom-popup']) && intval($_GET['custom-popup']) > 0 ? intval($_GET['custom-popup']) : false;
+
 $popupSetData = array(
 					'wrapper-style'=>'width:550px;',
 					'wrapper-height'=>'auto',
@@ -17,8 +20,8 @@ $popupSetData = array(
 				);
 // echo "<pre>";
 
-if (isset($_GET['custom-popup']) && is_numeric($_GET['custom-popup'])) {
-	$custom_popup_all = wppb_db::getCustomPopup($_GET['custom-popup']);
+if ($get_CustomPopup) {
+	$custom_popup_all = wppb_db::getCustomPopup($get_CustomPopup);
 	if (isset($custom_popup_all[0])) {
 		$customAddon = $custom_popup_all[0];
 		if (isset($customAddon->boption) && $customAddon->boption != '') $addon_option = unserialize($customAddon->boption);
@@ -50,11 +53,8 @@ if (isset($_GET['custom-popup']) && is_numeric($_GET['custom-popup'])) {
 	}
 }
 // echo "</pre>";
-
 ?>
-
-<div class="wppb-popup-cmn-container">
-	
+<div class="wppb-popup-cmn-container">	
 	<div class="wppb-popup-cmn-nav">
 		<div class="wppb-popup-cmn-nav-item">
 				<a class="wppb_icon_button" href="<?php _e(esc_url(WPPB_PAGE_URL),'wppb')?>"><span class="dashicons dashicons-arrow-left-alt"></span><span><?php _e('Back','wppb') ?></span></a>
@@ -64,7 +64,6 @@ if (isset($_GET['custom-popup']) && is_numeric($_GET['custom-popup'])) {
 				<?php } ?>
 		</div>	
 	</div>
-
 	<section class="wppb-popup-demo wppb-popup-tab-container active">
 	<div class="wppb-popup-demo-inner">
 				<!-- confirm delete  -->
@@ -81,13 +80,11 @@ if (isset($_GET['custom-popup']) && is_numeric($_GET['custom-popup'])) {
 					</div>
 				</div>
 			</div>
-
 		<?php 
-			if ( $_GET['custom-popup'] == '') include_once 'prebuilt-popup.php'; 
+			if ( !$get_CustomPopup ) include_once 'prebuilt-popup.php'; 
 			include_once 'popup-custom.php'; 
 		?>
-
-		<div class="rl_i_editor-main-container <?php echo $_GET['custom-popup'] == ''?'rl-display-none':'' ?>">
+		<div class="rl_i_editor-main-container <?php echo !$get_CustomPopup?'rl-display-none':'' ?>">
 			<?php include_once "editor-panel.php"; ?>
 		</div>
 

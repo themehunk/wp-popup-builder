@@ -253,9 +253,13 @@ var Business_news_letter = {
 	       	let popup_id  	= this_button.data('bid');
 	    	let isActive 	= this_button.prop('checked') == true?1:0;
 			this_button.addClass('business_disabled');
-			let data_ = {action:'popup_active',popup_id:popup_id,is_active:isActive};
+			let data_ = {action:'popup_active',bid:popup_id,is_active:isActive};
 			let returnData = Business_news_letter._ajaxFunction(data_);
 			returnData.success(function(response){
+				// console.log(response);
+				if (response) {
+					this_button.removeClass('business_disabled');
+				}
 			});
 	},
 	_installNow: function(event){
@@ -573,7 +577,7 @@ var Custom_popup_editor = {
 	},
 	_globalSettingInit:function(){
 		let inputs = jQuery('[data-global-input]');
-		if (inputs.length) jQuery.each(inputs,globalInit_);		
+		if (inputs.length) jQuery.each(inputs,globalInit_);	
 		function globalInit_(ind,value){//loop
 			let sepInput = jQuery(value);
 			let dataInput = sepInput.data('global-input');
@@ -688,11 +692,10 @@ var Custom_popup_editor = {
 				}else if (dataInput == 'popup-delay-close') {
 					let popupDalayClose = setHiddenInput['popup-delay-close'] ? setHiddenInput['popup-delay-close'] : 0;
 					Custom_popup_editor._inputRange( sepInput, false, false, popupDalayClose );
+				}else if ( dataInput == 'box-shadow-global' ) {
+					Custom_popup_editor._setBoxShadow(sepInput, jQuery('.wppb-popup-custom .wppb-popup-custom-wrapper') );
 				}
-
 		}//loop
-
-
 	},
 	_globalSetEditor:function(e){
 		let sepInput = jQuery(this);
@@ -787,6 +790,8 @@ var Custom_popup_editor = {
 					if(checkArray)setHiddenInput['popup-delay-open'] = inputValue;
 				}else if (inputData == 'popup-delay-close'){
 					if(checkArray)setHiddenInput['popup-delay-close'] = inputValue;
+				}else if ( inputData == "box-shadow-global" ) {
+					Custom_popup_editor._boxShadowFn( jQuery('.wppb-popup-custom .wppb-popup-custom-wrapper') ,sepInput);
 				}
 				if (checkArray)setHiddenInputI.val( JSON.stringify(setHiddenInput) );
 		}
@@ -869,6 +874,60 @@ var Custom_popup_editor = {
 			}
 		}
 	},
+	_setBoxShadow:function(input, clickedObj){
+		let checkData = input.data('shadow');
+		let getCss = Custom_popup_editor._checkStyle(clickedObj,'box-shadow');
+		if (getCss && getCss != 'none') {
+			if ( checkData == 'enable') {
+				input.closest('.content-style-box-shadow').find('.content-box-shadow').show();
+				input.prop('checked',true);
+			}else if (checkData == 'x-offset' || checkData == 'y-offset' || checkData == 'blur' || checkData == 'spread') {
+				let putVal = Custom_popup_editor._box_shadow_prop(getCss, checkData, true, true);
+				input.val( parseInt(putVal) );
+			}else if (checkData == 'color') {
+				Custom_popup_editor._colorPickr( input, clickedObj ,'box-shadow' );
+			}
+		}else{
+			if (checkData == 'enable') {
+				input.prop('checked',false);
+			}
+			input.closest('.content-style-box-shadow').find('.content-box-shadow').hide();
+		}
+	},
+	_boxShadowFn:function(clickedObj,changedInput){
+		let checkData = changedInput.data('shadow');
+		let inputVal  = changedInput.val();
+		let container = changedInput.closest('.content-style-box-shadow');
+		if (checkData == 'enable') {
+			if (changedInput.prop('checked')) {
+				let style = '#808080 2px 4px 7px 1px';
+				Custom_popup_editor._setStyleColor(clickedObj,style,'box-shadow');
+			}else{
+				Custom_popup_editor._removeStyle(clickedObj,'box-shadow');
+			}
+			Custom_popup_editor._setBoxShadow(changedInput,clickedObj);
+		}else if (container.find('[type="checkbox"][data-shadow]').prop('checked') && checkData) {
+			let getCss = Custom_popup_editor._checkStyle(clickedObj,'box-shadow');
+			let getBoxShadow = Custom_popup_editor._box_shadow_prop(getCss, checkData, inputVal);
+			if(getBoxShadow) Custom_popup_editor._setStyleColor(clickedObj,getBoxShadow,'box-shadow');
+		}
+	},
+	_box_shadow_prop:function(css, shadow_prop, value_, get_prop_){
+		let splitted = css.split(' ');
+			if (shadow_prop == 'color') {
+				if(get_prop_ ){return splitted[0];}else{splitted[0] = value_ };
+			}else if (shadow_prop == 'x-offset') {
+				if(get_prop_ ){return splitted[1];}else{splitted[1] = value_ + 'px' };
+			}else if (shadow_prop == 'y-offset') {
+				if(get_prop_ ){return splitted[2];}else{splitted[2] = value_ + 'px' };
+			}else if (shadow_prop == 'blur') {
+				if(get_prop_ ){return splitted[3];}else{splitted[3] = value_ + 'px' };
+			} else if (shadow_prop == 'spread') {
+				if(get_prop_ ){return splitted[4];}else{splitted[4] = value_ + 'px' };
+			}
+		splitted = splitted.join(' ');
+		return value_ ? splitted:false;
+	},
 	_globalPadding:function(changeData,changedInput,clickedObj,changeValue){
 				if(changeData == 'padding'){
 					let paddingOrigin = changedInput.data('padding');
@@ -940,7 +999,6 @@ var Custom_popup_editor = {
 				putLayout.html(getLayout);
 				jQuery('.wppb-popup-name-layout').hide();
 				jQuery('.wppb-popup-custom, .rl_i_editor-main-container').show();
-				// jQuery('.rl_i_editor-inner-wrap-mask').remove();
 				Custom_popup_editor._dragAndShort();
 				Custom_popup_editor._globalSettingInit();
 			}else{
@@ -1079,11 +1137,13 @@ var Custom_popup_editor = {
 			}else if( sepInput.data('input-color') == 'lf-field-background-color' ){
 				let element = leadForm.find('.name-type.lf-field input, .text-type.lf-field input, .textarea-type.lf-field textarea');
 				Custom_popup_editor._colorPickr( sepInput, element ,'background-color' );
-			}else if( getData == 'lf-field-font-size' ){
-				let element = leadForm.find('.lf-field input').css('font-size');
+			}else if( getData == 'lf-field-font-size' || getData == 'lf-field-height' ){
+				let element = leadForm.find('.lf-field input');
+				element = getData == 'lf-field-font-size' ? element.css('font-size') : element.css('height');
 				Custom_popup_editor._inputRange(sepInput, false, false, element );
 			}else if ( getData == 'lf-submit-padding') {
-				let paddings = leadForm.find('input.lf-form-submit').css('padding-'+sepInput.data('padding'));
+				let element = leadForm.find('input.lf-form-submit');
+				let paddings = element.css('padding-'+sepInput.data('padding'));
 				if(paddings || paddings == '0') sepInput.val(parseInt(paddings));
 			}else if ( getData == 'submit-font-weight'){
 				let fontWeight = leadForm.find('input.lf-form-submit').css('font-weight');
@@ -1101,26 +1161,27 @@ var Custom_popup_editor = {
 	_leadFormStylingSet:function(){
 		let input_ = jQuery(this);
 		let dataCheck = input_.data('lead-form');
+
 		let inputVal = input_.val();
 		let leadForm = jQuery('.wppb-popup-custom .wppb-popup-lead-form form');
 		if (dataCheck == 'lf-form-width') {
 			leadForm.css('width',inputVal+'%');
 		}else if (dataCheck == 'lf-label-font-size') {
 			leadForm.find('.lf-field > label').css('font-size',inputVal+'px');
-		}else if (dataCheck == 'lf-field-font-size') {
-			leadForm.find('.lf-field input, .textarea-type.lf-field textarea').not('input[type="submit"]').css('font-size',inputVal+'px');
+		}else if (dataCheck == 'lf-field-font-size' || dataCheck == 'lf-field-height') {
+			let element = leadForm.find('.lf-field input, .textarea-type.lf-field textarea').not('input[type="submit"]');
+			dataCheck == 'lf-field-font-size' ? element.css('font-size',inputVal+'px') : element.css('height',inputVal+'px');
 		}else if( dataCheck == 'lf-submit-btn-font-size'){
 			leadForm.find('input.lf-form-submit').css('font-size',inputVal+'px');
 		}else if( dataCheck == 'lf-heading-font-size'){
 			leadForm.children('h2').css('font-size',inputVal+'px');
-		}else if (dataCheck == 'form-border' || dataCheck == 'lf-submit-border' || dataCheck == 'lf-field-border') {				
 				let elementBorder = dataCheck == 'form-border' ? leadForm : (dataCheck == 'lf-field-border') ? leadForm.find('.lf-field input, .textarea-type.lf-field textarea').not('input[type="submit"]') : leadForm.find('input.lf-form-submit');
 				Custom_popup_editor._borderFn(elementBorder,input_,inputVal);
 		}else if ( dataCheck == 'form-heading-enable') {
 			input_.prop('checked') == true ? leadForm.children('h2').show() : leadForm.children('h2').hide();
-		}else if ( input_.data('padding') ) {
+		}else if ( input_.data('padding') && dataCheck == 'lf-submit-padding' ) {
 			Custom_popup_editor._globalPadding('padding', input_ ,leadForm.find('input.lf-form-submit') ,inputVal);
-		}else if ( input_.data('origin') == 'padding' ) {
+		}else if ( input_.data('origin') == 'padding' && dataCheck == 'lf-submit-padding' ) {
 			Custom_popup_editor._globalPadding('padding-origin', input_ ,leadForm.find('input.lf-form-submit') ,inputVal);
 		}else if ( dataCheck == 'submit-font-weight') {
 			leadForm.find('input.lf-form-submit').css('font-weight',inputVal);
@@ -1202,9 +1263,13 @@ var Custom_popup_editor = {
 	},
 	_colorPickr:function(select_element,clickedObj,getColorProperty,getColor=false){
 		let getColorValue = clickedObj.css(getColorProperty);
-		select_element.css('background-color',getColorValue);
-		// Custom_popup_editor._setStyleColor(select_element,getColorValue,getColorProperty);
+		if (getColorProperty == 'box-shadow') {
+			let getCss = Custom_popup_editor._checkStyle(clickedObj,'box-shadow');
+			getColorValue = Custom_popup_editor._box_shadow_prop(getCss, 'color', true, true);
+			console.log(getColorValue);
 
+		}
+		select_element.css('background-color',getColorValue);
 		const inputElement = select_element[0];
 		const pickr = new Pickr({
 		  el:inputElement,
@@ -1233,10 +1298,18 @@ var Custom_popup_editor = {
 		  // preview css on input editor item
 		  select_element.css('background-color',color_);
 		  // apply color on selected item
-		  Custom_popup_editor._setStyleColor(clickedObj,color_,getColorProperty);
-			  if (getColor && getColor[0].tagName == 'INPUT'){
-					getColor.val(color_).change();		  	
-			  }
+		  if (getColorProperty == 'box-shadow') {
+		  	let getCss = Custom_popup_editor._checkStyle(clickedObj,'box-shadow');
+		  	let propBoxShadow = Custom_popup_editor._box_shadow_prop(getCss, 'color', color_);
+		  	Custom_popup_editor._setStyleColor(clickedObj,propBoxShadow,'box-shadow');
+		  }else{
+		  	Custom_popup_editor._setStyleColor(clickedObj,color_,getColorProperty);
+			
+		  }
+		  // to get output on input
+		  // if (getColor && getColor[0].tagName == 'INPUT'){
+				// getColor.val(color_).change();		  	
+		  // }
 		});
 
 	},

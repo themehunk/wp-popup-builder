@@ -88,6 +88,8 @@ font-weight: 600;
     height: auto;
     z-index: 4;
     position: relative;
+    max-height: 430px;
+    overflow-y: scroll;
 }
 .wppb-popup-main-wrap .wppb-popup-rl-wrap{
     display: flex;
@@ -128,6 +130,7 @@ font-weight: 600;
     max-width: 100%;
     max-height: 100%;
     box-sizing: border-box;
+    height: intrinsic;
 }
 .wppb-popup-main-wrap .wppb-popup-close-btn{
         right: 5%;
@@ -147,8 +150,6 @@ font-weight: 600;
 /*business popup lead form builder design*/
 .wppb-popup-lead-form{
         width: 100%;
-    max-height: 250px;
-    overflow-y: scroll;
 }
 .wppb-popup-lead-form .leadform-show-form{
     max-width: 100%;

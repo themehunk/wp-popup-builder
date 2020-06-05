@@ -83,9 +83,9 @@
  .rl_i_editor-content-area select[data-editor-input]{
     width: 60px;
 }
-.rl_i_editor-content-area::-webkit-scrollbar{
+/*.rl_i_editor-content-area::-webkit-scrollbar{
   display: none;
-}
+}*/
 .rl_i_editor-footer{
         background: #777777;
     position: absolute;
@@ -499,7 +499,7 @@ label[data-range-output]{
 .rl_i_editor-item-content-items.content-border > div .color-output{
    display: block;
     height: 30px;
-         width: 58px;
+         width: 60px;
     border: 1px solid #dcdcdc;
     border-radius: 3px;
     cursor: pointer;
@@ -602,6 +602,10 @@ label[data-range-output]{
     border-radius: 11px;
     transition: .3s transform cubic-bezier(0.54, 1.18, 1, 1.01);
     cursor: pointer;
+}
+.wppb-popup-checkbox > input.business_disabled + label{
+     pointer-events: none;
+    opacity: .4;
 }
 .wppb-popup-checkbox > input + label:before{
         content: "";

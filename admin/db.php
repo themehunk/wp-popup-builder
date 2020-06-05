@@ -39,45 +39,41 @@ if (isset($_POST['htmldata'])) {
     }
 }
 public function popup_update(){
-  // for html data update
-      if (isset($_POST['bid']) && is_numeric($_POST['bid']) && isset($_POST['htmldata'])) {
-          $popupData = $this->arrayValueSanetize($_POST['htmldata']);
-          if ($popupData) {
-              $data['setting']  = serialize($popupData);
-              $formate_data     = ['%s'];
-              $where = ['BID'=>$_POST['bid']];
-              $formate_data_where =  ['%d'];
-              return self::$db->update( self::$table, $data , $where, $formate_data, $formate_data_where); 
-          }
-      }elseif ( isset($_POST['popup_id']) && is_numeric($_POST['popup_id']) && isset($_POST['is_active']) && is_numeric($_POST['is_active']) ) {
-  // for popup active and deactivate update
-              $data['is_active']  = $_POST['is_active'];
-              $formate_data     = ['%d'];
-              $where = ['BID'=>$_POST['popup_id']];
-              $formate_data_where =  ['%d'];
-              return self::$db->update( self::$table, $data , $where, $formate_data, $formate_data_where); 
+      if ( isset($_POST['bid']) && is_numeric($_POST['bid']) && intval($_POST['bid']) > 0 ) {
+            $bid = intval($_POST['bid']);
+            if ( isset($_POST['htmldata']) ) {
+                $popupData = $this->arrayValueSanetize($_POST['htmldata']);
+                if ($popupData) {
+                    $data['setting']  = serialize($popupData);
+                    $formate_data     = ['%s'];
+                    $where = ['BID'=> $bid ];
+                    $formate_data_where =  ['%d'];
+                    return self::$db->update( self::$table, $data , $where, $formate_data, $formate_data_where); 
+                }
+            }elseif ( isset($_POST['is_active']) ) {
+                $data['is_active']  = intval( $_POST['is_active'] );
+                $formate_data       = ['%d'];
+                $where              = [ 'BID'=>$bid ];
+                $formate_data_where = ['%d'];
+                return self::$db->update( self::$table, $data , $where, $formate_data, $formate_data_where);
+            }
       }
-
 }
 
 public function popup_delete(){
-
     if ( isset($_POST['bid']) && is_numeric($_POST['bid']) ) {
-          return self::$db->delete( self::$table , ['BID'=>$_POST['bid']], ['%d']);
+          $bid = intval( $_POST['bid'] );
+          return self::$db->delete( self::$table , [ 'BID'=>$bid ], ['%d']);
       }
-
 }
 
  //business popup update
   public function opt_update(){
-
-    if (isset($_POST['popup_id']) && isset($_POST['option_key']) && isset($_POST['option_value']) && is_numeric($_POST['popup_id'])) {
-          
+    if ( isset($_POST['popup_id']) && isset($_POST['option_key']) && isset($_POST['option_value']) && is_numeric($_POST['popup_id']) ) {
           $bid     = intval($_POST['popup_id']);
           $option_name = sanitize_text_field($_POST['option_key']);
           $option_value= sanitize_text_field($_POST['option_value']);
           $exist_Addon = self::$db->get_row("SELECT boption FROM ".self::$table." WHERE BID='".$bid."'");
-
           if(isset($exist_Addon->boption)){
             if ($exist_Addon->boption == '') {
               $option = [$option_name => $option_value];
@@ -398,7 +394,7 @@ public static function lead_form_db(){
 
 public function get_lead_form_ajx(){
   if ( isset($_POST['form_id']) && is_numeric($_POST['form_id']) && self::lead_form_front_end() ) {
-      $form_id = $_POST['form_id'];
+      $form_id = intval($_POST['form_id']);
       return self::lead_form_front_end()->lfb_show_front_end_forms($form_id);
   }
 }
