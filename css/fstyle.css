@@ -183,12 +183,13 @@ font-weight: 600;
 }
 .wppb-popup-lead-form .leadform-show-form input:not([type='submit']),
 .wppb-popup-lead-form .leadform-show-form textarea{
-        border: 1px solid gainsboro;
+         border: 1px solid gainsboro;
     color: #272525;
     margin: 2px 0;
     padding: 3px 6px !important;
     height: auto;
     line-height: 19px;
+    min-height: 12px;
 }
 .wppb-popup-lead-form .leadform-show-form textarea{
         min-height: 60px;

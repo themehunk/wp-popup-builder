@@ -372,6 +372,7 @@ var Custom_popup_editor = {
 	},
 	_dragAndShort:function(){
 		jQuery( ".wppb-popup-custom .rlEditorDropable" ).sortable({
+			connectWith: ".rlEditorDropable",
 	      revert: true,
 	      placeholder: "ui-state-highlight",
 	      cursor: "move",
@@ -380,7 +381,7 @@ var Custom_popup_editor = {
 	      	let droppedContainer = jQuery(this);
 	      	if(droppedContainer.children().length > 1)droppedContainer.children('.rl_rmBlankSpace').remove();
 	      }
-	    });
+	    }).disableSelection();
 
 		jQuery( ".rl_i_editor-element-add-item-list [data-item-drag]" ).draggable({
 	      connectToSortable: ".wppb-popup-custom .rlEditorDropable",
@@ -389,7 +390,7 @@ var Custom_popup_editor = {
 	      stop:function(event,ui){
 	      	Custom_popup_editor._initAfterDrag(ui.helper);
 	      }
-	    });
+	    }).disableSelection();
 	},
 	_initAfterDrag:function(myObj){
 	        	let editable,defaultText,extraAttr;
@@ -905,7 +906,11 @@ var Custom_popup_editor = {
 			}else{
 				Custom_popup_editor._removeStyle(clickedObj,'box-shadow');
 			}
-			Custom_popup_editor._setBoxShadow(changedInput,clickedObj);
+			let allInputs = container.find('[data-shadow]');
+			jQuery.each(allInputs,(index,value)=>{
+				Custom_popup_editor._setBoxShadow( jQuery(value) ,clickedObj);
+			});
+
 		}else if (container.find('[type="checkbox"][data-shadow]').prop('checked') && checkData) {
 			let getCss = Custom_popup_editor._checkStyle(clickedObj,'box-shadow');
 			let getBoxShadow = Custom_popup_editor._box_shadow_prop(getCss, checkData, inputVal);
