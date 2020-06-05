@@ -107,10 +107,6 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 				$wp_builder_obj->color(__('Background Color','wppb'),'background-color','data-global-input','overlay-color'); 
 				$wp_builder_obj->color(__('Outside Color','wppb'),'background-color','data-global-input','outside-color');
 				$wp_builder_obj->header_title(__('Popup Typography','wppb'));
-				echo $wp_builder_obj->box_shadow('box-shadow-global','data-global-input');
-			?>
-
-			<?php 
 				$wp_builder_obj->range_slider(__('Popup Width','wppb'), 'main-wrapper', ['title'=>'px','min'=>200,'max'=>800,'value'=>200] ,'wrapper-width');
 				echo $wp_builder_obj->checkbox('wrapper-height',__('Popup Height Auto/Custom','wppb'),'data-global-input="wrapper-height-check"');
 			?>
@@ -119,6 +115,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 			</section>
 			<?php 
 				$wp_builder_obj->margin_padding('main-wrapper', __('Popup Padding in px','wppb'), 'data-global-input', 'p'); 
+				echo $wp_builder_obj->box_shadow('box-shadow-global','data-global-input');
 				$wp_builder_obj->border('global-border','data-global-input'); 
 			?>
 			<div class="rl_i_editor-item-content-items rl-two-column-width">
@@ -339,7 +336,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 					$wp_builder_obj->color(__('Color','wppb'),'color','data-lead-form','lf-field-color');
 					$wp_builder_obj->color(__('Background Color','wppb'),'background-color','data-lead-form','lf-field-background-color');
 					$wp_builder_obj->range_slider(__('Font Size','wppb'), 'lf-field-font-size', ['title'=>'px','min'=>"10",'max'=>100,'value'=>10], false, 'data-lead-form');
-					$wp_builder_obj->range_slider(__('Height','wppb'), 'lf-field-height', ['title'=>'px','min'=>"20",'max'=>120,'value'=>25], false, 'data-lead-form');
+					$wp_builder_obj->range_slider(__('Height','wppb'), 'lf-field-height', ['title'=>'px','min'=>12,'max'=>120,'value'=>25], false, 'data-lead-form');
 					$wp_builder_obj->border('lf-field-border','data-lead-form'); 
 
 					$wp_builder_obj->header_title(__('Submit Button Setting','wppb'));

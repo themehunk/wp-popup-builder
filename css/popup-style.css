@@ -242,8 +242,6 @@ a:focus{
     /*border-radius: inherit;*/
 }
 .wppb-popup-custom-content{
-    max-height: 430px;
-    overflow-y: scroll;
     z-index: 4;
     position: relative;
     padding: 23px 37px 23px;
@@ -378,7 +376,7 @@ a:focus{
     margin: 2px 0;
     padding: 3px 6px;
     height: auto;
-    min-height: 38px;
+    min-height: 12px;
     font-size: 14px;
     line-height: 19px;
 }

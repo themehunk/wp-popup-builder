@@ -434,12 +434,12 @@ label[data-range-output]{
 .ul-inputs-margin-padding{
         border: 1px solid #dcdcdc;
     border-radius: 4px;
-    width: 87%;
+    width: 100%;
     color: #b1b1b1;
     margin: 0;
 }
 .ul-inputs-text{
-    width: 87%;
+    width: 100%;
 }
 .close-btn-container .ul-inputs-margin-padding,
 .close-btn-container .ul-inputs-text{
@@ -675,8 +675,12 @@ input[name="global-popup-name"]{
 }
 /*ui drag drop style*/
 .ui-state-highlight{
-    border-bottom: 0px;
-    animation:placeHolderBorder .3s 0s 1 normal ease-in forwards;
+      /* border-bottom: 0px; */
+    /* animation: placeHolderBorder .3s 0s 1 normal ease-in forwards; */
+    height: 30px;
+    border: 1px dotted #6747e6;
+    background-color: #bdb8d2f7;
+
 }
 @keyframes placeHolderBorder{
     0%{
