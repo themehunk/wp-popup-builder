@@ -1,3 +1,6 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) exit;
+?>
 <input type="hidden" name="popup-url" value="<?php echo WPPB_URL ?>">
 <input type="hidden" data-global-save="global-content" value='<?php echo $popupSetData["global_content"]; ?>'>
 
