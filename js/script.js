@@ -253,9 +253,10 @@ var Business_news_letter = {
 	       	let popup_id  	= this_button.data('bid');
 	    	let isActive 	= this_button.prop('checked') == true?1:0;
 			this_button.addClass('business_disabled');
-			let data_ = {action:'popup_active',popup_id:popup_id,is_active:isActive};
+			let data_ = {action:'popup_active',bid:popup_id,is_active:isActive};
 			let returnData = Business_news_letter._ajaxFunction(data_);
 			returnData.success(function(response){
+				// console.log(response);
 			});
 	},
 	_installNow: function(event){
@@ -940,7 +941,6 @@ var Custom_popup_editor = {
 				putLayout.html(getLayout);
 				jQuery('.wppb-popup-name-layout').hide();
 				jQuery('.wppb-popup-custom, .rl_i_editor-main-container').show();
-				// jQuery('.rl_i_editor-inner-wrap-mask').remove();
 				Custom_popup_editor._dragAndShort();
 				Custom_popup_editor._globalSettingInit();
 			}else{
@@ -1079,11 +1079,13 @@ var Custom_popup_editor = {
 			}else if( sepInput.data('input-color') == 'lf-field-background-color' ){
 				let element = leadForm.find('.name-type.lf-field input, .text-type.lf-field input, .textarea-type.lf-field textarea');
 				Custom_popup_editor._colorPickr( sepInput, element ,'background-color' );
-			}else if( getData == 'lf-field-font-size' ){
-				let element = leadForm.find('.lf-field input').css('font-size');
+			}else if( getData == 'lf-field-font-size' || getData == 'lf-field-height' ){
+				let element = leadForm.find('.lf-field input');
+				element = getData == 'lf-field-font-size' ? element.css('font-size') : element.css('height');
 				Custom_popup_editor._inputRange(sepInput, false, false, element );
 			}else if ( getData == 'lf-submit-padding') {
-				let paddings = leadForm.find('input.lf-form-submit').css('padding-'+sepInput.data('padding'));
+				let element = leadForm.find('input.lf-form-submit');
+				let paddings = element.css('padding-'+sepInput.data('padding'));
 				if(paddings || paddings == '0') sepInput.val(parseInt(paddings));
 			}else if ( getData == 'submit-font-weight'){
 				let fontWeight = leadForm.find('input.lf-form-submit').css('font-weight');
@@ -1101,26 +1103,27 @@ var Custom_popup_editor = {
 	_leadFormStylingSet:function(){
 		let input_ = jQuery(this);
 		let dataCheck = input_.data('lead-form');
+
 		let inputVal = input_.val();
 		let leadForm = jQuery('.wppb-popup-custom .wppb-popup-lead-form form');
 		if (dataCheck == 'lf-form-width') {
 			leadForm.css('width',inputVal+'%');
 		}else if (dataCheck == 'lf-label-font-size') {
 			leadForm.find('.lf-field > label').css('font-size',inputVal+'px');
-		}else if (dataCheck == 'lf-field-font-size') {
-			leadForm.find('.lf-field input, .textarea-type.lf-field textarea').not('input[type="submit"]').css('font-size',inputVal+'px');
+		}else if (dataCheck == 'lf-field-font-size' || dataCheck == 'lf-field-height') {
+			let element = leadForm.find('.lf-field input, .textarea-type.lf-field textarea').not('input[type="submit"]');
+			dataCheck == 'lf-field-font-size' ? element.css('font-size',inputVal+'px') : element.css('height',inputVal+'px');
 		}else if( dataCheck == 'lf-submit-btn-font-size'){
 			leadForm.find('input.lf-form-submit').css('font-size',inputVal+'px');
 		}else if( dataCheck == 'lf-heading-font-size'){
 			leadForm.children('h2').css('font-size',inputVal+'px');
-		}else if (dataCheck == 'form-border' || dataCheck == 'lf-submit-border' || dataCheck == 'lf-field-border') {				
 				let elementBorder = dataCheck == 'form-border' ? leadForm : (dataCheck == 'lf-field-border') ? leadForm.find('.lf-field input, .textarea-type.lf-field textarea').not('input[type="submit"]') : leadForm.find('input.lf-form-submit');
 				Custom_popup_editor._borderFn(elementBorder,input_,inputVal);
 		}else if ( dataCheck == 'form-heading-enable') {
 			input_.prop('checked') == true ? leadForm.children('h2').show() : leadForm.children('h2').hide();
-		}else if ( input_.data('padding') ) {
+		}else if ( input_.data('padding') && dataCheck == 'lf-submit-padding' ) {
 			Custom_popup_editor._globalPadding('padding', input_ ,leadForm.find('input.lf-form-submit') ,inputVal);
-		}else if ( input_.data('origin') == 'padding' ) {
+		}else if ( input_.data('origin') == 'padding' && dataCheck == 'lf-submit-padding' ) {
 			Custom_popup_editor._globalPadding('padding-origin', input_ ,leadForm.find('input.lf-form-submit') ,inputVal);
 		}else if ( dataCheck == 'submit-font-weight') {
 			leadForm.find('input.lf-form-submit').css('font-weight',inputVal);

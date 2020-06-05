@@ -1,4 +1,5 @@
 <?php 
+if ( ! defined( 'ABSPATH' ) ) exit; 
 // prebuilt popup json 
 $getOuterUrl_ 	= WPPB_URL.'inc/wppb-builder.json';
 $urlResponse 	= wp_remote_get( $getOuterUrl_ );
@@ -17,6 +18,11 @@ if ( is_array( $responseResult_ ) && ! is_wp_error( $responseResult_ ) ) {
 }
 ?>
 <section class="wppb-popup-name-layout">
+
+	<div class="wp-popup-name-layout-name-init-2">
+		<button class="wppb-popup-name-init business_disabled"><?php _e('NEXT','wppb'); ?></button>
+	</div>
+
 	<!-- popup name  -->
 	<div class="wppb-popup-name">
 		<div>
