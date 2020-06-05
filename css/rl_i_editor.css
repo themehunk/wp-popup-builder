@@ -83,9 +83,9 @@
  .rl_i_editor-content-area select[data-editor-input]{
     width: 60px;
 }
-.rl_i_editor-content-area::-webkit-scrollbar{
+/*.rl_i_editor-content-area::-webkit-scrollbar{
   display: none;
-}
+}*/
 .rl_i_editor-footer{
         background: #777777;
     position: absolute;
