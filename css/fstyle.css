@@ -88,7 +88,7 @@ font-weight: 600;
     height: auto;
     z-index: 4;
     position: relative;
-    max-height: 430px;
+    /*max-height: 430px;*/
     overflow-y: scroll;
 }
 .wppb-popup-main-wrap .wppb-popup-rl-wrap{
@@ -281,12 +281,6 @@ font-weight: 600;
                  margin: calc(5px / 100 * 70) 0;
             font-size: calc(15px / 100 * 70);
         }
-
-        .wppb-popup-lead-form{
-            max-height: 100px;
-            overflow-y: scroll;
-        }
-
 }
 
 /*effect css */

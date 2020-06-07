@@ -47,7 +47,6 @@ var Business_news_letter = {
 			let contentGlobal = jQuery('input[type="hidden"][data-global-save]');
 			contentGlobal = contentGlobal.val() ? JSON.parse(contentGlobal.val()) : {};
 			let outerParent = jQuery('.wppb-popup-custom');
-			let overlayImage = outerParent.find('[data-overlay-image]');
 			// overlay color set
 			let overLayColor = outerParent.find('.wppb-popup-custom-overlay');
 			overLayColor = Custom_popup_editor._checkStyle(overLayColor,'background-color');
@@ -60,15 +59,23 @@ var Business_news_letter = {
 			globalPadding = Custom_popup_editor._checkStyle(globalPadding,'padding');
 			if(outSideColor) contentGlobal['global-padding'] = globalPadding;
 
-			if(overlayImage.attr('data-overlay-image')){
+			let overlayImage = outerParent.find('[data-overlay-image]');
+
+			if( overlayImage.attr('data-overlay-image') && overlayImage.css('background-image') != 'none' ){
+
+				// let findOnOff = overlayImage.css('background-image');
+				// console.log(findOnOff);
+
 				contentGlobal['overlay-image-url'] = overlayImage.attr('data-overlay-image');
 			}else{
 				if(contentGlobal['overlay-image-url']) delete contentGlobal['overlay-image-url'];
 			}
-			let wrapperWidth = outerParent.find('.wppb-popup-custom-wrapper');
-			if ( wrapperWidth.attr('style') )contentGlobal['wrapper-style'] = wrapperWidth.attr('style');
 			let overlayStyle = Custom_popup_editor._removeStyle(overlayImage,"background-image",false)
 			if(overlayStyle) contentGlobal['overlay-style'] = overlayStyle;
+
+
+			let wrapperWidth = outerParent.find('.wppb-popup-custom-wrapper');
+			if ( wrapperWidth.attr('style') )contentGlobal['wrapper-style'] = wrapperWidth.attr('style');
 			// popup name
 			let popupName = jQuery('input[name="global-popup-name"]').val();
 			contentGlobal['popup-name'] = popupName;
@@ -372,7 +379,7 @@ var Custom_popup_editor = {
 	},
 	_dragAndShort:function(){
 		jQuery( ".wppb-popup-custom .rlEditorDropable" ).sortable({
-			connectWith: ".rlEditorDropable",
+			connectWith: ".wppb-popup-custom .rlEditorDropable",
 	      revert: true,
 	      placeholder: "ui-state-highlight",
 	      cursor: "move",
@@ -381,7 +388,7 @@ var Custom_popup_editor = {
 	      	let droppedContainer = jQuery(this);
 	      	if(droppedContainer.children().length > 1)droppedContainer.children('.rl_rmBlankSpace').remove();
 	      }
-	    }).disableSelection();
+	    });
 
 		jQuery( ".rl_i_editor-element-add-item-list [data-item-drag]" ).draggable({
 	      connectToSortable: ".wppb-popup-custom .rlEditorDropable",
@@ -390,7 +397,7 @@ var Custom_popup_editor = {
 	      stop:function(event,ui){
 	      	Custom_popup_editor._initAfterDrag(ui.helper);
 	      }
-	    }).disableSelection();
+	    });
 	},
 	_initAfterDrag:function(myObj){
 	        	let editable,defaultText,extraAttr;
@@ -448,6 +455,27 @@ var Custom_popup_editor = {
 		if (jQuery('.rl-editable-key-action').length)jQuery('.rl-editable-key-action').removeClass('rl-editable-key-action');
 		clickedObj.addClass('rl-editable-key-action');
 		let wrapperContent = jQuery('.rl_i_editor-item-content');
+
+
+		// jQuery( ".wppb-popup-custom .rlEditorDropable" ).sortable({
+		// 	connectWith: ".wppb-popup-custom .rlEditorDropable",
+	 //      revert: true,
+	 //      placeholder: "ui-state-highlight",
+	 //      cursor: "move",
+	 //      cancel:'.rl-editable-key-action',
+	 //      update:function(){
+	 //      	let droppedContainer = jQuery(this);
+	 //      	if(droppedContainer.children().length > 1)droppedContainer.children('.rl_rmBlankSpace').remove();
+	 //      }
+	 //    });
+	 // $('p').on('click', function() {
+    
+  //       $( ".sortable" ).sortable( "destroy" );
+  //   });
+  //       $( ".sortable" ).sortable( "destroy" );
+		// clickedObj.attr('contenteditable',true);
+
+
 
 		// close container while open content style
 		jQuery('.rl-lead-form-panel').hide();
@@ -614,11 +642,16 @@ var Custom_popup_editor = {
 						jQuery('.global-wrapper-height-custom-auto').show();
 					}
 			}else if (sepInputDataClr == 'overlay-color' || sepInputDataClr == 'outside-color' ) {
-				let colorObj = sepInputDataClr == 'outside-color' ? jQuery('.wppb-popup-custom') : jQuery('.wppb-popup-custom .wppb-popup-custom-overlay'); 
+				let colorObj;
+				if (sepInputDataClr == 'outside-color') {
+					colorObj = jQuery('.wppb-popup-custom');
+					if (setHiddenInput['outside-color']) Custom_popup_editor._setStyleColor(colorObj,setHiddenInput['outside-color'],'background-color');
+				}else{
+					colorObj = jQuery('.wppb-popup-custom .wppb-popup-custom-overlay');
+				}
 				Custom_popup_editor._colorPickr(sepInput,colorObj,dataInput);
 			}else if (dataInput == 'overlay-image') {
 				let imgUrl = jQuery('.wppb-popup-custom .wppb-popup-overlay-custom-img').css('background-image');
-				let popupUrl = jQuery('input[name="popup-url"]').val();
 				let imageContainer = jQuery('.global-overlay-image');
 				let imageCheckbox = jQuery('[data-global-input="global-overlay-image"]');
 				if (imgUrl && imgUrl != 'none') {
@@ -648,11 +681,17 @@ var Custom_popup_editor = {
 								if (setHiddenInput['close-type']) {
 						 				sepInput.val( setHiddenInput['close-type'] );
 								}else{
-						 				sepInput.val( 3 );
+						 				sepInput.val( 2 );
 								}
 						}
 						if (closeBtn.length) {
-							jQuery('.close-btn-container').show();
+							let checkStyle = Custom_popup_editor._checkStyle( closeBtn, 'display' );
+							if(checkStyle != 'none') {
+								jQuery('.close-btn-container').show();
+							}else{
+								jQuery('.close-btn-container').hide();
+							}
+
 							if (dataInput == 'close-font-size') {
 									Custom_popup_editor._inputRange(sepInput,closeBtn,'font-size');
 							}else if ( dataInput == 'close-btn' && sepInput.data('padding') ) {
@@ -728,40 +767,56 @@ var Custom_popup_editor = {
 						jQuery('.wppb-popup-custom .wppb-popup-custom-content').css('height',inputValue+'px');
 					if(checkArray)setHiddenInput['wrapper-height'] = inputValue;
 				}else if(inputData == 'wrapper-height-check'){
+					
 					if (sepInput.prop('checked') === false) {
 						jQuery('.wppb-popup-custom .wppb-popup-custom-content').css('height','auto');
 						if(checkArray)setHiddenInput['wrapper-height'] = 'auto';
 						jQuery('.global-wrapper-height-custom-auto').hide();
 					}else{
 						jQuery('.global-wrapper-height-custom-auto').show();
+						let putHeight = jQuery('.global-wrapper-height-custom-auto').find('[data-global-input="main-wrapper-height"]');
+						Custom_popup_editor._inputRange(putHeight,jQuery('.wppb-popup-custom .wppb-popup-custom-content'),'height');
 					}
+
 				}else if (inputData == "background-position") {
 						jQuery('.wppb-popup-custom .wppb-popup-overlay-custom-img').css('background-position',inputValue);
 				}else if (inputData == "background-size") {
 						jQuery('.wppb-popup-custom .wppb-popup-overlay-custom-img').css('background-size',inputValue);
 				}else if(inputData == "global-overlay-image"){
 					let imageContainer = jQuery('.global-overlay-image');
+					let imageDiv = jQuery('.wppb-popup-custom .wppb-popup-overlay-custom-img');
 						if (sepInput.prop('checked') === true) {
 							imageContainer.show();
 							let popupUrl = jQuery('input[name="popup-url"]').val();
 							let imgUrl = "url('"+popupUrl+"img/blank-img.png')";
+							if (imageDiv.attr('data-overlay-image') != '') {
+								imgUrl = "url('"+imageDiv.data('overlay-image')+"')";
+								imageDiv.css('background-image',imgUrl);
+							}
 							jQuery('.global-overlay-image .rl-i-choose-image-wrap').css('background-image', imgUrl);
 						}else{
 							imageContainer.hide();
-							jQuery('.wppb-popup-custom .wppb-popup-overlay-custom-img').css('background-image','none');
-							jQuery('.wppb-popup-custom .wppb-popup-overlay-custom-img').removeAttr('data-overlay-image');
+							imageDiv.css('background-image','none');
+							// jQuery('.wppb-popup-custom .wppb-popup-overlay-custom-img').removeAttr('data-overlay-image');
 						}
 				}else if (inputData == 'close-font-size') {
 					jQuery('.wppb-popup-custom .wppb-popup-close-btn').css('font-size',inputValue+'px');
 				}else if (inputData == 'close-option') {
 							if(checkArray)setHiddenInput['close-type'] = inputValue;
+							let closeBtn = jQuery('.wppb-popup-custom .wppb-popup-close-btn');
 							if (inputValue == 1 || inputValue == 2) {
-								let closeBtn = '<span class="wppb-popup-close-btn dashicons dashicons-no-alt"></span>';
-								if( !jQuery('.wppb-popup-custom .wppb-popup-close-btn').length ) jQuery('.wppb-popup-custom > div').prepend(closeBtn);
+								
+								if( !closeBtn.length ){
+									let closeBtn = '<span class="wppb-popup-close-btn dashicons dashicons-no-alt"></span>';
+									 jQuery('.wppb-popup-custom > div').prepend(closeBtn);
+								}else{
+									closeBtn.show();
+								}
 								jQuery('.close-btn-container').show();
 								Custom_popup_editor._globalSettingInit();
 							}else{
-								jQuery('.wppb-popup-custom .wppb-popup-close-btn').remove();
+								// jQuery('.wppb-popup-custom .wppb-popup-close-btn').remove();
+								closeBtn.hide();
 								jQuery('.close-btn-container').hide();
 							}
 				}else if ( inputData == 'close-btn' ) {
@@ -797,174 +852,6 @@ var Custom_popup_editor = {
 				if (checkArray)setHiddenInputI.val( JSON.stringify(setHiddenInput) );
 		}
 	},
-	_marginPadding:function(changeData,changedInput,clickedObj,changeValue){
-		if(changedInput.data('origin') && changeData == 'margin'){
-			if (changedInput.prop('checked')) {
-				let getFirstInput = changedInput.closest('.paraMeterContainer__').find('input[data-margin="top"]');
-				let getFirstValue = getFirstInput.val()?getFirstInput.val():0;
-				changedInput.closest('.paraMeterContainer__').find('input[type="number"]').val(getFirstValue);
-				clickedObj.css('margin',getFirstValue+'px');
-			}
-		}else if(changeData == 'margin'){
-			let marginOrigin = changedInput.data('margin');
-			let getCheckBox = changedInput.closest('.paraMeterContainer__').find('[data-editor-input="margin-origin"]');
-			if (getCheckBox.prop('checked')) {
-				clickedObj.css('margin',changeValue+'px');
-				changedInput.closest('.paraMeterContainer__').find('input[type="number"]').val(changeValue);
-			}else{
-				clickedObj.css('margin-'+marginOrigin,changeValue+'px');
-			}
-		}else if(changedInput.data('origin') && changeData == 'padding'){
-			if (changedInput.prop('checked')) {
-				let getFirstInput = changedInput.closest('.paraMeterContainer__').find('input[data-padding="top"]');
-				let getFirstValue = getFirstInput.val()?getFirstInput.val():0;
-				changedInput.closest('.paraMeterContainer__').find('input[type="number"]').val(getFirstValue);
-				clickedObj.css('padding',getFirstValue+'px');
-			}
-		}else if(changeData == 'padding'){
-			let paddingOrigin = changedInput.data('padding');
-			let getCheckBox = changedInput.closest('.paraMeterContainer__').find('[data-editor-input="padding-origin"]');
-			if (getCheckBox.prop('checked')) {
-				clickedObj.css('padding',changeValue+'px');
-				changedInput.closest('.paraMeterContainer__').find('input[type="number"]').val(changeValue);
-			}else{
-				clickedObj.css('padding-'+paddingOrigin,changeValue+'px');
-			}
-		}
-
-	},
-	__borderGet:function(elementBorder,input_){
-		if( input_.data('border') == 'border-enable' ){
-			let checkBorder = Custom_popup_editor._checkStyle(elementBorder,'border');
-			let container = input_.closest('.content-style-border').find('.content-border');
-				if (checkBorder){
-					input_.prop('checked',true);
-					container.show();
-				}else{
-					input_.prop('checked',false);
-					container.hide();
-				}
-			}else if( input_.data('border') == 'width' ){
-				let getWidth = elementBorder.css('border-width');
-				input_.val( parseInt(getWidth) );
-			}else if( input_.data('border') == 'radius' ){
-					let getRadius = elementBorder.css('border-radius');
-					input_.val( parseInt(getRadius) );
-			}else if ( input_.data('input-color') == 'border-color' ) {
-				Custom_popup_editor._colorPickr(input_,elementBorder,'border-color');
-			}
-	},
-	_borderFn:function(clickedObj,changedInput,changeValue){
-		let container = changedInput.closest('.content-style-border');
-		if (changedInput.data('border') && changedInput.data('border') == 'border-enable') {
-			if (changedInput.prop('checked')) {
-				clickedObj.css("border",'1px solid orange');
-				container.find('.content-border').show();
-			}else{
-				container.find('.content-border').hide();
-				Custom_popup_editor._removeStyle(clickedObj,'border');
-			}
-		}else if (changedInput.data('border') && container.find('[type="checkbox"][data-border]').prop('checked')) {
-			let checkProp = changedInput.data('border');
-			if (checkProp == 'width') {
-				clickedObj.css('border-width',changeValue);
-			}else if (checkProp == 'radius') {
-				clickedObj.css('border-radius',changeValue+'px');
-			}else if(checkProp == 'border-style'){
-				clickedObj.css('border-style',changeValue);
-			}
-		}
-	},
-	_setBoxShadow:function(input, clickedObj){
-		let checkData = input.data('shadow');
-		let getCss = Custom_popup_editor._checkStyle(clickedObj,'box-shadow');
-		if (getCss && getCss != 'none') {
-			if ( checkData == 'enable') {
-				input.closest('.content-style-box-shadow').find('.content-box-shadow').show();
-				input.prop('checked',true);
-			}else if (checkData == 'x-offset' || checkData == 'y-offset' || checkData == 'blur' || checkData == 'spread') {
-				let putVal = Custom_popup_editor._box_shadow_prop(getCss, checkData, true, true);
-				input.val( parseInt(putVal) );
-			}else if (checkData == 'color') {
-				Custom_popup_editor._colorPickr( input, clickedObj ,'box-shadow' );
-			}
-		}else{
-			if (checkData == 'enable') {
-				input.prop('checked',false);
-			}
-			input.closest('.content-style-box-shadow').find('.content-box-shadow').hide();
-		}
-	},
-	_boxShadowFn:function(clickedObj,changedInput){
-		let checkData = changedInput.data('shadow');
-		let inputVal  = changedInput.val();
-		let container = changedInput.closest('.content-style-box-shadow');
-		if (checkData == 'enable') {
-			if (changedInput.prop('checked')) {
-				let style = '#808080 2px 4px 7px 1px';
-				Custom_popup_editor._setStyleColor(clickedObj,style,'box-shadow');
-			}else{
-				Custom_popup_editor._removeStyle(clickedObj,'box-shadow');
-			}
-			let allInputs = container.find('[data-shadow]');
-			jQuery.each(allInputs,(index,value)=>{
-				Custom_popup_editor._setBoxShadow( jQuery(value) ,clickedObj);
-			});
-
-		}else if (container.find('[type="checkbox"][data-shadow]').prop('checked') && checkData) {
-			let getCss = Custom_popup_editor._checkStyle(clickedObj,'box-shadow');
-			let getBoxShadow = Custom_popup_editor._box_shadow_prop(getCss, checkData, inputVal);
-			if(getBoxShadow) Custom_popup_editor._setStyleColor(clickedObj,getBoxShadow,'box-shadow');
-		}
-	},
-	_box_shadow_prop:function(css, shadow_prop, value_, get_prop_){
-		let splitted = css.split(' ');
-			if (shadow_prop == 'color') {
-				if(get_prop_ ){return splitted[0];}else{splitted[0] = value_ };
-			}else if (shadow_prop == 'x-offset') {
-				if(get_prop_ ){return splitted[1];}else{splitted[1] = value_ + 'px' };
-			}else if (shadow_prop == 'y-offset') {
-				if(get_prop_ ){return splitted[2];}else{splitted[2] = value_ + 'px' };
-			}else if (shadow_prop == 'blur') {
-				if(get_prop_ ){return splitted[3];}else{splitted[3] = value_ + 'px' };
-			} else if (shadow_prop == 'spread') {
-				if(get_prop_ ){return splitted[4];}else{splitted[4] = value_ + 'px' };
-			}
-		splitted = splitted.join(' ');
-		return value_ ? splitted:false;
-	},
-	_globalPadding:function(changeData,changedInput,clickedObj,changeValue){
-				if(changeData == 'padding'){
-					let paddingOrigin = changedInput.data('padding');
-					let getCheckBox = changedInput.closest('.paraMeterContainer__').find('[data-origin="padding"]');
-					if (getCheckBox.prop('checked')) {
-						clickedObj.css('padding',changeValue+'px');
-						changedInput.closest('.paraMeterContainer__').find('input[type="number"]').val(changeValue);
-					}else{
-						clickedObj.css('padding-'+paddingOrigin,changeValue+'px');
-					}
-				}else if(changeData == 'padding-origin'){
-					if (changedInput.prop('checked')) {
-						let getFirstInput = changedInput.closest('.paraMeterContainer__').find('input[data-padding="top"]');
-						let getFirstValue = getFirstInput.val()?getFirstInput.val():0;
-						changedInput.closest('.paraMeterContainer__').find('input[type="number"]').val(getFirstValue);
-						clickedObj.css('padding',getFirstValue+'px');
-					}
-				}
-	},
-	_contentAlign:function(clickedObj,changeValue){
-		let alignContent = clickedObj.closest('.data-rl-editable-wrap');
-		if (changeValue == 'center') {
-			alignContent.css('justify-content','center');
-			clickedObj.attr('data-content-alignment','center');
-		}else if (changeValue == 'right') {
-			alignContent.css('justify-content','flex-end');
-			clickedObj.attr('data-content-alignment','flex-end');
-		}else if (changeValue == 'left') {
-			alignContent.css('justify-content','unset');
-			if(clickedObj.data('content-alignment'))clickedObj.removeAttr('data-content-alignment');
-		}
-	},
 	_rlRemoveElement:function(){
 		let button = jQuery(this);
 		button.closest('.data-rl-editable-wrap').remove();
@@ -988,7 +875,6 @@ var Custom_popup_editor = {
 		let layOutRadio = jQuery('.wppb-popup-name-layout input[name="wppb-popup-layout"]:checked');
 		let layoutName  = layOutRadio.val();
 		let popupName   = jQuery('.wppb-popup-name-layout input[name="wppb-popup-name"]').val();
-
 			if (layoutName && popupName) {
 				let getLayout = '';
 				if (layoutName == 'prebuilt') {
@@ -998,8 +884,9 @@ var Custom_popup_editor = {
 					getLayout = jQuery('.prebuilt-pupup-layout-container > div[data-layout="'+layoutName+'"]').html();
 				}
 				let saveLAyout = {layout:layoutName,'popup-name':popupName};
-				let setHiddenInputI = jQuery('input[type="hidden"][data-global-save]');
-				setHiddenInputI.val( JSON.stringify(saveLAyout) );
+				let outSideColor   = jQuery('.wppb-popup-name-layout input[name="wppb-popup-layout"]:checked').data('outside-color');
+				if (outSideColor) saveLAyout['outside-color'] = outSideColor;
+				jQuery('input[type="hidden"][data-global-save]').val( JSON.stringify(saveLAyout) );
 				let putLayout = jQuery('.wppb-popup-custom > div');
 				putLayout.html(getLayout);
 				jQuery('.wppb-popup-name-layout').hide();
@@ -1136,6 +1023,10 @@ var Custom_popup_editor = {
 					Custom_popup_editor.__borderGet(elementBorder,sepInput);
 			}else if (getData == 'form-heading-enable') {
 				leadForm.children('h2').css('display') != 'none' ? sepInput.prop('checked', true) : sepInput.prop('checked', false);
+			}else if (getData == 'form-label-enable') {
+
+				leadForm.find('.lf-field > label:not(.submit-type > label)').css('display') != 'none' ? sepInput.prop('checked', true) : sepInput.prop('checked', false);
+
 			}else if( sepInput.data('input-color') == 'lf-field-color' ){
 				let element = leadForm.find('.name-type.lf-field input, .text-type.lf-field input, .textarea-type.lf-field textarea');
 				Custom_popup_editor._colorPickr( sepInput, element ,'color' );
@@ -1180,10 +1071,13 @@ var Custom_popup_editor = {
 			leadForm.find('input.lf-form-submit').css('font-size',inputVal+'px');
 		}else if( dataCheck == 'lf-heading-font-size'){
 			leadForm.children('h2').css('font-size',inputVal+'px');
+		}else if (dataCheck == 'form-border' || dataCheck == 'lf-submit-border' || dataCheck == 'lf-field-border'){		
 				let elementBorder = dataCheck == 'form-border' ? leadForm : (dataCheck == 'lf-field-border') ? leadForm.find('.lf-field input, .textarea-type.lf-field textarea').not('input[type="submit"]') : leadForm.find('input.lf-form-submit');
 				Custom_popup_editor._borderFn(elementBorder,input_,inputVal);
 		}else if ( dataCheck == 'form-heading-enable') {
 			input_.prop('checked') == true ? leadForm.children('h2').show() : leadForm.children('h2').hide();
+		}else if ( dataCheck == 'form-label-enable') {
+			input_.prop('checked') == true ? leadForm.find('.lf-field > label:not(.submit-type > label)').show() : leadForm.find('.lf-field > label:not(.submit-type > label)').hide();
 		}else if ( input_.data('padding') && dataCheck == 'lf-submit-padding' ) {
 			Custom_popup_editor._globalPadding('padding', input_ ,leadForm.find('input.lf-form-submit') ,inputVal);
 		}else if ( input_.data('origin') == 'padding' && dataCheck == 'lf-submit-padding' ) {
@@ -1333,6 +1227,179 @@ var Custom_popup_editor = {
 		putOutput.on('change' ,function(){
 			rangeSlider.val(jQuery(this).val()).change();
 		});
+	},
+	_marginPadding:function(changeData,changedInput,clickedObj,changeValue){
+		if(changedInput.data('origin') && changeData == 'margin'){
+			if (changedInput.prop('checked')) {
+				let getFirstInput = changedInput.closest('.paraMeterContainer__').find('input[data-margin="top"]');
+				let getFirstValue = getFirstInput.val()?getFirstInput.val():0;
+				changedInput.closest('.paraMeterContainer__').find('input[type="number"]').val(getFirstValue);
+				clickedObj.css('margin',getFirstValue+'px');
+			}
+		}else if(changeData == 'margin'){
+			let marginOrigin = changedInput.data('margin');
+			let getCheckBox = changedInput.closest('.paraMeterContainer__').find('[data-editor-input="margin-origin"]');
+			if (getCheckBox.prop('checked')) {
+				clickedObj.css('margin',changeValue+'px');
+				changedInput.closest('.paraMeterContainer__').find('input[type="number"]').val(changeValue);
+			}else{
+				clickedObj.css('margin-'+marginOrigin,changeValue+'px');
+			}
+		}else if(changedInput.data('origin') && changeData == 'padding'){
+			if (changedInput.prop('checked')) {
+				let getFirstInput = changedInput.closest('.paraMeterContainer__').find('input[data-padding="top"]');
+				let getFirstValue = getFirstInput.val()?getFirstInput.val():0;
+				changedInput.closest('.paraMeterContainer__').find('input[type="number"]').val(getFirstValue);
+				clickedObj.css('padding',getFirstValue+'px');
+			}
+		}else if(changeData == 'padding'){
+			let paddingOrigin = changedInput.data('padding');
+			let getCheckBox = changedInput.closest('.paraMeterContainer__').find('[data-editor-input="padding-origin"]');
+			if (getCheckBox.prop('checked')) {
+				clickedObj.css('padding',changeValue+'px');
+				changedInput.closest('.paraMeterContainer__').find('input[type="number"]').val(changeValue);
+			}else{
+				clickedObj.css('padding-'+paddingOrigin,changeValue+'px');
+			}
+		}
+
+	},
+	__borderGet:function(elementBorder,input_){
+		if( input_.data('border') == 'border-enable' ){
+			let checkBorder = Custom_popup_editor._checkStyle(elementBorder,'border');
+			let container = input_.closest('.content-style-border').find('.content-border');
+				if (checkBorder){
+					input_.prop('checked',true);
+					container.show();
+				}else{
+					input_.prop('checked',false);
+					container.hide();
+				}
+			}else if( input_.data('border') == 'width' ){
+				let getWidth = elementBorder.css('border-width');
+				input_.val( parseInt(getWidth) );
+			}else if( input_.data('border') == 'radius' ){
+					let getRadius = elementBorder.css('border-radius');
+					input_.val( parseInt(getRadius) );
+			}else if ( input_.data('input-color') == 'border-color' ) {
+				Custom_popup_editor._colorPickr(input_,elementBorder,'border-color');
+			}
+	},
+	_borderFn:function(clickedObj,changedInput,changeValue){
+		let container = changedInput.closest('.content-style-border');
+		if (changedInput.data('border') && changedInput.data('border') == 'border-enable') {
+			if (changedInput.prop('checked')) {
+				clickedObj.css("border",'1px solid orange');
+			}else{
+				Custom_popup_editor._removeStyle(clickedObj,'border');
+			}
+
+			let allInputs = container.find('[data-border],[data-input-color]');
+			jQuery.each(allInputs,(index,value)=>{
+				Custom_popup_editor.__borderGet( clickedObj, jQuery(value) );
+			});
+
+
+		}else if (changedInput.data('border') && container.find('[type="checkbox"][data-border]').prop('checked')) {
+			let checkProp = changedInput.data('border');
+			if (checkProp == 'width') {
+				clickedObj.css('border-width',changeValue);
+			}else if (checkProp == 'radius') {
+				clickedObj.css('border-radius',changeValue+'px');
+			}else if(checkProp == 'border-style'){
+				clickedObj.css('border-style',changeValue);
+			}
+		}
+	},
+	_setBoxShadow:function(input, clickedObj){
+		let checkData = input.data('shadow');
+		let getCss = Custom_popup_editor._checkStyle(clickedObj,'box-shadow');
+		if (getCss && getCss != 'none') {
+			if ( checkData == 'enable') {
+				input.closest('.content-style-box-shadow').find('.content-box-shadow').show();
+				input.prop('checked',true);
+			}else if (checkData == 'x-offset' || checkData == 'y-offset' || checkData == 'blur' || checkData == 'spread') {
+				let putVal = Custom_popup_editor._box_shadow_prop(getCss, checkData, true, true);
+				input.val( parseInt(putVal) );
+			}else if (checkData == 'color') {
+				Custom_popup_editor._colorPickr( input, clickedObj ,'box-shadow' );
+			}
+		}else{
+			if (checkData == 'enable') {
+				input.prop('checked',false);
+			}
+			input.closest('.content-style-box-shadow').find('.content-box-shadow').hide();
+		}
+	},
+	_boxShadowFn:function(clickedObj,changedInput){
+		let checkData = changedInput.data('shadow');
+		let inputVal  = changedInput.val();
+		let container = changedInput.closest('.content-style-box-shadow');
+		if (checkData == 'enable') {
+			if (changedInput.prop('checked')) {
+				let style = '#808080 2px 4px 7px 1px';
+				Custom_popup_editor._setStyleColor(clickedObj,style,'box-shadow');
+			}else{
+				Custom_popup_editor._removeStyle(clickedObj,'box-shadow');
+			}
+			let allInputs = container.find('[data-shadow]');
+			jQuery.each(allInputs,(index,value)=>{
+				Custom_popup_editor._setBoxShadow( jQuery(value) ,clickedObj);
+			});
+
+		}else if (container.find('[type="checkbox"][data-shadow]').prop('checked') && checkData) {
+			let getCss = Custom_popup_editor._checkStyle(clickedObj,'box-shadow');
+			let getBoxShadow = Custom_popup_editor._box_shadow_prop(getCss, checkData, inputVal);
+			if(getBoxShadow) Custom_popup_editor._setStyleColor(clickedObj,getBoxShadow,'box-shadow');
+		}
+	},
+	_box_shadow_prop:function(css, shadow_prop, value_, get_prop_){
+		let splitted = css.split(' ');
+			if (shadow_prop == 'color') {
+				if(get_prop_ ){return splitted[0];}else{splitted[0] = value_ };
+			}else if (shadow_prop == 'x-offset') {
+				if(get_prop_ ){return splitted[1];}else{splitted[1] = value_ + 'px' };
+			}else if (shadow_prop == 'y-offset') {
+				if(get_prop_ ){return splitted[2];}else{splitted[2] = value_ + 'px' };
+			}else if (shadow_prop == 'blur') {
+				if(get_prop_ ){return splitted[3];}else{splitted[3] = value_ + 'px' };
+			} else if (shadow_prop == 'spread') {
+				if(get_prop_ ){return splitted[4];}else{splitted[4] = value_ + 'px' };
+			}
+		splitted = splitted.join(' ');
+		return value_ ? splitted:false;
+	},
+	_globalPadding:function(changeData,changedInput,clickedObj,changeValue){
+				if(changeData == 'padding'){
+					let paddingOrigin = changedInput.data('padding');
+					let getCheckBox = changedInput.closest('.paraMeterContainer__').find('[data-origin="padding"]');
+					if (getCheckBox.prop('checked')) {
+						clickedObj.css('padding',changeValue+'px');
+						changedInput.closest('.paraMeterContainer__').find('input[type="number"]').val(changeValue);
+					}else{
+						clickedObj.css('padding-'+paddingOrigin,changeValue+'px');
+					}
+				}else if(changeData == 'padding-origin'){
+					if (changedInput.prop('checked')) {
+						let getFirstInput = changedInput.closest('.paraMeterContainer__').find('input[data-padding="top"]');
+						let getFirstValue = getFirstInput.val()?getFirstInput.val():0;
+						changedInput.closest('.paraMeterContainer__').find('input[type="number"]').val(getFirstValue);
+						clickedObj.css('padding',getFirstValue+'px');
+					}
+				}
+	},
+	_contentAlign:function(clickedObj,changeValue){
+		let alignContent = clickedObj.closest('.data-rl-editable-wrap');
+		if (changeValue == 'center') {
+			alignContent.css('justify-content','center');
+			clickedObj.attr('data-content-alignment','center');
+		}else if (changeValue == 'right') {
+			alignContent.css('justify-content','flex-end');
+			clickedObj.attr('data-content-alignment','flex-end');
+		}else if (changeValue == 'left') {
+			alignContent.css('justify-content','unset');
+			if(clickedObj.data('content-alignment'))clickedObj.removeAttr('data-content-alignment');
+		}
 	}
 }
 	Custom_popup_editor.init();

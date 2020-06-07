@@ -324,21 +324,24 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 				<!-- heading style -->
 				<div class="rl_i_editor-item-content-i rl_i_editor-item-content-form-content wppb-lf-content-style">
 				 <?php 
+				 //heading section
 					$wp_builder_obj->header_title(__('Heading Setting','wppb'));
 					echo $wp_builder_obj->checkbox("form-heading-enable",__("Heading Enable",'wppb'),'data-lead-form="form-heading-enable"');
 					$wp_builder_obj->color(__('Color','wppb'),'color','data-lead-form','lf-heading-color');
 					$wp_builder_obj->range_slider(__('Font Size','wppb'), 'lf-heading-font-size', ['title'=>'px','min'=>"10",'max'=>100,'value'=>10], false, 'data-lead-form');
+				 //label text section
 					$wp_builder_obj->header_title(__('Label Setting','wppb'));
+					echo $wp_builder_obj->checkbox("form-label-enable",__("Label Enable",'wppb'),'data-lead-form="form-label-enable"');
 					$wp_builder_obj->color(__('Color','wppb'),'color','data-lead-form','lf-label-color');
 					$wp_builder_obj->range_slider(__('Font Size','wppb'), 'lf-label-font-size', ['title'=>'px','min'=>"10",'max'=>100,'value'=>10], false, 'data-lead-form');
-
+				 //field text section
 					$wp_builder_obj->header_title(__('Field Setting','wppb'));
 					$wp_builder_obj->color(__('Color','wppb'),'color','data-lead-form','lf-field-color');
 					$wp_builder_obj->color(__('Background Color','wppb'),'background-color','data-lead-form','lf-field-background-color');
 					$wp_builder_obj->range_slider(__('Font Size','wppb'), 'lf-field-font-size', ['title'=>'px','min'=>"10",'max'=>100,'value'=>10], false, 'data-lead-form');
 					$wp_builder_obj->range_slider(__('Height','wppb'), 'lf-field-height', ['title'=>'px','min'=>12,'max'=>120,'value'=>25], false, 'data-lead-form');
 					$wp_builder_obj->border('lf-field-border','data-lead-form'); 
-
+				 //submit button section
 					$wp_builder_obj->header_title(__('Submit Button Setting','wppb'));
 					$wp_builder_obj->color(__('Color','wppb'),'color','data-lead-form','lf-submit-btn-color');
 					$wp_builder_obj->color(__('Background Color','wppb'),'background-color','data-lead-form','lf-submit-btn-bcolor');

@@ -158,11 +158,12 @@ public function wppbPopupList($allSetting,$column_making,$business_id,$countPopu
 // popup page list of all popupSetData json file
 public function wppbPopupList_json($allSetting,$column_making,$countPopup){
 		$popupSetData = $this->wppbPopupContent($allSetting);
-		$LayOutName = isset($popupSetData['layout']) && $popupSetData['layout'] ? 'data-layout="'.$popupSetData['layout'].'"' : '';
+		$attr_inbuilt = isset($popupSetData['layout']) && $popupSetData['layout'] ? 'data-layout="'.$popupSetData['layout'].'"' : '';
+		$attr_inbuilt .= isset($popupSetData['outside-color']) && $popupSetData['outside-color'] ? 'data-outside-color="'.$popupSetData['outside-color'].'"' : '';
 		$returnHtml = '';
 		if ($column_making == 1) $returnHtml .= '<div class="wppb-popup-row wppb-popup_clear">';
 		$returnHtml .= '<div class="wppb-popup-column-three">
-								<input id="wppb-popup-layout-label__layout--'.$column_making.'" type="radio" name="wppb-popup-layout" value="prebuilt" '.$LayOutName.'>
+								<input id="wppb-popup-layout-label__layout--'.$column_making.'" type="radio" name="wppb-popup-layout" value="prebuilt" '.$attr_inbuilt.'>
 								<label for="wppb-popup-layout-label__layout--'.$column_making.'" class="wppb-popup-json-label">'.$this->popup_layout($popupSetData).'</label>
 						</div>';
 		if($countPopup == ($column_making)){
