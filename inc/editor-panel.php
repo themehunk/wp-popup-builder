@@ -346,7 +346,6 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 					$wp_builder_obj->color(__('Color','wppb'),'color','data-lead-form','lf-submit-btn-color');
 					$wp_builder_obj->color(__('Background Color','wppb'),'background-color','data-lead-form','lf-submit-btn-bcolor');
 					$wp_builder_obj->range_slider(__('Font Size','wppb'), 'lf-submit-btn-font-size', ['title'=>'px','min'=>"10",'max'=>100,'value'=>10], false, 'data-lead-form'); 
-					$wp_builder_obj->border('lf-submit-border','data-lead-form');
 					echo $wp_builder_obj->alignment(__('Button Alignment','wppb'),'lf-submit-aliment','data-lead-form'); 
 				?>
 					<div class="rl_i_editor-item-content-items item-text inline__">
@@ -355,7 +354,10 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 							<?php echo $wp_builder_obj->select('data-lead-form="submit-font-weight"',[ [200,200],[300,300],[400,400],[500,500],[600,600],[700,700],[800,800],[900,900] ]); ?>
 						</div>
 					</div>
-					<?php $wp_builder_obj->margin_padding('lf-submit-padding', __('Padding in px','wppb'), 'data-lead-form', 'p'); ?>
+					<?php 
+						$wp_builder_obj->margin_padding('lf-submit-padding', __('Padding in px','wppb'), 'data-lead-form', 'p');
+						$wp_builder_obj->border('lf-submit-border','data-lead-form');
+					 ?>
 				</div>
 			</div>
 		</section>
