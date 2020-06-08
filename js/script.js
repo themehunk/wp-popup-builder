@@ -908,9 +908,7 @@ var Custom_popup_editor = {
 
 		jQuery(document).on('keyup', '.wppb-popup-name-layout input[name="wppb-popup-name"]', Custom_popup_editor._chooseLayout);
 		jQuery(document).on('click', '.wppb-popup-name-layout input[name="wppb-popup-layout"]', Custom_popup_editor._chooseLayout);
-
 		jQuery(document).on('click', '.wppb-popup-name-init', Custom_popup_editor._popupName);
-
 		jQuery(document).on('keyup change', '.wppb-lead-form-styling [data-lead-form]',Custom_popup_editor._leadFormStylingSet);
 	},
 	_leadFormOpenPanel:function(){
