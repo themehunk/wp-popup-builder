@@ -633,14 +633,18 @@ var Custom_popup_editor = {
 			}else if (dataInput == 'main-wrapper-height') {
 					Custom_popup_editor._inputRange(sepInput,jQuery('.wppb-popup-custom .wppb-popup-custom-content'),'height');
 			}else if(dataInput=='wrapper-height-check'){
-				let height = Custom_popup_editor._checkStyle( jQuery('.wppb-popup-custom .wppb-popup-custom-content'), 'height' );
+				let globalContentH = jQuery('.wppb-popup-custom .wppb-popup-custom-content');
+				let height = Custom_popup_editor._checkStyle( globalContentH, 'height' );
 					if (height == 'auto' || !height) {
 						sepInput.prop('checked',false);
 						jQuery('.global-wrapper-height-custom-auto').hide();
 					}else{
 						sepInput.prop('checked',true);
 						jQuery('.global-wrapper-height-custom-auto').show();
+						if (globalContentH.innerHeight() < globalContentH.children().outerHeight()) globalContentH.css('overflow-y','scroll');
 					}
+
+
 			}else if (sepInputDataClr == 'overlay-color' || sepInputDataClr == 'outside-color' ) {
 				let colorObj;
 				if (sepInputDataClr == 'outside-color') {
@@ -764,10 +768,15 @@ var Custom_popup_editor = {
 					let globalBorder = jQuery('.wppb-popup-custom .wppb-popup-custom-wrapper');
 					Custom_popup_editor._borderFn(globalBorder,sepInput,inputValue);
 				}else if(inputData == 'main-wrapper-height'){
-						jQuery('.wppb-popup-custom .wppb-popup-custom-content').css('height',inputValue+'px');
+						let globalContentH = jQuery('.wppb-popup-custom .wppb-popup-custom-content');	
+						globalContentH.css('height',inputValue+'px');
+						if (globalContentH.innerHeight() < globalContentH.children().outerHeight()){
+							 globalContentH.css('overflow-y','scroll');
+						}else{
+							 globalContentH.css('overflow-y','unset');
+						}
 					if(checkArray)setHiddenInput['wrapper-height'] = inputValue;
 				}else if(inputData == 'wrapper-height-check'){
-					
 					if (sepInput.prop('checked') === false) {
 						jQuery('.wppb-popup-custom .wppb-popup-custom-content').css('height','auto');
 						if(checkArray)setHiddenInput['wrapper-height'] = 'auto';
@@ -777,7 +786,6 @@ var Custom_popup_editor = {
 						let putHeight = jQuery('.global-wrapper-height-custom-auto').find('[data-global-input="main-wrapper-height"]');
 						Custom_popup_editor._inputRange(putHeight,jQuery('.wppb-popup-custom .wppb-popup-custom-content'),'height');
 					}
-
 				}else if (inputData == "background-position") {
 						jQuery('.wppb-popup-custom .wppb-popup-overlay-custom-img').css('background-position',inputValue);
 				}else if (inputData == "background-size") {
@@ -1020,11 +1028,21 @@ var Custom_popup_editor = {
 					let elementBorder = getData == 'form-border' ? leadForm : (getData == 'lf-field-border') ? leadForm.find('.lf-field input, .textarea-type.lf-field textarea').not('input[type="submit"]') : leadForm.find('input.lf-form-submit');
 					Custom_popup_editor.__borderGet(elementBorder,sepInput);
 			}else if (getData == 'form-heading-enable') {
-				leadForm.children('h2').css('display') != 'none' ? sepInput.prop('checked', true) : sepInput.prop('checked', false);
+				if (leadForm.children('h2').css('display') != 'none') {
+					jQuery('.lead-form-heading-section').show();
+					sepInput.prop('checked', true);
+				}else{
+					jQuery('.lead-form-heading-section').hide();
+					sepInput.prop('checked', false);
+				}
 			}else if (getData == 'form-label-enable') {
-
-				leadForm.find('.lf-field > label:not(.submit-type > label)').css('display') != 'none' ? sepInput.prop('checked', true) : sepInput.prop('checked', false);
-
+				if (leadForm.find('.lf-field > label:not(.submit-type > label)').css('display') != 'none') {
+					jQuery('.lead-form-label-section').show();
+					sepInput.prop('checked', true);
+				}else{
+					jQuery('.lead-form-label-section').hide();
+					sepInput.prop('checked', false);
+				}
 			}else if( sepInput.data('input-color') == 'lf-field-color' ){
 				let element = leadForm.find('.name-type.lf-field input, .text-type.lf-field input, .textarea-type.lf-field textarea');
 				Custom_popup_editor._colorPickr( sepInput, element ,'color' );
@@ -1077,9 +1095,22 @@ var Custom_popup_editor = {
 				let elementBorder = dataCheck == 'form-border' ? leadForm : (dataCheck == 'lf-field-border') ? leadForm.find('.lf-field input, .textarea-type.lf-field textarea').not('input[type="submit"]') : leadForm.find('input.lf-form-submit');
 				Custom_popup_editor._borderFn(elementBorder,input_,inputVal);
 		}else if ( dataCheck == 'form-heading-enable') {
-			input_.prop('checked') == true ? leadForm.children('h2').show() : leadForm.children('h2').hide();
+			if (input_.prop('checked') == true) {
+					jQuery('.lead-form-heading-section').show();
+					leadForm.children('h2').show();
+				}else{
+					jQuery('.lead-form-heading-section').hide();
+					leadForm.children('h2').hide();
+				}
 		}else if ( dataCheck == 'form-label-enable') {
-			input_.prop('checked') == true ? leadForm.find('.lf-field > label:not(.submit-type > label)').show() : leadForm.find('.lf-field > label:not(.submit-type > label)').hide();
+				if (input_.prop('checked') == true) {
+					jQuery('.lead-form-label-section').show();
+					leadForm.find('.lf-field > label:not(.submit-type > label)').show()
+				}else{
+					jQuery('.lead-form-label-section').hide();
+					leadForm.find('.lf-field > label:not(.submit-type > label)').hide();
+				}
+			// input_.prop('checked') == true ? leadForm.find('.lf-field > label:not(.submit-type > label)').show() : leadForm.find('.lf-field > label:not(.submit-type > label)').hide();
 		}else if ( input_.data('padding') && dataCheck == 'lf-submit-padding' ) {
 			Custom_popup_editor._globalPadding('padding', input_ ,leadForm.find('input.lf-form-submit') ,inputVal);
 		}else if ( input_.data('origin') == 'padding' && dataCheck == 'lf-submit-padding' ) {

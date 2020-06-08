@@ -246,7 +246,7 @@ a:focus{
     z-index: 4;
     position: relative;
     padding: 23px 37px 23px;
-    overflow-y: auto;
+    /*overflow-y: auto;*/
 }
 .wppb-popup-custom img{
     max-width: 100%;
@@ -370,7 +370,7 @@ a:focus{
 .wppb-popup-lead-form.lf_submit_right .submit-type.lf-field{
     text-align: right;
 }
-.wppb-popup-lead-form .leadform-show-form input:not([type='submit']):not([type='checkbox']),
+.wppb-popup-lead-form .leadform-show-form input:not([type='submit']):not([type='radio']):not([type='checkbox']),
 .wppb-popup-lead-form .leadform-show-form textarea{
          width: 100%;
     border: 1px solid gainsboro;
