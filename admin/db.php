@@ -263,7 +263,7 @@ public function wppb_initContent($column_content,$parentId){
                             $popupContent['style'] .= $allUniqueId.' form input[type="submit"]{'.$setting_value['styles']['submit-style'].';}';
                         }
                         if ( isset($setting_value['styles']['label-style']) ){
-                            $popupContent['style'] .= $allUniqueId.' form .lf-field > label{'.$setting_value['styles']['label-style'].';}';
+                            $popupContent['style'] .= $allUniqueId.' form .lf-field > label:not(.submit-type > label){'.$setting_value['styles']['label-style'].';}';
                         }
 
                         if ( isset($setting_value['styles']['heading-style']) ){

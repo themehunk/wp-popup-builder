@@ -1020,11 +1020,21 @@ var Custom_popup_editor = {
 					let elementBorder = getData == 'form-border' ? leadForm : (getData == 'lf-field-border') ? leadForm.find('.lf-field input, .textarea-type.lf-field textarea').not('input[type="submit"]') : leadForm.find('input.lf-form-submit');
 					Custom_popup_editor.__borderGet(elementBorder,sepInput);
 			}else if (getData == 'form-heading-enable') {
-				leadForm.children('h2').css('display') != 'none' ? sepInput.prop('checked', true) : sepInput.prop('checked', false);
+				if (leadForm.children('h2').css('display') != 'none') {
+					jQuery('.lead-form-heading-section').show();
+					sepInput.prop('checked', true);
+				}else{
+					jQuery('.lead-form-heading-section').hide();
+					sepInput.prop('checked', false);
+				}
 			}else if (getData == 'form-label-enable') {
-
-				leadForm.find('.lf-field > label:not(.submit-type > label)').css('display') != 'none' ? sepInput.prop('checked', true) : sepInput.prop('checked', false);
-
+				if (leadForm.find('.lf-field > label:not(.submit-type > label)').css('display') != 'none') {
+					jQuery('.lead-form-label-section').show();
+					sepInput.prop('checked', true);
+				}else{
+					jQuery('.lead-form-label-section').hide();
+					sepInput.prop('checked', false);
+				}
 			}else if( sepInput.data('input-color') == 'lf-field-color' ){
 				let element = leadForm.find('.name-type.lf-field input, .text-type.lf-field input, .textarea-type.lf-field textarea');
 				Custom_popup_editor._colorPickr( sepInput, element ,'color' );
@@ -1077,9 +1087,22 @@ var Custom_popup_editor = {
 				let elementBorder = dataCheck == 'form-border' ? leadForm : (dataCheck == 'lf-field-border') ? leadForm.find('.lf-field input, .textarea-type.lf-field textarea').not('input[type="submit"]') : leadForm.find('input.lf-form-submit');
 				Custom_popup_editor._borderFn(elementBorder,input_,inputVal);
 		}else if ( dataCheck == 'form-heading-enable') {
-			input_.prop('checked') == true ? leadForm.children('h2').show() : leadForm.children('h2').hide();
+			if (input_.prop('checked') == true) {
+					jQuery('.lead-form-heading-section').show();
+					leadForm.children('h2').show();
+				}else{
+					jQuery('.lead-form-heading-section').hide();
+					leadForm.children('h2').hide();
+				}
 		}else if ( dataCheck == 'form-label-enable') {
-			input_.prop('checked') == true ? leadForm.find('.lf-field > label:not(.submit-type > label)').show() : leadForm.find('.lf-field > label:not(.submit-type > label)').hide();
+				if (input_.prop('checked') == true) {
+					jQuery('.lead-form-label-section').show();
+					leadForm.find('.lf-field > label:not(.submit-type > label)').show()
+				}else{
+					jQuery('.lead-form-label-section').hide();
+					leadForm.find('.lf-field > label:not(.submit-type > label)').hide();
+				}
+			// input_.prop('checked') == true ? leadForm.find('.lf-field > label:not(.submit-type > label)').show() : leadForm.find('.lf-field > label:not(.submit-type > label)').hide();
 		}else if ( input_.data('padding') && dataCheck == 'lf-submit-padding' ) {
 			Custom_popup_editor._globalPadding('padding', input_ ,leadForm.find('input.lf-form-submit') ,inputVal);
 		}else if ( input_.data('origin') == 'padding' && dataCheck == 'lf-submit-padding' ) {

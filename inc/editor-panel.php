@@ -315,11 +315,8 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 				<div class="rl_i_editor-item-content-i rl_i_editor-item-content-form-style active_  wppb-lf-form-style">
 					<?php 
 						$wp_builder_obj->header_title(__('Form Setting','wppb'));
-						$wp_builder_obj->range_slider(__('Form Width','wppb'), 'lf-form-width', ['title'=>'%','min'=>"20",'max'=>100,'value'=>100], false, 'data-lead-form'); 
-						// echo $wp_builder_obj->checkbox("form-margin-center",__("Form Centered",'wppb'),'data-lead-form="form-margin-center"');
-					
+						$wp_builder_obj->range_slider(__('Form Width','wppb'), 'lf-form-width', ['title'=>'%','min'=>"20",'max'=>100,'value'=>100], false, 'data-lead-form'); 					
 					echo $wp_builder_obj->alignment(__('Form Centered','wppb'), 'form-margin-center', 'data-lead-form', '' ,2); 
-
 						$wp_builder_obj->color(__('Background Color','wppb'),'background-color','data-lead-form','lf-form-color');
 						$wp_builder_obj->border('form-border','data-lead-form'); 
 					?>
@@ -330,13 +327,17 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 				 //heading section
 					$wp_builder_obj->header_title(__('Heading Setting','wppb'));
 					echo $wp_builder_obj->checkbox("form-heading-enable",__("Heading Enable",'wppb'),'data-lead-form="form-heading-enable"');
-					$wp_builder_obj->color(__('Color','wppb'),'color','data-lead-form','lf-heading-color');
-					$wp_builder_obj->range_slider(__('Font Size','wppb'), 'lf-heading-font-size', ['title'=>'px','min'=>"10",'max'=>100,'value'=>10], false, 'data-lead-form');
+					echo "<div class='lead-form-heading-section'>";
+						$wp_builder_obj->color(__('Color','wppb'),'color','data-lead-form','lf-heading-color');
+						$wp_builder_obj->range_slider(__('Font Size','wppb'), 'lf-heading-font-size', ['title'=>'px','min'=>"10",'max'=>100,'value'=>10], false, 'data-lead-form');
+					echo "</div>";
 				 //label text section
 					$wp_builder_obj->header_title(__('Label Setting','wppb'));
 					echo $wp_builder_obj->checkbox("form-label-enable",__("Label Enable",'wppb'),'data-lead-form="form-label-enable"');
-					$wp_builder_obj->color(__('Color','wppb'),'color','data-lead-form','lf-label-color');
-					$wp_builder_obj->range_slider(__('Font Size','wppb'), 'lf-label-font-size', ['title'=>'px','min'=>"10",'max'=>100,'value'=>10], false, 'data-lead-form');
+					echo "<div class='lead-form-label-section'>";
+						$wp_builder_obj->color(__('Color','wppb'),'color','data-lead-form','lf-label-color');
+						$wp_builder_obj->range_slider(__('Font Size','wppb'), 'lf-label-font-size', ['title'=>'px','min'=>"10",'max'=>100,'value'=>10], false, 'data-lead-form');
+					echo "</div>";
 				 //field text section
 					$wp_builder_obj->header_title(__('Field Setting','wppb'));
 					$wp_builder_obj->color(__('Color','wppb'),'color','data-lead-form','lf-field-color');

@@ -102,7 +102,7 @@ font-weight: 600;
 .wppb-popup-main-wrap .wppb-popup-rl-wrap.two-column .wppb-popup-rl-column {
     width: 50%;
 }
-.wppb-popup-main-wrap .wppb-popup-rl-wrap span,
+.wppb-popup-main-wrap .wppb-popup-rl-wrap span:not(.lf-field span),
 .wppb-popup-main-wrap .wppb-popup-rl-wrap a{
         display: block;
     line-height: 1;
