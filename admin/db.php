@@ -129,7 +129,7 @@ public function arrayValueSanetize($arr){
 
         foreach($arr as $key => $value){
           $key = is_numeric($key)?$key:sanitize_text_field($key);
-          if(is_array($value)){
+          if( is_array($value) ){
               $returnArray[$key] = $this->arrayValueSanetize($value);
           }else{
               if ($key == "link" || $key == "image-url" || $key == 'overlay-image-url') {

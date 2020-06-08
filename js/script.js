@@ -633,14 +633,18 @@ var Custom_popup_editor = {
 			}else if (dataInput == 'main-wrapper-height') {
 					Custom_popup_editor._inputRange(sepInput,jQuery('.wppb-popup-custom .wppb-popup-custom-content'),'height');
 			}else if(dataInput=='wrapper-height-check'){
-				let height = Custom_popup_editor._checkStyle( jQuery('.wppb-popup-custom .wppb-popup-custom-content'), 'height' );
+				let globalContentH = jQuery('.wppb-popup-custom .wppb-popup-custom-content');
+				let height = Custom_popup_editor._checkStyle( globalContentH, 'height' );
 					if (height == 'auto' || !height) {
 						sepInput.prop('checked',false);
 						jQuery('.global-wrapper-height-custom-auto').hide();
 					}else{
 						sepInput.prop('checked',true);
 						jQuery('.global-wrapper-height-custom-auto').show();
+						if (globalContentH.innerHeight() < globalContentH.children().outerHeight()) globalContentH.css('overflow-y','scroll');
 					}
+
+
 			}else if (sepInputDataClr == 'overlay-color' || sepInputDataClr == 'outside-color' ) {
 				let colorObj;
 				if (sepInputDataClr == 'outside-color') {
@@ -764,10 +768,15 @@ var Custom_popup_editor = {
 					let globalBorder = jQuery('.wppb-popup-custom .wppb-popup-custom-wrapper');
 					Custom_popup_editor._borderFn(globalBorder,sepInput,inputValue);
 				}else if(inputData == 'main-wrapper-height'){
-						jQuery('.wppb-popup-custom .wppb-popup-custom-content').css('height',inputValue+'px');
+						let globalContentH = jQuery('.wppb-popup-custom .wppb-popup-custom-content');	
+						globalContentH.css('height',inputValue+'px');
+						if (globalContentH.innerHeight() < globalContentH.children().outerHeight()){
+							 globalContentH.css('overflow-y','scroll');
+						}else{
+							 globalContentH.css('overflow-y','unset');
+						}
 					if(checkArray)setHiddenInput['wrapper-height'] = inputValue;
 				}else if(inputData == 'wrapper-height-check'){
-					
 					if (sepInput.prop('checked') === false) {
 						jQuery('.wppb-popup-custom .wppb-popup-custom-content').css('height','auto');
 						if(checkArray)setHiddenInput['wrapper-height'] = 'auto';
@@ -777,7 +786,6 @@ var Custom_popup_editor = {
 						let putHeight = jQuery('.global-wrapper-height-custom-auto').find('[data-global-input="main-wrapper-height"]');
 						Custom_popup_editor._inputRange(putHeight,jQuery('.wppb-popup-custom .wppb-popup-custom-content'),'height');
 					}
-
 				}else if (inputData == "background-position") {
 						jQuery('.wppb-popup-custom .wppb-popup-overlay-custom-img').css('background-position',inputValue);
 				}else if (inputData == "background-size") {

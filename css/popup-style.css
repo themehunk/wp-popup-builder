@@ -246,7 +246,7 @@ a:focus{
     z-index: 4;
     position: relative;
     padding: 23px 37px 23px;
-    overflow-y: auto;
+    /*overflow-y: auto;*/
 }
 .wppb-popup-custom img{
     max-width: 100%;
