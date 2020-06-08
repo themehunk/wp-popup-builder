@@ -4,7 +4,7 @@ Author URI: : https://www.themehunk.com/
 Tags: popup,wp popup, WordPress Popup Builder, popup maker, exit popup, popup builder, business popup plugin
 Requires at least: 5.0
 Tested up to: 5.4.1
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -50,6 +50,9 @@ Just upload the `wp-popup-builder.zip` to the `/wp-content/plugins/` directory, 
 
 
 == Changelog ==
+
+= 1.0.1 =
+escaping issue fixed.
 
 = 1.0.0 =
 Initial release
