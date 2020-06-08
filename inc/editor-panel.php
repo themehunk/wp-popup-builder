@@ -316,7 +316,10 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 					<?php 
 						$wp_builder_obj->header_title(__('Form Setting','wppb'));
 						$wp_builder_obj->range_slider(__('Form Width','wppb'), 'lf-form-width', ['title'=>'%','min'=>"20",'max'=>100,'value'=>100], false, 'data-lead-form'); 
-						echo $wp_builder_obj->checkbox("form-margin-center",__("Form Centered",'wppb'),'data-lead-form="form-margin-center"');
+						// echo $wp_builder_obj->checkbox("form-margin-center",__("Form Centered",'wppb'),'data-lead-form="form-margin-center"');
+					
+					echo $wp_builder_obj->alignment(__('Form Centered','wppb'), 'form-margin-center', 'data-lead-form', '' ,2); 
+
 						$wp_builder_obj->color(__('Background Color','wppb'),'background-color','data-lead-form','lf-form-color');
 						$wp_builder_obj->border('form-border','data-lead-form'); 
 					?>

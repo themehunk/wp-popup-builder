@@ -1047,7 +1047,11 @@ var Custom_popup_editor = {
 				if(getAlignment == sepInput.val()) sepInput.prop('checked',true);
 			}else if( getData == 'form-margin-center' ){
 				let getMargin = Custom_popup_editor._checkStyle(leadForm,'margin');
-				getMargin == 'auto' ? sepInput.prop('checked',true) : sepInput.prop('checked',false);
+				if (getMargin == 'auto' && sepInput.val() == 'center') {
+					sepInput.prop('checked',true);
+				}else if (sepInput.val() == 'left'){
+					sepInput.prop('checked',true);
+				}
 			}
 		}
 		jQuery.each(getInputs, leadFormInput);
@@ -1086,7 +1090,7 @@ var Custom_popup_editor = {
 				leadForm.find('input.lf-form-submit').attr('data-alignment',inputVal);
 				leadForm.find('.submit-type.lf-field').css('text-align',inputVal);
 		}else if (dataCheck == 'form-margin-center') {
-				if (input_.prop('checked') == true) {
+				if (inputVal == 'center') {
 					leadForm.css('margin','auto');
 				}else{
 					Custom_popup_editor._removeStyle(leadForm,'margin');

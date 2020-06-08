@@ -89,7 +89,7 @@ font-weight: 600;
     z-index: 4;
     position: relative;
     /*max-height: 430px;*/
-    overflow-y: scroll;
+    /*overflow-y: scroll;*/
 }
 .wppb-popup-main-wrap .wppb-popup-rl-wrap{
     display: flex;

@@ -204,7 +204,8 @@ a:focus{
     position: relative;
 }
 
-.wppb-popup-demo .wppb-popup-custom .wppb-popup-custom-content div span{
+.wppb-popup-demo .wppb-popup-custom .wppb-popup-custom-content div span,
+.wppb-prebuilt-popup-json .wppb-popup-custom-wrapper .wppb-popup-custom-content div span{
           display: block;
     line-height: 1;
     color: #cacaca;
@@ -245,7 +246,7 @@ a:focus{
     z-index: 4;
     position: relative;
     padding: 23px 37px 23px;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 .wppb-popup-custom img{
     max-width: 100%;
@@ -380,6 +381,10 @@ a:focus{
     min-height: 12px;
     font-size: 14px;
     line-height: 19px;
+}
+.wppb-popup-lead-form .leadform-show-form input::placeholder,
+.wppb-popup-lead-form .leadform-show-form textarea::placeholder{
+    color: inherit;
 }
 .wppb-popup-lead-form .leadform-show-form h2{
         margin: 5px 0;

@@ -354,7 +354,7 @@ public function box_shadow($id,$type,$attr=''){
 			echo $return;
 		}
 
-		public function alignment($title,$id,$type,$attr=''){
+		public function alignment($title,$id,$type,$attr='',$number_=false){
 				$attr_ = $type."='".$id."'" . $attr;
 				$return = '<div class="rl_i_editor-item-content-items item-alignment_ inline__">
 				<label class="rl-sub-title">'.$title.'</label>
@@ -367,12 +367,15 @@ public function box_shadow($id,$type,$attr=''){
 						<li>
 							<input id="_alignment_label_'.$id.'_center" '.$attr_.' type="radio" name="'.$id.'" value="center">
 							<label for="_alignment_label_'.$id.'_center" class="dashicons dashicons-editor-aligncenter"></label>
-						</li>
-						<li>
+						</li>';
+				if ($number_ != 2) {
+				$return .='<li>
 							<input id="_alignment_label_'.$id.'_right" '.$attr_.' type="radio" name="'.$id.'" value="right">
 							<label for="_alignment_label_'.$id.'_right" class="dashicons dashicons-editor-alignright"></label>
-						</li>
-					</ul>
+						</li>';
+				}
+
+				$return .=	'</ul>
 				</div>
 			</div>';
 			return $return;
