@@ -58,7 +58,7 @@
 				 	// set auto height
 				 	let getContentHeight = wppbPopupShow.find('.wppb-popup-custom-content');
 				 	if (getContentHeight.outerHeight() > (window.innerHeight - 150) ) {
-				 		getContentHeight.css('height',(window.innerHeight - 100) + 'px');
+				 		getContentHeight.css({'height':(window.innerHeight - 100) + 'px','overflow-y':'scroll'});
 				 	}
 
 				 	wppbPopupShow.css('background-color',getOutSideColor);

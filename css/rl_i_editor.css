@@ -679,7 +679,7 @@ input[name="global-popup-name"]{
     /* animation: placeHolderBorder .3s 0s 1 normal ease-in forwards; */
     height: 30px;
     border: 1px dotted #6747e6;
-    background-color: #bdb8d2f7;
+    background-color: #eae3a2;
 
 }
 @keyframes placeHolderBorder{
