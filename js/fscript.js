@@ -56,9 +56,17 @@
 				 	jQuery('body').append(renderTohtml);
 				 	let wppbPopupShow = jQuery('#wppbPopupShow'); 
 				 	// set auto height
+
 				 	let getContentHeight = wppbPopupShow.find('.wppb-popup-custom-content');
+
+				 	// console.log( getContentHeight.innerHeight() );
+				 	// console.log(getContentHeight.children().outerHeight());
+
+
 				 	if (getContentHeight.outerHeight() > (window.innerHeight - 150) ) {
 				 		getContentHeight.css({'height':(window.innerHeight - 100) + 'px','overflow-y':'scroll'});
+				 	}else if (getContentHeight.innerHeight() < getContentHeight.children().outerHeight() ) {
+				 		getContentHeight.css({'overflow-y':'scroll'});
 				 	}
 
 				 	wppbPopupShow.css('background-color',getOutSideColor);

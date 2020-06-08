@@ -397,7 +397,7 @@ var Custom_popup_editor = {
 	      stop:function(event,ui){
 	      	Custom_popup_editor._initAfterDrag(ui.helper);
 	      }
-	    });
+	    }).disableSelection();
 	},
 	_initAfterDrag:function(myObj){
 	        	let editable,defaultText,extraAttr;
@@ -781,6 +781,7 @@ var Custom_popup_editor = {
 						jQuery('.wppb-popup-custom .wppb-popup-custom-content').css('height','auto');
 						if(checkArray)setHiddenInput['wrapper-height'] = 'auto';
 						jQuery('.global-wrapper-height-custom-auto').hide();
+						jQuery('.wppb-popup-custom .wppb-popup-custom-content').css('overflow-y','unset');
 					}else{
 						jQuery('.global-wrapper-height-custom-auto').show();
 						let putHeight = jQuery('.global-wrapper-height-custom-auto').find('[data-global-input="main-wrapper-height"]');
