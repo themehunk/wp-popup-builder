@@ -42,6 +42,13 @@
     height: 100%;
     position: relative;
 }
+.rl_i_editor-inner-wrap.sticky{
+    position: fixed;
+    min-width: 310px;
+    height: 600px;
+    top: 32px;
+}
+
 .rl_i_editor-wrap-in{
 	    position: relative;
     height: 100%;
@@ -675,8 +682,7 @@ input[name="global-popup-name"]{
 }
 /*ui drag drop style*/
 .ui-state-highlight{
-      /* border-bottom: 0px; */
-    /* animation: placeHolderBorder .3s 0s 1 normal ease-in forwards; */
+    display: block;
     height: 30px;
     border: 1px dotted #6747e6;
     background-color: #eae3a2;

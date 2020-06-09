@@ -344,6 +344,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 					$wp_builder_obj->color(__('Background Color','wppb'),'background-color','data-lead-form','lf-field-background-color');
 					$wp_builder_obj->range_slider(__('Font Size','wppb'), 'lf-field-font-size', ['title'=>'px','min'=>"10",'max'=>100,'value'=>10], false, 'data-lead-form');
 					$wp_builder_obj->range_slider(__('Height','wppb'), 'lf-field-height', ['title'=>'px','min'=>12,'max'=>120,'value'=>25], false, 'data-lead-form');
+					$wp_builder_obj->margin_padding('lf-field-margin', __('Field Margin in px','wppb'), 'data-lead-form', 'm');
 					$wp_builder_obj->border('lf-field-border','data-lead-form'); 
 				 //submit button section
 					$wp_builder_obj->header_title(__('Submit Button Setting','wppb'));

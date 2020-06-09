@@ -143,6 +143,8 @@ var Business_news_letter = {
 												if ( leadForm.find('.lf-form-submit').attr('style') ) leadFormStyle['submit-style'] = leadForm.find('.lf-form-submit').attr('style');
 
 												if ( leadForm.find('.lf-form-submit').attr('data-alignment') ) leadFormStyle['submit-align'] = leadForm.find('.lf-form-submit').attr('data-alignment');
+												
+												if ( leadForm.find('.text-type.lf-field').attr('style') ) leadFormStyle['lf-field-style'] = leadForm.find('.text-type.lf-field').attr('style');
 
 												saveAttrData['styles'] = leadFormStyle;
 
@@ -376,6 +378,20 @@ var Custom_popup_editor = {
 		Custom_popup_editor._dragAndShort();
 		Custom_popup_editor._globalSettingInit();
 		Custom_popup_editor._leadFormInit();
+
+		if (jQuery('.rl_i_editor-main-container').length) {
+			Custom_popup_editor._forEditorSticky();
+			jQuery(window).scroll(()=>Custom_popup_editor._forEditorSticky());
+		}
+	},
+	_forEditorSticky:function(){
+			let navigation = jQuery('.rl_i_editor-main-container');
+			let windowOffset =jQuery(window);
+			if ( (windowOffset.scrollTop() + 32) > navigation.offset().top ) {
+				navigation.find('.rl_i_editor-inner-wrap').addClass('sticky');
+			}else{
+				navigation.find('.rl_i_editor-inner-wrap').removeClass('sticky');
+			}
 	},
 	_dragAndShort:function(){
 		jQuery( ".wppb-popup-custom .rlEditorDropable" ).sortable({
@@ -397,7 +413,7 @@ var Custom_popup_editor = {
 	      stop:function(event,ui){
 	      	Custom_popup_editor._initAfterDrag(ui.helper);
 	      }
-	    });
+	    }).disableSelection();
 	},
 	_initAfterDrag:function(myObj){
 	        	let editable,defaultText,extraAttr;
@@ -641,7 +657,7 @@ var Custom_popup_editor = {
 					}else{
 						sepInput.prop('checked',true);
 						jQuery('.global-wrapper-height-custom-auto').show();
-						if (globalContentH.innerHeight() < globalContentH.children().outerHeight()) globalContentH.css('overflow-y','scroll');
+						if (globalContentH.innerHeight() < globalContentH.children().outerHeight()) globalContentH.css({'overflow-y':'scroll','overflow-x':'hidden'});
 					}
 
 
@@ -770,21 +786,24 @@ var Custom_popup_editor = {
 				}else if(inputData == 'main-wrapper-height'){
 						let globalContentH = jQuery('.wppb-popup-custom .wppb-popup-custom-content');	
 						globalContentH.css('height',inputValue+'px');
+
 						if (globalContentH.innerHeight() < globalContentH.children().outerHeight()){
-							 globalContentH.css('overflow-y','scroll');
+							 globalContentH.css({'overflow-y':'scroll','overflow-x':'hidden'});
 						}else{
-							 globalContentH.css('overflow-y','unset');
+							Custom_popup_editor._removeStyle(globalContentH,'overflow');
 						}
 					if(checkArray)setHiddenInput['wrapper-height'] = inputValue;
 				}else if(inputData == 'wrapper-height-check'){
+					let globalContentH = jQuery('.wppb-popup-custom .wppb-popup-custom-content');
 					if (sepInput.prop('checked') === false) {
-						jQuery('.wppb-popup-custom .wppb-popup-custom-content').css('height','auto');
+						globalContentH.css('height','auto');
 						if(checkArray)setHiddenInput['wrapper-height'] = 'auto';
 						jQuery('.global-wrapper-height-custom-auto').hide();
+						Custom_popup_editor._removeStyle(globalContentH,'overflow');
 					}else{
 						jQuery('.global-wrapper-height-custom-auto').show();
 						let putHeight = jQuery('.global-wrapper-height-custom-auto').find('[data-global-input="main-wrapper-height"]');
-						Custom_popup_editor._inputRange(putHeight,jQuery('.wppb-popup-custom .wppb-popup-custom-content'),'height');
+						Custom_popup_editor._inputRange(putHeight,globalContentH,'height');
 					}
 				}else if (inputData == "background-position") {
 						jQuery('.wppb-popup-custom .wppb-popup-overlay-custom-img').css('background-position',inputValue);
@@ -984,12 +1003,17 @@ var Custom_popup_editor = {
 							element.attr('style',leadFormStyle_['label-style']);
 						}
 						if (leadFormStyle_['field-style']) {
-						let element = leadForm.find('.lf-field input, .lf-field textarea');
-							element.not('input[type="submit"]').attr('style',leadFormStyle_['field-style']);
+						let element = leadForm.find('.lf-field input, .lf-field textarea').not('input[type="submit"],input[type="radio"],input[type="checkbox"]');
+							element.attr('style',leadFormStyle_['field-style']);
 						}
 						if (leadFormStyle_['heading-style']) {
 						let element = leadForm.children('h2');
 							element.attr('style',leadFormStyle_['heading-style']);
+						}
+						if (leadFormStyle_['lf-field-style']) {
+						// let element = leadForm.find('.name-type.lf-field, .text-type.lf-field,.textarea-type.lf-field');
+						let element = leadForm.find('.lf-field');
+							element.attr('style',leadFormStyle_['lf-field-style']);
 						}
 					}
 			});			
@@ -1025,7 +1049,7 @@ var Custom_popup_editor = {
 				let element = leadForm.find('.lf-field > label').css('font-size');
 				Custom_popup_editor._inputRange(sepInput, false, false, element );
 			}else if ( getData == 'form-border' || getData ==  'lf-submit-border' || getData == 'lf-field-border') {
-					let elementBorder = getData == 'form-border' ? leadForm : (getData == 'lf-field-border') ? leadForm.find('.lf-field input, .textarea-type.lf-field textarea').not('input[type="submit"]') : leadForm.find('input.lf-form-submit');
+					let elementBorder = getData == 'form-border' ? leadForm : (getData == 'lf-field-border') ? leadForm.find('.lf-field input, .textarea-type.lf-field textarea').not('input[type="submit"], input[type="radio"], input[type="checkbox"]') : leadForm.find('input.lf-form-submit');
 					Custom_popup_editor.__borderGet(elementBorder,sepInput);
 			}else if (getData == 'form-heading-enable') {
 				if (leadForm.children('h2').css('display') != 'none') {
@@ -1070,6 +1094,10 @@ var Custom_popup_editor = {
 				}else if (sepInput.val() == 'left'){
 					sepInput.prop('checked',true);
 				}
+			}else if (getData == 'lf-field-margin'){
+				let fieldMArgin = leadForm.find('.text-type.lf-field');
+				let margins = fieldMArgin.css('margin-'+sepInput.data('margin'));
+				if(margins || margins == '0') sepInput.val(parseInt(margins));
 			}
 		}
 		jQuery.each(getInputs, leadFormInput);
@@ -1085,14 +1113,14 @@ var Custom_popup_editor = {
 		}else if (dataCheck == 'lf-label-font-size') {
 			leadForm.find('.lf-field > label').css('font-size',inputVal+'px');
 		}else if (dataCheck == 'lf-field-font-size' || dataCheck == 'lf-field-height') {
-			let element = leadForm.find('.lf-field input, .textarea-type.lf-field textarea').not('input[type="submit"]');
+			let element = leadForm.find('.lf-field input, .textarea-type.lf-field textarea').not('input[type="submit"],input[type="radio"],input[type="checkbox"]');
 			dataCheck == 'lf-field-font-size' ? element.css('font-size',inputVal+'px') : element.css('height',inputVal+'px');
 		}else if( dataCheck == 'lf-submit-btn-font-size'){
 			leadForm.find('input.lf-form-submit').css('font-size',inputVal+'px');
 		}else if( dataCheck == 'lf-heading-font-size'){
 			leadForm.children('h2').css('font-size',inputVal+'px');
-		}else if (dataCheck == 'form-border' || dataCheck == 'lf-submit-border' || dataCheck == 'lf-field-border'){		
-				let elementBorder = dataCheck == 'form-border' ? leadForm : (dataCheck == 'lf-field-border') ? leadForm.find('.lf-field input, .textarea-type.lf-field textarea').not('input[type="submit"]') : leadForm.find('input.lf-form-submit');
+		}else if (dataCheck == 'form-border' || dataCheck == 'lf-submit-border' || dataCheck == 'lf-field-border'){
+				let elementBorder = dataCheck == 'form-border' ? leadForm : (dataCheck == 'lf-field-border') ? leadForm.find('.lf-field input, .textarea-type.lf-field textarea').not('input[type="submit"],input[type="radio"],input[type="checkbox"]') : leadForm.find('input.lf-form-submit');
 				Custom_popup_editor._borderFn(elementBorder,input_,inputVal);
 		}else if ( dataCheck == 'form-heading-enable') {
 			if (input_.prop('checked') == true) {
@@ -1126,6 +1154,10 @@ var Custom_popup_editor = {
 				}else{
 					Custom_popup_editor._removeStyle(leadForm,'margin');
 				}
+		}else if (dataCheck == 'lf-field-margin') {
+			// let fieldMArgin = leadForm.find('.text-type.lf-field, .textarea-type.lf-field');
+			let fieldMArgin = leadForm.find('.lf-field');
+			Custom_popup_editor._marginPadding('margin',input_,fieldMArgin,inputVal);
 		}
 	}
 	,_chooseImage:function(e){

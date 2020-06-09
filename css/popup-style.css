@@ -204,7 +204,7 @@ a:focus{
     position: relative;
 }
 
-.wppb-popup-demo .wppb-popup-custom .wppb-popup-custom-content div span,
+.wppb-popup-demo .wppb-popup-custom .wppb-popup-custom-content .data-rl-editable-wrap > span,
 .wppb-prebuilt-popup-json .wppb-popup-custom-wrapper .wppb-popup-custom-content div span{
           display: block;
     line-height: 1;
@@ -218,6 +218,11 @@ a:focus{
     padding: 1px 0;
     position: relative;
     box-sizing: border-box;
+}
+.wppb-popup-demo .wppb-popup-custom  .wppb-popup-lead-form .leadform-show-form span{
+        font-weight: normal;
+    color: #cacaca;
+    font-size: 16px;
 }
 .wppb-popup-custom-wrapper{
         position: relative;
@@ -246,7 +251,7 @@ a:focus{
     z-index: 4;
     position: relative;
     padding: 23px 37px 23px;
-    /*overflow-y: auto;*/
+    /*overflow-x: hidden;*/
 }
 .wppb-popup-custom img{
     max-width: 100%;
@@ -344,8 +349,8 @@ a:focus{
     /*max-height: 250px;*/
     /*overflow-y: scroll;*/
 }
-.wppb-popup-demo .wppb-popup-custom  .wppb-popup-lead-form .leadform-show-form span{
-    text-align: left;
+.wppb-popup-lead-form .lead-form-front ul,.wppb-popup-lead-form .lead-form-front li{
+    margin: 0;
 }
 .wppb-popup-lead-form .leadform-show-form input[type='submit']{
        padding: 10px 30px;
