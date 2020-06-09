@@ -263,7 +263,8 @@ public function wppb_initContent($column_content,$parentId){
                             $popupContent['style'] .= $allUniqueId.' form input[type="submit"]{'.$setting_value['styles']['submit-style'].';}';
                         }
                         if ( isset($setting_value['styles']['label-style']) ){
-                            $popupContent['style'] .= $allUniqueId.' form .lf-field > label:not(.submit-type > label){'.$setting_value['styles']['label-style'].';}';
+                            $popupContent['style'] .= $allUniqueId.' form .lf-field.name-type > label,'.$allUniqueId.' form .lf-field.text-type > label,'.$allUniqueId.' form .lf-field.textarea-type > label{'.$setting_value['styles']['label-style'].';}';
+                            // $popupContent['style'] .= $allUniqueId.' form .lf-field > label:not(.submit-type > label){'.$setting_value['styles']['label-style'].';}';
                         }
 
                         if ( isset($setting_value['styles']['heading-style']) ){
@@ -271,8 +272,14 @@ public function wppb_initContent($column_content,$parentId){
                         }
 
                         if ( isset($setting_value['styles']['field-style']) ){
-                            $popupContent['style'] .= $allUniqueId.' form .lf-field input:not([type="submit"]),'.$allUniqueId.'form .lf-field texarea{'.$setting_value['styles']['field-style'].';}';
+                            $popupContent['style'] .= $allUniqueId.' form .lf-field input:not([type="submit"]),'.$allUniqueId.' form .lf-field textarea{'.$setting_value['styles']['field-style'].';}';
                         }
+
+                        if (isset($setting_value['styles']['lf-field-style'])) {
+                            // $popupContent['style'] .= $allUniqueId.' form .lf-field.name-type,'.$allUniqueId.' form .lf-field.text-type,'.$allUniqueId.' form .lf-field.textarea-type{'.$setting_value['styles']['lf-field-style'].';}';
+                            $popupContent['style'] .= $allUniqueId.' form .lf-field{'.$setting_value['styles']['lf-field-style'].';}';
+                        }
+
                         if (isset($setting_value['styles']['submit-align'])) {
                           $submitAlign = 'lf_submit_'.$setting_value['styles']['submit-align'];
                         }
