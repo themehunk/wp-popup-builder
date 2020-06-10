@@ -276,7 +276,6 @@ public function wppb_initContent($column_content,$parentId){
                         if (isset($setting_value['styles']['radio-text-style'])) {
                             $popupContent['style'] .= $allUniqueId.' form .lf-field.checkbox-type li,'.$allUniqueId.' form .lf-field.radio-type li{'.$setting_value['styles']['radio-text-style'].';}';
                         }
-
                         // heading style
                         if ( isset($setting_value['styles']['heading-style']) ){
                             $popupContent['style'] .= $allUniqueId.' form > h2{'.$setting_value['styles']['heading-style'].';}';

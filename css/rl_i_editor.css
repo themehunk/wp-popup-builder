@@ -195,7 +195,7 @@
     flex-direction: column;
 }
 .rl_i_editor-item-content-items > label{
-        font-size: 11px;
+        font-size: 12px;
     cursor: default;
 }
 .rl_i_editor-item-content-items.block__ > label{
@@ -555,8 +555,8 @@ label[data-range-output]{
     flex: 1;
 }
 .rl-sub-title{
-         color: #bdbdbd;
-    font-size: 11px;
+        color: #737373;
+    font-size: 12px;
     letter-spacing: .5px;
 }
 .popup-delete-wrap > button{
@@ -688,6 +688,12 @@ input[name="global-popup-name"]{
     border: 1px dotted #6747e6;
     background-color: #eae3a2;
 
+}
+.rl_i_editor-item-content-items.content-border,
+.global-overlay-image,
+.global-wrapper-height-custom-auto,
+.lead-form-heading-section{
+    background-color: rgb(246, 253, 255);
 }
 @keyframes placeHolderBorder{
     0%{
