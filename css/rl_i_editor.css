@@ -18,7 +18,7 @@
 	     min-width: 300px;
     position: relative;
     height: 600px;
-    box-shadow: 0px 5px 10px 0px #D0EAF5;
+    /*box-shadow: 0px 5px 10px 0px #D0EAF5;*/
     width: 25%;
 }
 /*popup export section*/
@@ -41,6 +41,7 @@
 .rl_i_editor-inner-wrap{
     height: 100%;
     position: relative;
+    box-shadow: 0px 5px 10px 0px #D0EAF5;
 }
 .rl_i_editor-inner-wrap.sticky{
     position: fixed;

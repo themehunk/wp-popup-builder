@@ -401,10 +401,11 @@ a:focus{
     word-break: break-all;
 }
 .wppb-popup-lead-form .leadform-show-form label{
-         margin: 5px 0;
+        margin: 5px 0;
     font-size: 15px;
     color: rgba(82, 82, 82, 1);
     line-height: 1;
+    display: block;
 }
 .wppb-popup-lead-form .leadform-show-form div.lf-field{
     margin:0;

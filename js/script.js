@@ -94,79 +94,87 @@ var Business_news_letter = {
 			if (jQuery(Wrap_value).attr('data-uniqid'))wrap_content['id'] = jQuery(Wrap_value).attr('data-uniqid');
 			saveData.push(wrap_content);
 		});
-		// close btn 
-		if ( _getClosebtn() ) saveData.push( _getClosebtn() );
+	// close btn 
+	if ( _getClosebtn() ) saveData.push( _getClosebtn() );
 
-				function _getClosebtn(){
-					let closebtn = jQuery('.wppb-popup-custom .wppb-popup-close-btn');
-					if (closebtn.length) {
-						let returnData = {type:'close-btn'};
-						if (closebtn.attr('style'))returnData['style'] = closebtn.attr('style');
-						if (closebtn.attr('data-uniqid'))returnData['id'] = closebtn.attr('data-uniqid');
-						return returnData;
-					}
+			function _getClosebtn(){
+				let closebtn = jQuery('.wppb-popup-custom .wppb-popup-close-btn');
+				if (closebtn.length) {
+					let returnData = {type:'close-btn'};
+					if (closebtn.attr('style'))returnData['style'] = closebtn.attr('style');
+					if (closebtn.attr('data-uniqid'))returnData['id'] = closebtn.attr('data-uniqid');
+					return returnData;
 				}
+			}
 
-				function _columnGet(column_){
-					let column_Data = [];
-					jQuery.each(column_,(Column_index,Column_value)=>{
-						let column_data_ = jQuery(Column_value);
-						let data_column = column_data_.find('[data-rl-editable], .wppb-popup-lead-form');
-						let column_content = {type:'column',content:_contentGet(data_column)};
-						if (column_data_.attr('data-uniqid'))column_content['id'] = column_data_.attr('data-uniqid');
-						if (column_data_.attr('style'))column_content['style'] = column_data_.attr('style');
+			function _columnGet(column_){
+				let column_Data = [];
+				jQuery.each(column_,(Column_index,Column_value)=>{
+					let column_data_ = jQuery(Column_value);
+					let data_column = column_data_.find('[data-rl-editable], .wppb-popup-lead-form');
+					let column_content = {type:'column',content:_contentGet(data_column)};
+					if (column_data_.attr('data-uniqid'))column_content['id'] = column_data_.attr('data-uniqid');
+					if (column_data_.attr('style'))column_content['style'] = column_data_.attr('style');
 
-						column_Data.push(column_content);
-					});
-					return column_Data;
-				}
+					column_Data.push(column_content);
+				});
+				return column_Data;
+			}
 
-				function _contentGet(getSaveDataInputs){
-						let content_data = [];
-						if (!getSaveDataInputs.length) {
-							return false;
+			function _contentGet(getSaveDataInputs){
+				let content_data = [];
+				if (!getSaveDataInputs.length) {
+					return false;
+				}else{
+					jQuery.each(getSaveDataInputs,(index,value)=>{
+						let checkInput = jQuery(value);
+						let saveAttrData = '';
+						if ( checkInput.hasClass('wppb-popup-lead-form') ) {
+							saveAttrData = {type:'lead-form',content:checkInput.attr('data-form-id')};
+								if (checkInput.attr('data-uniqid'))saveAttrData['id'] = checkInput.attr('data-uniqid');
+										let leadForm = checkInput.find('form');
+										let leadFormStyle = {};
+										if ( leadForm.attr('style') ) leadFormStyle['form-style'] = leadForm.attr('style');
+										if ( leadForm.find('h2').attr('style') ) leadFormStyle['heading-style'] = leadForm.children('h2').attr('style');
+										if ( leadForm.find('.text-type.lf-field > label').attr('style') ) leadFormStyle['label-style'] = leadForm.find('.text-type.lf-field > label').attr('style');
+
+										if (leadForm.find('.checkbox-type.lf-field > label,.radio-type.lf-field > label,.select-type.lf-field > label').attr('style')){
+												leadFormStyle['radio-label-style'] = leadForm.find('.checkbox-type.lf-field > label,.radio-type.lf-field > label,.select-type.lf-field > label').attr('style');
+											}
+
+										if ( leadForm.find('.checkbox-type.lf-field li,.radio-type.lf-field li').attr('style') ){
+												leadFormStyle['radio-text-style'] = leadForm.find('.checkbox-type.lf-field li,.radio-type.lf-field li').attr('style');
+										}
+
+										if ( leadForm.find('.text-type.lf-field input').attr('style') ) leadFormStyle['field-style'] = leadForm.find('.text-type.lf-field input').attr('style');
+
+										if ( leadForm.find('.lf-form-submit').attr('style') ) leadFormStyle['submit-style'] = leadForm.find('.lf-form-submit').attr('style');
+
+										if ( leadForm.find('.lf-form-submit').attr('data-alignment') ) leadFormStyle['submit-align'] = leadForm.find('.lf-form-submit').attr('data-alignment');
+										
+										if ( leadForm.find('.text-type.lf-field').attr('style') ) leadFormStyle['lf-field-style'] = leadForm.find('.text-type.lf-field').attr('style');
+
+										saveAttrData['styles'] = leadFormStyle;
+
 						}else{
-							jQuery.each(getSaveDataInputs,(index,value)=>{
-								let checkInput = jQuery(value);
-								let saveAttrData = '';
-								if ( checkInput.hasClass('wppb-popup-lead-form') ) {
-									saveAttrData = {type:'lead-form',content:checkInput.attr('data-form-id')};
-										if (checkInput.attr('data-uniqid'))saveAttrData['id'] = checkInput.attr('data-uniqid');
-												let leadForm = checkInput.find('form');
-												let leadFormStyle = {};
-												if ( leadForm.attr('style') ) leadFormStyle['form-style'] = leadForm.attr('style');
-												if ( leadForm.find('h2').attr('style') ) leadFormStyle['heading-style'] = leadForm.children('h2').attr('style');
-												if ( leadForm.find('.text-type.lf-field > label').attr('style') ) leadFormStyle['label-style'] = leadForm.find('.text-type.lf-field > label').attr('style');
-
-												if ( leadForm.find('.text-type.lf-field input').attr('style') ) leadFormStyle['field-style'] = leadForm.find('.text-type.lf-field input').attr('style');
-
-												if ( leadForm.find('.lf-form-submit').attr('style') ) leadFormStyle['submit-style'] = leadForm.find('.lf-form-submit').attr('style');
-
-												if ( leadForm.find('.lf-form-submit').attr('data-alignment') ) leadFormStyle['submit-align'] = leadForm.find('.lf-form-submit').attr('data-alignment');
-												
-												if ( leadForm.find('.text-type.lf-field').attr('style') ) leadFormStyle['lf-field-style'] = leadForm.find('.text-type.lf-field').attr('style');
-
-												saveAttrData['styles'] = leadFormStyle;
-
-								}else{
-									saveAttrData = {type:checkInput.data('rl-editable'),content:checkInput.html()};
-									if (checkInput.attr('style'))saveAttrData['style'] = checkInput.attr('style');
-									if (checkInput.data('editor-link'))saveAttrData['link'] = checkInput.attr('data-editor-link');
-									if (checkInput.data('editor-link-target') && saveAttrData['link'])saveAttrData['target'] = checkInput.attr('data-editor-link-target');
-									if (checkInput.data('content-alignment'))saveAttrData['alignment'] = checkInput.attr('data-content-alignment');
-									if (checkInput.attr('data-uniqid'))saveAttrData['id'] = checkInput.attr('data-uniqid');
-									// image condition
-									if (checkInput.data('rl-editable') == 'image'){
-										saveAttrData['image-url'] = checkInput.attr('src');
-									}
-								}
-								content_data.push(saveAttrData);
-							});
-							return content_data;
+							saveAttrData = {type:checkInput.data('rl-editable'),content:checkInput.html()};
+							if (checkInput.attr('style'))saveAttrData['style'] = checkInput.attr('style');
+							if (checkInput.data('editor-link'))saveAttrData['link'] = checkInput.attr('data-editor-link');
+							if (checkInput.data('editor-link-target') && saveAttrData['link'])saveAttrData['target'] = checkInput.attr('data-editor-link-target');
+							if (checkInput.data('content-alignment'))saveAttrData['alignment'] = checkInput.attr('data-content-alignment');
+							if (checkInput.attr('data-uniqid'))saveAttrData['id'] = checkInput.attr('data-uniqid');
+							// image condition
+							if (checkInput.data('rl-editable') == 'image'){
+								saveAttrData['image-url'] = checkInput.attr('src');
+							}
 						}
+						content_data.push(saveAttrData);
+					});
+					return content_data;
 				}
-		
-		return saveData;
+			}
+	
+	return saveData;
 	},
 	_deleteAddon:function(){
 		let this_btn = jQuery(this);
@@ -989,23 +997,39 @@ var Custom_popup_editor = {
 					let leadFormStyle_ = leadForm.data('form-styles');					
 					leadForm = leadForm.find('form');
 					if ( leadFormStyle_ ) {
+						// submit style
 						if (leadFormStyle_['submit-style']) {
 							leadForm.find('.lf-form-submit').attr('style',leadFormStyle_['submit-style']);
 						}
+						// submit alignment
 						if (leadFormStyle_['submit-align']) {
 							leadForm.find('.lf-form-submit').attr('data-alignment',leadFormStyle_['submit-align']);
 						}
+						// form style
 						if (leadFormStyle_['form-style']) {
 							leadForm.attr('style',leadFormStyle_['form-style']);
 						}
+						//label style
 						if (leadFormStyle_['label-style']) {
 						let element = leadForm.find('.name-type.lf-field > label, .text-type.lf-field > label, .textarea-type.lf-field > label');
 							element.attr('style',leadFormStyle_['label-style']);
 						}
+						// radio-label-style
+						if (leadFormStyle_['radio-label-style']) {
+						let element = leadForm.find('.checkbox-type.lf-field > label,.radio-type.lf-field > label,.select-type.lf-field > label');
+							element.attr('style',leadFormStyle_['radio-label-style']);
+						}
+						// radio text
+						if (leadFormStyle_['radio-text-style']) {
+							let element = leadForm.find('.checkbox-type.lf-field li,.radio-type.lf-field li');
+							element.attr('style',leadFormStyle_['radio-text-style']);
+						}
+						// radio-label-style
 						if (leadFormStyle_['field-style']) {
 						let element = leadForm.find('.lf-field input, .lf-field textarea').not('input[type="submit"],input[type="radio"],input[type="checkbox"]');
 							element.attr('style',leadFormStyle_['field-style']);
 						}
+						// heading style
 						if (leadFormStyle_['heading-style']) {
 						let element = leadForm.children('h2');
 							element.attr('style',leadFormStyle_['heading-style']);
@@ -1043,7 +1067,8 @@ var Custom_popup_editor = {
 			}else if( getData == 'lf-submit-btn-font-size' ){
 				Custom_popup_editor._inputRange(sepInput, false, false, leadForm.find('input.lf-form-submit').css('font-size') );
 			}else if( sepInput.data('input-color') == 'lf-label-color' ){
-				let element = leadForm.find('.name-type.lf-field > label, .text-type.lf-field > label, .textarea-type.lf-field > label');
+				// let element = leadForm.find('.name-type.lf-field > label, .text-type.lf-field > label, .textarea-type.lf-field > label');
+				let element = leadForm.find('.lf-field > label');
 				Custom_popup_editor._colorPickr( sepInput, element ,'color' );
 			}else if( getData == 'lf-label-font-size' ){
 				let element = leadForm.find('.lf-field > label').css('font-size');
@@ -1098,6 +1123,21 @@ var Custom_popup_editor = {
 				let fieldMArgin = leadForm.find('.text-type.lf-field');
 				let margins = fieldMArgin.css('margin-'+sepInput.data('margin'));
 				if(margins || margins == '0') sepInput.val(parseInt(margins));
+			}else if(getData == 'lf-radio-checkbox-text-color'){
+				let element = leadForm.find('.radio-type.lf-field li,.checkbox-type.lf-field li');
+				if (element.length) {
+					jQuery('.lead-form-radio-text-section').show();
+					Custom_popup_editor._colorPickr( sepInput, element ,'color' );
+				}else{
+					jQuery('.lead-form-radio-text-section').hide();
+				}
+			}else if(getData == 'lf-radio-checkbox-text-font-size'){
+				let element = leadForm.find('.radio-type.lf-field li,.checkbox-type.lf-field li').css('font-size');
+				Custom_popup_editor._inputRange(sepInput, false, false, element );
+			}else if(getData == 'lf-radio-checkbox-text-margin'){
+				let fieldMArgin = leadForm.find('.radio-type.lf-field li,.checkbox-type.lf-field li');
+				let margins = fieldMArgin.css('margin-'+sepInput.data('margin'));
+				if(margins || margins == '0') sepInput.val(parseInt(margins));
 			}
 		}
 		jQuery.each(getInputs, leadFormInput);
@@ -1110,6 +1150,11 @@ var Custom_popup_editor = {
 		let leadForm = jQuery('.wppb-popup-custom .wppb-popup-lead-form form');
 		if (dataCheck == 'lf-form-width') {
 			leadForm.css('width',inputVal+'%');
+		}else if(dataCheck == 'lf-radio-checkbox-text-font-size'){
+			leadForm.find('.radio-type.lf-field li,.checkbox-type.lf-field li').css('font-size',inputVal+'px');
+		}else if(dataCheck == 'lf-radio-checkbox-text-margin'){
+				let radioCheckBox = leadForm.find('.radio-type.lf-field li,.checkbox-type.lf-field li');
+				Custom_popup_editor._marginPadding('margin',input_,radioCheckBox,inputVal);
 		}else if (dataCheck == 'lf-label-font-size') {
 			leadForm.find('.lf-field > label').css('font-size',inputVal+'px');
 		}else if (dataCheck == 'lf-field-font-size' || dataCheck == 'lf-field-height') {
@@ -1133,12 +1178,11 @@ var Custom_popup_editor = {
 		}else if ( dataCheck == 'form-label-enable') {
 				if (input_.prop('checked') == true) {
 					jQuery('.lead-form-label-section').show();
-					leadForm.find('.lf-field > label:not(.submit-type > label)').show()
+					leadForm.find('.lf-field > label').not('.submit-type > label,.checkbox-type > label,.radio-type > label').hide();
 				}else{
 					jQuery('.lead-form-label-section').hide();
-					leadForm.find('.lf-field > label:not(.submit-type > label)').hide();
+					leadForm.find('.lf-field > label').not('.submit-type > label,.checkbox-type > label,.radio-type > label').hide();
 				}
-			// input_.prop('checked') == true ? leadForm.find('.lf-field > label:not(.submit-type > label)').show() : leadForm.find('.lf-field > label:not(.submit-type > label)').hide();
 		}else if ( input_.data('padding') && dataCheck == 'lf-submit-padding' ) {
 			Custom_popup_editor._globalPadding('padding', input_ ,leadForm.find('input.lf-form-submit') ,inputVal);
 		}else if ( input_.data('origin') == 'padding' && dataCheck == 'lf-submit-padding' ) {
