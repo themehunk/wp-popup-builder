@@ -171,10 +171,11 @@
     padding: 12px 0;
     text-align: center;
     position: relative;
+    background: #c6e1ed8c;
 }
 .rl_i_editor-main-container .rl_i_editor-item-content-header > nav > span.active_{
-    background-color: #777777;
-    color: white;
+    background-color: #D2F1FD;
+    color: #6547E6;
 }
 
 .rl_i_editor-item-content-i{

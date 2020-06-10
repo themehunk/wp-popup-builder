@@ -1209,10 +1209,10 @@ var Custom_popup_editor = {
 				}
 			}else if (getData == 'form-label-enable') {
 				if (leadForm.find('.lf-field > label:not(.submit-type > label)').css('display') != 'none') {
-					jQuery('.lead-form-label-section').show();
+					// jQuery('.lead-form-label-section').show();
 					sepInput.prop('checked', true);
 				}else{
-					jQuery('.lead-form-label-section').hide();
+					// jQuery('.lead-form-label-section').hide();
 					sepInput.prop('checked', false);
 				}
 			}else if( sepInput.data('input-color') == 'lf-field-color' ){
@@ -1300,10 +1300,10 @@ var Custom_popup_editor = {
 				}
 		}else if ( dataCheck == 'form-label-enable') {
 				if (input_.prop('checked') == true) {
-					jQuery('.lead-form-label-section').slideDown('fast');
+					// jQuery('.lead-form-label-section').slideDown('fast');
 					leadForm.find('.lf-field > label').not('.submit-type > label,.checkbox-type > label,.radio-type > label').show();
 				}else{
-					jQuery('.lead-form-label-section').slideUp('fast');
+					// jQuery('.lead-form-label-section').slideUp('fast');
 					leadForm.find('.lf-field > label').not('.submit-type > label,.checkbox-type > label,.radio-type > label').hide();
 				}
 		}else if ( input_.data('padding') && dataCheck == 'lf-submit-padding' ) {

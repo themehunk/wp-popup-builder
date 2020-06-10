@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 		<button class="wppb-export-sub"><?php _e("Export Popup",'wppb'); ?></button>
 		<!-- content -->
 		<div data-toggle="add-itemes" class="rl_i_editor-element-Toggle outer-toggle rl-active">
-			<span><?php _e('Drag And Drop Module','wppb'); ?></span>
+			<span><?php _e('Drag & Drop Module','wppb'); ?></span>
 			<span class="bottomCarret dashicons dashicons-arrow-right"></span>
 		</div>
 		<section data-toggle-action="add-itemes" class="rl_i_editor-element-item">
@@ -106,7 +106,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 				// overlay color / outside color / popup width 
 				$wp_builder_obj->color(__('Background Color','wppb'),'background-color','data-global-input','overlay-color'); 
 				$wp_builder_obj->color(__('Outside Color','wppb'),'background-color','data-global-input','outside-color');
-				$wp_builder_obj->header_title(__('Popup Dimention','wppb'));
+				$wp_builder_obj->header_title(__('Popup Dimension','wppb'));
 				$wp_builder_obj->range_slider(__('Popup Width','wppb'), 'main-wrapper', ['title'=>'px','min'=>200,'max'=>800,'value'=>200] ,'wrapper-width');
 				echo $wp_builder_obj->checkbox('wrapper-height',__('Popup Height Auto/Custom','wppb'),'data-global-input="wrapper-height-check"');
 			?>
@@ -340,7 +340,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 					echo "</div>";
 					// radio checkbox input text section
 					echo "<div class='lead-form-radio-text-section'>";
-					$wp_builder_obj->header_title(__('Radio Checkbox Input Text Setting','wppb'));
+					$wp_builder_obj->header_title(__('Radio Checkbox Field Setting','wppb'));
 						$wp_builder_obj->color(__('Color','wppb'),'lf-radio-checkbox-text-color','data-lead-form','lf-radio-checkbox-text-color');
 						$wp_builder_obj->range_slider(__('Font Size','wppb'), 'lf-radio-checkbox-text-font-size', ['title'=>'px','min'=>10,'max'=>100,'value'=>10], false, 'data-lead-form');
 					$wp_builder_obj->margin_padding('lf-radio-checkbox-text-margin', __('Input Margin in px','wppb'), 'data-lead-form', 'm');
