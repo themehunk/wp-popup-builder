@@ -207,7 +207,7 @@ font-weight: 600;
     color: rgba(82, 82, 82, 1);
     line-height: 1;
 }
-.wppb-popup-lead-form .leadform-show-form label{
+.wppb-popup-custom-content .wppb-popup-lead-form .leadform-show-form label{
          margin: 5px 0;
     font-size: 15px;
     color: rgba(82, 82, 82, 1);

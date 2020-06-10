@@ -256,30 +256,39 @@ public function wppb_initContent($column_content,$parentId){
                   $submitAlign = '';
                   if ( isset($setting_value['styles']) && $uniqIdAttr ) {
                         $allUniqueId = "#".$parentId.' #'.$uniqIdAttr;
+                        // form style
                         if ( isset($setting_value['styles']['form-style']) ){
                               $popupContent['style'] .= $allUniqueId.' form{'.$setting_value['styles']['form-style'].';}';
                           }
+                        // submit button style
                         if ( isset($setting_value['styles']['submit-style']) ){
                             $popupContent['style'] .= $allUniqueId.' form input[type="submit"]{'.$setting_value['styles']['submit-style'].';}';
                         }
+                        // input label style
                         if ( isset($setting_value['styles']['label-style']) ){
                             $popupContent['style'] .= $allUniqueId.' form .lf-field.name-type > label,'.$allUniqueId.' form .lf-field.text-type > label,'.$allUniqueId.' form .lf-field.textarea-type > label{'.$setting_value['styles']['label-style'].';}';
-                            // $popupContent['style'] .= $allUniqueId.' form .lf-field > label:not(.submit-type > label){'.$setting_value['styles']['label-style'].';}';
                         }
-
+                        // radio  checkbox select label style
+                        if (isset($setting_value['styles']['radio-label-style'])) {
+                            $popupContent['style'] .= $allUniqueId.' form .lf-field.checkbox-type > label,'.$allUniqueId.' form .lf-field.radio-type > label,'.$allUniqueId.' form .lf-field.select-type > label{'.$setting_value['styles']['radio-label-style'].';}';
+                        }
+                        //radio text style
+                        if (isset($setting_value['styles']['radio-text-style'])) {
+                            $popupContent['style'] .= $allUniqueId.' form .lf-field.checkbox-type li,'.$allUniqueId.' form .lf-field.radio-type li{'.$setting_value['styles']['radio-text-style'].';}';
+                        }
+                        // heading style
                         if ( isset($setting_value['styles']['heading-style']) ){
                             $popupContent['style'] .= $allUniqueId.' form > h2{'.$setting_value['styles']['heading-style'].';}';
                         }
-
+                        // input field heading style
                         if ( isset($setting_value['styles']['field-style']) ){
-                            $popupContent['style'] .= $allUniqueId.' form .lf-field input:not([type="submit"]),'.$allUniqueId.' form .lf-field textarea{'.$setting_value['styles']['field-style'].';}';
+                            $popupContent['style'] .= $allUniqueId.' form .lf-field input:not([type="submit"]):not([type="radio"]):not([type="checkbox"]),'.$allUniqueId.' form .lf-field textarea{'.$setting_value['styles']['field-style'].';}';
                         }
-
+                        // input parent field heading style
                         if (isset($setting_value['styles']['lf-field-style'])) {
-                            // $popupContent['style'] .= $allUniqueId.' form .lf-field.name-type,'.$allUniqueId.' form .lf-field.text-type,'.$allUniqueId.' form .lf-field.textarea-type{'.$setting_value['styles']['lf-field-style'].';}';
                             $popupContent['style'] .= $allUniqueId.' form .lf-field{'.$setting_value['styles']['lf-field-style'].';}';
                         }
-
+                        // submit allignement style
                         if (isset($setting_value['styles']['submit-align'])) {
                           $submitAlign = 'lf_submit_'.$setting_value['styles']['submit-align'];
                         }

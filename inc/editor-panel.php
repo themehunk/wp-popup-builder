@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 		<button class="wppb-export-sub"><?php _e("Export Popup",'wppb'); ?></button>
 		<!-- content -->
 		<div data-toggle="add-itemes" class="rl_i_editor-element-Toggle outer-toggle rl-active">
-			<span><?php _e('Content','wppb'); ?></span>
+			<span><?php _e('Drag And Drop Module','wppb'); ?></span>
 			<span class="bottomCarret dashicons dashicons-arrow-right"></span>
 		</div>
 		<section data-toggle-action="add-itemes" class="rl_i_editor-element-item">
@@ -37,7 +37,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 		</section>
 		<!-- global setting -->
 		<div data-toggle="global-setting" class="rl_i_editor-element-Toggle outer-toggle rl-active">
-			<span><?php _e("Global Content",'wppb'); ?></span>
+			<span><?php _e("Global Setting",'wppb'); ?></span>
 			<span class="bottomCarret dashicons dashicons-arrow-right"></span>
 		</div>
 		<section data-toggle-action="global-setting" class="rl_i_editor-global-setting rl_i_editor-element-item">
@@ -106,20 +106,15 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 				// overlay color / outside color / popup width 
 				$wp_builder_obj->color(__('Background Color','wppb'),'background-color','data-global-input','overlay-color'); 
 				$wp_builder_obj->color(__('Outside Color','wppb'),'background-color','data-global-input','outside-color');
-				$wp_builder_obj->header_title(__('Popup Typography','wppb'));
+				$wp_builder_obj->header_title(__('Popup Dimention','wppb'));
 				$wp_builder_obj->range_slider(__('Popup Width','wppb'), 'main-wrapper', ['title'=>'px','min'=>200,'max'=>800,'value'=>200] ,'wrapper-width');
 				echo $wp_builder_obj->checkbox('wrapper-height',__('Popup Height Auto/Custom','wppb'),'data-global-input="wrapper-height-check"');
 			?>
 			<section class="global-wrapper-height-custom-auto">
 			<?php  $wp_builder_obj->range_slider(__('Custom Height','wppb'),'main-wrapper-height', ['title'=>'px','min'=>150,'max'=>1000,'value'=>200] ,'wrapper-height'); ?>
 			</section>
-			<?php 
-				$wp_builder_obj->margin_padding('main-wrapper', __('Popup Padding in px','wppb'), 'data-global-input', 'p'); 
-				echo $wp_builder_obj->box_shadow('box-shadow-global','data-global-input');
-				$wp_builder_obj->border('global-border','data-global-input'); 
-			?>
 			<div class="rl_i_editor-item-content-items rl-two-column-width">
-				<label class="rl-sub-title"><?php _e('Container Width','wppb'); ?></label>
+				<label class="rl-sub-title"><?php _e('Column Width','wppb'); ?></label>
 				<div>
 					<label class="rl-sub-title"><?php _e('Column One %','wppb'); ?></label>
 					<label class="rl-sub-title"><?php _e('Column Two %','wppb'); ?></label>
@@ -129,6 +124,11 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 					<input type="number" data-global-input="column-width" data-column="2">
 				</div>
 			</div>
+			<?php 
+				$wp_builder_obj->margin_padding('main-wrapper', __('Popup Padding in px','wppb'), 'data-global-input', 'p'); 
+				echo $wp_builder_obj->box_shadow('box-shadow-global','data-global-input');
+				$wp_builder_obj->border('global-border','data-global-input'); 
+			?>
 		</section>
 		<!-- timer section -->
 			<div data-toggle="popup-timer-opt" class="rl_i_editor-element-Toggle outer-toggle">
@@ -149,7 +149,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 		</div>
 		<section data-toggle-action="close-btn-setting" class="">
 			<div class="rl_i_editor-item-content-items title_ inline__">
-				<label class="rl-sub-title"><?php _e('Popup Close option By Click','wppb'); ?></label>
+				<label class="rl-sub-title"><?php _e('Close Popup By Click','wppb'); ?></label>
 			</div>
 			<div class="rl_i_editor-item-content-items inline__">
 					<div>
@@ -276,7 +276,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 		<!-- delete Setting -->
 		<?php if(isset($wppb_popup_id)) { ?>
 			<div data-toggle="popup-delete-opt" class="rl_i_editor-element-Toggle outer-toggle">
-				<span><?php _e('Popup Delete','wppb'); ?></span>
+				<span><?php _e('Delete Popup','wppb'); ?></span>
 				<span class="bottomCarret dashicons dashicons-arrow-right"></span>
 			</div>
 			<section data-toggle-action="popup-delete-opt" class="rl-popup-delete-opt rl-display-none">
@@ -338,6 +338,14 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 						$wp_builder_obj->color(__('Color','wppb'),'color','data-lead-form','lf-label-color');
 						$wp_builder_obj->range_slider(__('Font Size','wppb'), 'lf-label-font-size', ['title'=>'px','min'=>"10",'max'=>100,'value'=>10], false, 'data-lead-form');
 					echo "</div>";
+					// radio checkbox input text section
+					echo "<div class='lead-form-radio-text-section'>";
+					$wp_builder_obj->header_title(__('Radio Checkbox Input Text Setting','wppb'));
+						$wp_builder_obj->color(__('Color','wppb'),'lf-radio-checkbox-text-color','data-lead-form','lf-radio-checkbox-text-color');
+						$wp_builder_obj->range_slider(__('Font Size','wppb'), 'lf-radio-checkbox-text-font-size', ['title'=>'px','min'=>10,'max'=>100,'value'=>10], false, 'data-lead-form');
+					$wp_builder_obj->margin_padding('lf-radio-checkbox-text-margin', __('Input Margin in px','wppb'), 'data-lead-form', 'm');
+					echo "</div>";
+
 				 //field text section
 					$wp_builder_obj->header_title(__('Field Setting','wppb'));
 					$wp_builder_obj->color(__('Color','wppb'),'color','data-lead-form','lf-field-color');

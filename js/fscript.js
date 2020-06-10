@@ -26,7 +26,9 @@
 
 			if (getPopup) {
 				getPopup = jQuery(getPopup);
+
 				getPopup.hide();
+
 				 let getHTml  = getPopup.html();
 				 let setting_ = getPopup.find('input[name="popup-setting-front"]');				
 					 setting_ = JSON.parse( setting_.val() );
@@ -56,23 +58,20 @@
 				 	jQuery('body').append(renderTohtml);
 				 	let wppbPopupShow = jQuery('#wppbPopupShow'); 
 				 	// set auto height
-
 				 	let getContentHeight = wppbPopupShow.find('.wppb-popup-custom-content');
-
-				 	// console.log( getContentHeight.innerHeight() );
-				 	// console.log(getContentHeight.children().outerHeight());
-
-
 				 	if (getContentHeight.outerHeight() > (window.innerHeight - 150) ) {
 				 		getContentHeight.css({'height':(window.innerHeight - 100) + 'px','overflow-y':'scroll'});
 				 	}else if (getContentHeight.innerHeight() < getContentHeight.children().outerHeight() ) {
 				 		getContentHeight.css({'overflow-y':'scroll'});
 				 	}
-
 				 	wppbPopupShow.css('background-color',getOutSideColor);
 				 	wppbPopupShow.addClass('wppb_popup_active');
 				 	jQuery('body').addClass('wppbPopupActive');
-					getPopup.removeClass('active');
+
+					// getPopup.removeClass('active');
+					getPopup.remove();
+
+
 					if (popupAutoClose > 0) {
 						popupAutoClose = popupAutoClose * 1000;
 						setTimeout(function(){
