@@ -176,39 +176,52 @@ var Business_news_letter = {
 	
 	return saveData;
 	},
+	_confirmMsg:function(show,msg=false){
+		if (show) {
+			console.log('from inside');
+
+			let container = jQuery('.resetConfirmPopup');
+			if (msg) container.find('.resetHeader > span').html(msg);
+			container.addClass('active');
+			jQuery('.wppbPopup.deny').click(function(e){
+				e.preventDefault();
+				container.removeClass('active');
+			});
+			jQuery(document).mouseup(function(e){
+				let resetWrapper = jQuery('.resetWrapper');
+				 if (!resetWrapper.is(e.target) && resetWrapper.has(e.target).length === 0){
+						container.removeClass('active');
+	             }
+			});
+		}
+	},
 	_deleteAddon:function(){
 		let this_btn = jQuery(this);
 		let bid  = this_btn.data('bid');
-		jQuery('.resetConfirmPopup').addClass('active');
-		
-		jQuery('.wppbPopup.deny').click(function(e){
-			e.preventDefault();
-			jQuery('.resetConfirmPopup').removeClass('active');
-		});
-
-			jQuery(document).mouseup(function(e){
-				var resetWrapper = jQuery('.resetWrapper');
-				 if (!resetWrapper.is(e.target) && resetWrapper.has(e.target).length === 0){
-						jQuery('.resetConfirmPopup').removeClass('active');
-                 }
+		Business_news_letter._confirmMsg(true,'Popup Will Delete Permanentally.');
+			jQuery('.wppbPopup.confirm').click(function(e){
+				jQuery(this).addClass('rlLoading');
+				e.preventDefault();
+				let data_ = {action:'delete_popup',bid:bid};
+				let returnData = Business_news_letter._ajaxFunction(data_);
+				returnData.success(function(response){
+					if (response || response == 0) {
+			        		setTimeout(()=>{
+			        		let pathName = window.location.pathname + "?page=wppb";
+			        			window.location.href = pathName;
+			        		},1000);
+			        	}
+				});
 			});
+	},
+	_backPreviousPopup:function(e){
+		e.preventDefault();
+		let href = jQuery(this).attr('href');
+		Business_news_letter._confirmMsg(true,'Your Popup Data Will lose If You Will Not Save OR Update Popup.');
 		jQuery('.wppbPopup.confirm').click(function(e){
-			jQuery(this).addClass('rlLoading');
 			e.preventDefault();
-
-			let data_ = {action:'delete_popup',bid:bid};
-			let returnData = Business_news_letter._ajaxFunction(data_);
-			returnData.success(function(response){
-				if (response || response == 0) {
-		        		setTimeout(()=>{
-		        		let pathName = window.location.pathname + "?page=wppb";
-		        			window.location.href = pathName;
-		        		},1000);
-		        	}
-			});
-	});
-
-
+			window.location.href = href;
+		});
 	},
 	_businessTabSetting:function(e){
 				e.preventDefault();
@@ -340,6 +353,9 @@ var Business_news_letter = {
 		jQuery(document).on('click', '.wppb_popup_saveAddon', Business_news_letter._saveBusinessAddon);
 		jQuery(document).on('click', '.wppb_popup_updateAddon', Business_news_letter._updateAddon);
 		jQuery(document).on('click', '.wppb_popup_deleteAddon', Business_news_letter._deleteAddon);
+
+		jQuery(document).on('click', '.wppb-back-page-popup', Business_news_letter._backPreviousPopup);
+		
 		jQuery(document).on('click', '.wppb-popup-cmn-nav-item > a.wppb-popup-tab', Business_news_letter._businessTabSetting);
 
 		jQuery(document).on('change', '.wppb-popup-option input[type="checkbox"]', Business_news_letter._businessOptionUpdate);
@@ -665,7 +681,7 @@ var Custom_popup_editor = {
 					}else{
 						sepInput.prop('checked',true);
 						jQuery('.global-wrapper-height-custom-auto').show();
-						if (globalContentH.innerHeight() < globalContentH.children().outerHeight()) globalContentH.css({'overflow-y':'scroll','overflow-x':'hidden'});
+						if (globalContentH.innerHeight() < globalContentH.children().outerHeight()) globalContentH.css({'overflow-y':'scroll'});
 					}
 
 
@@ -796,7 +812,7 @@ var Custom_popup_editor = {
 						globalContentH.css('height',inputValue+'px');
 
 						if (globalContentH.innerHeight() < globalContentH.children().outerHeight()){
-							 globalContentH.css({'overflow-y':'scroll','overflow-x':'hidden'});
+							 globalContentH.css({'overflow-y':'scroll'});
 						}else{
 							Custom_popup_editor._removeStyle(globalContentH,'overflow');
 						}
@@ -946,127 +962,8 @@ var Custom_popup_editor = {
 		jQuery(document).on('click', '.wppb-popup-name-init', Custom_popup_editor._popupName);
 		jQuery(document).on('keyup change', '.wppb-lead-form-styling [data-lead-form]',Custom_popup_editor._leadFormStylingSet);
 
-
-
-		// jQuery(document).on('click', '.color-output',Custom_popup_editor._colorPickerByclick);
-
-	},
-	_colorPickr:function(select_element,clickedObj,getColorProperty,getColor=false){
-		// let getColorValue = clickedObj.css(getColorProperty);
-		// if (getColorProperty == 'box-shadow') {
-		// 	let getCss = Custom_popup_editor._checkStyle(clickedObj,'box-shadow');
-		// 	getColorValue = Custom_popup_editor._box_shadow_prop(getCss, 'color', true, true);
-		// 	console.log(getColorValue);
-		// }
-		// select_element.css('background-color',getColorValue);
-			
-		// 	console.log(select_element);
-
-		// select_element.click(function(){
-		// 	const inputElement = select_element[0];
-		// 	const pickr = new Pickr({
-		// 	  el:inputElement,
-		// 	  appClass:'wppb-color-classsss',
-		// 	  useAsButton: true,
-		// 	  default: getColorValue,
-		// 	  theme: 'nano',
-		// 	  swatches: [
-		// 	    'rgba(244, 67, 54, 1)',
-		// 	    'rgba(233, 30, 99, 0.95)',
-		// 	    'rgba(156, 39, 176, 0.9)',
-		// 	    'rgba(103, 58, 183, 0.85)',
-		// 	    'rgba(63, 81, 181, 0.8)',
-		// 	    'rgba(33, 150, 243, 0.75)',
-		// 	    'rgba(255, 193, 7, 1)'
-		// 	  ],
-		// 	  components: {
-		// 	    preview: true,
-		// 	    opacity: true,
-		// 	    hue: true,
-		// 	    interaction: {
-		// 	      input: true,
-		// 	    }
-		// 	  }
-		// 	}).on('change',(color,instance)=>{
-		// 	  let color_ = color.toHEXA().toString(0);
-		// 	  // preview css on input editor item
-		// 	  select_element.css('background-color',color_);
-		// 	  // apply color on selected item
-		// 	  if (getColorProperty == 'box-shadow') {
-		// 	  	let getCss = Custom_popup_editor._checkStyle(clickedObj,'box-shadow');
-		// 	  	let propBoxShadow = Custom_popup_editor._box_shadow_prop(getCss, 'color', color_);
-		// 	  	Custom_popup_editor._setStyleColor(clickedObj,propBoxShadow,'box-shadow');
-		// 	  }else{
-		// 	  	Custom_popup_editor._setStyleColor(clickedObj,color_,getColorProperty);
-				
-		// 	  }
-		// 	}).on('hide', instance => {
-		// 	    console.log('hide', instance);
-		// 	    console.log(instance._root.app);
-		// 	    instance._root.app.remove();
-
-		// 	});
-		// 	select_element.unbind().click();
-		// });
-
-
-	},
-	_colorPickerByclick:function(e){
-
-		// console.log('dkdjioio');
-
-		let select_element = jQuery(this);
-		if (!select_element.hasClass('tempr__')){
-
-			select_element.addClass('tempr__');
-			select_element.click();
-
-			const inputElement = select_element[0];
-			const pickr = new Pickr({
-			  el:inputElement,
-			  useAsButton: true,
-			  default: 'rgba(244, 67, 54, 1)',
-			  theme: 'nano',
-			  swatches: [
-			    'rgba(244, 67, 54, 1)',
-			    'rgba(233, 30, 99, 0.95)',
-			    'rgba(156, 39, 176, 0.9)',
-			    'rgba(103, 58, 183, 0.85)',
-			    'rgba(63, 81, 181, 0.8)',
-			    'rgba(33, 150, 243, 0.75)',
-			    'rgba(255, 193, 7, 1)'
-			  ],
-			  components: {
-			    preview: true,
-			    opacity: true,
-			    hue: true,
-			    interaction: {
-			      input: true,
-			    }
-			  }
-			}).on('init', instance => {
-				    console.log('init', instance);
-			    // instance._root.button.click();
-
-			}).on('change',(color,instance)=>{
-			  let color_ = color.toHEXA().toString(0);
-			  // preview css on input editor item
-			  select_element.css('background-color',color_);
-			  // apply color on selected item
-			  if ('getColorProperty' == 'box-shadow') {
-			  	let getCss = Custom_popup_editor._checkStyle(clickedObj,'box-shadow');
-			  	let propBoxShadow = Custom_popup_editor._box_shadow_prop(getCss, 'color', color_);
-			  	Custom_popup_editor._setStyleColor(clickedObj,propBoxShadow,'box-shadow');
-			  }else{
-			  	Custom_popup_editor._setStyleColor(jQuery('.wppb-popup-custom'),color_,'background-color');
-				
-			  }
-			}).on('hide', instance => {
-			    console.log('hide', instance);
-			    instance._root.app.remove();
-			});
-			select_element.removeClass('tempr__');
-		}
+		// color picker
+		jQuery(document).on('click', '.color-output',Custom_popup_editor._colorPickerByclick);
 
 	},
 	_leadFormOpenPanel:function(){
@@ -1326,8 +1223,65 @@ var Custom_popup_editor = {
 			let fieldMArgin = leadForm.find('.lf-field');
 			Custom_popup_editor._marginPadding('margin',input_,fieldMArgin,inputVal);
 		}
-	}
-	,_chooseImage:function(e){
+	},
+	_colorPickr:function(select_element,clickedObj,getColorProperty,getColor=false){
+		let getColorValue = clickedObj.css(getColorProperty);
+		if (getColorProperty == 'box-shadow') {
+			let getCss = Custom_popup_editor._checkStyle(clickedObj,'box-shadow');
+			getColorValue = Custom_popup_editor._box_shadow_prop(getCss, 'color', true, true);
+		}
+		select_element.css('background-color',getColorValue);
+		let uniQid = Math.random().toString(11).replace('0.','wppb-pcr-') + '-init';
+		clickedObj.attr('data-color-id-'+getColorProperty,uniQid);
+		select_element.attr({'data-color-id':uniQid,'data-color-propetry':getColorProperty});
+	},
+	_colorPickerByclick:function(e){
+			let select_element = jQuery(this);
+			let getColorProperty = select_element.attr('data-color-propetry');
+			let clickedObj = select_element.attr('data-color-id');
+			clickedObj = jQuery('[data-color-id-'+getColorProperty+'="'+clickedObj+'"]');
+			let getColor_default = select_element.css('background-color');
+			const inputElement = select_element[0];
+			const pickr = new Pickr({
+			  el:inputElement,
+			  useAsButton: true,
+			  default: getColor_default,
+			  theme: 'nano',
+			  swatches: [
+			    'rgba(244, 67, 54, 1)',
+			    'rgba(233, 30, 99, 0.95)',
+			    'rgba(156, 39, 176, 0.9)',
+			    'rgba(103, 58, 183, 0.85)',
+			    'rgba(63, 81, 181, 0.8)',
+			    'rgba(33, 150, 243, 0.75)',
+			    'rgba(255, 193, 7, 1)'
+			  ],
+			  components: {
+			    preview: true,
+			    opacity: true,
+			    hue: true,
+			    interaction: {
+			      input: true,
+			    }
+			  }
+			}).on('init', instance => {
+			    jQuery(instance._root.app).addClass('visible');
+			}).on('change',(color,instance)=>{
+			  let color_ = color.toHEXA().toString(0);
+			  // preview css on input editor item
+			  select_element.css('background-color',color_);
+			  // apply color on selected item
+			  if (getColorProperty == 'box-shadow') {
+			  	let getCss = Custom_popup_editor._checkStyle(clickedObj,'box-shadow');
+			  	let propBoxShadow = Custom_popup_editor._box_shadow_prop(getCss, 'color', color_);
+			  	Custom_popup_editor._setStyleColor(clickedObj,propBoxShadow,'box-shadow');
+			  }else{
+			  	Custom_popup_editor._setStyleColor(clickedObj,color_,getColorProperty);
+			  }
+			}).on('hide', instance => {
+			    instance._root.app.remove();
+			});
+	},_chooseImage:function(e){
 		e.preventDefault();
     	let this_button = jQuery(this);
     	custom_uploader = wp.media({
@@ -1391,115 +1345,6 @@ var Custom_popup_editor = {
 					let saparateStyle = Custom_popup_editor._inlineCssSeparate(getElemStyle);
 					return style_ in saparateStyle?saparateStyle[style_]:false;
 				}
-	},
-	_colorPickr__:function(select_element,clickedObj,getColorProperty,getColor=false){
-		// let getColorValue = clickedObj.css(getColorProperty);
-		// if (getColorProperty == 'box-shadow') {
-		// 	let getCss = Custom_popup_editor._checkStyle(clickedObj,'box-shadow');
-		// 	getColorValue = Custom_popup_editor._box_shadow_prop(getCss, 'color', true, true);
-		// 	console.log(getColorValue);
-		// }
-		// select_element.css('background-color',getColorValue);
-			
-		// 	console.log(select_element);
-
-		// select_element.click(function(){
-		// 	const inputElement = select_element[0];
-		// 	const pickr = new Pickr({
-		// 	  el:inputElement,
-		// 	  appClass:'wppb-color-classsss',
-		// 	  useAsButton: true,
-		// 	  default: getColorValue,
-		// 	  theme: 'nano',
-		// 	  swatches: [
-		// 	    'rgba(244, 67, 54, 1)',
-		// 	    'rgba(233, 30, 99, 0.95)',
-		// 	    'rgba(156, 39, 176, 0.9)',
-		// 	    'rgba(103, 58, 183, 0.85)',
-		// 	    'rgba(63, 81, 181, 0.8)',
-		// 	    'rgba(33, 150, 243, 0.75)',
-		// 	    'rgba(255, 193, 7, 1)'
-		// 	  ],
-		// 	  components: {
-		// 	    preview: true,
-		// 	    opacity: true,
-		// 	    hue: true,
-		// 	    interaction: {
-		// 	      input: true,
-		// 	    }
-		// 	  }
-		// 	}).on('change',(color,instance)=>{
-		// 	  let color_ = color.toHEXA().toString(0);
-		// 	  // preview css on input editor item
-		// 	  select_element.css('background-color',color_);
-		// 	  // apply color on selected item
-		// 	  if (getColorProperty == 'box-shadow') {
-		// 	  	let getCss = Custom_popup_editor._checkStyle(clickedObj,'box-shadow');
-		// 	  	let propBoxShadow = Custom_popup_editor._box_shadow_prop(getCss, 'color', color_);
-		// 	  	Custom_popup_editor._setStyleColor(clickedObj,propBoxShadow,'box-shadow');
-		// 	  }else{
-		// 	  	Custom_popup_editor._setStyleColor(clickedObj,color_,getColorProperty);
-				
-		// 	  }
-		// 	}).on('hide', instance => {
-		// 	    console.log('hide', instance);
-		// 	    console.log(instance._root.app);
-		// 	    instance._root.app.remove();
-
-		// 	});
-		// 	select_element.unbind().click();
-		// });
-	},
-	_colorPickr:function(select_element,clickedObj,getColorProperty,getColor=false){
-		let getColorValue = clickedObj.css(getColorProperty);
-		if (getColorProperty == 'box-shadow') {
-			let getCss = Custom_popup_editor._checkStyle(clickedObj,'box-shadow');
-			getColorValue = Custom_popup_editor._box_shadow_prop(getCss, 'color', true, true);
-		}
-		select_element.css('background-color',getColorValue);
-		
-		const inputElement = select_element[0];
-		const pickr = new Pickr({
-		  el:inputElement,
-		  useAsButton: true,
-		  default: getColorValue,
-		  theme: 'nano',
-		  swatches: [
-		    'rgba(244, 67, 54, 1)',
-		    'rgba(233, 30, 99, 0.95)',
-		    'rgba(156, 39, 176, 0.9)',
-		    'rgba(103, 58, 183, 0.85)',
-		    'rgba(63, 81, 181, 0.8)',
-		    'rgba(33, 150, 243, 0.75)',
-		    'rgba(255, 193, 7, 1)'
-		  ],
-		  components: {
-		    preview: true,
-		    opacity: true,
-		    hue: true,
-		    interaction: {
-		      input: true,
-		    }
-		  }
-		}).on('change',(color,instance)=>{
-		  let color_ = color.toHEXA().toString(0);
-		  // preview css on input editor item
-		  select_element.css('background-color',color_);
-		  // apply color on selected item
-		  if (getColorProperty == 'box-shadow') {
-		  	let getCss = Custom_popup_editor._checkStyle(clickedObj,'box-shadow');
-		  	let propBoxShadow = Custom_popup_editor._box_shadow_prop(getCss, 'color', color_);
-		  	Custom_popup_editor._setStyleColor(clickedObj,propBoxShadow,'box-shadow');
-		  }else{
-		  	Custom_popup_editor._setStyleColor(clickedObj,color_,getColorProperty);
-			
-		  }
-		}).on('hide', instance => {
-		    console.log('hide', instance);
-
-
-		});
-
 	},
 	_inputRange:function(rangeSlider,clickedObj,prop,def=""){
 		let thisData = rangeSlider.data('show-range');

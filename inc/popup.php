@@ -57,7 +57,7 @@ if ($get_CustomPopup) {
 <div class="wppb-popup-cmn-container">	
 	<div class="wppb-popup-cmn-nav">
 		<div class="wppb-popup-cmn-nav-item">
-				<a class="wppb_icon_button" href="<?php _e(esc_url(WPPB_PAGE_URL),'wppb')?>"><span class="dashicons dashicons-arrow-left-alt"></span><span><?php _e('Back','wppb') ?></span></a>
+				<a class="wppb_icon_button wppb-back-page-popup" href="<?php _e(esc_url(WPPB_PAGE_URL),'wppb')?>"><span class="dashicons dashicons-arrow-left-alt"></span><span><?php _e('Back','wppb') ?></span></a>
 				<a class="wppb_icon_button wppb-popup-tab active" data-tab='setting' href="#"><span class="dashicons dashicons-edit"></span><span><?php _e('Edit Popup','wppb') ?></span></a>
 				<?php if(isset($wppb_popup_id)){ ?>
 					<a class="wppb_icon_button wppb-popup-tab" data-tab='option' href="#"><span><?php _e('[ / ]','wppb') ?></span><span><?php _e('Popup Shortcode','wppb') ?></span></a>
