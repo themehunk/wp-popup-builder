@@ -229,7 +229,7 @@ a:focus{
         position: relative;
     margin: auto;
     width: 550px;
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 .wppb-popup-overlay-custom-img{
         position: absolute;
@@ -239,14 +239,14 @@ a:focus{
     background-repeat: no-repeat;
     background-size: cover;
     background-position: left bottom;
-    /*border-radius: inherit;*/
+    border-radius: inherit;
 }
 .wppb-popup-custom-overlay{
         position: absolute;
     width: 100%;
     height: 100%;
     z-index: 2;
-    /*border-radius: inherit;*/
+    border-radius: inherit;
 }
 .wppb-popup-custom-content{
     z-index: 4;
