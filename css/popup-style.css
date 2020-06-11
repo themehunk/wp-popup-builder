@@ -252,7 +252,7 @@ a:focus{
     z-index: 4;
     position: relative;
     padding: 23px 37px 23px;
-    /*overflow-x: hidden;*/
+    overflow-x: initial;
 }
 .wppb-popup-custom img{
     max-width: 100%;
@@ -464,7 +464,7 @@ a:focus{
     background: #353434e6;
     width: 100%;
     height: 100%;
-    z-index: 1;
+    z-index: 1000;
     left: 0;
     top: 0;
     display: none;
@@ -484,6 +484,7 @@ a:focus{
     background: white;
     margin-top: 20%;
     min-width: 312px;
+    max-width: 400px;
     letter-spacing: 1px;
     text-align: center;
 }
