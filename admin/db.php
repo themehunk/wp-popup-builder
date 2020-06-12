@@ -207,7 +207,7 @@ public function wppb_html($setting,$inline=false){
 
         }
         $popupSetData['front-setting'] = htmlspecialchars( json_encode( $popupFrontSetting ), ENT_COMPAT );
-        return $this->wppb_layout($popupSetData);
+        return $this->wppb_layout($popupSetData,$inline);
     }
 }
 
@@ -305,14 +305,16 @@ public function wppb_initContent($column_content,$parentId){
           return $popupContent;
   }
 
-  public function wppb_layout($popupSetData,$layout=''){
+  public function wppb_layout($popupSetData,$inline,$layout=''){
     $overlay_image = $popupSetData['overlay-image-url']?'background-image:url('.$popupSetData['overlay-image-url'].');':'';
     $overlayStyle = $overlay_image?$overlay_image.$popupSetData['overlay-style']:'';
     $globalHeight = $popupSetData["wrapper-height"] != 'auto'?$popupSetData["wrapper-height"].'px;':$popupSetData["wrapper-height"].';';
 
     $popupSetData['style'] .= "#".$popupSetData["global-content-id"]."{padding:".$popupSetData["global-padding"].";height:".$globalHeight.'}';
+    $popupSetData['style'] .= "#wrapper-".$popupSetData["global-content-id"]."{".$popupSetData["wrapper-style"]."}";
 
-    $return = $popupSetData["close-btn"].'<div class="wppb-popup-custom-wrapper" style="'.$popupSetData["wrapper-style"].'">
+    // $return = $popupSetData["close-btn"].'<div id="wrapper-'.$popupSetData["global-content-id"].'" class="wppb-popup-custom-wrapper" style="'.$popupSetData["wrapper-style"].'">
+    $return = $popupSetData["close-btn"].'<div id="wrapper-'.$popupSetData["global-content-id"].'" class="wppb-popup-custom-wrapper">
             <input type="hidden" name="popup-setting-front" value="'.$popupSetData["front-setting"].'">
              <div class="wppb-popup-overlay-custom-img" style="'.$overlayStyle.'"></div>
               <div class="wppb-popup-custom-overlay" style="background-color:'.$popupSetData['overlay-color'].';"></div>
@@ -323,21 +325,20 @@ public function wppb_initContent($column_content,$parentId){
 
             $internal_Css = '';
             if ( $popupSetData['style'] ) {
-                $internal_Css = "<div>
-                  <style>".$popupSetData['style']."
-                    @media only screen and (max-width: 480px){
-                     ".$this->_responsiveCss($popupSetData['style'])." 
-                    }
-                  </style>
-                </div>";
+                $style    = $popupSetData['style'];
+                $style_res = !$inline ? $style.'@media only screen and (max-width: 480px){'.$this->_responsiveCss($style).'}':'';
+                $forInline = $inline ? "<textarea style='display:none;' class='wppb-popup-css-one-no_res' data-wrapper='".$popupSetData["wrapper-style"]."'>".$style."</textarea>":'';
+                $internal_Css = "<div class='wppb-popup-style-internal-stylesheet'>
+                  ".$forInline."
+                    <style>".$style_res."</style>
+                  </div>";
             }
     return $internal_Css.$return;
 }
 
 public function _responsiveCss($cssMainStr){
-    $css = explode('}',$cssMainStr);
+    $css = explode('}',$cssMainStr);    
         $returnCss = '';
-        $get_px_arr = [];
         foreach($css as $css_value){
           if ( $css_value && substr_count($css_value , 'px') > 0 ) {
             $id_css_Prop = explode('{', $css_value);
@@ -367,11 +368,10 @@ public function _responsiveCss3($cssProp_value,$arg=false){
         $css_con = false;
         $cssParameter  = explode('px', $cssProp_value[1]);
         foreach ($cssParameter as $value) {
-          if (is_numeric($value) && $value > 0) {
+          if (is_numeric($value) && ($value > 0 || $value <= -1 ) ) {
             $get_px_arr[] = trim($value);
           }
         }
-
         if (!empty($get_px_arr)) {
             rsort($get_px_arr);
           $css_con = $cssProp_value[1];
@@ -379,7 +379,7 @@ public function _responsiveCss3($cssProp_value,$arg=false){
                 $param = $arg == 'border-radius' ? $number_px : ($number_px / 100) * 60;
                 $param = number_format((float)$param, 2, '.', '');
                 if ($arg == 'font-size' && $param < 10) {
-                    $param = 10;
+                    $param = 10.00;
                 }
                 $css_con = str_replace($number_px.'px',$param.'px',$css_con);
               }

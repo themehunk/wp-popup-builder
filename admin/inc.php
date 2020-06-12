@@ -62,6 +62,7 @@ class wppb {
 	public function enqueue_front_script(){
 		  wp_enqueue_style('wppb-front', WPPB_URL . 'css/fstyle.css',false);
 		  wp_enqueue_script('wppb-front-js', WPPB_URL . 'js/fscript.js', array ( 'jquery' ), 1, true);
+		  wp_enqueue_style( 'dashicons' );
 		}
 
 	public static function load_file(){
