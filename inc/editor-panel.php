@@ -36,11 +36,11 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 			</div>
 		</section>
 		<!-- global setting -->
-		<div data-toggle="global-setting" class="rl_i_editor-element-Toggle outer-toggle rl-active">
+		<div data-toggle="global-setting" class="rl_i_editor-element-Toggle outer-toggle">
 			<span><?php _e("Global Setting",'wppb'); ?></span>
 			<span class="bottomCarret dashicons dashicons-arrow-right"></span>
 		</div>
-		<section data-toggle-action="global-setting" class="rl_i_editor-global-setting rl_i_editor-element-item">
+		<section data-toggle-action="global-setting" class="rl_i_editor-global-setting rl_i_editor-element-item rl-display-none">
 			<?php $wp_builder_obj->header_title( __('Popup Name','wppb') ); ?>
 			<input data-global-input="popup-name" type="text" name="global-popup-name">			
 			<?php $wp_builder_obj->header_title( __('Popup Background Setting','wppb') );
@@ -143,11 +143,11 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 			</section>
 		<!-- timer section -->
 		<!-- Close button setting -->
-		<div data-toggle="close-btn-setting" class="rl_i_editor-element-Toggle outer-toggle rl-active">
+		<div data-toggle="close-btn-setting" class="rl_i_editor-element-Toggle outer-toggle">
 			<span><?php _e('Close Button Setting','wppb'); ?></span>
 			<span class="bottomCarret dashicons dashicons-arrow-right"></span>
 		</div>
-		<section data-toggle-action="close-btn-setting" class="">
+		<section data-toggle-action="close-btn-setting" class="rl-display-none">
 			<div class="rl_i_editor-item-content-items title_ inline__">
 				<label class="rl-sub-title"><?php _e('Close Popup By Click','wppb'); ?></label>
 			</div>

@@ -145,6 +145,12 @@
     width: 70px;
     height: 60px;
 }
+.wppb-popup-custom span.ui-draggable.ui-draggable-dragging{
+        height: 60px!important;
+    box-sizing: border-box;
+    font-weight: 500;
+}
+
 .rl_i_editor-element-add-item-list  > li > span > .text-icon,
 .wppb-popup-custom span.ui-draggable.ui-draggable-dragging .text-icon{
          display: block;

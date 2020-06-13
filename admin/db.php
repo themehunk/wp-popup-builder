@@ -160,7 +160,7 @@ public function uniq_class($arr){
 }
 
 // popup html creating
-public function wppb_html($setting,$inline=false){
+public function wppb_html($setting,$inline=''){
     if ($setting && @unserialize( $setting )) {
         $popupSetData = array(
           'wrapper-style'=>'width:550px;',
@@ -189,18 +189,19 @@ public function wppb_html($setting,$inline=false){
                       $popupSetData[$contentkey_] = $contentvalue_;
                       if (isset($popupFrontSetting[$contentkey_]))$popupFrontSetting[$contentkey_] = $contentvalue_;
                     }
-                    if ( isset($setting_value['id']) ) $popupSetData['global-content-id'] = $setting_value['id'];
+                    if ( isset($setting_value['id']) ) $popupSetData['global-content-id'] = $inline.$setting_value['id'];
 
                 }elseif ($setting_value['type'] == 'wrap' ) {
+
                   $data_layout = $popupSetData['layout'] == 'layout-3' || $popupSetData['layout'] == 'layout-2'?'two-column':'';
-                  $Wrap_uniq_id = isset( $setting_value['id'] ) ? $setting_value['id'] : '';
+                  $Wrap_uniq_id = isset( $setting_value['id'] ) ? $inline.$setting_value['id'] : '';
                   $popupColumnContent = $this->wppb_initColumn($setting_value['content'],$Wrap_uniq_id);
                   $popupSetData["content"] .= '<div id="'.$Wrap_uniq_id.'" class="'.$data_layout.' wppb-popup-rl-wrap rl-clear">'.$popupColumnContent['content'].'</div>';
                   $popupSetData["style"] .= $popupColumnContent['style'];
                 }
 
           }else if ($setting_value['type'] == "close-btn" && !$inline) {
-            $Wrap_uniq_id = isset( $setting_value['id'] ) ? $setting_value['id'] : '';
+            $Wrap_uniq_id = isset( $setting_value['id'] ) ? $inline.$setting_value['id'] : '';
             $popupSetData["style"] .= isset( $setting_value['style'] )?"#".$Wrap_uniq_id."{".$setting_value['style']."}":'';
             $popupSetData["close-btn"] ='<span id="'.$Wrap_uniq_id.'" class="wppb-popup-close-btn dashicons dashicons-no-alt"></span>';
           }
@@ -215,16 +216,15 @@ public function wppb_initColumn($column,$parentId){
     $popupColumn = ['content'=>'','style'=>''];
       foreach ($column as $value) {
           $id = isset($value["id"])?$value["id"]:'';
-          $popupColumn['style'] .= isset($value["style"])?'#'.$parentId.' .'.$id.'{'.$value["style"].'}':'';          
+          $popupColumn['style'] .= isset($value["style"])?'#'.$parentId.' .'.$id.'{'.$value["style"].'}':'';   
           $popupContent = isset($value['content']) && is_array($value['content']) && !empty($value['content']) ?$this->wppb_initContent( $value['content'], $parentId ):['content'=>'','style'=>''];
-
           $popupColumn['style'] .= $popupContent["style"];
           $popupColumn['content'] .= '<div class="'.$id.' wppb-popup-rl-column">'.$popupContent["content"].'</div>';
       }
       return $popupColumn;
 }
 
-public function wppb_initContent($column_content,$parentId){
+public function wppb_initContent( $column_content,$parentId ){
               $popupContent = ['content'=>'','style'=>''];
 
               foreach ($column_content as $setting_value) {

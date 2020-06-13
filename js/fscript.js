@@ -170,17 +170,11 @@
 				let popup = $(value);
 				let getCss = popup.find('.wppb-popup-css-one-no_res').val();
 				let popupWidth = Business_front._findWidth(popup);
-
-
-				console.log(popupWidth);
-
 				if ( popupWidth.scale != 0) {
 					getCss = Business_front._responsive_one( getCss , popupWidth.scale );
 					let addClass = popupWidth.scale == 1 ? 'wppb-res-one' : popupWidth.scale == 2 ? 'wppb-res-one' : 'wppb-res-three';
 					popup.addClass(addClass);
 				}
-
-
 				popup.find('.wppb-popup-style-internal-stylesheet > style').text( getCss );
 				popup.find('.wppb-popup-custom-wrapper').css('width',popupWidth.width);
 			});
@@ -192,10 +186,6 @@
 					getPopupWidth  = parseInt( getPopupWidth.slice( findIndexWidth + 6 ,findIndexPx) );
 				let popupParentWidth = parseInt( popup.parent().css('width') );
 				let width = getPopupWidth > popupParentWidth ? popupParentWidth : getPopupWidth;
-
-
-				// console.log()
-
 				let getPErcent,scale;
 				if ( getPopupWidth > popupParentWidth ) {
 					// how many percent small them their parent popup
