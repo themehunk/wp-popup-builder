@@ -4,9 +4,11 @@ var Business_news_letter = {
 		Business_news_letter._bind();
 	},
 	_saveBusinessAddon:function(){
+		if($('.wppb-back-page-popup').length)$('.wppb-back-page-popup').removeClass('wppb-back-page-popup');
 		let this_btn = $(this);
 		this_btn.addClass('rlLoading');
 		let saveData = Business_news_letter._saveData();
+
 			let data_ = {action:'custom_insert',htmldata:saveData};
 			let returnData = Business_news_letter._ajaxFunction(data_);
 			returnData.success(function(response){
@@ -18,6 +20,7 @@ var Business_news_letter = {
 			});
 	},
 	_updateAddon:function(){
+		if($('.wppb-back-page-popup').length)$('.wppb-back-page-popup').removeClass('wppb-back-page-popup');
 		let this_btn = $(this);
 		this_btn.addClass('rlLoading');
 		let saveData = Business_news_letter._saveData();
@@ -178,8 +181,6 @@ var Business_news_letter = {
 	},
 	_confirmMsg:function(show,msg=false){
 		if (show) {
-			console.log('from inside');
-
 			let container = $('.resetConfirmPopup');
 			if (msg) container.find('.resetHeader > span').html(msg);
 			container.addClass('active');
@@ -378,6 +379,10 @@ var Custom_popup_editor = {
 		Custom_popup_editor._popupEditorInit();
 		Custom_popup_editor._bind();
 	},
+	_confirmMsgOn:function(){
+		if(!$('.wppb-back-page-popup').length) $('.wppb-popup-cmn-nav-item a:first-child').addClass('wppb-back-page-popup');
+		// Custom_popup_editor._confirmMsgOn()
+	},
 	_popupEditorInit:function(){
 		//link same tab and another tab setting
 		$('.rl_i_editor-item-content-header [data-editor-tab]').click(function(){
@@ -410,8 +415,8 @@ var Custom_popup_editor = {
 	},
 	_forEditorSticky:function(){
 			let navigation = $('.rl_i_editor-main-container');
-			let windowOffset =$(window);
-			if ( (windowOffset.scrollTop() + 32) > navigation.offset().top ) {
+			let windowOffset = $(window);
+			if ( (windowOffset.scrollTop() + 32) > navigation.offset().top && navigation.offset().top != 0) {
 				navigation.find('.rl_i_editor-inner-wrap').addClass('sticky');
 			}else{
 				navigation.find('.rl_i_editor-inner-wrap').removeClass('sticky');
@@ -435,10 +440,12 @@ var Custom_popup_editor = {
 	      helper: "clone",
 	      revert: "invalid",
 	      drag:function(event,ui){
-	      	// console.log(event);
-	      	// console.log(ui);
+	      	let container = $('.wppb-popup-custom .rlEditorDropable');
+	      	container.addClass('wppb-drop-on-target')
+	     	// let dragging = container.children('.ui-draggable-dragging');
 	      },
 	      stop:function(event,ui){
+	      	$('.wppb-popup-custom .rlEditorDropable').removeClass('wppb-drop-on-target')
 	      	Custom_popup_editor._initAfterDrag(ui.helper);
 	      }
 	    }).disableSelection();
@@ -610,6 +617,7 @@ var Custom_popup_editor = {
 		jQuery.each(allInputs,initInput_);
 	},
 	_changedSetEditor:function(){
+		Custom_popup_editor._confirmMsgOn()
 		let changedInput = $(this);
 		let clickedObj = $('.rl-editable-key-action');
 			let changeData = changedInput.data('editor-input');
@@ -786,6 +794,7 @@ var Custom_popup_editor = {
 		}//loop
 	},
 	_globalSetEditor:function(e){
+		Custom_popup_editor._confirmMsgOn()
 		let sepInput = $(this);
 		if (sepInput) {
 				let checkDatatype = sepInput.data('type');
@@ -990,6 +999,7 @@ var Custom_popup_editor = {
 		}
 	},
 	_leadFormChoose:function(){
+		Custom_popup_editor._confirmMsgOn()
 		let select = $(this);
 		let form_id = select.val();
   		if ( parseInt(form_id) ) {
@@ -1167,6 +1177,7 @@ var Custom_popup_editor = {
 		jQuery.each(getInputs, leadFormInput);
 	},
 	_leadFormStylingSet:function(){
+		Custom_popup_editor._confirmMsgOn()
 		let input_ = $(this);
 		let dataCheck = input_.data('lead-form');
 
@@ -1282,10 +1293,12 @@ var Custom_popup_editor = {
 			  }else{
 			  	Custom_popup_editor._setStyleColor(clickedObj,color_,getColorProperty);
 			  }
+				Custom_popup_editor._confirmMsgOn()
 			}).on('hide', instance => {
 			    instance._root.app.remove();
 			});
 	},_chooseImage:function(e){
+				Custom_popup_editor._confirmMsgOn()
 		e.preventDefault();
     	let this_button = $(this);
     	custom_uploader = wp.media({

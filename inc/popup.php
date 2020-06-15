@@ -55,9 +55,24 @@ if ($get_CustomPopup) {
 // echo "</pre>";
 ?>
 <div class="wppb-popup-cmn-container">	
+
+	<div class="resetConfirmPopup">
+		<div class="reserConfirm_inner">
+			<div class="resetWrapper">
+				<div class="resetHeader">
+					<span><?php _e('Popup Will Delete Permanentally.','wppb') ?></span>
+				</div>
+				<div class="resetFooter">
+					<a class="wppbPopup popup deny" href="#"><span class="dashicons dashicons-dismiss"></span><?php _e('No','wppb') ?></a>
+					<a class="wppbPopup popup confirm" href="#"><span class="dashicons dashicons-yes-alt"></span><?php _e('Yes','wppb') ?></a>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<div class="wppb-popup-cmn-nav">
 		<div class="wppb-popup-cmn-nav-item">
-				<a class="wppb_icon_button wppb-back-page-popup" href="<?php _e(esc_url(WPPB_PAGE_URL),'wppb')?>"><span class="dashicons dashicons-arrow-left-alt"></span><span><?php _e('Back','wppb') ?></span></a>
+				<a class="wppb_icon_button" href="<?php _e(esc_url(WPPB_PAGE_URL),'wppb')?>"><span class="dashicons dashicons-arrow-left-alt"></span><span><?php _e('Back','wppb') ?></span></a>
 				<a class="wppb_icon_button wppb-popup-tab active" data-tab='setting' href="#"><span class="dashicons dashicons-edit"></span><span><?php _e('Edit Popup','wppb') ?></span></a>
 				<?php if(isset($wppb_popup_id)){ ?>
 					<a class="wppb_icon_button wppb-popup-tab" data-tab='option' href="#"><span><?php _e('[ / ]','wppb') ?></span><span><?php _e('Popup Shortcode','wppb') ?></span></a>
@@ -66,20 +81,7 @@ if ($get_CustomPopup) {
 	</div>
 	<section class="wppb-popup-demo wppb-popup-tab-container active">
 	<div class="wppb-popup-demo-inner">
-				<!-- confirm delete  -->
-			<div class="resetConfirmPopup">
-				<div class="reserConfirm_inner">
-					<div class="resetWrapper">
-						<div class="resetHeader">
-							<span><?php _e('Popup Will Delete Permanentally.','wppb') ?></span>
-						</div>
-						<div class="resetFooter">
-							<a class="wppbPopup popup deny" href="#"><span class="dashicons dashicons-dismiss"></span><?php _e('No','wppb') ?></a>
-							<a class="wppbPopup popup confirm" href="#"><span class="dashicons dashicons-yes-alt"></span><?php _e('Yes','wppb') ?></a>
-						</div>
-					</div>
-				</div>
-			</div>
+				<!-- confirm first placed here delete  -->
 		<?php 
 			if ( !$get_CustomPopup ) include_once 'prebuilt-popup.php'; 
 			include_once 'popup-custom.php'; 

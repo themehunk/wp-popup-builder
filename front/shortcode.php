@@ -9,14 +9,15 @@ class wppb_shortcode{
 		return new self();
 	}
  	public function popup( $atts ,$content) {
+
 			    $a = shortcode_atts( array('popup' => '','inline' => '','widget' => ''), $atts );
 				$popup_id = false;
-				$popupInline = true;
+				$popupInline = uniqid('inline-');;
 				if ($a['inline']) {
 					$popup_id = $a['inline'];
 					$open_popup_div = '<div class="wppb-popup-main-wrap inline_ inline-popup active">'; 
 				}elseif ($a['popup']) {
-					$popupInline = false;
+					$popupInline = '';
 					$popup_id = $a['popup'];	
 					$open_popup_div = '<div class="wppb-popup-open popup active">'; 
 				}elseif ($a['widget']) {
@@ -32,5 +33,8 @@ class wppb_shortcode{
 					}
 				}
 	}
+
+
+
 // class end
 }

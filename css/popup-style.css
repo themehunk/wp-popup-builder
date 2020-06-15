@@ -606,3 +606,8 @@ a:focus{
     margin-left: 2em;
     letter-spacing: .05em;
 }
+.wppb-drop-on-target {
+        outline: 1px dotted #f7efac;
+    outline-offset: -1px;
+    padding: 10px 0;
+}
