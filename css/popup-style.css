@@ -219,6 +219,7 @@ a:focus{
     padding: 1px 0;
     position: relative;
     box-sizing: border-box;
+    overflow-wrap:unset;
 }
 .wppb-popup-demo .wppb-popup-custom  .wppb-popup-lead-form .leadform-show-form span{
         font-weight: normal;
@@ -534,7 +535,7 @@ a:focus{
 .wppb-popup-rl-wrap{
     display: flex;
     color: white;
-    /*align-items: center;*/
+    align-items: center;
 }
 .wppb-popup-rl-wrap .wppb-popup-rl-column{
         box-sizing: border-box;
