@@ -100,7 +100,7 @@ font-weight: 600;
 .wppb-popup-main-wrap .wppb-popup-rl-wrap{
     display: flex;
     color: white;
-    align-items: center;
+    /*align-items: center;*/
 }
 .data-rl-editable-wrap{
     display: flex;

@@ -499,35 +499,12 @@ var Custom_popup_editor = {
       		}
 	      return newElement;
 	},
-	_openEditPanel:function(){
+	_openEditPanel:function(e){
 		let clickedObj = $(this);
 		let clickedObjData1 	= clickedObj.data('rl-editable');
-
 		if ($('.rl-editable-key-action').length)$('.rl-editable-key-action').removeClass('rl-editable-key-action');
 		clickedObj.addClass('rl-editable-key-action');
 		let wrapperContent = $('.rl_i_editor-item-content');
-
-
-		// $( ".wppb-popup-custom .rlEditorDropable" ).sortable({
-		// 	connectWith: ".wppb-popup-custom .rlEditorDropable",
-	 //      revert: true,
-	 //      placeholder: "ui-state-highlight",
-	 //      cursor: "move",
-	 //      cancel:'.rl-editable-key-action',
-	 //      update:function(){
-	 //      	let droppedContainer = $(this);
-	 //      	if(droppedContainer.children().length > 1)droppedContainer.children('.rl_rmBlankSpace').remove();
-	 //      }
-	 //    });
-	 // $('p').on('click', function() {
-    
-  //       $( ".sortable" ).sortable( "destroy" );
-  //   });
-        // clickedObj.sortable( {cancel:clickedObj} );
-		// clickedObj.attr('contenteditable',true);
-
-
-
 		// close container while open content style
 		$('.rl-lead-form-panel').hide();
 		let toggleContainer = $(".rl_i_editor-element-Toggle");
@@ -543,12 +520,18 @@ var Custom_popup_editor = {
 		if (clickedObjData1 != "image") {
 			$('.rl_i_editor-item-content .item-image').hide();
 			$('.rl_i_editor-item-content .item-text').show();
+			clickedObj.attr('contenteditable',true);
+			Custom_popup_editor.placeCaretAtEnd(clickedObj.focus()[0]);
 		}else if (clickedObjData1 == "image") {
 			$('.rl_i_editor-item-content .item-image').show();
 			$('.rl_i_editor-item-content .item-text').hide();
 		}
 		// close container while open content style
 		wrapperContent.slideDown('slow');
+
+			// scrolling function apply
+			Custom_popup_editor._scrollFunction( wrapperContent );
+
 		let allInputs = wrapperContent.find('[data-editor-input]');
 		let initInput_ = (index,value)=>{
 			let seperateInput 		= $(value);
@@ -563,6 +546,9 @@ var Custom_popup_editor = {
 			if((clickedObjData1 == 'text' || clickedObjData1 == 'link' || clickedObjData1 == 'heading') && seperateInputData1 == 'title'){
 				// get text of clicked item 
 				seperateInput.val(clickedObj.html());
+				// if change by content editable then it will on
+				clickedObj.keyup(function(e){seperateInput.val($(this).text());});
+
 			}else if(seperateInputData1 == 'link'){
 				// get link href of clicked item
 				clickedObj.data('editor-link')?seperateInput.val(clickedObj.data('editor-link')):seperateInput.val('#');
@@ -961,27 +947,35 @@ var Custom_popup_editor = {
 				alert('fill the popup name');
 			}
 	},
-	_bind:function(){
-		$(document).on('click', '.wppb-popup-custom [data-rl-editable]',Custom_popup_editor._openEditPanel);
-		$(document).on('click', '.wppb-popup-custom .rlRemoveElement',Custom_popup_editor._rlRemoveElement);
-		$(document).on('click', '.rl-i-choose-image',Custom_popup_editor._chooseImage);
-		$(document).on('keyup change', '[data-editor-input]',Custom_popup_editor._changedSetEditor);
-		$(document).on('keyup change', '[data-global-input]', Custom_popup_editor._globalSetEditor);
-		$(document).on('change', '.lead-form-bulider-select > select', Custom_popup_editor._leadFormChoose);
-		$(document).on('click', '.wppb-popup-lead-form', Custom_popup_editor._leadFormOpenPanel);
-
-		$(document).on('keyup', '.wppb-popup-name-layout input[name="wppb-popup-name"]', Custom_popup_editor._chooseLayout);
-		$(document).on('click', '.wppb-popup-name-layout input[name="wppb-popup-layout"]', Custom_popup_editor._chooseLayout);
-		$(document).on('click', '.wppb-popup-name-init', Custom_popup_editor._popupName);
-		$(document).on('keyup change', '.wppb-lead-form-styling [data-lead-form]',Custom_popup_editor._leadFormStylingSet);
-
-		// color picker
-		$(document).on('click', '.color-output',Custom_popup_editor._colorPickerByclick);
-
-	},
 	_leadFormOpenPanel:function(){
+		// function scrollFn(){
+		// 	let headerOffset =  $('.rl_i_editor-header-area').offset().top + $('.rl_i_editor-header-area').outerHeight() + 10;
+		// 	let scrElem = $('.rl_i_editor-content-area');
+		// 	let scrElem2 = $('.rl-lead-form-panel');
+
+		// 	let panelOff = scrElem2.offset().top; 
+		// 	let offsetApply = panelOff - headerOffset;
+		// 	let panelOuterHeight = scrElem2.outerHeight();
+		// 	let editorOuterHeight = scrElem.outerHeight(); 
+		// 	if (editorOuterHeight > panelOuterHeight) {
+		// 		offsetApply = (editorOuterHeight - panelOuterHeight) + headerOffset; 
+		// 	}
+		// 	let scrollEnable = true;
+		// 	if (panelOff == headerOffset || panelOff < headerOffset || (offsetApply == panelOff) ) {
+		// 		scrollEnable = false;
+		// 	}
+		// 	if (scrollEnable) {
+		// 		scrElem.animate({scrollTop:offsetApply});
+		// 	}
+		// }
+		// setTimeout(scrollFn,600);
+
+
 		let getForm = $(this);
 		$('.rl-lead-form-panel').slideDown('fast');
+		// scrolling function apply
+			Custom_popup_editor._scrollFunction($('.rl-lead-form-panel'));
+
 		// close container while open content style
 		$('.rl-editable-key-action').removeClass('rl-editable-key-action');
 		let toggleContainer = $(".rl_i_editor-element-Toggle");
@@ -1238,6 +1232,69 @@ var Custom_popup_editor = {
 			let fieldMArgin = leadForm.find('.lf-field');
 			Custom_popup_editor._marginPadding('margin',input_,fieldMArgin,inputVal);
 		}
+	},
+	_bind:function(){
+		// $(document).on('click', '.wppb-popup-custom [data-rl-editable]',Custom_popup_editor._openEditPanel);
+
+
+
+		
+		$(document).on('click', '.wppb-popup-custom [data-rl-editable]',Custom_popup_editor._openEditPanel);
+		$(document).on('click', '.wppb-popup-custom .rlRemoveElement',Custom_popup_editor._rlRemoveElement);
+		$(document).on('click', '.rl-i-choose-image',Custom_popup_editor._chooseImage);
+		$(document).on('keyup change', '[data-editor-input]',Custom_popup_editor._changedSetEditor);
+		$(document).on('keyup change', '[data-global-input]', Custom_popup_editor._globalSetEditor);
+		$(document).on('change', '.lead-form-bulider-select > select', Custom_popup_editor._leadFormChoose);
+		$(document).on('click', '.wppb-popup-lead-form', Custom_popup_editor._leadFormOpenPanel);
+
+		$(document).on('keyup', '.wppb-popup-name-layout input[name="wppb-popup-name"]', Custom_popup_editor._chooseLayout);
+		$(document).on('click', '.wppb-popup-name-layout input[name="wppb-popup-layout"]', Custom_popup_editor._chooseLayout);
+		$(document).on('click', '.wppb-popup-name-init', Custom_popup_editor._popupName);
+		$(document).on('keyup change', '.wppb-lead-form-styling [data-lead-form]',Custom_popup_editor._leadFormStylingSet);
+
+		// color picker
+		$(document).on('click', '.color-output',Custom_popup_editor._colorPickerByclick);
+
+	},
+	_scrollFunction:function(scrPanel){
+		function scrollFn(){
+			let headerOffset =  $('.rl_i_editor-header-area').offset().top + $('.rl_i_editor-header-area').outerHeight() + 10;
+			let scrElem = $('.rl_i_editor-content-area');
+			// let scrElem2 = $('.rl-lead-form-panel');
+			let scrElem2 = scrPanel;
+
+			let panelOff = scrElem2.offset().top; 
+			let offsetApply = panelOff - headerOffset;
+			let panelOuterHeight = scrElem2.outerHeight();
+			let editorOuterHeight = scrElem.outerHeight(); 
+			if (editorOuterHeight > panelOuterHeight) {
+				offsetApply = (editorOuterHeight - panelOuterHeight) + headerOffset; 
+			}
+			let scrollEnable = true;
+			if (panelOff == headerOffset || panelOff < headerOffset || (offsetApply == panelOff) ) {
+				scrollEnable = false;
+			}
+			if (scrollEnable) {
+				scrElem.animate({scrollTop:offsetApply});
+			}
+		}
+		setTimeout(scrollFn,600);
+	},
+	placeCaretAtEnd:function(el) {
+		    el.focus();
+		    if (typeof window.getSelection != "undefined" && typeof document.createRange != "undefined") {
+		        var range = document.createRange();
+		        range.selectNodeContents(el);
+		        range.collapse(false);
+		        var sel = window.getSelection();
+		        sel.removeAllRanges();
+		        sel.addRange(range);
+		    } else if (typeof document.body.createTextRange != "undefined") {
+		        var textRange = document.body.createTextRange();
+		        textRange.moveToElementText(el);
+		        textRange.collapse(false);
+		        textRange.select();
+		    }
 	},
 	_colorPickr:function(select_element,clickedObj,getColorProperty,getColor=false){
 		let getColorValue = clickedObj.css(getColorProperty);
@@ -1555,4 +1612,10 @@ var Custom_popup_editor = {
 }
 	Custom_popup_editor.init();
 	Business_news_letter.init();
+
+	let scrElem2 = $('.rl-lead-form-panel');
+		// console.log( scrElem2.offset().top );
+
+
+
 })(jQuery);

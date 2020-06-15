@@ -30,6 +30,7 @@
     padding: 4px 11px;
     border-radius: 4px;
     cursor: pointer;
+    display: none;
 }
 .wppb-export-sub:focus{
     outline: none;
@@ -691,7 +692,7 @@ input[name="global-popup-name"]{
 /*ui drag drop style*/
 .ui-state-highlight{
     display: block;
-    height: 30px;
+    height: 40px;
     border: 1px dotted #6747e6;
     background-color: #eae3a2;
 
