@@ -435,16 +435,19 @@ var Custom_popup_editor = {
 		      }
 	    }).disableSelection();
 
+	    let clientXcount = 0, clientYcount = 0;
+
 		$( ".rl_i_editor-element-add-item-list [data-item-drag]" ).draggable({
 	      connectToSortable: ".wppb-popup-custom .rlEditorDropable",
 	      helper: "clone",
 	      revert: "invalid",
+	      cursor:'move',
+	      containment:'document',
 	      drag:function(event,ui){
 	      	let container = $('.wppb-popup-custom .rlEditorDropable');
-	      	container.addClass('wppb-drop-on-target')
-	     	// let dragging = container.children('.ui-draggable-dragging');
+	      	container.addClass('wppb-drop-on-target');
 	      },
-	      stop:function(event,ui){
+		stop:function(event,ui){
 	      	$('.wppb-popup-custom .rlEditorDropable').removeClass('wppb-drop-on-target')
 	      	Custom_popup_editor._initAfterDrag(ui.helper);
 	      }
