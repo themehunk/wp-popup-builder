@@ -74,17 +74,19 @@ a:focus{
     background: #33323563;
 }
 .wppb-prebuilt-popup-json img{
-    max-width: 100%;
+       max-width: 100%;
+    max-height: 100%;
 }
 .wppb-prebuilt-popup-json .wppb-popup-json-label{
-        display: block;
+         display: flex;
     box-shadow: 0px 0px 4px 1px #d8d8d8;
     position: relative;
     margin: auto;
     padding: 13px;
-     transition: .4s all linear; 
-    height: 173px;
-    overflow: hidden;
+    transition: .4s all linear;
+    height: 197px;
+    align-items: center;
+    justify-content: center;
 }
 .wppb-prebuilt-popup-json input[type="radio"]{
     display: none;

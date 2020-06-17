@@ -157,6 +157,30 @@ public function wppbPopupList($allSetting,$column_making,$business_id,$countPopu
 
 // popup page list of all popupSetData json file
 public function wppbPopupList_json($allSetting,$column_making,$countPopup){
+		$imageUrl = isset($allSetting[0]['img-url']) ? $allSetting[0]['img-url'] : '';
+		$imageUrl = $imageUrl ? "<img src='".$imageUrl."'>" : '';
+		$prebuilt_id = 'wppb-prebuilt-id-'.$column_making;
+		$popupSetData = $this->wppbPopupContent($allSetting);
+		$attr_inbuilt = isset($popupSetData['layout']) && $popupSetData['layout'] ? 'data-layout="'.$popupSetData['layout'].'"' : '';
+		$attr_inbuilt .= isset($popupSetData['outside-color']) && $popupSetData['outside-color'] ? 'data-outside-color="'.$popupSetData['outside-color'].'"' : '';
+		$attr_inbuilt .= "data-prebuilt-id='".$prebuilt_id."'";
+		$popupSetData = $this->popup_layout($popupSetData);
+		$popupSetData = "<div data-layout='".$prebuilt_id."'>".$popupSetData.'</div>';
+		$returnHtml = ['prebuilt-html'=> $popupSetData,'prebuilt-label'=>''];
+		if ($column_making == 1) $returnHtml['prebuilt-label'] .= '<div class="wppb-popup-row wppb-popup_clear">';
+		$returnHtml['prebuilt-label'] .= '<div class="wppb-popup-column-three">
+								<input id="wppb-popup-layout-label__layout--'.$column_making.'" type="radio" name="wppb-popup-layout" value="prebuilt" '.$attr_inbuilt.'>
+								<label for="wppb-popup-layout-label__layout--'.$column_making.'" class="wppb-popup-json-label">'.$imageUrl.'</label>
+						</div>';
+		if($countPopup == ($column_making)){
+			$returnHtml['prebuilt-label'] .= '</div>';
+		}elseif(($column_making) % 3 === 0){
+			$returnHtml['prebuilt-label'] .= '</div><div class="wppb-popup-row wppb-popup_clear">';
+		}
+		return $returnHtml;
+}
+
+public function wppbPopupList_json__($allSetting,$column_making,$countPopup){
 		$popupSetData = $this->wppbPopupContent($allSetting);
 		$attr_inbuilt = isset($popupSetData['layout']) && $popupSetData['layout'] ? 'data-layout="'.$popupSetData['layout'].'"' : '';
 		$attr_inbuilt .= isset($popupSetData['outside-color']) && $popupSetData['outside-color'] ? 'data-outside-color="'.$popupSetData['outside-color'].'"' : '';
@@ -182,7 +206,7 @@ public function wppbPopupList_json($allSetting,$column_making,$countPopup){
 		          if( is_array($value) ){
 		              $return[$key] = $this->wppb_changeFilePath( $value, $path );
 		          }else{
-		      			if( $key == 'image-url' || $key == 'overlay-image-url'){
+		      			if( $key == 'image-url' || $key == 'overlay-image-url' || $key == 'img-url'){
 							 $Exp = explode('/', $value);
 				             $End = end($Exp);
 				             $return[$key] = $path.$End;

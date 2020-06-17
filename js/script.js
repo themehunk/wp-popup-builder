@@ -931,11 +931,13 @@ var Custom_popup_editor = {
 			if (layoutName && popupName) {
 				let getLayout = '';
 				if (layoutName == 'prebuilt') {
-					getLayout = layOutRadio.siblings('label').html();
+					let prebuiltLayout = layOutRadio.attr( 'data-prebuilt-id' );
+					getLayout = $('.prebuilt-pupup-layout-container > div[data-layout="'+prebuiltLayout+'"]').html();
 					layoutName = layOutRadio.data('layout') ? layOutRadio.data('layout') : '';
 				}else{
 					getLayout = $('.prebuilt-pupup-layout-container > div[data-layout="'+layoutName+'"]').html();
 				}
+
 				let saveLAyout = {layout:layoutName,'popup-name':popupName};
 				let outSideColor   = $('.wppb-popup-name-layout input[name="wppb-popup-layout"]:checked').data('outside-color');
 				if (outSideColor) saveLAyout['outside-color'] = outSideColor;
