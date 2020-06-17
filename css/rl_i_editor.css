@@ -132,7 +132,7 @@
 }
 .rl_i_editor-element-add-item-list > li{
         float: left;
-    margin: 0;
+    margin: 8px 8px;
 }
 .rl_i_editor-element-add-item-list  > li > span,
 .wppb-popup-custom span.ui-draggable.ui-draggable-dragging{
@@ -140,7 +140,6 @@
     background: #EDF7FB;
     display: block;
     color: #775DE4!important;
-    margin: 8px 8px;
     padding: 7px 0px;
     font-size: 12px!important;
     width: 70px;
@@ -150,6 +149,7 @@
         height: 60px!important;
     box-sizing: border-box;
     font-weight: 500;
+    letter-spacing: 1px;
 }
 
 .rl_i_editor-element-add-item-list  > li > span > .text-icon,

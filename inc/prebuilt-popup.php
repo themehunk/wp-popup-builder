@@ -6,13 +6,15 @@ $urlResponse 	= wp_remote_get( $getOuterUrl_ );
 $responseBody_ 	= wp_remote_retrieve_body( $urlResponse );
 $responseResult_ = json_decode( $responseBody_ , true);
 
-$jsonPopupDemo = '';
+$jsonPopupDemo = $jsonPopupHtml = '';
 if ( is_array( $responseResult_ ) && ! is_wp_error( $responseResult_ ) ) {
 	$countColumn = 0;
 	foreach ($responseResult_ as $prebuilt_value) {
 		$prebuilt_value =  $wp_builder_obj->wppb_changeFilePath($prebuilt_value,WPPB_URL."img/");
 		$countColumn++;
-		$jsonPopupDemo .= $wp_builder_obj->wppbPopupList_json( $prebuilt_value,$countColumn,count($responseResult_) );			
+		$prebuiltData = $wp_builder_obj->wppbPopupList_json( $prebuilt_value,$countColumn,count($responseResult_) );
+		$jsonPopupDemo .= $prebuiltData['prebuilt-label'];			
+		$jsonPopupHtml .= $prebuiltData['prebuilt-html'];			
 	}
 }
 ?>
@@ -123,8 +125,6 @@ if ( is_array( $responseResult_ ) && ! is_wp_error( $responseResult_ ) ) {
 										</div>
 											<div class="data-rl-editable-wrap" style="justify-content: center;"><div class="actions_"><span class="dashicons dashicons-no rlRemoveElement"></span></div><span data-rl-editable="link" data-editor-link="#" data-editor-link-target="0" style="width: 75%;padding: 8px 6px;border: 2px solid rgba(10, 198, 206, 1);letter-spacing: 0;font-weight: 500;font-size: 15px;line-height:15px;border-radius: 12px;color: rgba(10, 198, 206, 1);margin: 12px 0px 3px 0px;" data-content-alignment="center" class=""><?php _e('GET EXCLUSIVE CODE','wppb'); ?></span></div>
 										</div>
-
-
 										<div data-rl-column='1' class="wppb-popup-rl-column rlEditorDropable">
 											<div class="data-rl-editable-wrap wrap-image_">
 															<div class="actions_">
@@ -137,7 +137,9 @@ if ( is_array( $responseResult_ ) && ! is_wp_error( $responseResult_ ) ) {
 									</div>
 					          </div>
 					</div>
-				</div>			
+				</div>	
+				<!-- json data layout -->
+				<?php echo $jsonPopupHtml; ?>
 	<!-- layout 3 -->
 		</section>
 	<!-- prebuilt popup section -->

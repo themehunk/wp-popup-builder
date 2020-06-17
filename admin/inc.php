@@ -57,6 +57,7 @@ class wppb {
 		  wp_enqueue_media();
 		  wp_enqueue_script( 'wppb-js', WPPB_URL . 'js/script.js', array ( 'jquery','jquery-ui-draggable', 'wp-util', 'updates' ), 1, true);
 		  wp_localize_script('wppb-js', 'wppb_ajax_backend', array('wppb_ajax_url' => admin_url('admin-ajax.php')));
+
 	}
 
 	public function enqueue_front_script(){

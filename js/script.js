@@ -435,16 +435,19 @@ var Custom_popup_editor = {
 		      }
 	    }).disableSelection();
 
+	    let clientXcount = 0, clientYcount = 0;
+
 		$( ".rl_i_editor-element-add-item-list [data-item-drag]" ).draggable({
 	      connectToSortable: ".wppb-popup-custom .rlEditorDropable",
 	      helper: "clone",
 	      revert: "invalid",
+	      cursor:'move',
+	      containment:'document',
 	      drag:function(event,ui){
 	      	let container = $('.wppb-popup-custom .rlEditorDropable');
-	      	container.addClass('wppb-drop-on-target')
-	     	// let dragging = container.children('.ui-draggable-dragging');
+	      	container.addClass('wppb-drop-on-target');
 	      },
-	      stop:function(event,ui){
+		stop:function(event,ui){
 	      	$('.wppb-popup-custom .rlEditorDropable').removeClass('wppb-drop-on-target')
 	      	Custom_popup_editor._initAfterDrag(ui.helper);
 	      }
@@ -928,11 +931,13 @@ var Custom_popup_editor = {
 			if (layoutName && popupName) {
 				let getLayout = '';
 				if (layoutName == 'prebuilt') {
-					getLayout = layOutRadio.siblings('label').html();
+					let prebuiltLayout = layOutRadio.attr( 'data-prebuilt-id' );
+					getLayout = $('.prebuilt-pupup-layout-container > div[data-layout="'+prebuiltLayout+'"]').html();
 					layoutName = layOutRadio.data('layout') ? layOutRadio.data('layout') : '';
 				}else{
 					getLayout = $('.prebuilt-pupup-layout-container > div[data-layout="'+layoutName+'"]').html();
 				}
+
 				let saveLAyout = {layout:layoutName,'popup-name':popupName};
 				let outSideColor   = $('.wppb-popup-name-layout input[name="wppb-popup-layout"]:checked').data('outside-color');
 				if (outSideColor) saveLAyout['outside-color'] = outSideColor;
