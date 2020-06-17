@@ -67,7 +67,6 @@ var Business_news_letter = {
 			if( overlayImage.attr('data-overlay-image') && overlayImage.css('background-image') != 'none' ){
 
 				// let findOnOff = overlayImage.css('background-image');
-				// console.log(findOnOff);
 
 				contentGlobal['overlay-image-url'] = overlayImage.attr('data-overlay-image');
 			}else{
@@ -287,7 +286,6 @@ var Business_news_letter = {
 			let data_ = {action:'popup_active',bid:popup_id,is_active:isActive};
 			let returnData = Business_news_letter._ajaxFunction(data_);
 			returnData.success(function(response){
-				// console.log(response);
 				if (response) {
 					this_button.removeClass('business_disabled');
 				}
@@ -329,7 +327,6 @@ var Business_news_letter = {
 					let data_ = {action:'activate_lead_form'};
 					let returnData = Business_news_letter._ajaxFunction(data_);
 					returnData.success(function(response){
-						console.log(response);
 						if (response.data.success) {
 							button.remove();
 							$('.lead-form-bulider-select').show();
@@ -635,7 +632,6 @@ var Custom_popup_editor = {
 			}else if(changeData == 'margin'|| changeData == 'padding'){
 				Custom_popup_editor._marginPadding(changeData,changedInput,clickedObj,changeValue);
 			}else if(changeData == 'item-width'){
-				console.log(changeValue);
 				clickedObj.css('width',changeValue+'%');
 			}else if (changeData == 'content-alignment') {
 				Custom_popup_editor._contentAlign(clickedObj,changeValue);
@@ -1381,12 +1377,14 @@ var Custom_popup_editor = {
 	},
 	_inlineCssSeparate:function(inline_css){
 				let saparateStyle = [];
-				inline_css.split(';').forEach((value_, index_)=>{
-					if(value_.search(':') > -1){
-				      let getCss = value_.split(':');
-				     	saparateStyle[getCss[0].trim()] = getCss[1].trim();  
-				    }
-				});
+				if (inline_css != '' && inline_css.search(';') > -1) {
+					inline_css.split(';').forEach((value_, index_)=>{
+						if(value_.search(':') > -1){
+					      let getCss = value_.split(':');
+					     	saparateStyle[getCss[0].trim()] = getCss[1].trim();  
+					    }
+					});
+				}
 				return saparateStyle;
 	},
 	_setStyleColor:function(element,element_value,styleProperty){
@@ -1619,7 +1617,6 @@ var Custom_popup_editor = {
 	Business_news_letter.init();
 
 	let scrElem2 = $('.rl-lead-form-panel');
-		// console.log( scrElem2.offset().top );
 
 
 
