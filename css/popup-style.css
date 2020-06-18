@@ -306,7 +306,7 @@ a:focus{
 .wppb-popup-custom [data-rl-editable]:before,
 .wppb-popup-custom .wppb-popup-lead-form:before,
 .wppb-popup-custom .data-rl-editable-wrap.wrap-image_:before{
-    content: 'Text';
+        content: 'Text';
     font-size: 14px;
     position: absolute;
     background: #6747e6;
@@ -613,24 +613,4 @@ a:focus{
         outline: 1px dotted #f7efac;
     outline-offset: -1px;
     padding: 10px 0;
-}
-
-/*full width layout*/
-.wppb-popup-custom.layout-full-width{
-       padding: 0;
-    min-width: 832px;
-    max-width: 832px;
-}
-.wppb-popup-demo .wppb-popup-custom.layout-full-width > div{
-    width: 100%;
-}
-.wppb-popup-custom.layout-full-width .wppb-popup-custom-wrapper{
-        width: 100%!important;
-    min-height: 500px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.wppb-popup-custom.layout-full-width .wppb-popup-custom-wrapper .wppb-popup-custom-content{
-    width: 100%;
 }

@@ -38,7 +38,7 @@
 				 let popupOpenTime       = 'popup-delay-open' in setting_ ? setting_['popup-delay-open'] : 4;
 				 popupOpenTime  = popupOpenTime * 1000;
 				 let popupAutoClose       = 'popup-delay-close' in setting_ ? parseInt(setting_['popup-delay-close']) : 0;
-				 let popupLayout = 'layout' in setting_ ? setting_['layout'] : '';
+
 				 let effectClass = 'wppb-effect-one';
 				 switch ( getEffect ){
 			 		case 2:
@@ -50,13 +50,13 @@
 			 		case 4:
 			 		effectClass = 'wppb-effect-two';
 				 }
-				 let renderTohtml = '<div id="wppbPopupShow" class="wppb-popup-main-wrap '+effectClass+' '+popupLayout+'"><div>';
+				 let renderTohtml = '<div id="wppbPopupShow" class="wppb-popup-main-wrap '+effectClass+'"><div>';
 				 renderTohtml += getHTml;
 				 renderTohtml += '</div></div>';
 				 
 				 function addActivePopup(){
 				 	$('body').append(renderTohtml);
-				 	let wppbPopupShow = $('#wppbPopupShow');
+				 	let wppbPopupShow = $('#wppbPopupShow'); 
 				 	// set auto height
 				 	let getContentHeight = wppbPopupShow.find('.wppb-popup-custom-content');
 				 	if (getContentHeight.outerHeight() > (window.innerHeight - 150) ) {

@@ -654,7 +654,6 @@ var Custom_popup_editor = {
 			if ( setHiddenInput.val() ) {
 				setHiddenInput = JSON.parse(setHiddenInput.val());
 			}
-			if('layout' in setHiddenInput)$('.wppb-popup-custom').addClass(setHiddenInput['layout']);
 			if (dataInput == 'main-wrapper') {
 				if(sepInput.data('show-range') == "wrapper-width"){
 					Custom_popup_editor._inputRange(sepInput,$('.wppb-popup-custom .wppb-popup-custom-wrapper'),'width');
@@ -934,7 +933,7 @@ var Custom_popup_editor = {
 				}else{
 					getLayout = $('.prebuilt-pupup-layout-container > div[data-layout="'+layoutName+'"]').html();
 				}
-				$('.wppb-popup-custom').addClass(layoutName);
+
 				let saveLAyout = {layout:layoutName,'popup-name':popupName};
 				let outSideColor   = $('.wppb-popup-name-layout input[name="wppb-popup-layout"]:checked').data('outside-color');
 				if (outSideColor) saveLAyout['outside-color'] = outSideColor;
@@ -950,6 +949,29 @@ var Custom_popup_editor = {
 			}
 	},
 	_leadFormOpenPanel:function(){
+		// function scrollFn(){
+		// 	let headerOffset =  $('.rl_i_editor-header-area').offset().top + $('.rl_i_editor-header-area').outerHeight() + 10;
+		// 	let scrElem = $('.rl_i_editor-content-area');
+		// 	let scrElem2 = $('.rl-lead-form-panel');
+
+		// 	let panelOff = scrElem2.offset().top; 
+		// 	let offsetApply = panelOff - headerOffset;
+		// 	let panelOuterHeight = scrElem2.outerHeight();
+		// 	let editorOuterHeight = scrElem.outerHeight(); 
+		// 	if (editorOuterHeight > panelOuterHeight) {
+		// 		offsetApply = (editorOuterHeight - panelOuterHeight) + headerOffset; 
+		// 	}
+		// 	let scrollEnable = true;
+		// 	if (panelOff == headerOffset || panelOff < headerOffset || (offsetApply == panelOff) ) {
+		// 		scrollEnable = false;
+		// 	}
+		// 	if (scrollEnable) {
+		// 		scrElem.animate({scrollTop:offsetApply});
+		// 	}
+		// }
+		// setTimeout(scrollFn,600);
+
+
 		let getForm = $(this);
 		$('.rl-lead-form-panel').slideDown('fast');
 		// scrolling function apply

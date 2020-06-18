@@ -177,7 +177,7 @@ public function wppb_html($setting,$inline=''){
           'lead-form' => '',
           'global-content-id'=>false
           );
-      $popupFrontSetting = ['layout'=>'','close-type'=>3,'outside-color'=>'#535353F2','effect'=>1,'popup-delay-open'=>3,'popup-delay-close'=>0];
+      $popupFrontSetting = ['close-type'=>3,'outside-color'=>'#535353F2','effect'=>1,'popup-delay-open'=>3,'popup-delay-close'=>0];
       $allSetting = unserialize($setting);  
 
       // print_r($allSetting);
