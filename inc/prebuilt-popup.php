@@ -137,7 +137,35 @@ if ( is_array( $responseResult_ ) && ! is_wp_error( $responseResult_ ) ) {
 									</div>
 					          </div>
 					</div>
-				</div>	
+				</div>
+		<!-- layout 4	 -->
+		<div data-layout="layout-full-width">
+					<span class="wppb-popup-close-btn dashicons dashicons-no-alt" style="top: 2%;right: 2%;border: 2px solid #652d2e;border-radius: 15px;padding: 1px;background-color: #ffffff;color: #4C0C0CD8;"></span>
+				<div class="wppb-popup-custom-wrapper">	 	
+							<div class="wppb-popup-overlay-custom-img" data-overlay-image="http://192.168.64.2/wordpress/wp-content/uploads/2020/05/images-scaled.jpg" style="background-image: url('http://192.168.64.2/wordpress/wp-content/uploads/2020/05/images-scaled.jpg');"></div>
+					         <div class="wppb-popup-custom-overlay" style="background-color:#3A0517A6;"></div>
+					          <div class="wppb-popup-custom-content" style="padding: 2px 37px 18px;">
+					          		<div data-rl-wrap="layout-1" class="wppb-popup-rl-wrap rl-clear">
+										<div data-rl-column="1" class="wppb-popup-rl-column rlEditorDropable ui-sortable">
+
+											<div class="data-rl-editable-wrap ui-sortable-handle" style="justify-content: center;">
+												<div class="actions_"><span class="dashicons dashicons-no rlRemoveElement"></span></div>
+												<span class="text-heading rl-editable-key-action" data-rl-editable="heading" style="font-size: 26px; line-height: 30px; width: 81%;" data-content-alignment="center">Subscribe To Our Newsletter For Best Monthly Deals Discounts For Your Pets!</span>
+											</div>
+											<div class="data-rl-editable-wrap ui-sortable-handle" style="justify-content: center;">
+												<div class="actions_">
+												<span class="dashicons dashicons-no rlRemoveElement"></span></div>
+												<span data-rl-editable="text" style="font-size: 16px; margin: 15px 0px; color: rgb(214, 214, 214); width: 75%;" data-content-alignment="center">Be a part of our subscription and stay updated with the latest deals we offer.</span>
+											</div>
+											<div class="data-rl-editable-wrap ui-sortable-handle" style="justify-content: center;">
+												<div class="actions_"><span class="dashicons dashicons-no rlRemoveElement"></span></div>
+												<span data-rl-editable="link" data-content-alignment="center" data-editor-link="#" style="width: fit-content; padding: 8px 16px; border: 1px solid rgba(211, 74, 74, 0.35); color: rgba(226, 178, 32, 1);font-size: 15px; border-radius:2px;">Book Ticket</span>
+											</div>
+										</div>
+									</div>
+					          </div>
+					</div>
+				</div>
 				<!-- json data layout -->
 				<?php echo $jsonPopupHtml; ?>
 	<!-- layout 3 -->
@@ -156,6 +184,11 @@ if ( is_array( $responseResult_ ) && ! is_wp_error( $responseResult_ ) ) {
 				<li>
 					<input id='wppb-popup-layout-label__layout-3' type="radio" name="wppb-popup-layout" value="layout-3">
 					<label for="wppb-popup-layout-label__layout-3"><img src="<?php echo esc_url(WPPB_URL."img/layout-3.png","wppb");?>"></label>
+				</li>
+
+				<li>
+					<input id='wppb-popup-layout-label__layout-4' type="radio" name="wppb-popup-layout" value="layout-full-width">
+					<label for="wppb-popup-layout-label__layout-4"><img src="<?php echo esc_url(WPPB_URL."img/full-width-layout.png","wppb");?>"></label>
 				</li>
 			</ul>
 		</div>
