@@ -89,14 +89,8 @@ if (!function_exists('wppb_install')) {
 		      	 $wpdb->query($sql);
 	 	}
 	}
+	add_action( 'admin_init', 'wppb_install' );
 }
-add_action( 'admin_init', 'wppb_install' );
-
-
-
-
-
-
 
 
 ob_end_clean();
