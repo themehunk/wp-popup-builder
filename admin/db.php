@@ -83,7 +83,7 @@ public function popup_delete(){
             }
               $data['boption'] = serialize($option);
               $result = self::$db->update( self::$table,$data , ['BID'=>$bid], ['%s'], ['%d']);
-                if ($option_value) {
+                if ( $option_value && $option_name != 'mobile-enable' ) {
                     $already_on = $this->chekPopupStatus($option_name);
                     $result = $already_on?22:$result;
                 }

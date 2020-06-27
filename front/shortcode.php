@@ -20,10 +20,13 @@ class wppb_shortcode{
 					$popupInline = '';
 					$popup_id = $a['popup'];	
 					$open_popup_div = '<div class="wppb-popup-open popup active">'; 
+					$checkMobile = wp_is_mobile() && (isset($option['mobile-enable']) && !$option['mobile-enable']) ? false :true;
+				 	if (!$checkMobile) $popup_id = false;
 				}elseif ($a['widget']) {
 					$popup_id = $a['widget'];	
 					$open_popup_div = '<div class="wppb-popup-main-wrap inline_ widget-popup active">'; 
 				}
+
 				if ($popup_id) {
 					$return_Html = wppb_db::Popup_show($popup_id);
 					if ( isset($return_Html->setting) ) {

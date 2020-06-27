@@ -10,6 +10,8 @@ class wppb_ajax extends wppb_db{
 			add_action('wp_ajax_option_update', array($this,'option_update'));
 			add_action('wp_ajax_popup_active', array($this,'update'));
 
+			// add_action('wp_ajax_mobile_update', array($this,'mobile_update'));
+
 			add_action('wp_ajax_getLeadForm', array($this,'getLeadForm'));
 
 			add_action('wp_ajax_activate_lead_form', array($this,'lead_form_plugin_activate'));
@@ -40,6 +42,7 @@ class wppb_ajax extends wppb_db{
 			echo $result?$result:0;
 		die();
 	}
+	
 	// lead form
 	
 	// install lead form 
