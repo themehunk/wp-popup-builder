@@ -179,25 +179,6 @@ public function wppbPopupList_json($allSetting,$column_making,$countPopup){
 		}
 		return $returnHtml;
 }
-
-public function wppbPopupList_json__($allSetting,$column_making,$countPopup){
-		$popupSetData = $this->wppbPopupContent($allSetting);
-		$attr_inbuilt = isset($popupSetData['layout']) && $popupSetData['layout'] ? 'data-layout="'.$popupSetData['layout'].'"' : '';
-		$attr_inbuilt .= isset($popupSetData['outside-color']) && $popupSetData['outside-color'] ? 'data-outside-color="'.$popupSetData['outside-color'].'"' : '';
-		$returnHtml = '';
-		if ($column_making == 1) $returnHtml .= '<div class="wppb-popup-row wppb-popup_clear">';
-		$returnHtml .= '<div class="wppb-popup-column-three">
-								<input id="wppb-popup-layout-label__layout--'.$column_making.'" type="radio" name="wppb-popup-layout" value="prebuilt" '.$attr_inbuilt.'>
-								<label for="wppb-popup-layout-label__layout--'.$column_making.'" class="wppb-popup-json-label">'.$this->popup_layout($popupSetData).'</label>
-						</div>';
-		if($countPopup == ($column_making)){
-			$returnHtml .= '</div>';
-		}elseif(($column_making) % 3 === 0){
-			$returnHtml .= '</div><div class="wppb-popup-row wppb-popup_clear">';
-		}
-		return $returnHtml;
-}
-
 // builder internal tools function
 	public function wppb_changeFilePath($arr,$path){
 		$return = [];

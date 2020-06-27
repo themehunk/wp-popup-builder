@@ -179,8 +179,6 @@ public function wppb_html($setting,$inline=''){
           );
       $popupFrontSetting = ['close-type'=>3,'outside-color'=>'#535353F2','effect'=>1,'popup-delay-open'=>3,'popup-delay-close'=>0];
       $allSetting = unserialize($setting);  
-
-      // print_r($allSetting);
         foreach ($allSetting as $setting_value) {
           if (isset($setting_value['content']) && is_array($setting_value['content'])) {
             
@@ -194,6 +192,7 @@ public function wppb_html($setting,$inline=''){
                 }elseif ($setting_value['type'] == 'wrap' ) {
 
                   $data_layout = $popupSetData['layout'] == 'layout-3' || $popupSetData['layout'] == 'layout-2'?'two-column':'';
+
                   $Wrap_uniq_id = isset( $setting_value['id'] ) ? $inline.$setting_value['id'] : '';
                   $popupColumnContent = $this->wppb_initColumn($setting_value['content'],$Wrap_uniq_id);
                   $popupSetData["content"] .= '<div id="'.$Wrap_uniq_id.'" class="'.$data_layout.' wppb-popup-rl-wrap rl-clear">'.$popupColumnContent['content'].'</div>';
