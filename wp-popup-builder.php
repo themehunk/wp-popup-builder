@@ -19,7 +19,6 @@ include_once( WPPB_PATH . 'admin/inc.php');
 include_once( WPPB_PATH . 'front/shortcode.php');
 include_once( WPPB_PATH . 'front/load.php');
 
-register_activation_hook( __FILE__ , 'wppb_install' );
 add_action( 'plugins_loaded', 'wppb_loaded' );
 
 function wppb_loaded(){

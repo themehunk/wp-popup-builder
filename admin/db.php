@@ -83,7 +83,7 @@ public function popup_delete(){
             }
               $data['boption'] = serialize($option);
               $result = self::$db->update( self::$table,$data , ['BID'=>$bid], ['%s'], ['%d']);
-                if ($option_value) {
+                if ( $option_value && $option_name != 'mobile-enable' ) {
                     $already_on = $this->chekPopupStatus($option_name);
                     $result = $already_on?22:$result;
                 }
@@ -179,8 +179,6 @@ public function wppb_html($setting,$inline=''){
           );
       $popupFrontSetting = ['close-type'=>3,'outside-color'=>'#535353F2','effect'=>1,'popup-delay-open'=>3,'popup-delay-close'=>0];
       $allSetting = unserialize($setting);  
-
-      // print_r($allSetting);
         foreach ($allSetting as $setting_value) {
           if (isset($setting_value['content']) && is_array($setting_value['content'])) {
             
@@ -194,6 +192,7 @@ public function wppb_html($setting,$inline=''){
                 }elseif ($setting_value['type'] == 'wrap' ) {
 
                   $data_layout = $popupSetData['layout'] == 'layout-3' || $popupSetData['layout'] == 'layout-2'?'two-column':'';
+
                   $Wrap_uniq_id = isset( $setting_value['id'] ) ? $inline.$setting_value['id'] : '';
                   $popupColumnContent = $this->wppb_initColumn($setting_value['content'],$Wrap_uniq_id);
                   $popupSetData["content"] .= '<div id="'.$Wrap_uniq_id.'" class="'.$data_layout.' wppb-popup-rl-wrap rl-clear">'.$popupColumnContent['content'].'</div>';

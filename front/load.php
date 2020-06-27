@@ -16,19 +16,23 @@ class wppb_load{
 
  					if ( isset($value->boption) && isset($value->setting) && @unserialize($value->boption) ) {
 	 					$option = unserialize($value->boption); 
-	 					$popupHtml = new wppb_db();
-	 					$popupHtmlContent = $popupHtml->wppb_html($value->setting);
 	 						// for all page setting
-	 						if ($popupHtmlContent) {
+	 						$showPopup = '';
 	 							if (isset($option['pages']) && $option['pages'] && get_post_type() === 'page') {
-				 						echo '<div data-option="1" class="wppb-popup-open popup active">'.$popupHtmlContent.'</div>';
+					 					$popupHtml = new wppb_db();
+					 					$popupHtmlContent = $popupHtml->wppb_html($value->setting);
+				 						$showPopup = $popupHtmlContent ? '<div data-option="1" class="wppb-popup-open popup active">'.$popupHtmlContent.'</div>': '';
 				 					}else if (isset($option['post']) && $option['post'] && get_post_type() === 'post') {
-				 						echo '<div data-option="1" class="wppb-popup-open popup active">'.$popupHtmlContent.'</div>';
+				 						$popupHtml = new wppb_db();
+					 					$popupHtmlContent = $popupHtml->wppb_html($value->setting);
+				 						$showPopup = $popupHtmlContent ? '<div data-option="1" class="wppb-popup-open popup active">'.$popupHtmlContent.'</div>':'';
 				 					}else if (isset($option['home_page']) && $option['home_page']  && is_front_page()) {
-				 					echo '<div data-option="1" class="wppb-popup-open popup active">'.$popupHtmlContent.'</div>';
+				 						$popupHtml = new wppb_db();
+					 					$popupHtmlContent = $popupHtml->wppb_html($value->setting);
+				 						$showPopup = $popupHtmlContent ? '<div data-option="1" class="wppb-popup-open popup active">'.$popupHtmlContent.'</div>':'';
 				 					}
-	 						}
-		 					 	
+							$checkMobile = wp_is_mobile() && (isset($option['mobile-enable']) && !$option['mobile-enable']) ? false :true;
+				 			if ($checkMobile) echo $showPopup;
 	 					}
  			}
  		}

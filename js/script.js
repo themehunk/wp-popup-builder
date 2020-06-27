@@ -347,6 +347,23 @@ var Business_news_letter = {
 				.addClass( 'disabled' )
 				.html( wp.updates.l10n.installFailedShort );
 		},
+	_mobileEnable:function(e){
+		let thisCheckBox = $(this);
+		let bid = thisCheckBox.attr('data-bid');
+		let option_value = thisCheckBox.prop('checked') == true?1:0;
+		// disable all on enable all pages and post
+		let checkBoxDisable = thisCheckBox.closest('.wppb-popup-checkbox');
+			checkBoxDisable.addClass('business_disabled');
+		let data_ = {action:'option_update',popup_id:bid,option_key:'mobile-enable',option_value:option_value};
+			let returnData = Business_news_letter._ajaxFunction(data_);
+			returnData.success(function(response){
+				if (response) {
+		        		setTimeout(function(){
+			        		checkBoxDisable.removeClass('business_disabled');
+			        	},1000);
+		        	}
+			});
+	},
 	_bind(){
 		$(document).on('click', '.wppb_popup_saveAddon', Business_news_letter._saveBusinessAddon);
 		$(document).on('click', '.wppb_popup_updateAddon', Business_news_letter._updateAddon);
@@ -357,6 +374,9 @@ var Business_news_letter = {
 		$(document).on('click', '.wppb-popup-cmn-nav-item > a.wppb-popup-tab', Business_news_letter._businessTabSetting);
 
 		$(document).on('change', '.wppb-popup-option input[type="checkbox"]', Business_news_letter._businessOptionUpdate);
+		// mobile anable and disabled
+		$(document).on('change', 'input[type="checkbox"][data-mobile-enable="mobile-enable"]', Business_news_letter._mobileEnable);
+
 		$(document).on('change','.wppb_popup_setting_active', Business_news_letter._savePopupActiveDeactive);
 
 		$(document).on('click','.wppb-export-sub', Business_news_letter._exportPopup);

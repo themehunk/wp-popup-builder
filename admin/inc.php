@@ -73,20 +73,32 @@ class wppb {
 
 }
 
-function wppb_install() {
-      global $wpdb;
-      $table = $wpdb->prefix .'wppb';
-      $charset_collate = $wpdb->get_charset_collate();
-      $create_table_query = "CREATE TABLE IF NOT EXISTS $table (
-          BID INT(11) PRIMARY KEY AUTO_INCREMENT ,
-          addon_name VARCHAR(100) NOT NULL,
-		      setting LONGTEXT NOT NULL,
-		      boption TEXT NOT NULL,
-          is_active BOOLEAN DEFAULT '1'
-        ) $charset_collate;";
-      require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-      dbDelta( $create_table_query );
-  }
+if (!function_exists('wppb_install')) {
+	function wppb_install() {
+	      global $wpdb;
+	      $wppb = $wpdb->prefix .'wppb';
+	      $charset_collate = $wpdb->get_charset_collate();
+	    if ($wpdb->get_var("SHOW TABLES LIKE '$wppb'") != $wppb) {
+		      $sql = "CREATE TABLE IF NOT EXISTS $wppb (
+		          BID INT(11) PRIMARY KEY AUTO_INCREMENT ,
+		          addon_name VARCHAR(100) NOT NULL,
+				      setting LONGTEXT NOT NULL,
+				      boption TEXT NOT NULL,
+		          is_active BOOLEAN DEFAULT '1'
+		        ) $charset_collate;";
+		      	 $wpdb->query($sql);
+	 	}
+	}
+}
+add_action( 'admin_init', 'wppb_install' );
+
+
+
+
+
+
+
+
 ob_end_clean();
 
 
