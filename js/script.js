@@ -573,10 +573,10 @@ var Custom_popup_editor = {
 				// get link href of clicked item
 				clickedObj.data('editor-link')?seperateInput.val(clickedObj.data('editor-link')):seperateInput.val('#');
 			}else if(clickedObj.data('editor-link') && seperateInputData1 == '_linktarget'){
-				if (clickedObj.data('editor-link-target') == 1 && seperateInput.val() == 1) {
+				if (clickedObj.data('editor-link-target') == 1) {
 					seperateInput.prop('checked',true);
-				}else if (seperateInput.val() == 0) {
-					seperateInput.prop('checked',true);
+				}else{
+					seperateInput.prop('checked',false);
 				}
 			}else if( seperateInput.data('input-color') && seperateInputData1 != 'border'){
 					Custom_popup_editor._colorPickr(seperateInput,clickedObj,seperateInputData1);
@@ -636,7 +636,8 @@ var Custom_popup_editor = {
 				clickedObj.attr('data-editor-link',changeValue);
 			}else if (changeData == '_linktarget' && clickedObj.data('editor-link')) {
 				// set link href of clicked item
-				clickedObj.attr('data-editor-link-target',changeValue);
+				let putVal = changedInput.prop('checked') == true ? 1: 0;
+				clickedObj.attr('data-editor-link-target',putVal);
 			}else if(changeData == 'text-alignment-choice'){
 				// set aligment clicked item
 				clickedObj.css('text-align',changeValue);
