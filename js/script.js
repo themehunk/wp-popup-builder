@@ -1469,13 +1469,14 @@ var Custom_popup_editor = {
 			}
 		}else if(changeData == 'margin'){
 			let marginOrigin = changedInput.data('margin');
-			let getCheckBox = changedInput.closest('.paraMeterContainer__').find('[data-editor-input="margin-origin"]');
+			let getCheckBox = changedInput.closest('.paraMeterContainer__').find('[data-origin="margin"]');
 			if (getCheckBox.prop('checked')) {
 				clickedObj.css('margin',changeValue+'px');
 				changedInput.closest('.paraMeterContainer__').find('input[type="number"]').val(changeValue);
 			}else{
 				clickedObj.css('margin-'+marginOrigin,changeValue+'px');
 			}
+
 		}else if(changedInput.data('origin') && changeData == 'padding'){
 			if (changedInput.prop('checked')) {
 				let getFirstInput = changedInput.closest('.paraMeterContainer__').find('input[data-padding="top"]');
@@ -1485,7 +1486,7 @@ var Custom_popup_editor = {
 			}
 		}else if(changeData == 'padding'){
 			let paddingOrigin = changedInput.data('padding');
-			let getCheckBox = changedInput.closest('.paraMeterContainer__').find('[data-editor-input="padding-origin"]');
+			let getCheckBox = changedInput.closest('.paraMeterContainer__').find('[data-origin="padding"]');
 			if (getCheckBox.prop('checked')) {
 				clickedObj.css('padding',changeValue+'px');
 				changedInput.closest('.paraMeterContainer__').find('input[type="number"]').val(changeValue);
