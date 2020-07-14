@@ -8,7 +8,6 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 		$LfbPluginPath = '<a href="#" class="add-lead-form-plugin install-lead-form-btn">Install Lead Form</a>';
 	}
 ?>
-
 <div class="rl_i_editor-inner-wrap">
 	<div class="rl_i_editor-wrap-in">
 		<div class="rl_i_editor-header">
@@ -107,11 +106,11 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 				$wp_builder_obj->color(__('Background Color','wppb'),'background-color','data-global-input','overlay-color'); 
 				$wp_builder_obj->color(__('Outside Color','wppb'),'background-color','data-global-input','outside-color');
 				$wp_builder_obj->header_title(__('Popup Dimension','wppb'));
-				$wp_builder_obj->range_slider(__('Popup Width','wppb'), 'main-wrapper', ['title'=>'px','min'=>200,'max'=>800,'value'=>200] ,'wrapper-width');
-				echo $wp_builder_obj->checkbox('wrapper-height',__('Popup Height Auto/Custom','wppb'),'data-global-input="wrapper-height-check"');
+				$wp_builder_obj->range_slider(__('Width(<small>px</small>)','wppb'), 'main-wrapper', ['title'=>'px','min'=>200,'max'=>800,'value'=>200] ,'wrapper-width');
+				echo $wp_builder_obj->checkbox('wrapper-height',__('Height(<small>custom</small>)','wppb'),'data-global-input="wrapper-height-check"');
 			?>
 			<section class="global-wrapper-height-custom-auto">
-			<?php  $wp_builder_obj->range_slider(__('Custom Height','wppb'),'main-wrapper-height', ['title'=>'px','min'=>150,'max'=>1000,'value'=>200] ,'wrapper-height'); ?>
+			<?php  $wp_builder_obj->range_slider(__('Height(<small>px</small>)','wppb'),'main-wrapper-height', ['title'=>'px','min'=>150,'max'=>1000,'value'=>200] ,'wrapper-height'); ?>
 			</section>
 			<div class="rl_i_editor-item-content-items rl-two-column-width">
 				<label class="rl-sub-title"><?php _e('Column Width','wppb'); ?></label>
@@ -125,7 +124,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 				</div>
 			</div>
 			<?php 
-				$wp_builder_obj->margin_padding('main-wrapper', __('Popup Padding in px','wppb'), 'data-global-input', 'p'); 
+				$wp_builder_obj->margin_padding('main-wrapper', __('Padding(<small>px</small>)','wppb'), 'data-global-input', 'p'); 
 				echo $wp_builder_obj->box_shadow('box-shadow-global','data-global-input');
 				$wp_builder_obj->border('global-border','data-global-input'); 
 			?>
@@ -156,13 +155,9 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 			<span class="bottomCarret dashicons dashicons-arrow-right"></span>
 		</div>
 		<section data-toggle-action="close-btn-setting" class="rl-display-none">
-			<div class="rl_i_editor-item-content-items title_ inline__">
-				<label class="rl-sub-title"><?php _e('Close Popup By Click','wppb'); ?></label>
-			</div>
+			<?php	$wp_builder_obj->header_title(__('Close Popup By Click','wppb')); ?>
 			<div class="rl_i_editor-item-content-items inline__">
-					<div>
 					<?php echo $wp_builder_obj->select('data-cmn="close-btn" data-global-input="close-option"',[ [__('Click On Icon','wppb'),1],[__('Click On Icon and Outside','wppb'),2],[__('Click On Outside','wppb'),3,true] ]); ?>
-					</div>
 			</div>
 
 			<div class="close-btn-container">
@@ -188,9 +183,10 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 				<section class="rl_i_editor-item-content-i rl_i_editor-item-content-close-btn-style active_">				
 				<?php 
-				 	$wp_builder_obj->color(__('Icon Color','wppb'),'color','data-global-input','close-btn-color',"data-cmn='close-btn'");
-					$wp_builder_obj->color(__('Icon Background Color','wppb'),'background-color','data-global-input','close-btn-bg-color',"data-cmn='close-btn'"); 
-					$wp_builder_obj->range_slider( __("Icon Font Size",'wppb'), 'close-font-size', ['title'=>'px','min'=>10,'max'=>100,'value'=>18,"attr"=>'data-cmn="close-btn"']);
+					$wp_builder_obj->header_title(__('Icon Style','wppb'));
+				 	$wp_builder_obj->color(__('Color','wppb'),'color','data-global-input','close-btn-color',"data-cmn='close-btn'");
+					$wp_builder_obj->color(__('Background Color','wppb'),'background-color','data-global-input','close-btn-bg-color',"data-cmn='close-btn'"); 
+					$wp_builder_obj->range_slider( __("Font Size(<small>px</small>)",'wppb'), 'close-font-size', ['title'=>'px','min'=>10,'max'=>100,'value'=>18,"attr"=>'data-cmn="close-btn"']);
 						$wp_builder_obj->border('close-btn','data-global-input',"data-cmn='close-btn'"); 
 				?>
 				
@@ -224,7 +220,13 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 							<label class="rl_i_editor-title rl-sub-title"><?php _e('Title','wppb'); ?></label>
 							<textarea data-editor-input='title'></textarea>
 						</div>
-						<!-- link -->
+						<?php
+						// text color/ background-color / font-size / letter-spacing / line height
+						$wp_builder_obj->color(__('Text Color','wppb'),'color','data-editor-input'); 
+						$wp_builder_obj->color(__('Background Color','wppb'),'background-color','data-editor-input');
+						$wp_builder_obj->range_slider( __("Font Size(<small>px</small>)",'wppb'), 'font-size', ['title'=>'px','min'=>10,'value'=>30,'max'=>100,"container-class"=>'item-text'], false , 'data-editor-input' );
+						$wp_builder_obj->range_slider( __("Letter Spacing(<small>px</small>)",'wppb'), 'letter-spacing', ['title'=>'px','min'=>'-5','value'=>1,'max'=>50,"container-class"=>'item-text'], false , 'data-editor-input' );
+						$wp_builder_obj->range_slider( __('Line Height(<small>px</small>)','wppb'), 'line-height', ['title'=>'px','min'=>'-5','value'=>1,'max'=>100,"container-class"=>'item-text'], false , 'data-editor-input' ); ?>
 						<div class="rl_i_editor-item-content-items item-link_ block__">
 							<label class="rl_i_editor-title rl-sub-title"><?php _e('Link','wppb'); ?></label>
 							<div class="rl_i_editor-anchor">
@@ -233,17 +235,10 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 									<label data-toggle="_linktargetSetting" class="dashicons dashicons-admin-links"></label>
 								</div>
 								 <div data-toggle-action="_linktargetSetting" class="rl_i_editor-anchor-setting">
-								   <div>
-									<div>
-										<input id="_linkTarget11" data-editor-input='_linktarget' type="radio" name="_linktarget" value="1">
-										<label for="_linkTarget11"><?php _e('Another tab','wppb'); ?></label>
-									</div>
-									<div>
-										<input id="_linkTarget00" data-editor-input='_linktarget' type="radio" name="_linktarget" value="0">
-										<label for="_linkTarget00"><?php _e('same tab','wppb'); ?></label>
-									</div>
-								  </div>
-								</div>
+								 	<?php 
+										echo $wp_builder_obj->checkbox('_linktarget',__('Another Tab','wppb'),'data-editor-input="_linktarget"');
+								 	 ?>
+								 	</div>
 							</div>
 						</div>
 						<!-- text alignment -->
@@ -254,14 +249,9 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 				<div class="rl_i_editor-item-content-i rl_i_editor-item-content-style">
 					<!-- width -->
 					<?php  
-					$wp_builder_obj->range_slider( __('Width','wppb'), 'item-width', ['title'=>'%','min'=>1,'value'=>20,'max'=>100],false, 'data-editor-input' );
+					$wp_builder_obj->range_slider( __('Width(<small>%</small>)','wppb'), 'item-width', ['title'=>'%','min'=>1,'value'=>20,'max'=>100],false, 'data-editor-input' );
 					echo $wp_builder_obj->alignment(__('Container Alignment','wppb'),'content-alignment','data-editor-input'); 
-					// text color/ background-color / font-size / letter-spacing / line height
-						$wp_builder_obj->color(__('Text Color','wppb'),'color','data-editor-input'); 
-						$wp_builder_obj->color(__('Background Color','wppb'),'background-color','data-editor-input');
-						$wp_builder_obj->range_slider( __("Font Size",'wppb'), 'font-size', ['title'=>'px','min'=>10,'value'=>30,'max'=>100,"container-class"=>'item-text'], false , 'data-editor-input' );
-						$wp_builder_obj->range_slider( __("Letter Spacing",'wppb'), 'letter-spacing', ['title'=>'px','min'=>'-5','value'=>1,'max'=>50,"container-class"=>'item-text'], false , 'data-editor-input' );
-						$wp_builder_obj->range_slider( __('Line Height','wppb'), 'line-height', ['title'=>'px','min'=>'-5','value'=>1,'max'=>100,"container-class"=>'item-text'], false , 'data-editor-input' ); 
+					
 						?>
 					<!-- font weight -->
 					<div class="rl_i_editor-item-content-items item-text inline__">
@@ -323,7 +313,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 				<div class="rl_i_editor-item-content-i rl_i_editor-item-content-form-style active_  wppb-lf-form-style">
 					<?php 
 						$wp_builder_obj->header_title(__('Form Setting','wppb'));
-						$wp_builder_obj->range_slider(__('Form Width','wppb'), 'lf-form-width', ['title'=>'%','min'=>"20",'max'=>100,'value'=>100], false, 'data-lead-form'); 					
+						$wp_builder_obj->range_slider(__('Form Width(<small>%</small>)','wppb'), 'lf-form-width', ['title'=>'%','min'=>"20",'max'=>100,'value'=>100], false, 'data-lead-form'); 					
 					echo $wp_builder_obj->alignment(__('Form Centered','wppb'), 'form-margin-center', 'data-lead-form', '' ,2); 
 						$wp_builder_obj->color(__('Background Color','wppb'),'background-color','data-lead-form','lf-form-color');
 						$wp_builder_obj->border('form-border','data-lead-form'); 
@@ -337,36 +327,36 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 					echo $wp_builder_obj->checkbox("form-heading-enable",__("Heading Enable",'wppb'),'data-lead-form="form-heading-enable"');
 					echo "<div class='lead-form-heading-section'>";
 						$wp_builder_obj->color(__('Color','wppb'),'color','data-lead-form','lf-heading-color');
-						$wp_builder_obj->range_slider(__('Font Size','wppb'), 'lf-heading-font-size', ['title'=>'px','min'=>"10",'max'=>100,'value'=>10], false, 'data-lead-form');
+						$wp_builder_obj->range_slider(__('Font Size(<small>px</small>)','wppb'), 'lf-heading-font-size', ['title'=>'px','min'=>"10",'max'=>100,'value'=>10], false, 'data-lead-form');
 					echo "</div>";
 				 //label text section
 					$wp_builder_obj->header_title(__('Label Setting','wppb'));
 					echo $wp_builder_obj->checkbox("form-label-enable",__("Label Enable",'wppb'),'data-lead-form="form-label-enable"');
 					echo "<div class='lead-form-label-section'>";
 						$wp_builder_obj->color(__('Color','wppb'),'color','data-lead-form','lf-label-color');
-						$wp_builder_obj->range_slider(__('Font Size','wppb'), 'lf-label-font-size', ['title'=>'px','min'=>"10",'max'=>100,'value'=>10], false, 'data-lead-form');
+						$wp_builder_obj->range_slider(__('Font Size(<small>px</small>)','wppb'), 'lf-label-font-size', ['title'=>'px','min'=>"10",'max'=>100,'value'=>10], false, 'data-lead-form');
 					echo "</div>";
 					// radio checkbox input text section
 					echo "<div class='lead-form-radio-text-section'>";
 					$wp_builder_obj->header_title(__('Radio Checkbox Field Setting','wppb'));
 						$wp_builder_obj->color(__('Color','wppb'),'lf-radio-checkbox-text-color','data-lead-form','lf-radio-checkbox-text-color');
-						$wp_builder_obj->range_slider(__('Font Size','wppb'), 'lf-radio-checkbox-text-font-size', ['title'=>'px','min'=>10,'max'=>100,'value'=>10], false, 'data-lead-form');
-					$wp_builder_obj->margin_padding('lf-radio-checkbox-text-margin', __('Input Margin in px','wppb'), 'data-lead-form', 'm');
+						$wp_builder_obj->range_slider(__('Font Size(<small>px</small>)','wppb'), 'lf-radio-checkbox-text-font-size', ['title'=>'px','min'=>10,'max'=>100,'value'=>10], false, 'data-lead-form');
+					$wp_builder_obj->margin_padding('lf-radio-checkbox-text-margin', __('Input Margin(<small>px</small>)','wppb'), 'data-lead-form', 'm');
 					echo "</div>";
 
 				 //field text section
 					$wp_builder_obj->header_title(__('Field Setting','wppb'));
 					$wp_builder_obj->color(__('Color','wppb'),'color','data-lead-form','lf-field-color');
 					$wp_builder_obj->color(__('Background Color','wppb'),'background-color','data-lead-form','lf-field-background-color');
-					$wp_builder_obj->range_slider(__('Font Size','wppb'), 'lf-field-font-size', ['title'=>'px','min'=>"10",'max'=>100,'value'=>10], false, 'data-lead-form');
-					$wp_builder_obj->range_slider(__('Height','wppb'), 'lf-field-height', ['title'=>'px','min'=>12,'max'=>120,'value'=>25], false, 'data-lead-form');
-					$wp_builder_obj->margin_padding('lf-field-margin', __('Field Margin in px','wppb'), 'data-lead-form', 'm');
+					$wp_builder_obj->range_slider(__('Font Size(<small>px</small>)','wppb'), 'lf-field-font-size', ['title'=>'px','min'=>"10",'max'=>100,'value'=>10], false, 'data-lead-form');
+					$wp_builder_obj->range_slider(__('Height(<small>px</small>)','wppb'), 'lf-field-height', ['title'=>'px','min'=>12,'max'=>120,'value'=>25], false, 'data-lead-form');
+					$wp_builder_obj->margin_padding('lf-field-margin', __('Field Margin(<small>px</small>)','wppb'), 'data-lead-form', 'm');
 					$wp_builder_obj->border('lf-field-border','data-lead-form'); 
 				 //submit button section
 					$wp_builder_obj->header_title(__('Submit Button Setting','wppb'));
 					$wp_builder_obj->color(__('Color','wppb'),'color','data-lead-form','lf-submit-btn-color');
 					$wp_builder_obj->color(__('Background Color','wppb'),'background-color','data-lead-form','lf-submit-btn-bcolor');
-					$wp_builder_obj->range_slider(__('Font Size','wppb'), 'lf-submit-btn-font-size', ['title'=>'px','min'=>"10",'max'=>100,'value'=>10], false, 'data-lead-form'); 
+					$wp_builder_obj->range_slider(__('Font Size(<small>px</small>)','wppb'), 'lf-submit-btn-font-size', ['title'=>'px','min'=>"10",'max'=>100,'value'=>10], false, 'data-lead-form'); 
 					echo $wp_builder_obj->alignment(__('Button Alignment','wppb'),'lf-submit-aliment','data-lead-form'); 
 				?>
 					<div class="rl_i_editor-item-content-items item-text inline__">
@@ -376,7 +366,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 						</div>
 					</div>
 					<?php 
-						$wp_builder_obj->margin_padding('lf-submit-padding', __('Padding in px','wppb'), 'data-lead-form', 'p');
+						$wp_builder_obj->margin_padding('lf-submit-padding', __('Padding(<small>px</small>)','wppb'), 'data-lead-form', 'p');
 						$wp_builder_obj->border('lf-submit-border','data-lead-form');
 					 ?>
 				</div>

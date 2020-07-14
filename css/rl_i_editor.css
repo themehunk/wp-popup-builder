@@ -92,9 +92,12 @@
  .rl_i_editor-content-area select[data-editor-input]{
     width: 60px;
 }
-/*.rl_i_editor-content-area::-webkit-scrollbar{
-  display: none;
-}*/
+select[data-global-input="close-option"],
+.lead-form-bulider-select select{
+        width: 100%;
+    padding: 5px 11px;
+    margin-top: 5px;
+}
 .rl_i_editor-footer{
         background: #777777;
     position: absolute;
@@ -305,8 +308,14 @@
 .background-image-setting-position > div > label > span.rotat45{
     transform: rotate(45deg);
 }
+
 .rl_i_editor-anchor-input{
     position: relative;
+}
+.rl_i_editor-anchor-setting{
+        margin: 10px 0;
+    background: #efefef;
+    display: none;
 }
 .rl_i_editor-anchor-input > input{
         width: 100%;
@@ -326,31 +335,14 @@
     font-size: 18px;
     cursor: pointer;
 }
-.rl_i_editor-anchor-setting{
-        margin: 10px 0;
-    background: #efefef;
-    display: none;
-}
-.rl_i_editor-anchor-setting >div{
-    display: flex;
-}
-.rl_i_editor-anchor-setting input{
-    display: none;
-}
-.rl_i_editor-anchor-setting input:checked ~ label{
-        background: #777777;
-    color: white;
-}
-.rl_i_editor-anchor-setting label{
-    display: block;
-    padding: 10px;
-    cursor: pointer;
+.rl_i_editor-anchor-setting .rl_i_editor-item-content-items{
+        padding: 5px 10px 5px 10px;
 }
 .rl_i_editor-item-content-items.inline__ >label{
         flex: 2;
 }
 .rl_i_editor-item-content-items.inline__ > div{
-        flex: 1;
+        flex: 0;
 }
 .rl_i_editor-item-content-items.inline__ > div.rl_text-alignment{
     flex: 6;
@@ -510,7 +502,7 @@ label[data-range-output]{
     flex: 2;
 } 
 .rl_i_editor-item-content-items.content-border > div > div{
-    flex: 1;
+    flex: 0;
 }
 .rl_i_editor-item-content-items.content-border > div .color-output{
    display: block;
@@ -538,7 +530,7 @@ label[data-range-output]{
     background: #F1F9FC;
 }
 .rl_i_editor-header-title > label{
-     font-size: 14px;
+     font-size: 12px;
     color: #6647E6;
 }
 
@@ -563,9 +555,9 @@ label[data-range-output]{
     flex: 1;
 }
 .rl-sub-title{
-        color: #737373;
-    font-size: 12px;
-    letter-spacing: .5px;
+        color: #949494!important;
+    font-size: 12px!important;
+    letter-spacing: .3px!important;
 }
 .popup-delete-wrap > button{
          background-color: red;
@@ -654,7 +646,7 @@ label[data-range-output]{
 
 }
 .wppb-popup-checkbox-container > .wppb-popup-checkbox{
-        flex: 1;
+        flex: 0;
 }
 .global-overlay-image{
       display: none;

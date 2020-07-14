@@ -205,6 +205,7 @@ public function wppbPopupList_json($allSetting,$column_making,$countPopup){
 						<label>'.$title.'</label>
 					</div>';
 	}
+
 	public function color($title,$prop,$type,$color_id=1,$attr=''){
 		if ($title && $prop && $type) {
 			$typeAndProp = $type.'="'.$prop.'"' . $attr;
@@ -226,33 +227,33 @@ public function wppbPopupList_json($allSetting,$column_making,$countPopup){
 
  			$attr .=  $type_.'="'.$id.'"';
  			$container = isset( $arr['container-class'] ) ? $arr['container-class'] : '';
-		 	echo '<div  class="rl_i_editor-item-content-items  '.$container.' title_ inline__">
-						<div class="rl_i_range-font-size"><label class="rl-sub-title">'.$title.'</label></div>
-					</div>
-					<div  class="rl_i_editor-item-content-items inline__ '.$container.'">
-						<div class="range_ rl_i_range-font-size">
+		 	$html = '<div  class="rl_i_editor-item-content-items inline__ '.$container.'">';
+		 		$html .= '<label class="rl-sub-title range-titile">'.$title.'</label>';
+					$html .= '<div class="range_ rl_i_range-font-size">
 							<input data-show-range="'.$id_two.'" type="range" '.$attr.'>
-						</div>
-						<div class="data-range-output">
-							<input type="number" data-range-output="'.$id_two.'" '.$attrTwo.'>
-							<label class="param-title rl-sub-title">'.$title_.'</label>
-						</div>
+						</div>';
+					$html .= '<div class="data-range-output">
+							<input class="rl-sub-title" type="number" data-range-output="'.$id_two.'" '.$attrTwo.'>';
+					$html .= '</div>
 					</div>';
+			echo $html;
 		 }
-	public function select($attr,$option){
-			$return = "<select ".$attr.">";
+		 public function select($attr,$option){
+			$return = "<select class='rl-sub-title' ".$attr.">";
 			if ( is_array($option) ) {
 				foreach ($option as $value) {
 						if ( isset($value[0]) && isset($value[1]) ) {
 							$selected = isset($value[2]) ? 'selected="selected"':'';
 							$return	.= "<option value='".$value[1]."' ".$selected.">".$value[0]."</option>";
+						}elseif ( isset($value[0]) ) {
+							$return	.= "<option>".$value[0]."</option>";
 						}
 					}	
 				}	
 			$return	.= "</select>";
 			return $return;
 		}
-	public function checkbox($id,$title,$attr){
+		public function checkbox($id,$title,$attr){
 			return '<div  class="rl_i_editor-item-content-items title_ inline__">
 			<div class="rl_i_range-font-size">
 					<div class="wppb-popup-checkbox-container">
@@ -272,12 +273,12 @@ public function wppbPopupList_json($allSetting,$column_making,$countPopup){
 						'.$this->checkbox($id,"Border",$data_attr.' data-border="border-enable"').'
 					<div  class="rl_i_editor-item-content-items content-border">
 						<div>
-							<label class="rl-sub-title">'.__('Border Width','wppb').'</label>
-							<div><input type="number" value="" '.$data_attr.' data-border="width"></div>
+							<label class="rl-sub-title">'.__('Border Width(<small>px</small>)','wppb').'</label>
+							<div><input class="rl-sub-title" type="number" value="" '.$data_attr.' data-border="width"></div>
 						</div>
 						<div>
-							<label class="rl-sub-title">'.__('Border radius','wppb').'</label>
-							<div><input type="number" value="" '.$data_attr.' data-border="radius"></div>
+							<label class="rl-sub-title">'.__('Border radius(<small>px</small>)','wppb').'</label>
+							<div><input class="rl-sub-title" type="number" value="" '.$data_attr.' data-border="radius"></div>
 						</div>
 						<div>
 							<label class="rl-sub-title">'.__('Border Color','wppb').'</label>
@@ -291,36 +292,35 @@ public function wppbPopupList_json($allSetting,$column_making,$countPopup){
 				</section>';
 				echo $return;
 	}
-public function box_shadow($id,$type,$attr=''){
+	public function box_shadow($id,$type,$attr=''){
 		$data_attr = $type.'="'.$id.'"' . $attr;
-	$return = '<section class="content-style-border content-style-box-shadow">
-					'.$this->checkbox($type,'Box Shadow',$data_attr.' data-shadow="enable"').'
-						<div  class="rl_i_editor-item-content-items content-border content-box-shadow">
-							<div>
-								<label class="rl-sub-title">X Offset</label>
-								<div><input type="number" value="" '.$data_attr.'  data-shadow="x-offset"></div>
+			$return = '<section class="content-style-border content-style-box-shadow">
+						'.$this->checkbox($type,'Box Shadow',$data_attr.' data-shadow="enable"').'
+							<div  class="rl_i_editor-item-content-items content-border content-box-shadow">
+								<div>
+									<label class="rl-sub-title">X Offset</label>
+									<div><input class="rl-sub-title" type="number" value="" '.$data_attr.'  data-shadow="x-offset"></div>
+								</div>
+								<div>
+									<label class="rl-sub-title">Y Offset</label>
+									<div><input class="rl-sub-title" type="number" value="" '.$data_attr.' data-shadow="y-offset"></div>
+								</div>
+								<div>
+									<label class="rl-sub-title">Blur</label>
+									<div><input class="rl-sub-title" type="number" value="" '.$data_attr.' data-shadow="blur"></div>
+								</div>
+								<div>
+									<label class="rl-sub-title">Spread</label>
+									<div><input class="rl-sub-title" type="number" value="" '.$data_attr.' data-shadow="spread"></div>
+								</div>
+								<div>
+									<label class="rl-sub-title">Color</label>
+									<div><label class="color-output" '.$data_attr.' data-shadow="color"></label></div>
+								</div>
 							</div>
-							<div>
-								<label class="rl-sub-title">Y Offset</label>
-								<div><input type="number" value="" '.$data_attr.' data-shadow="y-offset"></div>
-							</div>
-							<div>
-								<label class="rl-sub-title">Blur</label>
-								<div><input type="number" value="" '.$data_attr.' data-shadow="blur"></div>
-							</div>
-							<div>
-								<label class="rl-sub-title">Spread</label>
-								<div><input type="number" value="" '.$data_attr.' data-shadow="spread"></div>
-							</div>
-							<div>
-								<label class="rl-sub-title">Color</label>
-								<div><label class="color-output" '.$data_attr.' data-shadow="color"></label></div>
-							</div>
-						</div>
-					</section>';
-		return $return;
-}
-
+						</section>';
+			return $return;
+	}
 	public function margin_padding($id,$title,$type,$margin_padding,$attr=''){
 		$attr = $type."='".$id."'" .$attr;
 		$parameter = $margin_padding == "m" ? 'margin' : 'padding';
@@ -331,16 +331,16 @@ public function box_shadow($id,$type,$attr=''){
 				<div class="rl_i_editor-item-content-padding_ paraMeterContainer__">
 					<ul class="ul-inputs-margin-padding rl-clear">
 						<li>
-							<input type="number" value="" '.$attr.' data-'.$parameter.'="top">
+							<input class="rl-sub-title" type="number" value="" '.$attr.' data-'.$parameter.'="top">
 						</li>
 						<li>
-							<input type="number" value="" '.$attr.' data-'.$parameter.'="right">
+							<input class="rl-sub-title" type="number" value="" '.$attr.' data-'.$parameter.'="right">
 						</li>
 						<li>
-							<input type="number" value="" '.$attr.' data-'.$parameter.'="bottom">
+							<input class="rl-sub-title" type="number" value="" '.$attr.' data-'.$parameter.'="bottom">
 						</li>
 						<li>
-							<input type="number" value="" '.$attr.' data-'.$parameter.'="left">
+							<input class="rl-sub-title" type="number" value="" '.$attr.' data-'.$parameter.'="left">
 						</li>
 						<li class="padding-origin_ margin-padding-origin">
 							<input id="m__p_origin-'.$parameter.'-'.$id.'" type="checkbox" '.$attr.' data-origin="'.$parameter.'">
@@ -358,12 +358,11 @@ public function box_shadow($id,$type,$attr=''){
 			</div>';
 			echo $return;
 		}
-
 		public function alignment($title,$id,$type,$attr='',$number_=false){
 				$attr_ = $type."='".$id."'" . $attr;
-				$return = '<div class="rl_i_editor-item-content-items item-alignment_ inline__">
-				<label class="rl-sub-title">'.$title.'</label>
-				<div class="rl_text-alignment">
+				$return = '<div class="rl_i_editor-item-content-items item-alignment_ inline__">';
+				// $return .= '<label class="rl-sub-title">'.$title.'</label>';
+				$return .= '<div class="rl_text-alignment">
 					<ul class="text-alignment-choice">
 						<li>
 							<input id="_alignment_label_'.$id.'_left" '.$attr_.' type="radio" name="'.$id.'" value="left">
@@ -385,7 +384,6 @@ public function box_shadow($id,$type,$attr=''){
 			</div>';
 			return $return;
 		}
-
 // class end
 }
 
