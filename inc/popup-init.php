@@ -125,36 +125,40 @@ public function wppbPopupContent($allSetting){
 		return $popupSetData;
 }
 // popup page list of all popupSetData
-public function wppbPopupList($allSetting,$column_making,$business_id,$countPopup,$isActive=false){
-		$popupSetData = $this->wppbPopupContent($allSetting);
+public function wppbPopupList($allSetting,$business_id,$isActive=false,$device_){
+		$popup_is_active = $isActive?"checked='checked'":"";		
+		$popup_name = isset($allSetting[0]['content']['popup-name']) && $allSetting[0]['content']['popup-name'] ? $allSetting[0]['content']['popup-name']:'';
+		$business_id = $business_id?$business_id:"";
+		$url         = WPPB_PAGE_URL.'&custom-popup='.$business_id;
+
+		$editBtn     = '<a class="wppb-popup-setting can_disable" href="'.esc_url($url).'"><span class="dashicons dashicons-edit"></span></a>';
+		$deLeteBtn     = '<a data-bid="'.$business_id.'" class="wppb_popup_deleteAddon dashicons dashicons-trash"></a>';
+
+		$status = '<div class="wppb-popup-checkbox">
+				<input id="business_popup--'.$business_id.'" type="checkbox" class="wppb_popup_setting_active" data-bid="'.$business_id.'" '.$popup_is_active.'>
+				<label for="business_popup--'.$business_id.'"></label>
+			</div>';
+		$all 	 = !$device_ || $device_ == "all" ? 'checked' : '';
+		$mobileEnable = '<div>
+					        <input data-device="'.$business_id.'" id="wppb-device-name-all'.$business_id.'" type="radio" name="device-'.$business_id.'" value="all" '.$all.'>
+					        <label for="wppb-device-name-all'.$business_id.'"><span class="dashicons dashicons-admin-site-alt3"></span></label>
+					    </div>';
+		$homePage = get_home_url()."?wppb_preview=".$business_id;
+		$homePage = '<a href="'.$homePage.'" target="_blank"><span class="dashicons dashicons-visibility"></span></a>';
+		$Setting_ = '<a href="'.$url.'&wppb-setting"><span class="dashicons dashicons-admin-generic"></span></a>';
+				
 		$returnHtml = '';
-		$popup_is_active = $isActive?"checked='checked'":"";
-		$business_id 	   = $business_id?$business_id:"";
-		if ($column_making == 1) $returnHtml .= '<div class="wppb-popup-row wppb-popup_clear">';
-		$returnHtml .= '<div class="wppb-popup-column-three">
-									<div class="wppb-popup-demo">
-										<div class="tempIdShow">'.$popupSetData['popup-name'].'</div>
-										<div class="wppb-popup-demo-wrapper">'.$this->popup_layout($popupSetData).'</div>
-										<div class="wppb-popup-demo-settings">
-											<div class="wppb-popup-setting-btns">
-												<div class="wppb-popup-checkbox">
-													<input id="business_popup--'.$business_id.'" type="checkbox" class="wppb_popup_setting_active" data-bid="'.$business_id.'" '.$popup_is_active.'>
-													<label for="business_popup--'.$business_id.'"></label>
-												</div>
-												<a class="wppb-popup-setting can_disable" href="'.esc_url(WPPB_PAGE_URL.'&custom-popup='.$business_id).'"><span class="dashicons dashicons-admin-generic"></span> '.__("Settings","wppb").'</a>
-
-											</div>
-										</div>
-									</div>
-							</div>';
-		if($countPopup == ($column_making)){
-			$returnHtml .= '</div>';
-		}elseif(($column_making) % 3 === 0){
-			$returnHtml .= '</div><div class="wppb-popup-row wppb-popup_clear">';
-		}
+		$returnHtml .= "<div class='wppb-list-item'>";
+			$returnHtml .= '<div class="wppb-popup-list-title"><span>'.$popup_name.'</span></div>';
+			$returnHtml .= '<div class="wppb-popup-list-enable"><span>'.$status.'</span></div>';
+			$returnHtml .= '<div class="wppb-popup-list-mobile">'.$mobileEnable.'</div>';			
+			$returnHtml .= '<div class="wppb-popup-list-view">'.$homePage.'</div>';
+			$returnHtml .= '<div class="wppb-popup-list-action"><span>'.$deLeteBtn.$editBtn.'</span></div>';
+			$returnHtml .= '<div class="wppb-popup-list-setting">'.$Setting_.'</div>';
+		$returnHtml .= "</div>";
 		return $returnHtml;
-}
 
+}
 // popup page list of all popupSetData json file
 public function wppbPopupList_json($allSetting,$column_making,$countPopup){
 		$imageUrl = isset($allSetting[0]['img-url']) ? $allSetting[0]['img-url'] : '';
