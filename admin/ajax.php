@@ -7,9 +7,9 @@ class wppb_ajax extends wppb_db{
 			add_action('wp_ajax_custom_insert', array($this,'insert'));
 			add_action('wp_ajax_custom_update', array($this,'update'));
 			add_action('wp_ajax_delete_popup', array($this,'delete'));
-			add_action('wp_ajax_option_update', array($this,'option_update'));
 			add_action('wp_ajax_popup_active', array($this,'update'));
 
+			add_action('wp_ajax_option_update', array($this,'option_update'));
 			// add_action('wp_ajax_mobile_update', array($this,'mobile_update'));
 
 			add_action('wp_ajax_getLeadForm', array($this,'getLeadForm'));
@@ -35,7 +35,6 @@ class wppb_ajax extends wppb_db{
 		$result = $this->popup_delete();
 		echo $result?$result:0;
 		die();
-
 	}
 	public function option_update(){
 			$result = $this->opt_update();

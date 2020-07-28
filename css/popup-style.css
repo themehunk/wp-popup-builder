@@ -419,12 +419,12 @@ a:focus{
 }
 
 /*popup page design*/
-.tempIdShow{
+/*.tempIdShow{
      text-align: center;
     background-color: #F9F9F9;
     padding: 12px 0;
     font-size: 16px;
-}
+}*/
 .rlLoading{
        position: relative;
     pointer-events: none;
@@ -463,7 +463,7 @@ a:focus{
 
 /*business confirm modal reset*/
 .resetConfirmPopup{
-          position: absolute;
+        position: absolute;
     background: #353434e6;
     width: 100%;
     height: 100%;
@@ -566,9 +566,9 @@ a:focus{
 .wppb-custom-popup-section{
     font-size: 10px;
 }
-.wppb-custom-popup-section .wppb-popup-row{
+/*.wppb-custom-popup-section .wppb-popup-row{
     margin-top: 15px;
-}
+}*/
 .wppb-custom-popup-section .data-rl-editable-wrap > span{
        display: block;
     line-height: 1;
@@ -586,18 +586,19 @@ a:focus{
        width: unset!important;
     height: 100%;
 }
-.wppb-custom-popup-section .wppb-popup-demo-wrapper{
+/*.wppb-custom-popup-section .wppb-popup-demo-wrapper{
         height: 240px;
     overflow: hidden;
     zoom: .6;
-}
+}*/
 .wppb-custom-popup-section .wppb-popup-demo:hover {
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 .wppb-custom-popup-heading{
-    display: flex;
+        display: flex;
     align-items: center;
     margin-top: 50px;
+    margin-bottom: 30px;
 }
 .wppb-custom-popup-heading > a{
         background: #6747E6;
