@@ -147,6 +147,25 @@ select[data-global-input="close-option"],
     font-size: 12px!important;
     width: 70px;
     height: 60px;
+    border: 2px solid #EDF7FB;
+    border-radius: 4px;
+}
+.rl_i_editor-element-add-item-list  > li > span.lock{
+    position: relative;
+    opacity: .7;
+}
+.rl_i_editor-element-add-item-list  > li > span.lock:before{
+        content: "\f160";
+    font-family: dashicons;
+    font-size: 20px;
+    position: absolute;
+    right: -5px;
+    top: -5px;
+    color: #e4530c;
+}
+.rl_i_editor-element-add-item-list  > li > span:hover,
+.wppb-popup-custom span.ui-draggable.ui-draggable-dragging:hover{
+    border-color:#A7E7FF;
 }
 .wppb-popup-custom span.ui-draggable.ui-draggable-dragging{
         height: 60px!important;

@@ -31,6 +31,15 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 					<li><span data-item-drag="link"><i class="text-icon dashicons dashicons-admin-links"></i><?php _e("Button",'wppb'); ?></span></li>
 					<li><span data-item-drag="image"><i class="text-icon dashicons dashicons-format-image"></i><?php _e("Image",'wppb'); ?></span></li>
 					<li><span data-item-drag="lead-form"><i class="text-icon dashicons dashicons-feedback"></i><?php _e("Form",'wppb'); ?></span></li>
+
+					<li><span class="lock"><i class="text-icon dashicons dashicons-text"></i><?php _e("Section",'wppb'); ?></span></li>
+					<li><span class="lock"><i class="text-icon dashicons dashicons-format-video"></i><?php _e("Video",'wppb'); ?></span></li>
+
+
+
+
+
+
 				</ul>
 			</div>
 		</section>

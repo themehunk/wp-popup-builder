@@ -157,6 +157,39 @@ if ( is_array( $responseResult_ ) && ! is_wp_error( $responseResult_ ) ) {
 					<input id='wppb-popup-layout-label__layout-3' type="radio" name="wppb-popup-layout" value="layout-3">
 					<label for="wppb-popup-layout-label__layout-3"><img src="<?php echo esc_url(WPPB_URL."img/layout-3.png","wppb");?>"></label>
 				</li>
+
+				<li>
+					<input type="radio" class="lock">
+					<label><img src="<?php echo esc_url(WPPB_URL."img/layout-1-l.png","wppb");?>"></label>
+				</li>
+				<li>
+					<input type="radio" class="lock">
+					<label><img src="<?php echo esc_url(WPPB_URL."img/full-width-layout-l.png","wppb");?>"></label>
+				</li>
+				<li>
+					<input type="radio" class="lock">
+					<label><img src="<?php echo esc_url(WPPB_URL."img/popup-pro-top-bottom-bar-layout-front-l.png","wppb");?>"></label>
+				</li>
+				<li>
+					<input type="radio" class="lock">
+					<label><img src="<?php echo esc_url(WPPB_URL."img/popup-pro-bottom-top-bar-front-l.png","wppb");?>"></label>
+				</li>
+				<li>
+					<input type="radio" class="lock">
+					<label><img src="<?php echo esc_url(WPPB_URL."img/popup-pro-left-front-l.png","wppb");?>"></label>
+				</li>
+				<li>
+					<input type="radio" class="lock">
+					<label><img src="<?php echo esc_url(WPPB_URL."img/popup-pro-right-front-l.png","wppb");?>"></label>
+				</li>
+				<li>
+					<input type="radio" class="lock">
+					<label><img src="<?php echo esc_url(WPPB_URL."img/popup-pro-left-center-front-l.png","wppb");?>"></label>
+				</li>
+				<li>
+					<input type="radio" class="lock">
+					<label><img src="<?php echo esc_url(WPPB_URL."img/popup-pro-right-center-front-l.png","wppb");?>"></label>
+				</li>
 			</ul>
 		</div>
 </div>
