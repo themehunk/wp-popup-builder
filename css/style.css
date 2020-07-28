@@ -378,6 +378,18 @@ business popup editor settings
 .wppb-popup-placement > ul > li > input:checked + label{
     background: #6747e6;
 }
+.wppb-popup-placement > ul > li > input.lock + label{
+    opacity: .7;
+}
+.wppb-popup-placement > ul > li > input.lock + label:before {
+        content: "\f160";
+    font-family: dashicons;
+    font-size: 20px;
+    position: absolute;
+    right: -5px;
+    top: -5px;
+    color: #e4530c;
+}
 .wppb-popup-placement > ul > li > input:checked + label:before {
          content: "\f12a";
     font-family: dashicons;

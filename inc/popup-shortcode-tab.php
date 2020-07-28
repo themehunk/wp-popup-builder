@@ -1,7 +1,7 @@
 <?php 
 if ( ! defined( 'ABSPATH' )) exit;
 
-	$OldUser_options = ['all','pages','post','home_page','mobile-enable'];
+	$OldUser_options = ['all','pages','post','home_page'];
 	$check_option_prev = [];
 	foreach ($OldUser_options as $options_value) {
 		if ( isset($addon_option[$options_value]) && $addon_option[$options_value] ) {
@@ -46,9 +46,9 @@ if ( ! defined( 'ABSPATH' )) exit;
 		 foreach ( $All_pages as $page_c ) {
 				$all_pages_html .= '<li>';
 				$checkedPAges = isset( $pagesId[ $page_c->ID ] ) ? 'checked' : '';
-				$all_pages_html .= '<input '.$checkedPAges.' id="wppb-pages--'.$page_c->ID.'" type="checkbox" name="pages-check" value="'.$page_c->ID.'">';
-				$all_pages_html .= '<label for="wppb-pages--'.$page_c->ID.'">';
-				$all_pages_html .= '<span class="dashicons dashicons-yes-alt"></span>'.$page_c->post_title;
+				$all_pages_html .= '<input '.$checkedPAges.' type="checkbox" name="pages-check" value="'.$page_c->ID.'">';
+				$all_pages_html .= '<label>';
+				$all_pages_html .= '<span class="dashicons dashicons-lock"></span>'.$page_c->post_title;
 				$all_pages_html .= '</label></li>';
 		  }
 	}
@@ -59,9 +59,9 @@ if ( ! defined( 'ABSPATH' )) exit;
 		 foreach ( $All_post as $post_c ) {
 		 		$all_post_html .= '<li>';
 				$checkedPost = isset( $postId[ $post_c->ID ] ) ? 'checked' : '';
-				$all_post_html .= '<input '.$checkedPost.' id="wppb-posts--'.$post_c->ID.'" type="checkbox" name="post-check" value="'.$post_c->ID.'">';
-				$all_post_html .= '<label for="wppb-posts--'.$post_c->ID.'">';
-				$all_post_html .= '<span class="dashicons dashicons-yes-alt"></span>'.$post_c->post_title;
+				$all_post_html .= '<input  type="checkbox" name="post-check" value="'.$post_c->ID.'">';
+				$all_post_html .= '<label>';
+				$all_post_html .= '<span class="dashicons dashicons-lock"></span>'.$post_c->post_title;
 				$all_post_html .= '</label></li>';
 		  }
 	}
@@ -77,9 +77,9 @@ if ( ! defined( 'ABSPATH' )) exit;
 				foreach ($Woo_query_wppb->posts as $wo_wppb_value) {
 							$allWooCommercePost .= '<li>';
 							$checkWoocomercePage = isset( $woocommerce_postId[ $wo_wppb_value->ID ] ) ? 'checked' : '';
-							$allWooCommercePost .= '<input '.$checkWoocomercePage.' id="wppb-posts--'.$wo_wppb_value->ID.'" type="checkbox" name="woocommerce-check" value="'.$wo_wppb_value->ID.'">';
-							$allWooCommercePost .= '<label for="wppb-posts--'.$wo_wppb_value->ID.'">';
-							$allWooCommercePost .= '<span class="dashicons dashicons-yes-alt"></span>'.$wo_wppb_value->post_title;
+							$allWooCommercePost .= '<input '.$checkWoocomercePage.' type="checkbox" name="woocommerce-check" value="'.$wo_wppb_value->ID.'">';
+							$allWooCommercePost .= '<label>';
+							$allWooCommercePost .= '<span class="dashicons dashicons-lock"></span>'.$wo_wppb_value->post_title;
 							$allWooCommercePost .= '</label></li>';
 				}
 		}
@@ -243,12 +243,12 @@ $popup_is_active = isset($popup_is_active) ? $popup_is_active : '';
 					<label for='popup--device-all'><span class="dashicons dashicons-desktop"></span><span>All Device</span></label>
 				</li>
 				<li>
-					<input id='popup--device-desktop' type="radio" name="popup-device" value="desktop" <?php if( $device == "desktop" )echo "checked"; ?> >
-					<label for='popup--device-desktop'><span class="dashicons dashicons-desktop"></span><span>Desktop</span></label>
+					<input  classtype="radio" name="popup-device" value="desktop" class="lock">
+					<label ><span class="dashicons dashicons-desktop"></span><span>Desktop</span></label>
 				</li>
 				<li>
-					<input id='popup--device-mobile' type="radio" name="popup-device" value="mobile" <?php if( $device == "mobile" )echo "checked"; ?> >
-					<label for='popup--device-mobile'><span class="dashicons dashicons-smartphone"></span><span>Mobile</span></label>
+					<input type="radio" name="popup-device" value="mobile" class="lock">
+					<label ><span class="dashicons dashicons-smartphone"></span><span>Mobile</span></label>
 				</li>
 			</ul>
 		</div>
@@ -265,16 +265,16 @@ $popup_is_active = isset($popup_is_active) ? $popup_is_active : '';
 					<label for='popup--trigger-page-load'><span class="dashicons dashicons-update-alt"></span><span>Page Load</span></label>
 				</li>
 				<li>
-					<input id='popup--trigger-click' type="checkbox" name="popup-trigger" value="click" <?php if( $triggerV['class-id'] ) echo 'checked'; ?> >
-					<label for='popup--trigger-click'><span class="dashicons dashicons-external"></span><span>On Click</span></label>
+					<input class="lock" type="checkbox" name="popup-trigger" value="click">
+					<label><span class="dashicons dashicons-external"></span><span>On Click</span></label>
 				</li>
 				<li>
-					<input id='popup--trigger-page-scroll' type="checkbox" name="popup-trigger" value="page-scroll" <?php if(isset($triggerV['page-scroll'])) echo 'checked'; ?> >
-					<label for='popup--trigger-page-scroll'><span class="dashicons dashicons-arrow-up-alt"></span><span>Page Scroll</span></label>
+					<input class="lock" type="checkbox" name="popup-trigger" value="page-scroll">
+					<label><span class="dashicons dashicons-arrow-up-alt"></span><span>Page Scroll</span></label>
 				</li>
 				<li>
-					<input id='popup--trigger-exit-popup' type="checkbox" name="popup-trigger" value="exit" <?php if(isset($triggerV['exit'])) echo 'checked'; ?> >
-					<label for='popup--trigger-exit-popup'><span class="dashicons dashicons-dismiss"></span><span>Exit Window</span></label>
+					<input class="lock" type="checkbox" name="popup-trigger" value="exit">
+					<label><span class="dashicons dashicons-dismiss"></span><span>Exit Window</span></label>
 				</li>
 			</ul>
 		</div>
@@ -319,16 +319,8 @@ $popup_is_active = isset($popup_is_active) ? $popup_is_active : '';
 				<label for="checkbox--frequency-show-time"><span class="dashicons dashicons-yes-alt"></span>One Time Show On Visit Page.</label>
 			</div>
 			<div class="frequency-day-hour">
-				<input <?php if(isset($frequency['after-time']) ) echo 'checked'; ?> id="checkbox--frequency-after-days" type="radio" name="frequency" value="after-time">
-				<label for="checkbox--frequency-after-days"><span class="dashicons dashicons-yes-alt"></span>How Much Time After Show Popup. </label>
-				<div>
-					<label>Days</label>
-					<input type="number" name="after-days-count" value="<?php echo $afterDaysCount ?>"> 
-				</div>
-				<div>
-					<label>Hour</label>
-					<input type="number" name="after-days-hour-count" value="<?php echo $afterDaysCountHour ?>"> 
-				</div>
+				<input type="radio" name="frequency" value="after-time">
+				<label><span class="dashicons dashicons-lock"></span>How Much Time After Show Popup. </label>
 			</div>
 
 		</div>
