@@ -28,7 +28,7 @@ public static function getCustomPopup($bid=""){
 
 public function popup_insert(){
 if (isset($_POST['htmldata'])) {    
-      $popupData = $this->arrayValueSanetize( $_POST['htmldata'] );
+      $popupData = $this->arrayValueSanetize( $_POST['htmldata'], true );
       if ($popupData) {
           $data['setting']  = serialize($popupData);
           $data['addon_name'] = 'custom_popup';
@@ -42,7 +42,7 @@ public function popup_update(){
       if ( isset($_POST['bid']) && is_numeric($_POST['bid']) && intval($_POST['bid']) > 0 ) {
             $bid = intval($_POST['bid']);
             if ( isset($_POST['htmldata']) ) {
-                $popupData = $this->arrayValueSanetize($_POST['htmldata']);
+                $popupData = $this->arrayValueSanetize($_POST['htmldata'], true);
                 if ($popupData) {
                     $data['setting']  = serialize($popupData);
                     $formate_data     = ['%s'];
@@ -66,46 +66,17 @@ public function popup_delete(){
           return self::$db->delete( self::$table , [ 'BID'=>$bid ], ['%d']);
       }
 }
-
  //business popup update
-  public function opt_update(){
-    if ( isset($_POST['popup_id']) && isset($_POST['option_key']) && isset($_POST['option_value']) && is_numeric($_POST['popup_id']) ) {
-          $bid     = intval($_POST['popup_id']);
-          $option_name = sanitize_text_field($_POST['option_key']);
-          $option_value= sanitize_text_field($_POST['option_value']);
-          $exist_Addon = self::$db->get_row("SELECT boption FROM ".self::$table." WHERE BID='".$bid."'");
-          if(isset($exist_Addon->boption)){
-            if ($exist_Addon->boption == '') {
-              $option = [$option_name => $option_value];
-            }elseif ($exist_Addon->boption != '') {
-              $option = unserialize($exist_Addon->boption);
-              $option[$option_name] = $option_value;
-            }
-              $data['boption'] = serialize($option);
+public function opt_update(){
+    if ( isset($_POST['popup_id']) && is_numeric($_POST['popup_id']) && isset($_POST['option']) && $_POST['option'] != '' ) {
+          $optionData = $this->arrayValueSanetize( $_POST['option'] );
+          if ( $optionData ) {
+              $bid     = intval($_POST['popup_id']);
+              $data['boption'] = serialize($optionData);
               $result = self::$db->update( self::$table,$data , ['BID'=>$bid], ['%s'], ['%d']);
-                if ( $option_value && $option_name != 'mobile-enable' ) {
-                    $already_on = $this->chekPopupStatus($option_name);
-                    $result = $already_on?22:$result;
-                }
               return $result;
           }
       }
-  }
-
- // check that popup on or off on pages,post, and home page
-  private function chekPopupStatus($option_name){
-          $return_Html = self::popup_pages();
-          $findAlready = 0;
-          if (!empty($return_Html)) {
-            foreach ($return_Html as $value) {
-                  $option = unserialize($value->boption); 
-                  if (isset($option[$option_name]) && $option[$option_name]) {
-                      if($findAlready >= 2)break;
-                      $findAlready++;     
-                  }    
-            }
-          }
-          return $findAlready >= 2?true:false;
   }
   //get popup for all pages,pages,post
   public static function popup_pages(){
@@ -121,18 +92,18 @@ public function popup_delete(){
     } 
   }
 
-public function arrayValueSanetize($arr){
+public function arrayValueSanetize($arr, $uniqid=false ){
   $returnArray = [];
   if ( is_array($arr) ) {
 
-        $arr = $this->uniq_class($arr);
+        if( $uniqid ) $arr = $this->uniq_class($arr);
 
         foreach($arr as $key => $value){
           $key = is_numeric($key)?$key:sanitize_text_field($key);
           if( is_array($value) ){
-              $returnArray[$key] = $this->arrayValueSanetize($value);
+              $returnArray[$key] = $this->arrayValueSanetize($value, $uniqid);
           }else{
-              if ($key == "link" || $key == "image-url" || $key == 'overlay-image-url') {
+              if ($key && ($key == "link" || $key == "image-url" || $key == 'overlay-image-url' || $key == 'video-url' || $key == 'poster') ) {
                     // senetize link 
                     $value = esc_url($value);
               }else if($key == "style" || $key == "overlay-style"){

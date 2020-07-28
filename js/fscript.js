@@ -59,11 +59,13 @@
 				 	let wppbPopupShow = $('#wppbPopupShow'); 
 				 	// set auto height
 				 	let getContentHeight = wppbPopupShow.find('.wppb-popup-custom-content');
-				 	if (getContentHeight.outerHeight() > (window.innerHeight - 150) ) {
-				 		getContentHeight.css({'height':(window.innerHeight - 100) + 'px','overflow-y':'scroll'});
+				 	let windowHeight = window.innerHeight - 150;
+				 	if (getContentHeight.outerHeight() > windowHeight ) {
+				 		getContentHeight.css({'height':windowHeight + 'px','overflow-y':'scroll'});
 				 	}else if (getContentHeight.innerHeight() < getContentHeight.children().outerHeight() ) {
 				 		getContentHeight.css({'overflow-y':'scroll'});
 				 	}
+
 				 	Business_front._setStyleColor(wppbPopupShow,getOutSideColor,'background-color');
 				 	wppbPopupShow.addClass('wppb_popup_active');
 				 	$('body').addClass('wppbPopupActive');

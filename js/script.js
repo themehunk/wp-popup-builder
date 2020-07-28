@@ -1,16 +1,16 @@
 (function($){
-var Business_news_letter = {
+var Wppb_save = {
 	init:function(){
-		Business_news_letter._bind();
+		Wppb_save._bind();
 	},
 	_saveBusinessAddon:function(){
 		if($('.wppb-back-page-popup').length)$('.wppb-back-page-popup').removeClass('wppb-back-page-popup');
 		let this_btn = $(this);
 		this_btn.addClass('rlLoading');
-		let saveData = Business_news_letter._saveData();
+		let saveData = Wppb_save._saveData();
 
 			let data_ = {action:'custom_insert',htmldata:saveData};
-			let returnData = Business_news_letter._ajaxFunction(data_);
+			let returnData = Wppb_save._ajaxFunction(data_);
 			returnData.success(function(response){
 				if (response && response != 0) {
 		        		let pathName = window.location.pathname + window.location.search + "=" +response;
@@ -23,10 +23,10 @@ var Business_news_letter = {
 		if($('.wppb-back-page-popup').length)$('.wppb-back-page-popup').removeClass('wppb-back-page-popup');
 		let this_btn = $(this);
 		this_btn.addClass('rlLoading');
-		let saveData = Business_news_letter._saveData();
+		let saveData = Wppb_save._saveData();
 		let bid = this_btn.data('bid');
 			let data_ = {action:'custom_update',htmldata:saveData,bid:bid};
-			let returnData = Business_news_letter._ajaxFunction(data_);
+			let returnData = Wppb_save._ajaxFunction(data_);
 			returnData.success(function(response){
 				if (response || response == 0) {
 		        		setTimeout(()=>this_btn.removeClass('rlLoading'),1000);
@@ -34,7 +34,7 @@ var Business_news_letter = {
 			});
 	},
 	_exportPopup:function(){
-		let saveData = Business_news_letter._saveData();
+		let saveData = Wppb_save._saveData();
 		let uniqId = Math.floor(Math.random() * Date.now());
 		let filename = 'wppb-'+uniqId+'-builder.json';
 		let jsonStr = JSON.stringify(saveData);
@@ -87,7 +87,7 @@ var Business_news_letter = {
 		let getSaveData = $('.wppb-popup-custom');
 		let getSaveDataWrap = getSaveData.find('[data-rl-wrap]');
 		let saveData = [];
-		let getSaveGlobal = Business_news_letter._initGlobalSave();
+		let getSaveGlobal = Wppb_save._initGlobalSave();
 		if (!jQuery.isEmptyObject(getSaveGlobal.content)) saveData.push(getSaveGlobal);
 		// find all wrap 
 		jQuery.each(getSaveDataWrap,(Wrap_index,Wrap_value)=>{
@@ -195,29 +195,41 @@ var Business_news_letter = {
 			});
 		}
 	},
-	_deleteAddon:function(){
+	_deleteAddon:function(e){
+		e.preventDefault();
 		let this_btn = $(this);
 		let bid  = this_btn.data('bid');
-		Business_news_letter._confirmMsg(true,'Popup Will Delete Permanentally.');
-			$('.wppbPopup.confirm').click(function(e){
-				$(this).addClass('rlLoading');
+		Wppb_save._confirmMsg(true,'Popup Will Delete Permanentally.');
+			$('.wppbPopup.confirm').off().click(function(e){
+				let confirmBtn = $(this);
+				confirmBtn.addClass('rlLoading');
 				e.preventDefault();
 				let data_ = {action:'delete_popup',bid:bid};
-				let returnData = Business_news_letter._ajaxFunction(data_);
+				let returnData = Wppb_save._ajaxFunction(data_);
 				returnData.success(function(response){
+
 					if (response || response == 0) {
-			        		setTimeout(()=>{
-			        		let pathName = window.location.pathname + "?page=wppb";
-			        			window.location.href = pathName;
-			        		},1000);
+							if ( this_btn.closest('.wppb-custom-popup-list').length ) {
+
+								this_btn.closest('.wppb-list-item').fadeOut('slow',function(){this_btn.closest('.wppb-list-item').remove();});
+								$('.resetConfirmPopup').removeClass('active');
+								confirmBtn.removeClass('rlLoading');
+							}else{
+				        		setTimeout(()=>{
+				        		let pathName = window.location.pathname + "?page=wppb";
+				        			window.location.href = pathName;
+				        		},1000);
+							}
 			        	}
+
 				});
 			});
+
 	},
 	_backPreviousPopup:function(e){
 		e.preventDefault();
 		let href = $(this).attr('href');
-		Business_news_letter._confirmMsg(true,'Your Popup Data Will lose If You Will Not Save OR Update Popup.');
+		Wppb_save._confirmMsg(true,'Your Popup Data Will lose If You Will Not Save OR Update Popup.');
 		$('.wppbPopup.confirm').click(function(e){
 			e.preventDefault();
 			window.location.href = href;
@@ -231,46 +243,43 @@ var Business_news_letter = {
 				currentLink.addClass(tabActive);
 				// for tab change
 				let getTabActive = currentLink.data('tab');
-				$('.wppb-popup-tab-container').removeClass(tabActive);
-				if (getTabActive == 'setting') {
-					$('.wppb-popup-demo.wppb-popup-tab-container').addClass(tabActive);
-				}else if(getTabActive == 'option'){
-					$('.wppb-popup-option.wppb-popup-tab-container').addClass(tabActive);
-				}
+				let getTabGroup = currentLink.data('tab-group');
+				$('[data-tab-group="'+getTabGroup+'"][data-tab-active]').removeClass(tabActive);
+				$('[data-tab-group="'+getTabGroup+'"][data-tab-active="'+getTabActive+'"]').addClass(tabActive);
 	},
 	_businessOptionUpdate:function(e){
-		var thisCheckBox = $(this);
-		var bid = thisCheckBox.closest('.wppb-opt-page-opt').data('bid');
-		var option_key = thisCheckBox.data('name');
-		let option_value = thisCheckBox.prop('checked') == true?1:0;
-		// disable all on enable all pages and post
-		var checkBoxDisable = thisCheckBox.closest('.wppb-popup-checkbox');
-			checkBoxDisable.addClass('business_disabled');
-		let data_ = {action:'option_update',popup_id:bid,option_key:option_key,option_value:option_value};
-			let returnData = Business_news_letter._ajaxFunction(data_);
-			returnData.success(function(response){
-				if (response) {
-		        		$('.wppb-popup-optSaved-msg').fadeIn('slow');
-		        		if (response == 22){
-		        			var optMsg;
-		        			if(option_key == 'home_page'){
-		        				optMsg = 'Home Page';
-		        			}else if(option_key == 'pages'){
-		        				optMsg = 'Pages';
-		        			}else if(option_key == 'post'){
-		        				optMsg = 'Post';
-		        			}
-		        			$('.wppb-popup-optPopup-msg').fadeIn().children('.opt_name').html(optMsg+" Popup Is Already On.");
-		        			$('.optClose').unbind().click(function(){
-		        				$(this).closest('.wppb-popup-optPopup-msg').fadeOut();	
-		        			});
-		        		}
-		        	}
-		        	setTimeout(function(){
-		        		checkBoxDisable.removeClass('business_disabled');
-		        		$('.wppb-popup-optSaved-msg').fadeOut(1000);
-		        	},1000);
-			});
+		// var thisCheckBox = $(this);
+		// var bid = thisCheckBox.closest('.wppb-opt-page-opt').data('bid');
+		// var option_key = thisCheckBox.data('name');
+		// let option_value = thisCheckBox.prop('checked') == true?1:0;
+		// // disable all on enable all pages and post
+		// var checkBoxDisable = thisCheckBox.closest('.wppb-popup-checkbox');
+		// 	checkBoxDisable.addClass('business_disabled');
+		// let data_ = {action:'option_update',popup_id:bid,option_key:option_key,option_value:option_value};
+		// 	let returnData = Wppb_save._ajaxFunction(data_);
+		// 	returnData.success(function(response){
+		// 		if (response) {
+		//         		$('.wppb-popup-optSaved-msg').fadeIn('slow');
+		//         		if (response == 22){
+		//         			var optMsg;
+		//         			if(option_key == 'home_page'){
+		//         				optMsg = 'Home Page';
+		//         			}else if(option_key == 'pages'){
+		//         				optMsg = 'Pages';
+		//         			}else if(option_key == 'post'){
+		//         				optMsg = 'Post';
+		//         			}
+		//         			$('.wppb-popup-optPopup-msg').fadeIn().children('.opt_name').html(optMsg+" Popup Is Already On.");
+		//         			$('.optClose').unbind().click(function(){
+		//         				$(this).closest('.wppb-popup-optPopup-msg').fadeOut();	
+		//         			});
+		//         		}
+		//         	}
+		//         	setTimeout(function(){
+		//         		checkBoxDisable.removeClass('business_disabled');
+		//         		$('.wppb-popup-optSaved-msg').fadeOut(1000);
+		//         	},1000);
+		// 	});
 
 	},_ajaxFunction:function(data_){
 		return jQuery.ajax({method:'post',
@@ -284,7 +293,7 @@ var Business_news_letter = {
 	    	let isActive 	= this_button.prop('checked') == true?1:0;
 			this_button.addClass('business_disabled');
 			let data_ = {action:'popup_active',bid:popup_id,is_active:isActive};
-			let returnData = Business_news_letter._ajaxFunction(data_);
+			let returnData = Wppb_save._ajaxFunction(data_);
 			returnData.success(function(response){
 				if (response) {
 					this_button.removeClass('business_disabled');
@@ -325,7 +334,7 @@ var Business_news_letter = {
 			}
 			setTimeout( function(){
 					let data_ = {action:'activate_lead_form'};
-					let returnData = Business_news_letter._ajaxFunction(data_);
+					let returnData = Wppb_save._ajaxFunction(data_);
 					returnData.success(function(response){
 						if (response.data.success) {
 							button.remove();
@@ -348,45 +357,208 @@ var Business_news_letter = {
 				.html( wp.updates.l10n.installFailedShort );
 		},
 	_mobileEnable:function(e){
-		let thisCheckBox = $(this);
-		let bid = thisCheckBox.attr('data-bid');
-		let option_value = thisCheckBox.prop('checked') == true?1:0;
-		// disable all on enable all pages and post
-		let checkBoxDisable = thisCheckBox.closest('.wppb-popup-checkbox');
-			checkBoxDisable.addClass('business_disabled');
-		let data_ = {action:'option_update',popup_id:bid,option_key:'mobile-enable',option_value:option_value};
-			let returnData = Business_news_letter._ajaxFunction(data_);
-			returnData.success(function(response){
-				if (response) {
-		        		setTimeout(function(){
-			        		checkBoxDisable.removeClass('business_disabled');
-			        	},1000);
-		        	}
+		// let thisCheckBox = $(this);
+		// let bid = thisCheckBox.attr('data-bid');
+		// let option_value = thisCheckBox.prop('checked') == true?1:0;
+		// // disable all on enable all pages and post
+		// let checkBoxDisable = thisCheckBox.closest('.wppb-popup-checkbox');
+		// 	checkBoxDisable.addClass('business_disabled');
+		// let data_ = {action:'option_update',popup_id:bid,option_key:'mobile-enable',option_value:option_value};
+		// 	let returnData = Wppb_save._ajaxFunction(data_);
+		// 	returnData.success(function(response){
+		// 		if (response) {
+		//         		setTimeout(function(){
+		// 	        		checkBoxDisable.removeClass('business_disabled');
+		// 	        	},1000);
+		//         	}
+		// 	});
+	},
+	_saveSetting:function(){
+		let savedata = {};
+		// popup placement data------------
+		let getPlacement = $('.wppb-popup-placement input[name="popup-placement"]:checked');
+		if ( getPlacement.length && getPlacement.val() != '') {
+
+			if ( getPlacement.val() == "pages") {
+					savedata['placement'] = {};
+
+				// for all pages and selected pages
+				let pageAll = $('.wppb-placement-selection input[type="checkbox"][data-name="all-pages"]:checked');
+				if ( pageAll.length ) {
+					savedata['placement']['pages'] = 'all';
+				}else{
+					let pageSelected = $('.wppb-placement-selection input[type="checkbox"][name="pages-check"]:checked');
+					if ( pageSelected.length ) {
+						savedata['placement']['pages'] = [];
+						$.each( pageSelected, function(){
+							if ( $(this).val() != '') savedata['placement'].pages.push( $(this).val() );
+						} );
+					}
+				}
+				// for all posts and selected posts
+				let postAll = $('.wppb-placement-selection input[type="checkbox"][data-name="all-posts"]:checked');
+				if ( postAll.length ) {
+					savedata['placement']['post'] = 'all';
+				}else{
+					let postSelected = $('.wppb-placement-selection input[type="checkbox"][name="post-check"]:checked');
+					if ( postSelected.length ) {
+						savedata['placement']['post'] = [];
+						$.each( postSelected, function(){
+							if ( $(this).val() != '') savedata['placement'].post.push( $(this).val() );
+						} );
+					}
+				}
+				// for all woocommerce postSelected
+				let postAllWoocommerce = $('.wppb-placement-selection input[type="checkbox"][data-name="all-woocommerce-posts"]:checked');
+				if ( postAllWoocommerce.length ) {
+					savedata['placement']['woocommerce'] = 'all';
+				}else{
+					let woocommerceSelected = $('.wppb-placement-selection input[type="checkbox"][name="woocommerce-check"]:checked');
+					if ( woocommerceSelected.length ) {
+						savedata['placement']['woocommerce'] = [];
+						$.each( woocommerceSelected, function(){
+							if ( $(this).val() != '') savedata['placement'].woocommerce.push( $(this).val() );
+						} );
+					}
+				}
+
+
+			}else{
+				savedata['placement'] = getPlacement.val();
+			}
+
+		}
+		// popup Selected device------------
+		let getPopupDevice = $('.wppb-display-device [name="popup-device"]:checked');
+		if ( getPopupDevice.length && getPopupDevice.val() ) savedata['device'] = getPopupDevice.val();
+		//popup trigger------------
+		let getTrigger = $('.wppb-display-trigger input[name="popup-trigger"]');
+		if ( getTrigger.length ) {
+			savedata['trigger'] = {};
+			$.each(getTrigger, function(){
+				let input_ = $(this);
+				let checked_ = input_.prop('checked') == true ? true : false;
+				let inputval = input_.val();
+				// exit
+				// if ( inputval == 'exit' && checked_ )savedata['trigger']['exit'] = true;
+				// for click
+				// if ( inputval == 'click' && checked_ ) {
+				// 	let classIdVal = $('.wppb-display-trigger input[name="class-id"]').val();
+				// 	if ( classIdVal ) {
+				// 		savedata['trigger']['click'] = [];
+				// 		if ( classIdVal.indexOf(',') > -1 ) {
+				// 			let classIdSplt = classIdVal.split(',');
+				// 			classIdSplt.forEach((val)=>{
+				// 				savedata['trigger'].click.push( val );
+				// 			});
+				// 		}else{
+				// 			savedata['trigger'].click.push( classIdVal );
+				// 		}
+				// 	}
+				// }
+				//for time spent
+				if ( inputval == 'page-load' ) {
+					savedata['trigger']['page-load'] = checked_;
+					if (checked_) {
+						savedata['trigger']['time'] = {};
+						let time_ = $('.wppb-display-trigger .trigger-time input[type="number"][name="second"]');
+						if(time_.val() && time_.val() > 0) savedata['trigger']['time']['second'] = time_.val();
+						if ( $.isEmptyObject( savedata['trigger']['time'] ) ) delete savedata['trigger']['time'];
+					}
+
+				}
+				//for scroll page
+				// if ( inputval == 'page-scroll' && checked_ ) {
+				// 	let scroll = $('.wppb-display-trigger .page-scroll input[name="page-scroll"]').val();
+				// 	if ( scroll != '') savedata['trigger']['page-scroll'] = scroll;
+				// }
 			});
+		}
+		// frequency------------
+		// for one time
+		// let frequency_ = $('.wppb-popup-frequency input[name="frequency"]:checked');
+		// if (frequency_.length) {
+		// 	let value_ = frequency_.val();
+		// 	savedata['frequency'] = value_;
+		// 	if (value_ == 'after-time') {
+		// 		let dayCount = $('.wppb-popup-frequency input[name="after-days-count"]').val();
+		// 		if (dayCount) savedata['after-days'] = dayCount;
+		// 		let dayCountHour = $('.wppb-popup-frequency input[name="after-days-hour-count"]').val();
+		// 		if (dayCountHour) savedata['after-hour'] = dayCountHour;
+		// 	}
+		// }
+		return savedata;
+	},
+	_businessOptionUpdate:function(e){
+		let optData = Wppb_save._saveSetting();
+
+		// console.log(optData);
+		// return;
+
+
+		let button = $(this);
+		button.addClass('rlLoading');
+		let bid = button.data('bid');
+			let data_ = {action:'option_update',popup_id:bid,option:optData};
+			let returnData = Wppb_save._ajaxFunction(data_);
+			returnData.success(function(response){
+				// console.log(response);
+				setTimeout(function(){
+					button.addClass('business_disabled');
+					button.removeClass('rlLoading');
+				},500);
+
+			});
+
+	},
+	_wppbPopupSetting:function(){
+		// console.log($(this));
+		$('.wppb-popup-setting-save').removeClass('business_disabled');
+		let input = $(this);
+		let inputName = input.attr('name');
+		let inputVal = input.val();
+		let check = input.prop('checked') == true ? true : false;
+
+		// for placement
+		if ( inputName == "popup-placement" ) {
+			inputVal == 'pages' ? $('.wppb-placement-selection').slideDown() : $('.wppb-placement-selection').slideUp();
+		}else if (inputName == 'popup-trigger' ) {
+			if(inputVal == 'click') {
+				check ? $('.wppb-display-trigger .trigger-class-id').slideDown() : $('.wppb-display-trigger .trigger-class-id').slideUp();
+			}else if(inputVal == 'page-load') {
+				check ? $('.wppb-display-trigger .trigger-time').slideDown() : $('.wppb-display-trigger .trigger-time').slideUp();
+			}else if(inputVal == 'page-scroll') {
+				check ? $('.wppb-display-trigger .page-scroll').slideDown() : $('.wppb-display-trigger .page-scroll').slideUp();
+			}
+		}
 	},
 	_bind(){
-		$(document).on('click', '.wppb_popup_saveAddon', Business_news_letter._saveBusinessAddon);
-		$(document).on('click', '.wppb_popup_updateAddon', Business_news_letter._updateAddon);
-		$(document).on('click', '.wppb_popup_deleteAddon', Business_news_letter._deleteAddon);
+		$(document).on('change keyup', '.wppb-popup-option input[type]' ,Wppb_save._wppbPopupSetting);
+		$(document).on('click', '.wppb_popup_saveAddon', Wppb_save._saveBusinessAddon);
+		$(document).on('click', '.wppb_popup_updateAddon', Wppb_save._updateAddon);
+		$(document).on('click', '.wppb_popup_deleteAddon', Wppb_save._deleteAddon);
 
-		$(document).on('click', '.wppb-back-page-popup', Business_news_letter._backPreviousPopup);
+		$(document).on('click', '.wppb-back-page-popup', Wppb_save._backPreviousPopup);
 		
-		$(document).on('click', '.wppb-popup-cmn-nav-item > a.wppb-popup-tab', Business_news_letter._businessTabSetting);
+		$(document).on('click', '.wppb-popup-setting-save', Wppb_save._businessOptionUpdate);
+		$(document).on('click', '[data-tab-group][data-tab]', Wppb_save._businessTabSetting);
+		// $(document).on('click', '.wppb-popup-cmn-nav-item > a.wppb-popup-tab', Wppb_save._businessTabSetting);
+		// $(document).on('click', '.wppb-popup-cmn-nav-item > a.wppb-popup-tab', Wppb_save._businessTabSetting);
 
-		$(document).on('change', '.wppb-popup-option input[type="checkbox"]', Business_news_letter._businessOptionUpdate);
+		// $(document).on('change', '.wppb-popup-option input[type="checkbox"]', Wppb_save._businessOptionUpdate);
 		// mobile anable and disabled
-		$(document).on('change', 'input[type="checkbox"][data-mobile-enable="mobile-enable"]', Business_news_letter._mobileEnable);
+		// $(document).on('change', 'input[type="checkbox"][data-mobile-enable="mobile-enable"]', Wppb_save._mobileEnable);
 
-		$(document).on('change','.wppb_popup_setting_active', Business_news_letter._savePopupActiveDeactive);
+		$(document).on('change','.wppb_popup_setting_active', Wppb_save._savePopupActiveDeactive);
 
-		$(document).on('click','.wppb-export-sub', Business_news_letter._exportPopup);
+		$(document).on('click','.wppb-export-sub', Wppb_save._exportPopup);
 
 		// lead form install
-			$( document ).on('click' , '.install-lead-form-btn', Business_news_letter._installNow );
-			$( document ).on('click' , '.active-lead-form-btn', Business_news_letter._activatePlugin);
-			$( document ).on('wp-plugin-install-success' , Business_news_letter._activatePlugin);
-			$( document ).on('wp-plugin-installing'      , Business_news_letter._pluginInstalling);
-			$( document ).on('wp-plugin-install-error'   , Business_news_letter._installError);
+			$( document ).on('click' , '.install-lead-form-btn', Wppb_save._installNow );
+			$( document ).on('click' , '.active-lead-form-btn', Wppb_save._activatePlugin);
+			$( document ).on('wp-plugin-install-success' , Wppb_save._activatePlugin);
+			$( document ).on('wp-plugin-installing'      , Wppb_save._pluginInstalling);
+			$( document ).on('wp-plugin-install-error'   , Wppb_save._installError);
 		
 	}
 }
@@ -970,29 +1142,6 @@ var Custom_popup_editor = {
 			}
 	},
 	_leadFormOpenPanel:function(){
-		// function scrollFn(){
-		// 	let headerOffset =  $('.rl_i_editor-header-area').offset().top + $('.rl_i_editor-header-area').outerHeight() + 10;
-		// 	let scrElem = $('.rl_i_editor-content-area');
-		// 	let scrElem2 = $('.rl-lead-form-panel');
-
-		// 	let panelOff = scrElem2.offset().top; 
-		// 	let offsetApply = panelOff - headerOffset;
-		// 	let panelOuterHeight = scrElem2.outerHeight();
-		// 	let editorOuterHeight = scrElem.outerHeight(); 
-		// 	if (editorOuterHeight > panelOuterHeight) {
-		// 		offsetApply = (editorOuterHeight - panelOuterHeight) + headerOffset; 
-		// 	}
-		// 	let scrollEnable = true;
-		// 	if (panelOff == headerOffset || panelOff < headerOffset || (offsetApply == panelOff) ) {
-		// 		scrollEnable = false;
-		// 	}
-		// 	if (scrollEnable) {
-		// 		scrElem.animate({scrollTop:offsetApply});
-		// 	}
-		// }
-		// setTimeout(scrollFn,600);
-
-
 		let getForm = $(this);
 		$('.rl-lead-form-panel').slideDown('fast');
 		// scrolling function apply
@@ -1023,7 +1172,7 @@ var Custom_popup_editor = {
 			letExistForm.length ? letExistForm.addClass('rlLoading') : $('.wppb-popup-custom #lf-business-popup').addClass('rlLoading');
 
   			let data_ = {action:'getLeadForm',form_id:form_id};
-			let returnData = Business_news_letter._ajaxFunction(data_);
+			let returnData = Wppb_save._ajaxFunction(data_);
 			returnData.success(function(response){
 				if (response && response != 0) {
 					let replace_form = "<div class='wppb-popup-lead-form' data-form-id='"+form_id+"'>"+response+"</div>"; 
@@ -1636,7 +1785,7 @@ var Custom_popup_editor = {
 	}
 }
 	Custom_popup_editor.init();
-	Business_news_letter.init();
+	Wppb_save.init();
 
 	let scrElem2 = $('.rl-lead-form-panel');
 

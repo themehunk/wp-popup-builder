@@ -130,7 +130,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 			?>
 		</section>
 		<!-- timer section -->
-			<div data-toggle="popup-timer-opt" class="rl_i_editor-element-Toggle outer-toggle">
+			<!-- <div data-toggle="popup-timer-opt" class="rl_i_editor-element-Toggle outer-toggle">
 				<span><?php _e('Popup Timer & Mobile Setting','wppb'); ?></span>
 				<span class="bottomCarret dashicons dashicons-arrow-right"></span>
 			</div>
@@ -147,7 +147,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 					}
 
 				?>
-			</section>
+			</section> -->
 		<!-- timer section -->
 		<!-- Close button setting -->
 		<div data-toggle="close-btn-setting" class="rl_i_editor-element-Toggle outer-toggle">
