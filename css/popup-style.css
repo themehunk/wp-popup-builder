@@ -35,9 +35,15 @@ a:focus{
     display: none;
 }
 .prebulilt-popup-inner input.lock + label{
-        opacity: .7;
     pointer-events: none;
-    border: 2px solid #ea825c70;
+}
+.prebulilt-popup-inner input.lock + label:after{
+    content: '';
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #5f5f5f8c;
 }
 .prebulilt-popup-inner input.lock + label:before{
         content: "\f160";
@@ -47,8 +53,8 @@ a:focus{
     right: -5px;
     top: -5px;
     color: #e4530c;
+    z-index: 1;
 }
-
 .prebulilt-popup-inner label{
         cursor: pointer;
     position: relative;
