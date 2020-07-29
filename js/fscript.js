@@ -40,16 +40,6 @@
 				 let popupAutoClose       = 'popup-delay-close' in setting_ ? parseInt(setting_['popup-delay-close']) : 0;
 
 				 let effectClass = 'wppb-effect-one';
-				 switch ( getEffect ){
-			 		case 2:
-			 		effectClass = 'wppb-effect-two';
-			 			break;
-			 		case 3:
-			 		effectClass = 'wppb-effect-3';
-			 			break;
-			 		case 4:
-			 		effectClass = 'wppb-effect-two';
-				 }
 				 let renderTohtml = '<div id="wppbPopupShow" class="wppb-popup-main-wrap '+effectClass+'"><div>';
 				 renderTohtml += getHTml;
 				 renderTohtml += '</div></div>';
@@ -57,6 +47,12 @@
 				 function addActivePopup(){
 				 	$('body').append(renderTohtml);
 				 	let wppbPopupShow = $('#wppbPopupShow'); 
+
+				 	// create cookie
+				 		let checkCookie = getPopup.attr('data-wppb-frequency');
+				 		Business_front.setPopupCookie(getPopup);
+				 	// create cookie
+
 				 	// set auto height
 				 	let getContentHeight = wppbPopupShow.find('.wppb-popup-custom-content');
 				 	let windowHeight = window.innerHeight - 150;
@@ -257,6 +253,34 @@
 	        		});
 	        }
 	        return css_con;
+		},
+		setPopupCookie:function(element) {
+			let frequency = element.attr('data-wppb-frequency');
+			let day  = element.attr('data-wppb-fr-d')?element.attr('data-wppb-fr-d'):false;
+			let hour = element.attr('data-wppb-fr-h')?element.attr('data-wppb-fr-h'):false;
+			let bid  = element.attr('data-wppb-bid');
+			if (bid && frequency) {
+			  	let calculation;
+				let cookieName = 'wppb-fr-'+bid;
+				  	if (day && hour) {
+				  		// for day + hour
+				  		calculation = (24 * parseInt(day) ) *( 1000 * 60 * 60 * parseInt(hour) );
+				  	}else if ( hour ) {
+				  		// for hour
+				  		calculation = ( 1000 * 60 * parseInt(hour) );
+				  	}else if ( frequency == 'one-time' ) {
+				  		// for one time will block for 30 days
+				  		calculation = (24 * 30 ) *( 1000 * 60 * 60  );
+				  	}else if(frequency == 'every-page'){
+		 		 		document.cookie = cookieName +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+				  	}
+			  	if ( calculation ) {
+			  		let date = new Date();
+					date.setTime( date.getTime() + calculation );
+					let expires = "expires="+ date.toUTCString();
+					document.cookie = cookieName + "=" + frequency + ";" + expires + ";path=/";
+			  	}
+			}
 		},
 		_bind:function(){
 			Business_front._responsive();

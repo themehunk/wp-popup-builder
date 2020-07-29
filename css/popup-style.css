@@ -35,8 +35,9 @@ a:focus{
     display: none;
 }
 .prebulilt-popup-inner input.lock + label{
-    opacity: .7;
+        opacity: .7;
     pointer-events: none;
+    border: 2px solid #ea825c70;
 }
 .prebulilt-popup-inner input.lock + label:before{
         content: "\f160";
@@ -375,8 +376,6 @@ a:focus{
         padding: 15px;
     background-size: 100%;
     box-sizing: border-box;
-    /*max-height: 250px;*/
-    /*overflow-y: scroll;*/
 }
 .wppb-popup-lead-form .lead-form-front ul,.wppb-popup-lead-form .lead-form-front li{
     margin: 0;
@@ -440,14 +439,6 @@ a:focus{
     margin:0;
     box-sizing: border-box;
 }
-
-/*popup page design*/
-/*.tempIdShow{
-     text-align: center;
-    background-color: #F9F9F9;
-    padding: 12px 0;
-    font-size: 16px;
-}*/
 .rlLoading{
        position: relative;
     pointer-events: none;
@@ -589,9 +580,6 @@ a:focus{
 .wppb-custom-popup-section{
     font-size: 10px;
 }
-/*.wppb-custom-popup-section .wppb-popup-row{
-    margin-top: 15px;
-}*/
 .wppb-custom-popup-section .data-rl-editable-wrap > span{
        display: block;
     line-height: 1;
@@ -609,11 +597,6 @@ a:focus{
        width: unset!important;
     height: 100%;
 }
-/*.wppb-custom-popup-section .wppb-popup-demo-wrapper{
-        height: 240px;
-    overflow: hidden;
-    zoom: .6;
-}*/
 .wppb-custom-popup-section .wppb-popup-demo:hover {
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }

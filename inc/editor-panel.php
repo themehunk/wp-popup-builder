@@ -34,12 +34,6 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 					<li><span class="lock"><i class="text-icon dashicons dashicons-text"></i><?php _e("Section",'wppb'); ?></span></li>
 					<li><span class="lock"><i class="text-icon dashicons dashicons-format-video"></i><?php _e("Video",'wppb'); ?></span></li>
-
-
-
-
-
-
 				</ul>
 			</div>
 		</section>
@@ -138,26 +132,6 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 				$wp_builder_obj->border('global-border','data-global-input'); 
 			?>
 		</section>
-		<!-- timer section -->
-			<!-- <div data-toggle="popup-timer-opt" class="rl_i_editor-element-Toggle outer-toggle">
-				<span><?php _e('Popup Timer & Mobile Setting','wppb'); ?></span>
-				<span class="bottomCarret dashicons dashicons-arrow-right"></span>
-			</div>
-			<section data-toggle-action="popup-timer-opt" class="rl-popup-timer-opt rl-display-none">
-				<?php 
-					$wp_builder_obj->header_title(__('Timer Setting','wppb'));
-					$wp_builder_obj->range_slider(__('Popup Appear Delay in Second','wppb'), 'popup-delay-open', ['title'=>'sec','min'=>3,'max'=>60,'value'=>4] ,'popup-timer-appear-delay');
-					$wp_builder_obj->range_slider( __('Popup Auto Close in Second','wppb'), 'popup-delay-close', ['title'=>'sec','min'=>0,'max'=>500,'value'=>0] ,'popup-timer-autoclose'); 
-
-					if( isset($wppb_popup_id) ) {
-						  $mobileE = isset($addon_option['mobile-enable']) && !$addon_option['mobile-enable'] ?'': 'checked';
-							$wp_builder_obj->header_title(__('Mobile Setting','wppb'));
-						echo $wp_builder_obj->checkbox('mobile-enable',__('Show Popup Mobile','wppb'),'data-mobile-enable="mobile-enable"'."data-bid='".$wppb_popup_id."'".$mobileE);
-					}
-
-				?>
-			</section> -->
-		<!-- timer section -->
 		<!-- Close button setting -->
 		<div data-toggle="close-btn-setting" class="rl_i_editor-element-Toggle outer-toggle">
 			<span><?php _e('Close Button Setting','wppb'); ?></span>

@@ -246,41 +246,6 @@ var Wppb_save = {
 				let getTabGroup = currentLink.data('tab-group');
 				$('[data-tab-group="'+getTabGroup+'"][data-tab-active]').removeClass(tabActive);
 				$('[data-tab-group="'+getTabGroup+'"][data-tab-active="'+getTabActive+'"]').addClass(tabActive);
-	},
-	_businessOptionUpdate:function(e){
-		// var thisCheckBox = $(this);
-		// var bid = thisCheckBox.closest('.wppb-opt-page-opt').data('bid');
-		// var option_key = thisCheckBox.data('name');
-		// let option_value = thisCheckBox.prop('checked') == true?1:0;
-		// // disable all on enable all pages and post
-		// var checkBoxDisable = thisCheckBox.closest('.wppb-popup-checkbox');
-		// 	checkBoxDisable.addClass('business_disabled');
-		// let data_ = {action:'option_update',popup_id:bid,option_key:option_key,option_value:option_value};
-		// 	let returnData = Wppb_save._ajaxFunction(data_);
-		// 	returnData.success(function(response){
-		// 		if (response) {
-		//         		$('.wppb-popup-optSaved-msg').fadeIn('slow');
-		//         		if (response == 22){
-		//         			var optMsg;
-		//         			if(option_key == 'home_page'){
-		//         				optMsg = 'Home Page';
-		//         			}else if(option_key == 'pages'){
-		//         				optMsg = 'Pages';
-		//         			}else if(option_key == 'post'){
-		//         				optMsg = 'Post';
-		//         			}
-		//         			$('.wppb-popup-optPopup-msg').fadeIn().children('.opt_name').html(optMsg+" Popup Is Already On.");
-		//         			$('.optClose').unbind().click(function(){
-		//         				$(this).closest('.wppb-popup-optPopup-msg').fadeOut();	
-		//         			});
-		//         		}
-		//         	}
-		//         	setTimeout(function(){
-		//         		checkBoxDisable.removeClass('business_disabled');
-		//         		$('.wppb-popup-optSaved-msg').fadeOut(1000);
-		//         	},1000);
-		// 	});
-
 	},_ajaxFunction:function(data_){
 		return jQuery.ajax({method:'post',
 						url: wppb_ajax_backend.wppb_ajax_url,
@@ -356,81 +321,16 @@ var Wppb_save = {
 				.addClass( 'disabled' )
 				.html( wp.updates.l10n.installFailedShort );
 		},
-	_mobileEnable:function(e){
-		// let thisCheckBox = $(this);
-		// let bid = thisCheckBox.attr('data-bid');
-		// let option_value = thisCheckBox.prop('checked') == true?1:0;
-		// // disable all on enable all pages and post
-		// let checkBoxDisable = thisCheckBox.closest('.wppb-popup-checkbox');
-		// 	checkBoxDisable.addClass('business_disabled');
-		// let data_ = {action:'option_update',popup_id:bid,option_key:'mobile-enable',option_value:option_value};
-		// 	let returnData = Wppb_save._ajaxFunction(data_);
-		// 	returnData.success(function(response){
-		// 		if (response) {
-		//         		setTimeout(function(){
-		// 	        		checkBoxDisable.removeClass('business_disabled');
-		// 	        	},1000);
-		//         	}
-		// 	});
-	},
 	_saveSetting:function(){
 		let savedata = {};
 		// popup placement data------------
 		let getPlacement = $('.wppb-popup-placement input[name="popup-placement"]:checked');
 		if ( getPlacement.length && getPlacement.val() != '') {
-
-			if ( getPlacement.val() == "pages") {
-					savedata['placement'] = {};
-
-				// for all pages and selected pages
-				let pageAll = $('.wppb-placement-selection input[type="checkbox"][data-name="all-pages"]:checked');
-				if ( pageAll.length ) {
-					savedata['placement']['pages'] = 'all';
-				}else{
-					let pageSelected = $('.wppb-placement-selection input[type="checkbox"][name="pages-check"]:checked');
-					if ( pageSelected.length ) {
-						savedata['placement']['pages'] = [];
-						$.each( pageSelected, function(){
-							if ( $(this).val() != '') savedata['placement'].pages.push( $(this).val() );
-						} );
-					}
-				}
-				// for all posts and selected posts
-				let postAll = $('.wppb-placement-selection input[type="checkbox"][data-name="all-posts"]:checked');
-				if ( postAll.length ) {
-					savedata['placement']['post'] = 'all';
-				}else{
-					let postSelected = $('.wppb-placement-selection input[type="checkbox"][name="post-check"]:checked');
-					if ( postSelected.length ) {
-						savedata['placement']['post'] = [];
-						$.each( postSelected, function(){
-							if ( $(this).val() != '') savedata['placement'].post.push( $(this).val() );
-						} );
-					}
-				}
-				// for all woocommerce postSelected
-				let postAllWoocommerce = $('.wppb-placement-selection input[type="checkbox"][data-name="all-woocommerce-posts"]:checked');
-				if ( postAllWoocommerce.length ) {
-					savedata['placement']['woocommerce'] = 'all';
-				}else{
-					let woocommerceSelected = $('.wppb-placement-selection input[type="checkbox"][name="woocommerce-check"]:checked');
-					if ( woocommerceSelected.length ) {
-						savedata['placement']['woocommerce'] = [];
-						$.each( woocommerceSelected, function(){
-							if ( $(this).val() != '') savedata['placement'].woocommerce.push( $(this).val() );
-						} );
-					}
-				}
-
-
-			}else{
-				savedata['placement'] = getPlacement.val();
-			}
-
+			savedata['placement'] = getPlacement.val();
 		}
 		// popup Selected device------------
-		let getPopupDevice = $('.wppb-display-device [name="popup-device"]:checked');
-		if ( getPopupDevice.length && getPopupDevice.val() ) savedata['device'] = getPopupDevice.val();
+		// let getPopupDevice = $('.wppb-display-device [name="popup-device"]:checked');
+		// if ( getPopupDevice.length && getPopupDevice.val() ) savedata['device'] = getPopupDevice.val();
 		//popup trigger------------
 		let getTrigger = $('.wppb-display-trigger input[name="popup-trigger"]');
 		if ( getTrigger.length ) {
@@ -439,23 +339,6 @@ var Wppb_save = {
 				let input_ = $(this);
 				let checked_ = input_.prop('checked') == true ? true : false;
 				let inputval = input_.val();
-				// exit
-				// if ( inputval == 'exit' && checked_ )savedata['trigger']['exit'] = true;
-				// for click
-				// if ( inputval == 'click' && checked_ ) {
-				// 	let classIdVal = $('.wppb-display-trigger input[name="class-id"]').val();
-				// 	if ( classIdVal ) {
-				// 		savedata['trigger']['click'] = [];
-				// 		if ( classIdVal.indexOf(',') > -1 ) {
-				// 			let classIdSplt = classIdVal.split(',');
-				// 			classIdSplt.forEach((val)=>{
-				// 				savedata['trigger'].click.push( val );
-				// 			});
-				// 		}else{
-				// 			savedata['trigger'].click.push( classIdVal );
-				// 		}
-				// 	}
-				// }
 				//for time spent
 				if ( inputval == 'page-load' ) {
 					savedata['trigger']['page-load'] = checked_;
@@ -467,35 +350,18 @@ var Wppb_save = {
 					}
 
 				}
-				//for scroll page
-				// if ( inputval == 'page-scroll' && checked_ ) {
-				// 	let scroll = $('.wppb-display-trigger .page-scroll input[name="page-scroll"]').val();
-				// 	if ( scroll != '') savedata['trigger']['page-scroll'] = scroll;
-				// }
 			});
 		}
 		// frequency------------
 		// for one time
-		// let frequency_ = $('.wppb-popup-frequency input[name="frequency"]:checked');
-		// if (frequency_.length) {
-		// 	let value_ = frequency_.val();
-		// 	savedata['frequency'] = value_;
-		// 	if (value_ == 'after-time') {
-		// 		let dayCount = $('.wppb-popup-frequency input[name="after-days-count"]').val();
-		// 		if (dayCount) savedata['after-days'] = dayCount;
-		// 		let dayCountHour = $('.wppb-popup-frequency input[name="after-days-hour-count"]').val();
-		// 		if (dayCountHour) savedata['after-hour'] = dayCountHour;
-		// 	}
-		// }
+		let frequency_ = $('.wppb-popup-frequency input[name="frequency"]:checked');
+		if (frequency_.length) {
+			savedata['frequency'] = frequency_.val();
+		}
 		return savedata;
 	},
 	_businessOptionUpdate:function(e){
 		let optData = Wppb_save._saveSetting();
-
-		// console.log(optData);
-		// return;
-
-
 		let button = $(this);
 		button.addClass('rlLoading');
 		let bid = button.data('bid');
@@ -542,13 +408,6 @@ var Wppb_save = {
 		
 		$(document).on('click', '.wppb-popup-setting-save', Wppb_save._businessOptionUpdate);
 		$(document).on('click', '[data-tab-group][data-tab]', Wppb_save._businessTabSetting);
-		// $(document).on('click', '.wppb-popup-cmn-nav-item > a.wppb-popup-tab', Wppb_save._businessTabSetting);
-		// $(document).on('click', '.wppb-popup-cmn-nav-item > a.wppb-popup-tab', Wppb_save._businessTabSetting);
-
-		// $(document).on('change', '.wppb-popup-option input[type="checkbox"]', Wppb_save._businessOptionUpdate);
-		// mobile anable and disabled
-		// $(document).on('change', 'input[type="checkbox"][data-mobile-enable="mobile-enable"]', Wppb_save._mobileEnable);
-
 		$(document).on('change','.wppb_popup_setting_active', Wppb_save._savePopupActiveDeactive);
 
 		$(document).on('click','.wppb-export-sub', Wppb_save._exportPopup);
@@ -855,8 +714,15 @@ var Custom_popup_editor = {
 					sepInput.val( parseInt(paddings) );
 				}
 			}else if(dataInput == 'popup-name'){
-				setHiddenInput['popup-name'] ? sepInput.val( setHiddenInput['popup-name'] ) : sepInput.val( 'Enter Popup Name' );
 
+				if(setHiddenInput['popup-name']){
+					sepInput.val( setHiddenInput['popup-name'] );
+					$('.wppb-popup-title-name').html( setHiddenInput['popup-name'] );
+
+				}else{
+					sepInput.val( 'No Name' );
+					$('.wppb-popup-title-name').html( 'No Name' );
+				}
 			}else if( dataInput == 'global-border'){
 				let globalBorder = $('.wppb-popup-custom .wppb-popup-custom-wrapper');
 				Custom_popup_editor.__borderGet(globalBorder,sepInput);
@@ -960,9 +826,6 @@ var Custom_popup_editor = {
 					}else{
 						$('.rl-two-column-width').hide();
 					}
-				}else if (dataInput == 'popup-delay-open') {
-					let popupDalay = setHiddenInput['popup-delay-open'] ? setHiddenInput['popup-delay-open'] : 3;
-					Custom_popup_editor._inputRange( sepInput, false, false, popupDalay );
 				}else if (dataInput == 'popup-delay-close') {
 					let popupDalayClose = setHiddenInput['popup-delay-close'] ? setHiddenInput['popup-delay-close'] : 0;
 					Custom_popup_editor._inputRange( sepInput, false, false, popupDalayClose );
@@ -1084,8 +947,6 @@ var Custom_popup_editor = {
 						$(getColumn[0]).css('width',(100 - inputValue)+'%');
 						sepInput.siblings('input').val( 100 - inputValue );
 					}
-				}else if (inputData == 'popup-delay-open'){
-					if(checkArray)setHiddenInput['popup-delay-open'] = inputValue;
 				}else if (inputData == 'popup-delay-close'){
 					if(checkArray)setHiddenInput['popup-delay-close'] = inputValue;
 				}else if ( inputData == "box-shadow-global" ) {

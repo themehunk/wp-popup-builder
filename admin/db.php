@@ -80,16 +80,23 @@ public function opt_update(){
   }
   //get popup for all pages,pages,post
   public static function popup_pages(){
-    $querystr = "SELECT setting,boption FROM ".self::$table." WHERE setting !='' AND boption!='' AND is_active = 1";
+    $querystr = "SELECT BID,setting,boption,addon_name FROM ".self::$table." WHERE setting !='' AND boption!='' AND is_active = 1";
     $pageposts = self::$db->get_results($querystr);
     return !empty($pageposts)?$pageposts:false; 
   }
 
-//get for addon for update 
-  public static function Popup_show($bid){
-    if ($bid && is_numeric($bid)) {
-      return  self::$db->get_row("SELECT setting FROM ".self::$table." WHERE BID='".$bid."' AND is_active='1'");
-    } 
+  //get for addon for update 
+  public static function Popup_show($bid,$preview=false,$popup_page=false){
+    if ( $bid && is_numeric($bid) ) {
+        if($popup_page){
+          return  self::$db->get_row("SELECT BID,setting,boption,addon_name FROM ".self::$table." WHERE BID='".$bid."' AND is_active='1'");
+        }else if($preview){
+          return  self::$db->get_row("SELECT addon_name,setting FROM ".self::$table." WHERE BID='".$bid."' ");
+        }else{
+          return  self::$db->get_row("SELECT addon_name,setting FROM ".self::$table." WHERE BID='".$bid."' AND is_active='1'");
+        }
+    }
+
   }
 
 public function arrayValueSanetize($arr, $uniqid=false ){
@@ -131,7 +138,7 @@ public function uniq_class($arr){
 }
 
 // popup html creating
-public function wppb_html($setting,$inline=''){
+public function wppb_html($setting,$inline='',$setting_=false ){
     if ($setting && @unserialize( $setting )) {
         $popupSetData = array(
           'wrapper-style'=>'width:550px;',
@@ -148,7 +155,10 @@ public function wppb_html($setting,$inline=''){
           'lead-form' => '',
           'global-content-id'=>false
           );
-      $popupFrontSetting = ['close-type'=>3,'outside-color'=>'#535353F2','effect'=>1,'popup-delay-open'=>3,'popup-delay-close'=>0];
+      // $popupFrontSetting = ['close-type'=>3,'outside-color'=>'#535353F2','effect'=>1,'popup-delay-open'=>3,'popup-delay-close'=>0];
+      $popupFrontSetting = ['layout'=>'','close-type'=>3,'outside-color'=>'#535353F2','effect'=>1];
+      if(is_array($setting_)) $popupFrontSetting = array_merge($popupFrontSetting,$setting_);
+
       $allSetting = unserialize($setting);  
         foreach ($allSetting as $setting_value) {
           if (isset($setting_value['content']) && is_array($setting_value['content'])) {
