@@ -2,6 +2,7 @@
 if ( ! defined( 'ABSPATH' ) ) exit; 
 ob_start();
 
+include_once WPPB_PATH.'inc/popup-init.php';
 // popup directory
 class wppb {
 	private static $instance;
@@ -37,7 +38,8 @@ class wppb {
 	    add_menu_page( __('Wp Popup Builder', 'wppb'), __('Wp Popup Builder', 'wppb'),'wppb_manager', 'wppb',array($this ,'display_addons'));
 	}
 	public function display_addons(){
-		include_once WPPB_PATH.'inc/popup-init.php';
+		// include_once WPPB_PATH.'inc/popup-init.php';
+		$wp_builder_obj = new wp_popup_builder_init();
         if(isset($_GET['custom-popup'])){
         	include_once WPPB_PATH."inc/popup.php";
         }else{

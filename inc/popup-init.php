@@ -183,6 +183,75 @@ public function wppbPopupList_json($allSetting,$column_making,$countPopup){
 		}
 		return $returnHtml;
 }
+
+// shortcode 
+
+ 	public function show_popup_part_start($value, $shortcode=false){
+ 				$return_data = false;
+				$cookieFilter = true;
+ 				$option = unserialize($value->boption);
+ 				if ( isset($_COOKIE['wppb-fr-'.$value->BID]) && isset($option['frequency']) && $_COOKIE['wppb-fr-'.$value->BID] == $option['frequency'] ) {
+						$cookieFilter = false;
+				}
+				if ($cookieFilter) {
+					$device = isset( $option['device'] ) ? $option['device'] : false;
+					$checkMobile = wp_is_mobile();
+					// if ( $device == 'mobile' && $checkMobile ) { //desktop condition
+					if ( ($device == 'mobile' || isset($option['mobile-enable']) ) && $checkMobile ) { //desktop condition and also for previous user
+						$return_data = true;
+					}else if( $device == 'desktop' && !$checkMobile ){ //mobile condition
+						$return_data =  true;
+					}else if ( $device == 'all' || $device == false ) { //all and if not device set
+						$return_data =  true;
+					}
+				}
+				return $return_data ? $this->show_popup_part_one( $value,$option,$shortcode ):false;
+ 	}
+
+ 	public function show_popup_part_one($value,$option,$shortcode){
+ 			$return_ = false;
+ 			$setting_ = [];
+ 			$popup_attr = '';
+			$placement = isset($option['placement']) ? $option['placement'] : false;
+			// if ( $placement == 'all' ) {//new user
+			if ( $placement == 'all' || (isset($option['all']) && $option['all']) ) {
+				$return_ = true;
+			// }else if ( $placement == 'home_page' && is_front_page() ) { for new update
+			}else if ( ( $placement == 'home_page' && is_front_page() ) || (isset($option['home_page']) && $option['home_page'])) {
+				$return_ = true;
+			}
+
+			// class and attr by trigger
+			if ( isset($option['trigger']) ) {
+				$trigger = $option['trigger'];
+				//for page load 
+				if ( isset($trigger['page-load']) ){
+					 if (!$trigger['page-load'] || $trigger['page-load'] == 'false') $return_ = false;;
+					}
+				//for setting like popup open delay 
+				if ( isset($trigger['time']) ) {
+					$minute_ = isset($trigger['time']['minute']) && is_numeric(isset($trigger['time']['minute'])) ? $trigger['time']['minute'] * 60 :false;
+					$second_ = $minute_ ? $minute_ + $trigger['time']['second'] : $trigger['time']['second'];
+					$setting_['popup-delay-open'] = $second_;
+				}
+			}
+			// for frequency 
+			if ( isset($option['frequency']) && $option['frequency'] ) {
+				$popup_attr .= 'data-wppb-frequency="'.$option['frequency'].'"';
+				$popup_attr .= 'data-wppb-bid="'.$value->BID.'"';
+			}
+
+			if ( $shortcode || $return_ ) {
+				$popupHtml = new wppb_db();
+				$popupHtmlContent = $popupHtml->wppb_html($value->setting,'',$setting_);
+				$showPopup = $popupHtmlContent ? '<div data-option="1" class="wppb-popup-open popup active" '.$popup_attr.'>'.$popupHtmlContent.'</div>': '';
+				if($showPopup) return $showPopup;
+			}
+ 	}
+// shortcode 
+
+
+
 // builder internal tools function
 	public function wppb_changeFilePath($arr,$path){
 		$return = [];
@@ -391,7 +460,7 @@ public function wppbPopupList_json($allSetting,$column_making,$countPopup){
 // class end
 }
 
-$wp_builder_obj = new wp_popup_builder_init();
+// $wp_builder_obj = new wp_popup_builder_init();
 
 
 
