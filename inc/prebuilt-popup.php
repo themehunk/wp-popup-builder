@@ -2,7 +2,7 @@
 if ( ! defined( 'ABSPATH' ) ) exit; 
 // prebuilt popup json 
 $getOuterUrl_ 	= WPPB_URL.'inc/wppb-builder.json';
-$urlResponse 	= wp_remote_get( $getOuterUrl_ );
+$urlResponse 	= wp_remote_get( $getOuterUrl_,['timeout'=>120] );
 $responseBody_ 	= wp_remote_retrieve_body( $urlResponse );
 $responseResult_ = json_decode( $responseBody_ , true);
 

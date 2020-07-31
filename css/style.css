@@ -472,9 +472,9 @@ business popup editor settings
     width: 274px;
 }
 .trigger-time{
-    margin: 10px 0;
+    width: 420px;
 }
-.trigger-time > div{
+/* .trigger-time > div{
     display: flex;
 }
 .trigger-time > div > div{
@@ -482,30 +482,35 @@ business popup editor settings
     display: flex;
     flex-direction: column;
     justify-content: center;
+} */
+
+.wppb-display-trigger .field_{
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
 }
-.trigger-time input,
-.page-scroll input{
+.wppb-display-trigger .field_ span{
+    margin: 0 7px 0 0;
+}
+.wppb-display-trigger .description_ span:first-child{
+    display: block;
+    color: #4a4a4a;
+    letter-spacing: .5px;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+.wppb-display-trigger .description_ span:last-child{
+    display: block;
+    color: #969292;
+    letter-spacing: .5px;
+    margin-bottom: 5px;
+}
+.trigger-time input{
         width: 57px;
     border: none;
     box-shadow: 0px 0px 1px 2px #ecf7fb;
     letter-spacing: 0.5px;
     color: #aaa6a6;
-}
-.trigger-time label{
-        color: #aba7a7;
-    padding: 0 0 6px 0px;
-    letter-spacing: .5px;
-    font-size: 14px;
-}
-.page-scroll > div{
-         float: left;
-    width: 47%;
-    margin: 10px 0;
-}
-.page-scroll span,.page-scroll label{
-        font-size: 14px;
-    color: #aaa6a6;
-    letter-spacing: .5px;
 }
 .wrap-frequency .frequency-day-hour{
         display: flex;
