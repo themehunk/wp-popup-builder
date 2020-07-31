@@ -630,6 +630,12 @@ label[data-range-output]{
 .wppb-popup-checkbox > input:checked + label{
         background-color: #6747E6;
 }
+.wppb-popup-checkbox > input.wppb_popup_setting_active + label{
+    background-color: #E62525;
+    }
+    .wppb-popup-checkbox > input.wppb_popup_setting_active:checked + label{
+            background-color: #47E68E;
+    }
 .wppb-popup-checkbox > input:checked + label:before{
     transform: translate(148%, -51%);
 }

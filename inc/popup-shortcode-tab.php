@@ -58,7 +58,8 @@ $popup_is_active = isset($popup_is_active) ? $popup_is_active : '';
 
 <!-- popup display -->
 <section class="wppb-display-popup">
-		<span class="popup-display-sub-heading">Popup Display And Shortcode</span>
+		<span class="popup-display-sub-heading">Popup Display Option</span>
+		<span class="popup-display-sub-heading-2">Choose option to display popup at Whole Website (Includes all page, post, product etc), At Homepage only or at some selected page and post. You can also use a shortcode to display popup in the area which supports the shortcode.</span>
 		<div class="wppb-popup-placement">
 			<ul class="rl-clear">
 				<li>
@@ -85,7 +86,8 @@ $popup_is_active = isset($popup_is_active) ? $popup_is_active : '';
 <div class="wppb-popup-editor-divider"></div>
 <!-- popup display device -->
 <section class="wppb-display-device">
-		<span class="popup-display-sub-heading">Popup Display Device</span>
+<span class="popup-display-sub-heading">Choose Popup Display Device</span>
+		<span class="popup-display-sub-heading-2">Here you can choose the device at which you want to display popup. Choose "All devices" to display popup at PC, Laptop and all small devices. And choose "Desktop" If you don't want to display popup at small mobile devices.</span>
 		<div class="wppb-popup-placement">
 			<ul class="rl-clear">
 				<li>
@@ -108,6 +110,7 @@ $popup_is_active = isset($popup_is_active) ? $popup_is_active : '';
 
 <section class="wppb-display-trigger">
 		<span class="popup-display-sub-heading">Popup Trigger</span>
+		<span class="popup-display-sub-heading-2">This option allows you to choose when you want to trigger popup.</span>
 		<div class="wppb-popup-placement">
 			<ul class="rl-clear">
 				<li>
@@ -128,14 +131,16 @@ $popup_is_active = isset($popup_is_active) ? $popup_is_active : '';
 				</li>
 			</ul>
 		</div>
-
 		<div class="trigger-time <?php if( !(isset($triggerV['page-load']) || $triggerV['pageload']) ) echo 'rl-display-none'; ?>">
-			<span class="popup-display-sub-heading-2">Time Spent After Appear Popup.</span>
-			<div>
-				<div>
-					<label>Second</label>
-					<input type="number" max="60" name="second" value="<?php echo $triggerV['second']; ?>">
-				</div>
+		<div class="wppb-popup-editor-divider"></div>
+			<div class="description_">
+				<span>Page Load : Set Popup Trigger Time.</span>
+				<span>Select "Page Load" to trigger popup at each time page load. You can also set a popup trigger delay.
+				</span>
+			</div>
+			<div class="field_">
+				<span class="popup-display-sub-heading-2">Time Spent After Appear Popup In Second </span>
+				<input type="number" max="60" name="second" value="<?php echo $triggerV['second']; ?>">
 			</div>
 		</div>
 
