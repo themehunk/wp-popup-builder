@@ -375,8 +375,10 @@ a:focus{
     width: 100%;
 }
 .wppb-popup-lead-form .leadform-show-form{
-        max-width: 100%;
-    padding: 4px;
+    max-width: 100%;
+padding: 4px;
+display: flex;
+justify-content: left;
 }
 .wppb-popup-lead-form .lead-form-front{
         padding: 15px;

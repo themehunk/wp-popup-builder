@@ -1065,10 +1065,22 @@ var Custom_popup_editor = {
 						if (leadFormStyle_['submit-align']) {
 							leadForm.find('.lf-form-submit').attr('data-alignment',leadFormStyle_['submit-align']);
 						}
+						if (leadFormStyle_['form-alignment']) {
+							let justify_ = 'left';
+							if (leadFormStyle_['form-alignment'] == 'center') {
+								justify_ = 'center';
+							}else if(leadFormStyle_['form-alignment'] == 'right'){
+								justify_ = 'flex-end';
+							}
+							leadForm.attr('data-form-alignment',leadFormStyle_['form-alignment']);
+							leadForm.closest('.leadform-show-form').css('justify-content',justify_);
+						}
 						// form style
 						if (leadFormStyle_['form-style']) {
 							leadForm.attr('style',leadFormStyle_['form-style']);
 						}
+						//form alignment 
+						Custom_popup_editor._removeStyle(leadForm,'margin');
 						//label style
 						if (leadFormStyle_['label-style']) {
 						let element = leadForm.find('.name-type.lf-field > label, .text-type.lf-field > label, .textarea-type.lf-field > label');
@@ -1172,13 +1184,16 @@ var Custom_popup_editor = {
 			}else if (getData == 'lf-submit-aliment') {
 				let getAlignment = leadForm.find('.submit-type.lf-field').css('text-align');
 				if(getAlignment == sepInput.val()) sepInput.prop('checked',true);
-			}else if( getData == 'form-margin-center' ){
-				let getMargin = Custom_popup_editor._checkStyle(leadForm,'margin');
-				if (getMargin == 'auto' && sepInput.val() == 'center') {
-					sepInput.prop('checked',true);
-				}else if (sepInput.val() == 'left'){
-					sepInput.prop('checked',true);
-				}
+			}
+			else if( getData == 'form-margin-center' ){
+					let checkAlign = leadForm.attr('data-form-alignment');
+					if (checkAlign == 'center' && sepInput.val() == 'center') {
+						sepInput.prop('checked',true);
+					}else if (checkAlign == 'right' && sepInput.val() == 'right'){
+						sepInput.prop('checked',true);
+					}else if((!checkAlign || checkAlign == 'left') && sepInput.val() == 'left'){
+						sepInput.prop('checked',true);
+					}
 			}else if (getData == 'lf-field-margin'){
 				let fieldMArgin = leadForm.find('.text-type.lf-field');
 				let margins = fieldMArgin.css('margin-'+sepInput.data('margin'));
@@ -1254,11 +1269,14 @@ var Custom_popup_editor = {
 				leadForm.find('input.lf-form-submit').attr('data-alignment',inputVal);
 				leadForm.find('.submit-type.lf-field').css('text-align',inputVal);
 		}else if (dataCheck == 'form-margin-center') {
+				let justify_ = 'left';
 				if (inputVal == 'center') {
-					leadForm.css('margin','auto');
-				}else{
-					Custom_popup_editor._removeStyle(leadForm,'margin');
+					justify_ = 'center';
+				}else if(inputVal == 'right'){
+					justify_ = 'flex-end';
 				}
+				leadForm.closest('.leadform-show-form').css('justify-content',justify_);
+				leadForm.attr('data-form-alignment',inputVal);
 		}else if (dataCheck == 'lf-field-margin') {
 			// let fieldMArgin = leadForm.find('.text-type.lf-field, .textarea-type.lf-field');
 			let fieldMArgin = leadForm.find('.lf-field');
@@ -1433,7 +1451,7 @@ var Custom_popup_editor = {
 	},
 	_removeStyle:function(element,removeStyle,apply_=true){
 				let getElemStyle =  element.attr('style');
-				if (getElemStyle) {
+			if (getElemStyle) {
 					let saparateStyle = Custom_popup_editor._inlineCssSeparate(getElemStyle);
 						let newStyle = '';
 						for (let key in saparateStyle) {
