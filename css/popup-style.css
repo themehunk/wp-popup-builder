@@ -608,12 +608,29 @@ justify-content: left;
 .wppb-custom-popup-section .wppb-popup-demo:hover {
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
+
+.wppb-custom-popup-section a.buypro-wpbp {
+  display: block;
+    margin-top: 15px;
+    background: #E91E63;
+    width: 67px;
+    padding: 10px;
+    text-align: center;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 4px;
+}
+
 .wppb-custom-popup-heading{
         display: flex;
     align-items: center;
-    margin-top: 50px;
+    margin-top: 20px;
     margin-bottom: 30px;
 }
+
+
+
+
 .wppb-custom-popup-heading > a{
         background: #6747E6;
     display: block;

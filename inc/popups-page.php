@@ -30,6 +30,7 @@ if (!empty($custom_popup_all)) {
 	</div>
 
 <section id="wppb-custom-popup-section" class="wppb-custom-popup-section">
+	<a target="_blank" href="https://themehunk.com/wp-popup-builder-pro/" class="buypro-wpbp">Buy Pro</a>
 		<div class="wppb-custom-popup-heading">
 			<h1><?php _e('WP Builder Popup','wppb'); ?></h1>
 			<a href="<?php echo esc_url(WPPB_PAGE_URL.'&custom-popup','wppb') ?>"> <span class="dashicons dashicons-edit"></span> <?php _e('Add New Popup','wppb'); ?></a>
