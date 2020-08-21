@@ -107,6 +107,13 @@ business popup editor settings
 .wppb-popup-cmn-nav-item {
     display: flex;
 }
+#wppb-custom-popup-nav .wppb-popup-cmn-nav-item{
+    justify-content: space-around;
+}
+#wppb-custom-popup-nav .wppb-popup-cmn-nav-item > a{
+    flex: 1;
+    text-align: center;
+}
 .wppb-popup-cmn-nav-item > a {
         padding: 1rem 2.5rem;
     display: block;
