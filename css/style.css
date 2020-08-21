@@ -20,8 +20,8 @@
     font-weight: normal;
  }
 #wppb-popup-demos-container{
-        height: 100vh;
-    overflow: auto;
+        /* height: 100vh; */
+    /* overflow: auto; */
 }
 .wppb-popup-cmn-container * :not(.dashicons){
     font-family:"Montserrat", sans-serif;

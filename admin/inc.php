@@ -8,7 +8,7 @@ class wppb {
 	private static $instance;
 
 	private function __construct(){
-        add_action( 'admin_init', array( $this, 'create_roles' ) );
+        add_action('admin_init', array( $this, 'create_roles' ) );
 		add_action('admin_menu', array($this, 'admin_menu'));
   		add_action('admin_enqueue_scripts', array($this,'enqueue_admin_script') );
 		add_action('wp_enqueue_scripts', array($this,'enqueue_front_script') );
@@ -35,7 +35,7 @@ class wppb {
 	    $wp_roles->add_cap( 'administrator', 'wppb_manager' );
 	}
 	public function admin_menu() {
-	    add_menu_page( __('Wp Popup Builder', 'wppb'), __('Wp Popup Builder', 'wppb'),'wppb_manager', 'wppb',array($this ,'display_addons'));
+	    add_menu_page( __('Wp Popup Builder', 'wppb'), __('Wp Popup Builder', 'wppb'),'wppb_manager', 'wppb',array($this ,'display_addons'), WPPB_URL.'img/wppb-pro-icon.png');
 	}
 	public function display_addons(){
 		// include_once WPPB_PATH.'inc/popup-init.php';
