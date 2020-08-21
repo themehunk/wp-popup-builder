@@ -622,25 +622,10 @@ justify-content: left;
 }
 
 .wppb-custom-popup-heading{
-        display: flex;
-    align-items: center;
     margin-top: 20px;
     margin-bottom: 30px;
 }
 
-
-
-
-.wppb-custom-popup-heading > a{
-        background: #6747E6;
-    display: block;
-    padding: 6px 7px;
-    color: white;
-    text-decoration: none;
-    font-size: 1.2em;
-    margin-left: 2em;
-    letter-spacing: .05em;
-}
 .wppb-drop-on-target {
         outline: 1px dotted #f7efac;
     outline-offset: -1px;

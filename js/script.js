@@ -653,13 +653,14 @@ var Custom_popup_editor = {
 		}
 		jQuery.each(allInputs,initInput_);
 	},
-	_changedSetEditor:function(){
+	_changedSetEditor:function(e){
+		let eventType = e.type;
 		Custom_popup_editor._confirmMsgOn()
 		let changedInput = $(this);
 		let clickedObj = $('.rl-editable-key-action');
 			let changeData = changedInput.data('editor-input');
 			let changeValue = changedInput.val();
-			if(changeData == 'title') {
+			if(changeData == 'title' && eventType == 'keyup') {
 				// set text of clicked item 
 				clickedObj.html(changeValue);
 			}else if (changeData == 'link') {
