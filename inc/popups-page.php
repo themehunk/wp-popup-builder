@@ -31,15 +31,19 @@ if (!empty($custom_popup_all)) {
 
 <section id="wppb-custom-popup-section" class="wppb-custom-popup-section">
 	<a target="_blank" href="https://themehunk.com/wp-popup-builder-pro/" class="buypro-wpbp">Buy Pro</a>
-	<div class="wppb-popup-cmn-nav wppb-custom-popup-heading">
+	<div class="wppb-popup-cmn-nav" id="wppb-custom-popup-nav">
 		<div class="wppb-popup-cmn-nav-item">
-				<a href="<?php echo esc_url(WPPB_PAGE_URL.'&custom-popup','wppb') ?>"> <span class="dashicons dashicons-edit"></span> <?php _e('Add New Popup','wppb'); ?></a>
-				<a href="<?php echo esc_url(WPPB_PAGE_URL,'wppb') ?>"> <span class="dashicons dashicons-visibility"></span> <?php _e('View Popup List','wppb'); ?></a>
+				<a href="<?php echo esc_url(WPPB_PAGE_URL,'wppb') ?>"> <span class="dashicons dashicons-visibility"></span> <?php _e('View Popup List','wppb'); ?></a>				
 				<a href="<?php echo esc_url(WPPB_PAGE_URL.'&wppb-view-pro','wppb') ?>"> <span class="dashicons dashicons-visibility"></span> <?php _e('View Pro Feature','wppb'); ?></a>
+				<a href="<?php echo esc_url(WPPB_PAGE_URL.'&wppb-view-pro-about','wppb') ?>"><?php _e('Help','wppb'); ?></a>
 		</div>	
 	</div>
 
-		<?php if($popup_html_all_custom != '' && !isset($_GET['wppb-view-pro']) ){ ?>
+		<?php if($popup_html_all_custom != '' && !isset($_GET['wppb-view-pro']) && !isset($_GET['wppb-view-pro-about']) ){ ?>
+			<div class="wppb-custom-popup-heading">
+				<h1><?php _e('WP Builder Popup','wppb'); ?></h1>
+				<a href="<?php echo esc_url(WPPB_PAGE_URL.'&custom-popup','wppb') ?>"> <span class="dashicons dashicons-edit"></span> <?php _e('Add New Popup','wppb'); ?></a>
+			</div>
 			<div class="wppb-custom-popup-head rl-clear">
 				<div class="wppb-popup-list-title"><span>Title</span></div>
 				<div class="wppb-popup-list-enable"><span>Status</span></div>
@@ -54,7 +58,8 @@ if (!empty($custom_popup_all)) {
 		<?php } ?>
 
 		<?php 
-		if( isset($_GET['wppb-view-pro']) ) include_once 'wppb-pro-popup.php';
+			if( isset($_GET['wppb-view-pro']) ) include_once 'wppb-pro-popup.php';
+			if( isset($_GET['wppb-view-pro-about']) ) include_once 'wppb-pro-popup.php';
 		 ?>
 
 </section>

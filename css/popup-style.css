@@ -621,13 +621,100 @@ justify-content: left;
     border-radius: 4px;
 }
 
-.wppb-custom-popup-heading{
+#wppb-custom-popup-nav{
     margin-top: 20px;
     margin-bottom: 30px;
 }
-
+.wppb-custom-popup-heading{
+        display: flex;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+.wppb-custom-popup-heading > a{
+        background: #6747E6;
+    display: block;
+    padding: 6px 7px;
+    color: white;
+    text-decoration: none;
+    font-size: 1.2em;
+    margin-left: 2em;
+    letter-spacing: .05em;
+}
 .wppb-drop-on-target {
         outline: 1px dotted #f7efac;
     outline-offset: -1px;
     padding: 10px 0;
+}
+.wppb-pro-panel-one{
+    text-align: center;
+}
+.wppb-pro-panel-one > h1{
+    font-size: 25px;
+    letter-spacing: 1px;
+    margin: 30px 0;
+    color: #6747e6;
+}
+.wppb-pro-panel-one > a{
+    display: block;
+    width: fit-content;
+    margin: 30px auto;
+    padding: 14px 30px;
+    background-color: #6747e6;
+    color: white;
+    font-size: 16px;
+    text-decoration: none;
+    letter-spacing: 1px; 
+}
+.wppb-pro-panel-one > p{
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+.wppb-pro-panel-one > .wppb-join{
+    background: #ef8809;
+    width: fit-content;
+    margin: 30px auto 80px auto;
+    padding: 20px 18px;
+    border-radius: 38px;
+    font-weight: 500;
+    color: white;
+}
+.wppb-pro-panel-one > .wppb-divider{
+    background-color: #6747e6;
+    width: 146px;
+    height: 3px;
+    display: block;
+    margin: 38px auto;
+    border-radius: 20px;
+}
+.wppb-pro-panel-one ul.wppb-feature{
+    display: flex;
+    margin: auto;
+    /* background: #c5bebe; */
+    width: 70%;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+.wppb-pro-panel-one ul.wppb-feature > li{
+    /* background-color: #c6e2c6; */
+    width: 257px;
+    margin: 18px 0;
+}
+.wppb-pro-panel-one ul.wppb-feature > li > span{
+    background-color: #6747e6;
+    width: 95px;
+    height: 95px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-size: 42px;
+    color: white;
+}
+.wppb-pro-panel-one ul.wppb-feature > li > p{
+    font-size: 19px;
+    letter-spacing: 1px;
+    font-weight: 400;
+    margin: 5px 0;
 }
