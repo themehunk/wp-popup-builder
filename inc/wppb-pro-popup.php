@@ -1,6 +1,6 @@
 <section class="wppb-pro-feature-panel" data-tab-active='view-free-to-pro' data-tab-group="pro-to-free">
     <div class="wppb-pro-panel-one">
-        <h1>Build Best Forms With Lead Form Builder Pro !</h1>
+        <h1>Build Best Popup With Wp Popup Builder Pro !</h1>
         <a class="link-btn-front" href="https://themehunk.com/wp-popup-builder-pro/" target="_blank">Buy Now - 29$</a>
         <div class="wppb-divider"></div>
         <img class="pro-feature-img" src="<?php echo WPPB_URL.'img/wppb-pro-plugin.jpg'; ?>" alt="">
