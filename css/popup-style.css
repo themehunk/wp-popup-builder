@@ -631,7 +631,8 @@ justify-content: left;
 #wppb-custom-popup-nav{
     position: fixed;
     top: 32px;
-    width: 86%;
+    width: 89%;
+    left: 160px;
 }
 .wppb-custom-popup-heading{
         display: flex;
@@ -729,6 +730,9 @@ justify-content: left;
     font-size: 42px;
     color: white;
 }
+.wppb-pro-panel-one ul.wppb-feature > li > img{
+
+}
 .wppb-pro-panel-one ul.wppb-feature > li > p{
     font-size: 19px;
     letter-spacing: 1px;
@@ -743,4 +747,44 @@ justify-content: left;
 .wppb-pro-panel-help > div{
     flex: 1;
     padding: 0 28px;
+}
+.wppb-feature-extra{
+    display: flex;
+    flex-wrap: wrap;
+    width: 72%;
+    margin: 28px auto;
+    align-items: center;
+}
+.wppb-feature-extra > li{
+    width: 50%;
+}
+.wppb-feature-extra > li:nth-child(odd){
+    text-align: left;
+}
+.wppb-feature-extra > li:nth-child(even){
+    text-align: right;
+}
+.wppb-feature-extra > li > h1{
+    font-size: 22px;
+    text-align: left;
+    letter-spacing: .5px;
+}
+.wppb-feature-extra > li > p{
+    text-align: left;
+    font-size: 15px;
+    letter-spacing: .5px;
+    margin: 5px 0;
+}
+.wppb-feature-extra > li > img{
+    max-width: 280px;
+    border-radius: 9px;
+}
+.wppb-feature-extra > li > p.points_:before{
+    content: '';
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: #6b6868;
+    margin-right: 10px;
+    border-radius: 3px;
 }
