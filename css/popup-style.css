@@ -4,7 +4,8 @@ a:focus{
     box-shadow: none;
 }
 #wppb-custom-popup-section{
-        padding: 0 16px 0 0;
+    padding: 0 16px 0 0;
+    padding-top: 50px;
 }
 .prebuilt-pupup-layout-container{
     display: none;
@@ -588,6 +589,12 @@ justify-content: left;
 .wppb-custom-popup-section{
     font-size: 10px;
 }
+.wppb-custom-popup-section > section{
+    display: none;
+}
+.wppb-custom-popup-section > section.active{
+    display: block;
+}
 .wppb-custom-popup-section .data-rl-editable-wrap > span{
        display: block;
     line-height: 1;
@@ -622,8 +629,9 @@ justify-content: left;
 }
 
 #wppb-custom-popup-nav{
-    margin-top: 20px;
-    margin-bottom: 30px;
+    position: fixed;
+    top: 32px;
+    width: 86%;
 }
 .wppb-custom-popup-heading{
         display: flex;
@@ -655,7 +663,7 @@ justify-content: left;
     margin: 30px 0;
     color: #6747e6;
 }
-.wppb-pro-panel-one > a{
+.wppb-pro-panel-one a.link-btn-front,.wppb-pro-panel-help a.link-btn-front{
     display: block;
     width: fit-content;
     margin: 30px auto;
@@ -665,6 +673,14 @@ justify-content: left;
     font-size: 16px;
     text-decoration: none;
     letter-spacing: 1px; 
+}
+.wppb-pro-panel-help a.link-btn-front{
+    margin: 0;
+}
+.wppb-pro-panel-help .help-txt{
+    font-size: 16px;
+    letter-spacing: .5px;
+    font-weight: 500;
 }
 .wppb-pro-panel-one > p{
     font-size: 18px;
@@ -690,13 +706,14 @@ justify-content: left;
 .wppb-pro-panel-one ul.wppb-feature{
     display: flex;
     margin: auto;
-    /* background: #c5bebe; */
     width: 70%;
     justify-content: space-around;
     flex-wrap: wrap;
 }
+.wppb-pro-panel-one > img.pro-feature-img{
+    max-width: 825px;
+}
 .wppb-pro-panel-one ul.wppb-feature > li{
-    /* background-color: #c6e2c6; */
     width: 257px;
     margin: 18px 0;
 }
@@ -717,4 +734,13 @@ justify-content: left;
     letter-spacing: 1px;
     font-weight: 400;
     margin: 5px 0;
+}
+.wppb-custom-popup-section > section.active.wppb-pro-panel-help{
+    display: flex;
+    background: white;
+    padding: 37px;
+}
+.wppb-pro-panel-help > div{
+    flex: 1;
+    padding: 0 28px;
 }
