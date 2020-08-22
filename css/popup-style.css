@@ -496,6 +496,7 @@ justify-content: left;
     display: none;
     font-family: "Montserrat", sans-serif;
     font-weight: 500;
+    min-height: 100vh;
 }
 .resetConfirmPopup.active{
     display: block;
@@ -787,4 +788,10 @@ justify-content: left;
     background: #6b6868;
     margin-right: 10px;
     border-radius: 3px;
+}
+.no-popup-found{
+    text-align: center;
+    margin: 53px;
+    font-weight: 500;
+    font-size: 15px;
 }
