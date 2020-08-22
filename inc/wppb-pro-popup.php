@@ -10,7 +10,7 @@
         <div class="wppb-divider"></div>
         <ul class="wppb-feature">
             <li>
-                <span class="dashicons dashicons-facebook-alt"></span>
+                <span class="dashicons dashicons-star-empty"></span>
                 <p>Icon Module</p>
             </li>
             <li>

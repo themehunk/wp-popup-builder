@@ -29,14 +29,14 @@ if (!empty($custom_popup_all)) {
 </div>
 
 <div id="wppb-popup-demos-container">	
-	
+
 <section id="wppb-custom-popup-section" class="wppb-custom-popup-section">
 	<!-- <a target="_blank" href="https://themehunk.com/wp-popup-builder-pro/" class="buypro-wpbp">Buy Pro</a> -->
 	<div class="wppb-popup-cmn-nav" id="wppb-custom-popup-nav">
 		<div class="wppb-popup-cmn-nav-item">
-				<a class="active" data-tab='view-list' data-tab-group='pro-to-free' href="<?php echo esc_url(WPPB_PAGE_URL,'wppb') ?>"> <?php _e('View Popup List','wppb'); ?></a>				
-				<a data-tab='view-free-to-pro' data-tab-group='pro-to-free' href="<?php echo esc_url(WPPB_PAGE_URL.'&wppb-view-pro','wppb') ?>"> <?php _e('Free To Pro','wppb'); ?></a>
-				<a data-tab='help' data-tab-group='pro-to-free' href="<?php echo esc_url(WPPB_PAGE_URL.'&wppb-view-pro-about','wppb') ?>"><?php _e('Help','wppb'); ?></a>
+				<a class="active" data-tab='view-list' data-tab-group='pro-to-free' href="#"> <?php _e('View Popup List','wppb'); ?></a>				
+				<a data-tab='view-free-to-pro' data-tab-group='pro-to-free' href="#"> <?php _e('Free To Pro','wppb'); ?></a>
+				<a data-tab='help' data-tab-group='pro-to-free' href="#"><?php _e('Help','wppb'); ?></a>
 		</div>	
 	</div>
 			<section class="wppb-front-view-list active" data-tab-active='view-list' data-tab-group="pro-to-free">
@@ -44,8 +44,8 @@ if (!empty($custom_popup_all)) {
 					<h1><?php _e('WP Builder Popup','wppb'); ?></h1>
 					<a href="<?php echo esc_url(WPPB_PAGE_URL.'&custom-popup','wppb') ?>"> <span class="dashicons dashicons-edit"></span> <?php _e('Add New Popup','wppb'); ?></a>
 				</div>
-				<?php if($popup_html_all_custom != '' && !isset($_GET['wppb-view-pro']) && !isset($_GET['wppb-view-pro-about']) ){ ?>
-					
+				
+				<?php if($popup_html_all_custom != ''){ ?>
 					<div class="wppb-custom-popup-head rl-clear">
 						<div class="wppb-popup-list-title"><span>Title</span></div>
 						<div class="wppb-popup-list-enable"><span>Status</span></div>
@@ -57,7 +57,9 @@ if (!empty($custom_popup_all)) {
 					<div class="wppb-custom-popup-list">
 						<?php echo $popup_html_all_custom ?>
 					</div>
-				<?php } ?>
+				<?php }else{
+						echo '<p class="no-popup-found">No Popup Found. Click Add New Popup To Create Popup. </p>';
+						} ?>
 			</section>
 		<?php 
 			include_once 'wppb-pro-popup.php';
