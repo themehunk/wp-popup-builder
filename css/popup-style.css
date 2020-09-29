@@ -148,7 +148,7 @@ a:focus{
     cursor: pointer;
     transition: .4s all linear;
 }
-.wppb-popup-name-layout .rl_i_editor-item-content-header > nav span.active_{
+.wppb-popup-name-layout .rl_i_editor-item-content-header > nav span.active{
         background: #6747e6;
 }
 .wppb-prebuilt-popup-json .wppb-popup-row{
@@ -168,6 +168,14 @@ a:focus{
 }
 .wp-popup-name-layout-name-init-2{
     text-align: right;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    margin: 27px 0 0 0;
+}
+.wp-popup-name-layout-name-init-2 .wppb-popup-name-init{
+    position: absolute;
+    right: 0;
 }
 .wppb-popup-name-init{
         background-color: #6747e6;
@@ -361,6 +369,9 @@ a:focus{
 }
 .wppb-popup-custom .wppb-popup-lead-form:before{
         content: 'Form';
+}
+.wppb-popup-custom [data-rl-editable="spacer"]:before{
+    content: 'Spacer';
 }
 .wppb-popup-custom [data-rl-editable]:hover:before,
 .wppb-popup-custom .wppb-popup-lead-form:hover:before,

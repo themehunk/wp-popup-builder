@@ -21,6 +21,12 @@ if ( is_array( $responseResult_ ) && ! is_wp_error( $responseResult_ ) ) {
 <section class="wppb-popup-name-layout">
 
 	<div class="wp-popup-name-layout-name-init-2">
+		<div class="rl_i_editor-item-content-header">
+			<nav class="rl-clear">
+				<span data-tab='prebuilt' data-tab-group="prebuilt-layout"  class="active"><?php _e('Prebuilt Popup','wppb'); ?></span>
+				<span data-tab='choose-layout' data-tab-group="prebuilt-layout"><?php _e('Choose Layout','wppb'); ?></span>
+			</nav>
+		</div>	
 		<button class="wppb-popup-name-init business_disabled"><?php _e('NEXT','wppb'); ?></button>
 	</div>
 
@@ -32,16 +38,11 @@ if ( is_array( $responseResult_ ) && ! is_wp_error( $responseResult_ ) ) {
 		</div>
 	</div>
 
-	<div class="rl_i_editor-item-content-header">
-		<nav class="rl-clear">
-			<span data-editor-tab="prebuilt-layout" class="active_"><?php _e('Prebuilt Popup','wppb'); ?></span>
-			<span data-editor-tab="choose-layout"><?php _e('Choose Layout','wppb'); ?></span>
-		</nav>
-	</div>	
+	
 
 
 	<!-- popup name  -->
-	<div class="prebulit-demo-popup rl_i_editor-item-content-i rl_i_editor-item-content-choose-layout">
+	<div data-tab-active='choose-layout' data-tab-group="prebuilt-layout" class="prebulit-demo-popup rl_i_editor-item-content-i rl_i_editor-item-content-choose-layout">
 	<!-- prebuilt popup section -->
 		<section class="prebuilt-pupup-layout-container">
 				<!-- layout 1 -->
@@ -196,7 +197,7 @@ if ( is_array( $responseResult_ ) && ! is_wp_error( $responseResult_ ) ) {
 
 <!-- prebuilt json file  -->
 
-<section class="wppb-prebuilt-popup-json rl_i_editor-item-content-i rl_i_editor-item-content-prebuilt-layout active_">
+<section data-tab-active='prebuilt' data-tab-group="prebuilt-layout" class="wppb-prebuilt-popup-json rl_i_editor-item-content-i rl_i_editor-item-content-prebuilt-layout active">
 	<?php echo $jsonPopupDemo;?>
 </section>
 

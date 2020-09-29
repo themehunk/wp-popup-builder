@@ -143,6 +143,9 @@ select[data-global-input="close-option"],
     border: 2px solid #EDF7FB;
     border-radius: 4px;
 }
+.rl_i_editor-element-add-item-list > li > span.form{
+    font-size: 10px!important;
+}
 .rl_i_editor-element-add-item-list  > li > span.lock{
     position: relative;
     opacity: .7;
@@ -201,7 +204,7 @@ select[data-global-input="close-option"],
 .rl_i_editor-item-content-i{
      display: none; 
 }
-.rl_i_editor-item-content-i.active_{
+.rl_i_editor-item-content-i.active,.rl_i_editor-item-content-i.active_{
      display: block; 
 }
 .rl_i_editor-item-content-items {

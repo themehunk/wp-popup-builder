@@ -227,6 +227,10 @@ public function wppb_initContent( $column_content,$parentId ){
                   $popupContent['content'] .=  '<div class="data-rl-editable-wrap" '.$alignMent.'>
                           <span class="'.$uniqIdAttr.'">'.$setting_value['content'].'</span>
                         </div>';
+                }elseif ($setting_value['type'] == 'spacer') {
+                  $popupContent['content'] .=	'<div class="data-rl-editable-wrap">
+                              <span class="'.$uniqIdAttr.'"></span>
+                          </div>';
                 }elseif ($setting_value['type'] == 'image') {
                   $popupContent['content'] .= '<div class="data-rl-editable-wrap wrap-image_" '.$alignMent.'>
                                <img  class="'.$uniqIdAttr.'" src="'.$setting_value['image-url'].'">
