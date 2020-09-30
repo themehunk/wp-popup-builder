@@ -207,6 +207,9 @@ select[data-global-input="close-option"],
 .rl_i_editor-item-content-i.active,.rl_i_editor-item-content-i.active_{
      display: block; 
 }
+.wppb-prebuilt-popup-json div[data-tab-group]:not(.active){
+    display: none;
+}
 .rl_i_editor-item-content-items {
     padding: 5px 10px 10px;
     /*margin-bottom: 8px;*/
