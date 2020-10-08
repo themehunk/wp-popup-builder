@@ -35,6 +35,13 @@ function initContent($column_content){
 									<span class="dashicons dashicons-no rlRemoveElement"></span></div>
 									<span class="text-heading" data-rl-editable="heading" '.$contentAttr.'>'.$setting_value['content'].'</span>
 								</div>';
+				}elseif ($setting_value['type'] == 'spacer') {
+					$popupContent .=	'<div class="data-rl-editable-wrap">
+											<div class="actions_">
+											<span class="dashicons dashicons-no rlRemoveElement"></span>
+										</div>
+										<span data-rl-editable="spacer" '.$contentAttr.'></span>
+									</div>';
 				}elseif ($setting_value['type'] == 'image') {
 				
 				$popupContent .= '<div class="data-rl-editable-wrap wrap-image_" '.$alignMent.'>
