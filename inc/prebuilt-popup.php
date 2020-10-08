@@ -207,7 +207,7 @@ define('PAID_IMG_URL', WPPB_URL . 'img/paid/');
 		<div class="rl_i_editor-item-content-header prebuilt-free-paid">
 			<nav class="rl-clear">
 				<span data-tab='free' data-tab-group="free-paid" class="active"><?php _e('Free Popup', 'wppb'); ?></span>
-				<span data-tab='paid' data-tab-group="free-paid"><?php _e('Paid Popup', 'wppb'); ?></span>
+				<span data-tab='paid' data-tab-group="free-paid"><?php _e('Premium Popup', 'wppb'); ?></span>
 			</nav>
 		</div>
 		<div data-tab-active='free' data-tab-group="free-paid" class="prebuilt-free active">
