@@ -95,12 +95,12 @@ $popup_is_active = isset($popup_is_active) ? $popup_is_active : '';
 					<label for='popup--device-all'><span class="dashicons dashicons-desktop"></span><span>All Device</span></label>
 				</li>
 				<li>
-					<input  classtype="radio" name="popup-device" value="desktop" class="lock">
-					<label ><span class="dashicons dashicons-desktop"></span><span>Desktop</span></label>
+					<input id="popup--device-desktop" type="radio" name="popup-device" value="desktop" <?php if( $device == "desktop" )echo "checked"; ?>>
+					<label for="popup--device-desktop"><span class="dashicons dashicons-desktop"></span><span>Desktop</span></label>
 				</li>
 				<li>
-					<input type="radio" name="popup-device" value="mobile" class="lock">
-					<label ><span class="dashicons dashicons-smartphone"></span><span>Mobile</span></label>
+					<input id="popup--device-mobile" type="radio" name="popup-device" value="mobile" <?php if( $device == "mobile" )echo "checked"; ?>>
+					<label for="popup--device-mobile"><span class="dashicons dashicons-smartphone"></span><span>Mobile</span></label>
 				</li>
 			</ul>
 		</div>

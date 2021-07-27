@@ -677,7 +677,7 @@ justify-content: left;
 }
 
 #wppb-custom-popup-nav{
-    position: fixed;
+    position:inherit;
     top: 32px;
     width: 89%;
     left: 160px;

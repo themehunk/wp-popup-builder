@@ -158,12 +158,6 @@ var Wppb_save = {
 
 										saveAttrData['styles'] = leadFormStyle;
 
-						}else if(checkInput.data('rl-editable') == 'spacer'){
-							saveAttrData = {type:'spacer',content:''};
-							if( checkInput.attr('style') ) {
-								saveAttrData['style'] = checkInput.attr('style');
-							}
-							if (checkInput.attr('data-uniqid'))saveAttrData['id'] = checkInput.attr('data-uniqid');
 						}else{
 							saveAttrData = {type:checkInput.data('rl-editable'),content:checkInput.html()};
 							if (checkInput.attr('style'))saveAttrData['style'] = checkInput.attr('style');
@@ -335,8 +329,8 @@ var Wppb_save = {
 			savedata['placement'] = getPlacement.val();
 		}
 		// popup Selected device------------
-		// let getPopupDevice = $('.wppb-display-device [name="popup-device"]:checked');
-		// if ( getPopupDevice.length && getPopupDevice.val() ) savedata['device'] = getPopupDevice.val();
+		let getPopupDevice = $('.wppb-display-device [name="popup-device"]:checked');
+		if ( getPopupDevice.length && getPopupDevice.val() ) savedata['device'] = getPopupDevice.val();
 		//popup trigger------------
 		let getTrigger = $('.wppb-display-trigger input[name="popup-trigger"]');
 		if ( getTrigger.length ) {
@@ -488,6 +482,9 @@ var Custom_popup_editor = {
 		      	if(droppedContainer.children().length > 1)droppedContainer.children('.rl_rmBlankSpace').remove();
 		      }
 	    }).disableSelection();
+
+	    let clientXcount = 0, clientYcount = 0;
+
 		$( ".rl_i_editor-element-add-item-list [data-item-drag]" ).draggable({
 	      connectToSortable: ".wppb-popup-custom .rlEditorDropable",
 	      helper: "clone",
@@ -525,13 +522,7 @@ var Custom_popup_editor = {
 					defaultText = 'Please Select Form';
 	        		editable = 'lead-form';
 	        		extraAttr = {class:'wppb-popup-lead-form',id:'lf-business-popup'}
-	      		}else if( checkDragItem == 'spacer' ){
-					defaultText = '';
-					editable = 'spacer';
-					extraAttr = {
-								 style:"height: 60px;"
-								}
-				}
+	      		}
 	        	let putAttr = {'data-rl-editable':editable};
 				if (extraAttr)putAttr = jQuery.extend(putAttr,extraAttr);
 
@@ -560,7 +551,6 @@ var Custom_popup_editor = {
 	      return newElement;
 	},
 	_openEditPanel:function(e){
-
 		let clickedObj = $(this);
 		let clickedObjData1 	= clickedObj.data('rl-editable');
 		if ($('.rl-editable-key-action').length)$('.rl-editable-key-action').removeClass('rl-editable-key-action');
@@ -577,28 +567,16 @@ var Custom_popup_editor = {
 				$('[data-toggle-action="'+separateToggleData+'"]').slideUp('slow');
 			}
 		});
-		$('.rl_i_editor-item-content-items').show();
-		$('[data-editor-tab="style"]').show();
-		if (clickedObjData1 != "image") {
-			$('.spacer_').hide();
-			if(clickedObjData1 == 'spacer'){
-				$('.rl_i_editor-item-content-items').hide();
-				$('.spacer_,.item-spacer').show();
-				$('[data-editor-tab="style"]').hide();
-				$('.rl_i_editor-item-content .item-image').hide();
-				$('.rl_i_editor-item-content .item-text').hide();
-			}else{
-				$('.rl_i_editor-item-content .item-image').hide();
-				$('.rl_i_editor-item-content .item-text').show();
-				clickedObj.attr('contenteditable',true);
-				Custom_popup_editor.placeCaretAtEnd(clickedObj.focus()[0]);
-			}
 
+		if (clickedObjData1 != "image") {
+			$('.rl_i_editor-item-content .item-image').hide();
+			$('.rl_i_editor-item-content .item-text').show();
+			clickedObj.attr('contenteditable',true);
+			Custom_popup_editor.placeCaretAtEnd(clickedObj.focus()[0]);
 		}else if (clickedObjData1 == "image") {
 			$('.rl_i_editor-item-content .item-image').show();
 			$('.rl_i_editor-item-content .item-text').hide();
 		}
-
 		// close container while open content style
 		wrapperContent.slideDown('slow');
 
@@ -714,8 +692,6 @@ var Custom_popup_editor = {
 				Custom_popup_editor._borderFn(clickedObj,changedInput,changeValue);
 			}else if (changeData == 'font-weight') {
 				clickedObj.css('font-weight',changeValue);
-			}else if(changeData == 'height'){
-				clickedObj.css('height',changeValue+'px');
 			}
 	},
 	_globalSettingInit:function(){
