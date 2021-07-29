@@ -77,6 +77,8 @@ WP Popup Builder is a powerful tool to create amazing popup for your site. Its d
 * Video
 * Form
 * Icon
+* Shortcode
+* Mail Chimp
 
 Pro popup comes with 9 different popup display locations and 20+ popup in & out animations.
 
