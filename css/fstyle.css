@@ -114,6 +114,11 @@
 .data-rl-editable-wrap {
   display: flex;
 }
+.wppb-popup-main-wrap .wppb-popup-rl-wrap {
+  display: flex;
+  color: white;
+  align-items: center;
+}
 .wppb-popup-main-wrap .wppb-popup-rl-wrap.two-column .wppb-popup-rl-column {
   width: 50%;
 }
@@ -544,3 +549,8 @@
     transform: scale(0);
   }
 }
+.wppb-popup-main-wrap .wppb-popup-shortcode {
+  max-height: 200px;
+  overflow: auto;
+}
+

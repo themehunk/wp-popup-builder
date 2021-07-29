@@ -21,14 +21,10 @@
 			Business_front._bind();
 		},
 		_show_popup:function(){
-
 			let getPopup = $('.wppb-popup-open.popup.active')[0];	
-
 			if (getPopup) {
 				getPopup = $(getPopup);
-
 				getPopup.hide();
-
 				 let getHTml  = getPopup.html();
 				 let setting_ = getPopup.find('input[name="popup-setting-front"]');				
 					 setting_ = JSON.parse( setting_.val() );

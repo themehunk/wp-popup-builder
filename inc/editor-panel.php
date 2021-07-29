@@ -20,7 +20,7 @@ if (file_exists(WP_PLUGIN_DIR . '/lead-form-builder/lead-form-builder.php') && i
 				<button class="wppb-export-sub"><?php _e("Export Popup", 'wppb'); ?></button>
 
 				<?php $wp_builder_obj->header_title(__('Popup Name', 'wppb')); ?>
-					<input data-global-input="popup-name" type="text" name="global-popup-name">
+				<input data-global-input="popup-name" type="text" name="global-popup-name">
 				<!-- content -->
 				<div data-toggle="add-itemes" class="rl_i_editor-element-Toggle outer-toggle rl-active">
 					<span><?php _e('Drag & Drop Module', 'wppb'); ?></span>
@@ -36,13 +36,17 @@ if (file_exists(WP_PLUGIN_DIR . '/lead-form-builder/lead-form-builder.php') && i
 							<li><span data-item-drag="lead-form"><i class="text-icon dashicons dashicons-feedback"></i><?php _e("Form", 'wppb'); ?></span></li>
 							<li><span class="wppb-drag-itemes" data-item-drag="spacer"><i class="text-icon dashicons dashicons-image-flip-vertical"></i><?php _e("Spacer", 'wppb'); ?></span>
 							</li>
-							<li><span class="lock"><i class="text-icon dashicons dashicons-text"></i>Icon List</span></li>
-							<li><span class="lock"><i class="text-icon dashicons dashicons-star-empty"></i>Icon</span></li>
-							<li><span class="lock"><i class="text-icon dashicons dashicons-image-filter"></i>Lottie</span></li>
+							<li>
+								<span class="wppb-drag-itemes form" data-item-drag="shortcode"><i class="text-icon dashicons dashicons-shortcode"></i><?php _e("Short Code", 'wppb'); ?></span>
+							</li>
+							<li><span class="lock"><i class="text-icon dashicons dashicons-text"></i><?php _e('Icon List', 'wppb'); ?></span></li>
+							<li><span class="lock"><i class="text-icon dashicons dashicons-star-empty"></i><?php _e('Icon', 'wppb'); ?></span></li>
+							<li><span class="lock"><i class="text-icon dashicons dashicons-image-filter"></i><?php _e('Lottie', 'wppb'); ?></span></li>
 							<li><span class="lock"><i class="text-icon dashicons dashicons-text"></i><?php _e("Section", 'wppb'); ?></span></li>
-							<li><span class="lock form"><i class="text-icon dashicons dashicons-feedback"></i>Contact Form 7</span></li>
-
+							<li><span class="lock form"><i class="text-icon dashicons dashicons-feedback"></i><?php _e("Contact Form 7", 'wppb'); ?></span></li>
+							<li><span class="lock form"><i class="text-icon dashicons dashicons-email"></i><?php _e("Mail Chimp", 'wppb'); ?></span></li>
 							<li><span class="lock"><i class="text-icon dashicons dashicons-format-video"></i><?php _e("Video", 'wppb'); ?></span></li>
+
 						</ul>
 					</div>
 				</section>
@@ -368,6 +372,33 @@ if (file_exists(WP_PLUGIN_DIR . '/lead-form-builder/lead-form-builder.php') && i
 					</div>
 				</section>
 				<!-- add lead form -->
+				<!-- shortcode init  -->
+				<section class="rl-display-none rl-shortcode-panel wppb-sections-extra">
+					<div class="rl_i_editor-element-Toggle">
+						<span><?php _e('Shortcode Configuration', 'wppb'); ?></span>
+					</div>
+					<div class="rl_i_editor-item-content-items title_ inline__">
+						<label class="rl-sub-title"><?php _e('Paste Your Shortcode', 'wppb'); ?></label>
+					</div>
+					<div class="rl-mail-chip-api">
+						<textarea name="shortcode-panel-api" data-shortcode='shortcode-code-get-code'></textarea>
+					</div>
+					<!-- style and content style  -->
+					<div class="wppb-shortcode-styling">
+						<!-- shortcode-style -->
+						<div class="rl_i_editor-item-content-i rl_i_editor-item-content-shortcode-style active_">
+							<?php
+							$wp_builder_obj->header_title(__('Container Setting', 'wppb'));
+							$wp_builder_obj->range_slider(__('Width(<small>%</small>)', 'wppb'), 'shortcode-container-width', ['title' => '%', 'min' => "20", 'max' => 100, 'value' => 100], false, 'data-shortcode');
+							$wp_builder_obj->range_slider(__('Height(<small>%</small>)', 'wppb'), 'shortcode-container-height', ['title' => '%', 'min' => "20", 'max' => 1000, 'value' => 100], false, 'data-shortcode');
+							// $wp_builder_obj->color(__('Background Color', 'wppb'), 'background-color', 'data-shortcode', 'form-bg-color');
+							// $wp_builder_obj->border('shortcode-form-border', 'data-shortcode');
+							?>
+						</div>
+					</div>
+					<!-- style and content style  -->
+				</section>
+				<!-- shortcode init  -->
 			</div>
 		</div>
 		<div class="rl_i_editor-footer">

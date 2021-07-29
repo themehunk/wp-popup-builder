@@ -75,7 +75,21 @@ function initContent($column_content){
 									</div>
 									</div>';
 
-                }
+                } else if ($setting_value['type'] == 'shortcode' && isset($setting_value['content'])) {
+					$shortCode = $setting_value['content'];
+					$style_ = isset($setting_value['wrap-style']) ? $setting_value['wrap-style'] : '';
+					$shortCode_ = '';
+					$shortCode_ .= '<div class="wppb-popup-shortcode" data-shortcode="' . $shortCode . '" style="' . $style_ . '" ' . $uniqIdAttr . '>';
+					$shortCode_ .= do_shortcode($shortCode);
+					$shortCode_ .= "</div>";
+					$popupContent .= '<div class="data-rl-editable-wrap" ' . $alignMent . '>
+					<div class="actions_">
+					<span class="dashicons dashicons-admin-page rlCopyElement"></span>
+					<span class="dashicons dashicons-no rlRemoveElement"></span>
+					</div>
+					' . $shortCode_ . '
+				</div>';
+				}
 			}
 		return $popupContent;
 	}
