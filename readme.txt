@@ -3,8 +3,8 @@ Contributors: ThemeHunk
 Author URI: : https://www.themehunk.com/
 Tags: popup,wp popup, popup maker, popup builder, popups,marketing
 Requires at least: 5.5
-Tested up to: 5.7.1
-Stable tag: 1.1.14
+Tested up to: 5.8
+Stable tag: 1.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -102,6 +102,10 @@ Just upload the `wp-popup-builder.zip` to the `/wp-content/plugins/` directory, 
 
 
 == Changelog ==
+= 1.2.0 =
+* shortcode addon added 
+* Preview in popup setting page added
+* 2 column popup issue fix 
 
 = 1.1.14 =
 * notify Updated.
