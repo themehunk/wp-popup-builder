@@ -4,7 +4,7 @@ Author URI: : https://www.themehunk.com/
 Tags: popup,wp popup, popup maker, popup builder, popups,marketing
 Requires at least: 5.5
 Tested up to: 5.8
-Stable tag: 1.3.0
+Stable tag: 1.2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -104,7 +104,7 @@ Just upload the `wp-popup-builder.zip` to the `/wp-content/plugins/` directory, 
 
 
 == Changelog ==
-= 1.3.0 =
+= 1.2.1 =
 * spacer problem solve
 * multiple time click content problem solve
 * customizer preview problem solve
