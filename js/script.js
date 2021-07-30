@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 (function($){
 	var Wppb_save = {
 		init:function(){
