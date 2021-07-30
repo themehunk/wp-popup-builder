@@ -226,7 +226,7 @@ if (file_exists(WP_PLUGIN_DIR . '/lead-form-builder/lead-form-builder.php') && i
 								$wp_builder_obj->range_slider(__("Font Size(<small>px</small>)", 'wppb'), 'font-size', ['title' => 'px', 'min' => 10, 'value' => 30, 'max' => 100, "container-class" => 'item-text'], false, 'data-editor-input');
 								$wp_builder_obj->range_slider(__("Letter Spacing(<small>px</small>)", 'wppb'), 'letter-spacing', ['title' => 'px', 'min' => '-5', 'value' => 1, 'max' => 50, "container-class" => 'item-text'], false, 'data-editor-input');
 								$wp_builder_obj->range_slider(__('Line Height(<small>px</small>)', 'wppb'), 'line-height', ['title' => 'px', 'min' => '-5', 'value' => 1, 'max' => 100, "container-class" => 'item-text'], false, 'data-editor-input'); ?>
-								<div class="rl_i_editor-item-content-items item-link_ block__">
+								<div class="rl_i_editor-item-content-items item-text item-link_ block__">
 									<label class="rl_i_editor-title rl-sub-title"><?php _e('Link', 'wppb'); ?></label>
 									<div class="rl_i_editor-anchor">
 										<div class="rl_i_editor-anchor-input">
