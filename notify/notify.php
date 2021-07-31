@@ -28,18 +28,8 @@ class ThemeHunk_Notify{
 	}
 
 	function enqueue(){
-		wp_enqueue_style( 'owl.carousel', WPPB_URL.'notify/assets/css/owl.carousel.css', array(), '1.0.0' );
 		wp_enqueue_style( 'hunk-companion-notice', WPPB_URL.'notify/assets/css/notice.css', array(), '1.0.0' );
-
-
-		wp_enqueue_script( 'owl.carousel', 'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.js', array( 'jquery' ), '',false );
-		wp_enqueue_script( 'hunk-companion-notify', WPPB_URL.'notify/assets/js/themehunk-notify.js', array( 'jquery' ), '',false );
-
-
-
 	}
-
-
 
 
 	function set_cookie() { 
