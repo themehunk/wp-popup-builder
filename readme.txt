@@ -4,7 +4,7 @@ Author URI: : https://www.themehunk.com/
 Tags: popup,wp popup, popup maker, popup builder, popups,marketing
 Requires at least: 5.5
 Tested up to: 5.8.1
-Stable tag: 1.2.4
+Stable tag: 1.2.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -14,73 +14,76 @@ WP Popup Builder is a powerful tool to create amazing popup for your site. Its d
 
 **WP Popup Builder** is a great plugin for your business websites. Easiest to use with beautiful Pre-built Popup templates & a powerful drag and drop editor. It allows you to create and design lightbox popups to show them in your site Pages, Post and Widget areas ( Using Shortcodes or Without Shortcodes ). Its Drag and drop interface will help you in designing popups with ease. You can simply design your own popups by adding a background, choosing colors, images, fonts, and styling. WP popup builder has a real time editor to see the frequent changes on screen. It is fastest Popup builder comes with incredible Features and functionality. This will easily convert website visitors into subscribers and customers.
 
-[Popups Feature](https://themehunk.com/product/wp-popup-builder/)   |  [Docs](https://www.themehunk.com/support/)
+[Popups Feature](https://themehunk.com/product/wp-popup-builder/)  |  [Docs](https://www.themehunk.com/support/)  |  [Demo](https://themehunk.com/wp-popup-builder-pro/#demos)
 
 **Key Features:-**
 
-* Drag and Drop Popup Builder
-* Real Time Popup Editor.
-* Popup Form & newsletter create.
-* Pre Built Popup Designs available.
-* page, post, sidebar and footer shortcode available.
-* Option to add or change background color and image.
-* Option to manage popup width and option to manage column width.
-* Multiple styling options available like Border, Spacing of form etc.
-* Timing for "Popup Appearance" and timing for "Auto Close" option is also given.
-* Multiple styling option for text are available like Font Size, Text Alignment, Text Color, Background Color, Letter Spacing, Line height, Margin and Padding.
-* Seperate border option for text and its styling like Border Width, Border Radius, Border Color and Border Style are also available.
-* Seperate styling options available for buttons too.
-* Alignment and spacing option for image is also available.
-* You can add other form in the popup.
-* Option to show popup on selected place are available, Such as "Home Page", "Inner Pages" and in "Posts"
-* 24x7 support available for free product too [http://www.themehunk.com/support](http://www.themehunk.com/support). 
+⭐ Drag and Drop Popup Builder
+⭐ Real Time Popup Editor.
+⭐ Popup Form & newsletter create.
+⭐ Pre Built Popup Designs available.
+⭐ page, post, sidebar and footer shortcode available.
+⭐ Option to add or change background color and image.
+⭐ Option to manage popup width and option to manage column width.
+⭐ Multiple styling options available like Border, Spacing of form etc.
+⭐ Timing for "Popup Appearance" and timing for "Auto Close" option is also given.
+⭐ Multiple styling option for text are available like Font Size, Text Alignment, Text Color, Background Color, Letter Spacing, Line height, Margin and Padding.
+⭐ Seperate border option for text and its styling like Border Width, Border Radius, Border Color and Border Style are also available.
+⭐ Seperate styling options available for buttons too.
+⭐ Alignment and spacing option for image is also available.
+⭐ You can add other form in the popup.
+⭐ Option to show popup on selected place are available, Such as "Home Page", "Inner Pages" and in "Posts"
+⭐ 24x7 support available for free product too [http://www.themehunk.com/support](http://www.themehunk.com/support). 
 
 **Pro Features:-**
-[WP Popup Builder Pro](https://themehunk.com/wp-popup-builder-pro/)
 
 = Popup Display Options =
-* Display popup according to your need
-* Whole Site
-* Selected Page
-* Home Page
-* Shortcode
-* Popup Responsive options
+⭐ Display popup according to your need
+⭐ Whole Site
+⭐ Selected Page
+⭐ Home Page
+⭐ Shortcode
+⭐ Popup Responsive options
 
 = This option allow you to choose whether you want to display popup in small devices or not. =
-* Display on all devices
-* Display on PC
-* Display on Mobile
+⭐ Display on all devices
+⭐ Display on PC
+⭐ Display on Mobile
 
 = Popup Trigger =
-* This option provide 100% control over popup,
-* Display on Page Load
-* Display on Click
-* Display on Page Scroll
-* Display on Page Exit
+⭐ This option provide 100% control over popup,
+⭐ Display on Page Load
+⭐ Display on Click
+⭐ Display on Page Scroll
+⭐ Display on Page Exit
 
 = Popup Frequency : This option decide how frequently you want to display popup. =
-* Every time Page Load
-* Display Popup Only Once
-* Display Popup on Time Interval
+⭐ Every time Page Load
+⭐ Display Popup Only Once
+⭐ Display Popup on Time Interval
 
 = Video Popup : This feature allow you to add video in popup. =
-* Self Hosted Video
-* YouTube Video
-* Vimeo Video
+⭐ Self Hosted Video
+⭐ YouTube Video
+⭐ Vimeo Video
 
 = Pro drag and drop modules =
-* Section
-* Heading
-* Text
-* Button
-* Image
-* Video
-* Form
-* Icon
-* Shortcode
-* Mail Chimp
+⭐ Section
+⭐ Heading
+⭐ Text
+⭐ Button
+⭐ Image
+⭐ Video
+⭐ Form
+⭐ Icon
+⭐ Shortcode
+⭐ Mail Chimp
 
 Pro popup comes with 9 different popup display locations and 20+ popup in & out animations.
+[WP Popup Builder Pro](https://themehunk.com/wp-popup-builder-pro/)
+
+= Suggestion =
+If you have suggestions about how to improve Wp Popup Builder Plugin, you can write us so we can bundle them into Wp Popup Builder Plugin.
 
 
 == Installation ==
@@ -90,6 +93,28 @@ Pro popup comes with 9 different popup display locations and 20+ popup in & out 
 3. Get started from Dashboard > Wp Popup Builder
 
 == Frequently Asked Questions ==
+
+= How can i get Support if my Wp Popup Builder Plugin is not Working ? =
+
+If you're facing any problem while using our Wp Popup builder plugin, Please first follow the below steps :
+
+1. Deactivate all plugins you are using and check if the problem is still occurring with our Wp popup Builder.
+2. Check the theme and plugin version, if it is latest or not.
+3. Check the plugin with default theme, to make sure error is not due to theme you're using.
+
+You're free to contact us through mail, via our Contact form and Live chat support. We have also given full documentation of our Plugin, you can go with it and learn how to use our plugin.
+
+= How can i get more advanced features of Wp Popup Builder ? =
+
+You can get more features with the premium version of Wp Popup Builder Plugin, available on ThemeHunk. Please follow this link and get to know about more advanced features.
+
+= Is it Compatible with All WordPress Themes ? =
+
+It is compatible with all [ThemeHunk themes](https://themehunk.com/free-themes/) and almost all WordPress themes, We always try to make our Plugin compatible with All WordPress Themes. If Wp Popup builder will create any kind of issue with any theme. You're Free to [contact us](https://themehunk.com/contact-us/) , Our Team will be Happy to help you.
+
+= Can I translate Wp Popup Builder plugin to Multi Language ? =
+
+Yes, You can translate our plugin to desired language.
 
 = How to Install Plugin =
 Just upload the `wp-popup-builder.zip` to the `/wp-content/plugins/` directory, and then activate it from 'Plugins' menu in WordPress.
@@ -104,6 +129,9 @@ Just upload the `wp-popup-builder.zip` to the `/wp-content/plugins/` directory, 
 
 
 == Changelog ==
+
+= 1.2.5 =
+* Improve Text.
 
 = 1.2.4 =
 * Jot Shop Banner Add.
