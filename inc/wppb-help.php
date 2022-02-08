@@ -9,7 +9,10 @@
             <p class="help-txt"><?php _e("For any type of difficulty please check plugin documentation", 'wppb') ?></p>
             <a class="link-btn-front" href="https://themehunk.com/contact-us/" target="_blank"><?php _e("Contact Support", 'wppb') ?></a>
         </div>
-        <a class="review-link" href="https://wordpress.org/support/plugin/wp-popup-builder/reviews/?filter=5" target="_blank"><?php _e("Give us your valuable feedback", 'wppb') ?></a>
+        <div class="containe_">
+            <p class="help-txt"><?php _e("Give us your valuable feedback", 'wppb') ?></p>
+            <a class="link-btn-front" href="https://wordpress.org/support/plugin/wp-popup-builder/reviews/?filter=5" target="_blank"><?php _e("Submit Rating", 'wppb') ?></a>
+        </div>
     </div>
     <div class="th-useful-plugins">
         <h2 class="heading_"><?php _e("Themehunk Useful Plugins", "wppb") ?></h2>
