@@ -1,7 +1,7 @@
 <section class="wppb-pro-feature-panel" data-tab-active='view-free-to-pro' data-tab-group="pro-to-free">
     <div class="wppb-pro-panel-one">
         <h1><?php _e("Build Best Popup With Wp Popup Builder Pro !", 'wppb') ?></h1>
-        <a class="link-btn-front" href="https://themehunk.com/wp-popup-builder-pro/" target="_blank"><?php _e('Buy Now - 49$', 'wppb') ?></a>
+        <a class="link-btn-front" href="https://themehunk.com/wp-popup-builder-pro/" target="_blank"><?php _e('Buy Now - $49', 'wppb') ?></a>
         <div class="wppb-divider"></div>
         <img class="pro-feature-img" src="<?php echo WPPB_URL . 'img/wppb-pro-plugin.jpg'; ?>" alt="">
         <p><?php _e('Generate more leads means more clients, just take your forms to next level', 'wppb') ?></p>
@@ -63,6 +63,6 @@
             </li>
         </ul>
 
-        <a class="link-btn-front" href="https://themehunk.com/wp-popup-builder-pro/" target="_blank"><?php _e('Buy Now - 49$', 'wppb') ?></a>
+        <a class="link-btn-front" href="https://themehunk.com/wp-popup-builder-pro/" target="_blank"><?php _e('Buy Now - $49', 'wppb') ?></a>
     </div>
 </section>
