@@ -35,7 +35,7 @@ if (!empty($custom_popup_all)) {
 			<div class="wppb-popup-cmn-nav-item">
 				<a class="active" data-tab='view-list' data-tab-group='pro-to-free' href="#"> <?php _e('View Popup List', 'wppb'); ?></a>
 				<a data-tab='view-free-to-pro' data-tab-group='pro-to-free' href="#"> <?php _e('Free To Pro', 'wppb'); ?></a>
-				<a data-tab='help' data-tab-group='pro-to-free' href="#"><?php _e('Help', 'wppb'); ?></a>
+				<a data-tab='help' data-tab-group='pro-to-free' href="#"><?php _e('Help & Useful Plugins', 'wppb'); ?></a>
 			</div>
 		</div>
 		<section class="wppb-front-view-list active" data-tab-active='view-list' data-tab-group="pro-to-free">
@@ -46,18 +46,18 @@ if (!empty($custom_popup_all)) {
 
 			<?php if ($popup_html_all_custom != '') { ?>
 				<div class="wppb-custom-popup-head rl-clear">
-					<div class="wppb-popup-list-title"><span>Title</span></div>
-					<div class="wppb-popup-list-enable"><span>Status</span></div>
-					<div class="wppb-popup-list-mobile"><span>Device</span></div>
-					<div class="wppb-popup-list-view"><span>View</span></div>
-					<div class="wppb-popup-list-action"><span>Action</span></div>
-					<div class="wppb-popup-list-setting"><span>Setting</span></div>
+					<div class="wppb-popup-list-title"><span><?php _e("Title", 'wppb') ?></span></div>
+					<div class="wppb-popup-list-enable"><span><?php _e("Status", 'wppb') ?></span></div>
+					<div class="wppb-popup-list-mobile"><span><?php _e("Device", 'wppb') ?></span></div>
+					<div class="wppb-popup-list-view"><span><?php _e("View", 'wppb') ?></span></div>
+					<div class="wppb-popup-list-action"><span><?php _e("Action", 'wppb') ?></span></div>
+					<div class="wppb-popup-list-setting"><span><?php _e("Setting", 'wppb') ?></span></div>
 				</div>
 				<div class="wppb-custom-popup-list">
 					<?php echo $popup_html_all_custom ?>
 				</div>
 			<?php } else {
-				echo '<p class="no-popup-found">No Popup Found. Click Add New Popup To Create Popup. </p>';
+				echo '<p class="no-popup-found">' . __("No Popup Found. Click Add New Popup To Create Popup. ", 'wppb') . '</p>';
 			} ?>
 		</section>
 		<?php
