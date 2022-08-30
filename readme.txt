@@ -134,6 +134,7 @@ Just upload the `wp-popup-builder.zip` to the `/wp-content/plugins/` directory, 
 
 = 1.2.8 =
 * New Option panel added.
+* buy now button style fix.
 
 = 1.2.7 =
 * Translation file added 
