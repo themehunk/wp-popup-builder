@@ -40,10 +40,15 @@ class wppb {
 	public function display_addons(){
 		// include_once WPPB_PATH.'inc/popup-init.php';
 		$wp_builder_obj = new wp_popup_builder_init();
+
         if(isset($_GET['custom-popup'])){
+
         	include_once WPPB_PATH."inc/popup.php";
+
         }else{
+
             include_once WPPB_PATH."inc/popups-page.php"; 
+            
         }
 	}
 

@@ -1,24 +1,14 @@
 <?php
 if (!defined('ABSPATH')) exit;
+
 $custom_popup_all = wppb_db::getCustomPopup();
-$popup_html_all_custom = '';
-if (!empty($custom_popup_all)) {
-	foreach ($custom_popup_all as $popupValue) {
-		$allSetting = unserialize($popupValue->setting);
-		$business_id 	   		= isset($popupValue->BID) ? $popupValue->BID : "";
-		if ($popupValue->boption != '') {
-			$bOption = unserialize($popupValue->boption);
-		}
-		$device = isset($bOption['device']) ? $bOption['device'] : false;
-		$popup_html_all_custom .= $wp_builder_obj->wppbPopupList($allSetting, $business_id, $popupValue->is_active, $device);
-	}
-}
+
 ?>
 <div class="resetConfirmPopup">
 	<div class="reserConfirm_inner">
 		<div class="resetWrapper">
 			<div class="resetHeader">
-				<span><?php _e('Popup Will Delete Permanentally.', 'wppb') ?></span>
+				<span><?php _e('Popup Will Delete Permanentally.', 'wppb'); ?></span>
 			</div>
 			<div class="resetFooter">
 				<a class="wppbPopup popup deny" href="#"><span class="dashicons dashicons-dismiss"></span><?php _e('No', 'wppb') ?></a>
@@ -44,7 +34,8 @@ if (!empty($custom_popup_all)) {
 				<a href="<?php echo esc_url(WPPB_PAGE_URL . '&custom-popup', 'wppb') ?>"> <span class="dashicons dashicons-edit"></span> <?php _e('Add New Popup', 'wppb'); ?></a>
 			</div>
 
-			<?php if ($popup_html_all_custom != '') { ?>
+			<?php if ($custom_popup_all != '') { ?>
+
 				<div class="wppb-custom-popup-head rl-clear">
 					<div class="wppb-popup-list-title"><span><?php _e('Title','wppb');?></span></div>
 					<div class="wppb-popup-list-enable"><span><?php _e('Status','wppb');?></span></div>
@@ -54,16 +45,44 @@ if (!empty($custom_popup_all)) {
 					<div class="wppb-popup-list-action"><span><?php _e('Action','wppb');?></span></div>
 					<div class="wppb-popup-list-setting"><span><?php _e('Setting','wppb');?></span></div>
 				</div>
+
 				<div class="wppb-custom-popup-list">
-					<?php echo $popup_html_all_custom ?>
-				</div>
-			<?php } else {
-				echo '<p class="no-popup-found">No Popup Found. Click Add New Popup To Create Popup. </p>';
-			} ?>
+
+				<?php if (!empty($custom_popup_all)) {
+
+				foreach ($custom_popup_all as $popupValue) {
+
+					$allSetting = unserialize($popupValue->setting);
+
+					$business_id 	   		= isset($popupValue->BID) ? $popupValue->BID : "";
+
+					if ($popupValue->boption != '') {
+
+						$bOption = unserialize($popupValue->boption);
+					}
+					
+					$device = isset($bOption['device']) ? $bOption['device'] : false;
+					 $wp_builder_obj->wppbPopupList($allSetting, $business_id, $popupValue->is_active, $device);
+				     }
+
+                  } ?>
+
+			</div>
+
+			<?php } else { ?>
+
+				<p class="no-popup-found"><?php _e('No Popup Found. Click Add New Popup To Create Popup.','wppb');?> </p>;
+
+			<?php } ?>
+
 		</section>
+
 		<?php
+
 		include_once 'wppb-pro-popup.php';
+
 		include_once 'wppb-help.php';
+		
 		?>
 
 	</section>
