@@ -20,7 +20,8 @@ class wppb_load{
 						$popupHtmlContent = $popupHtml->wppb_html( $return_Html->setting );
 						echo $popupHtmlContent && $return_Html ? '<div data-option="1" class="wppb-popup-open popup active">'.$popupHtmlContent.'</div>':'';
 					}
-		}
+		  }
+		  
 	}
 	public  function footer_load(){
 	 		$return_Html = wppb_db::popup_pages();

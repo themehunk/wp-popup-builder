@@ -2,12 +2,18 @@
 if (!defined('ABSPATH')) exit;
 
 $LfbPluginPath = false;
+
 if (file_exists(WP_PLUGIN_DIR . '/lead-form-builder/lead-form-builder.php') && is_plugin_inactive('lead-form-builder/lead-form-builder.php')) {
+
 	$LfbPluginPath = '<a href="#" class="add-lead-form-plugin active-lead-form-btn">Activate Lead Form</a>';
+
 } elseif (!file_exists(WP_PLUGIN_DIR . '/lead-form-builder/lead-form-builder.php')) {
+
 	$LfbPluginPath = '<a href="#" class="add-lead-form-plugin install-lead-form-btn">Install Lead Form</a>';
 }
+
 ?>
+
 <div class="rl_i_editor-inner-wrap">
 	<div class="rl_i_editor-wrap-in">
 		<div class="rl_i_editor-header">
