@@ -46,12 +46,13 @@ if (!empty($custom_popup_all)) {
 
 			<?php if ($popup_html_all_custom != '') { ?>
 				<div class="wppb-custom-popup-head rl-clear">
-					<div class="wppb-popup-list-title"><span>Title</span></div>
-					<div class="wppb-popup-list-enable"><span>Status</span></div>
-					<div class="wppb-popup-list-mobile"><span>Device</span></div>
-					<div class="wppb-popup-list-view"><span>View</span></div>
-					<div class="wppb-popup-list-action"><span>Action</span></div>
-					<div class="wppb-popup-list-setting"><span>Setting</span></div>
+					<div class="wppb-popup-list-title"><span><?php _e('Title','wppb');?></span></div>
+					<div class="wppb-popup-list-enable"><span><?php _e('Status','wppb');?></span></div>
+					<div class="wppb-popup-list-mobile"><span><?php _e('Device','wppb');?></span></div>
+					<div class="wppb-popup-list-view"><span>
+					<?php _e('View','wppb');?></span></div>
+					<div class="wppb-popup-list-action"><span><?php _e('Action','wppb');?></span></div>
+					<div class="wppb-popup-list-setting"><span><?php _e('Setting','wppb');?></span></div>
 				</div>
 				<div class="wppb-custom-popup-list">
 					<?php echo $popup_html_all_custom ?>
