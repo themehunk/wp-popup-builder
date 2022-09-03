@@ -309,202 +309,281 @@ public function wppbPopupList_json($allSetting,$column_making,$countPopup){
 		return $return;
 	}
 
-	public function header_title($title){
-		echo '<div class="rl_i_editor-header-title">
-						<label>'.$title.'</label>
-					</div>';
-	}
+	public function header_title($title){ ?>
+
+		<div class="rl_i_editor-header-title">
+						<label><?php echo esc_html($title);?></label>
+					</div>
+
+	<?php }
 
 	public function color($title,$prop,$type,$color_id=1,$attr=''){
 		if ($title && $prop && $type) {
-			$typeAndProp = $type.'="'.$prop.'"' . $attr;
-			echo '<div class="rl_i_editor-item-content-items item-text inline__"><label class="rl-sub-title">'.$title.'</label>
+
+			$typeAndProp = esc_attr($type).'="'.esc_attr($prop).'"' . esc_attr($attr);
+
+			?>
+			<div class="rl_i_editor-item-content-items item-text inline__">
+			   <label class="rl-sub-title"><?php echo esc_html($title);?></label>
+				
 					<div>
-						<label class="color-output" data-input-color="'.$color_id.'" '.$typeAndProp.'></label>
+						<label class="color-output" data-input-color="<?php echo esc_attr($color_id);?>" <?php echo $typeAndProp;?>></label>
 					</div>
-				</div>';
-		}
+			</div>
+		<?php }
 	}
 
 	public function range_slider($title, $id, $arr, $id_two=false, $type_ = "data-global-input"){
+
  			$title_ = isset( $arr['title'] ) ? $arr['title'] : ''; 
- 			$attr  = isset( $arr['min'] ) ?'min="'.$arr['min'].'"': ''; 
- 			$attr .= isset( $arr['max'] ) ?'max="'.$arr['max'].'"': ''; 
- 			$attr .= isset( $arr['value'] ) ?'value="'.$arr['value'].'"': '';
+
+ 			$attr  = isset( $arr['min'] ) ?'min="'.esc_attr($arr['min']).'"': ''; 
+
+ 			$attr .= isset( $arr['max'] ) ?'max="'.esc_attr($arr['max']).'"': ''; 
+
+ 			$attr .= isset( $arr['value'] ) ?'value="'.esc_attr($arr['value']).'"': '';
  			$attr .= $attrTwo = isset( $arr['attr'] ) ? $arr['attr'] : '';
+
  			$id_two = !$id_two ? $id : $id_two;
 
- 			$attr .=  $type_.'="'.$id.'"';
+ 			$attr .=  $type_.'="'.esc_attr($id).'"';
+
  			$container = isset( $arr['container-class'] ) ? $arr['container-class'] : '';
-		 	$html = '<div  class="rl_i_editor-item-content-items inline__ '.$container.'">';
-		 		$html .= '<label class="rl-sub-title range-titile">'.$title.'</label>';
-					$html .= '<div class="range_ rl_i_range-font-size">
-							<input data-show-range="'.$id_two.'" type="range" '.$attr.'>
-						</div>';
-					$html .= '<div class="data-range-output">
-							<input class="rl-sub-title" type="number" data-range-output="'.$id_two.'" '.$attrTwo.'>';
-					$html .= '</div>
-					</div>';
-			echo $html;
-		 }
-		 public function select($attr,$option){
-			$return = "<select class='rl-sub-title' ".$attr.">";
-			if ( is_array($option) ) {
-				foreach ($option as $value) {
-						if ( isset($value[0]) && isset($value[1]) ) {
-							$selected = isset($value[2]) ? 'selected="selected"':'';
-							$return	.= "<option value='".$value[1]."' ".$selected.">".$value[0]."</option>";
-						}elseif ( isset($value[0]) ) {
-							$return	.= "<option>".$value[0]."</option>";
-						}
-					}	
-				}	
-			$return	.= "</select>";
-			return $return;
-		}
-		public function checkbox($id,$title,$attr){
-			return '<div  class="rl_i_editor-item-content-items title_ inline__">
-			<div class="rl_i_range-font-size">
-					<div class="wppb-popup-checkbox-container">
-						<label class="wppb-popup-checkbox-title rl-sub-title">'.$title.'</label>
-						<div class="wppb-popup-checkbox">
-							<input id="wppb_popup__checkbox__label_id-'.$id.'" type="checkbox" '.$attr.'>
-							<label for="wppb_popup__checkbox__label_id-'.$id.'"></label>
+
+ 			?>
+
+		 	<div  class="rl_i_editor-item-content-items inline__  <?php echo esc_attr($container);?>">
+
+		 	<label class="rl-sub-title range-titile">
+
+		 		<?php echo esc_html($title);?>
+		 			
+		 		</label>
+
+			<div class="range_ rl_i_range-font-size">
+							<input data-show-range="<?php echo esc_attr($id_two);?>" type="range"  <?php echo $attr;?>>
 						</div>
+
+			<div class="data-range-output">
+							<input class="rl-sub-title" type="number" data-range-output="<?php echo esc_attr($id_two);?>"  <?php echo $attrTwo;?>>
+			</div>
+			</div>
+
+		 <?php }
+
+		public function select($attr,$option){ ?>
+
+				<select class='rl-sub-title' <?php echo $attr;?>>
+
+				<?php if ( is_array($option) ) {
+
+					foreach ($option as $value) {
+
+							if ( isset($value[0]) && isset($value[1]) ) {
+								$selected = isset($value[2]) ? 'selected="selected"':'';?>
+
+							<option value='<?php echo esc_attr($value[1]);?>' <?php echo esc_attr($selected);?>><?php echo esc_attr($value[0]);?>
+							</option>
+
+							<?php }elseif ( isset($value[0]) ) { ?>
+
+								<option><?php echo esc_attr($value[0]);?></option>
+
+						<?php 	}
+						}	
+					}	
+
+					?>
+		</select>
+		
+	<?php }
+    
+    public function checkbox($id,$title,$attr){ 
+
+    	?>
+
+			<div  class="rl_i_editor-item-content-items title_ inline__">
+
+			<div class="rl_i_range-font-size">
+
+					<div class="wppb-popup-checkbox-container">
+
+						<label class="wppb-popup-checkbox-title rl-sub-title"><?php echo esc_html($title);?></label>
+
+						<div class="wppb-popup-checkbox">
+
+							<input id="wppb_popup__checkbox__label_id-<?php echo esc_attr($id);?>" type="checkbox" <?php echo $attr;?>>
+
+							<label for="wppb_popup__checkbox__label_id-<?php echo esc_attr($id);?>"></label>
+
+						</div>
+
 					</div>
+
 				</div>
-				</div>';
-		}
-	public function border($id,$type,$attr = ''){
-		$data_attr = $type.'="'.$id.'"' . $attr;
+
+			</div>
+
+		<?php }
+
+
+		public function border($id,$type,$attr = ''){
+		$data_attr = esc_attr($type).'="'.esc_attr($id).'"' . esc_attr($attr);
 		$border = $this->select($data_attr.' data-border="border-style"',[ ['solid','solid'],['dashed','dashed'],['dotted','dotted'],['double','double'],['groove','groove'],['ridge','ridge'] ]);
-				$return =  '<section class="content-style-border">
-						'.$this->checkbox($id,"Border",$data_attr.' data-border="border-enable"').'
+		?>
+			<section class="content-style-border">
+
+					<?php echo $this->checkbox($id,"Border",$data_attr.' data-border="border-enable"');
+					?>
+
 					<div  class="rl_i_editor-item-content-items content-border">
 						<div>
-							<label class="rl-sub-title">'.__('Border Width(<small>px</small>)','wppb').'</label>
-							<div><input class="rl-sub-title" type="number" value="" '.$data_attr.' data-border="width"></div>
+							<label class="rl-sub-title"><?php _e('Border Width(<small>px</small>)','wppb');?></label>
+							<div><input class="rl-sub-title" type="number" value="" <?php echo $data_attr;?> data-border="width"></div>
 						</div>
 						<div>
-							<label class="rl-sub-title">'.__('Border radius(<small>px</small>)','wppb').'</label>
-							<div><input class="rl-sub-title" type="number" value="" '.$data_attr.' data-border="radius"></div>
+
+							<label class="rl-sub-title"><?php _e('Border radius(<small>px</small>)','wppb');?>
+							</label>
+
+							<div>
+								<input class="rl-sub-title" type="number" value="" <?php echo $data_attr;?> data-border="radius">
+							</div>
+
 						</div>
+
 						<div>
-							<label class="rl-sub-title">'.__('Border Color','wppb').'</label>
-							<div><label class="color-output" '.$data_attr.' data-input-color="border-color"></label></div>
+								<label class="rl-sub-title"><?php _e('Border Color','wppb');?>
+								</label>
+							 <div>
+								<label class="color-output" <?php echo $data_attr;?> data-input-color="border-color">	
+								</label>
+						   </div>
 						</div>
-						<div>
-							<label class="rl-sub-title">'.__('Border Style','wppb').'</label>
-							<div>'.$border.'</div>
+
+						 <div>
+							    <label class="rl-sub-title">
+								<?php _e('Border Style','wppb');?>	
+								</label>
+							<div><?php echo $border; ?></div>
 						</div>
 					</div>
-				</section>';
-				echo $return;
-	}
+				</section>
+				
+	<?php }
+
+
 	public function box_shadow($id,$type,$attr=''){
-		$data_attr = $type.'="'.$id.'"' . $attr;
-			$return = '<section class="content-style-border content-style-box-shadow">
-						'.$this->checkbox($type,'Box Shadow',$data_attr.' data-shadow="enable"').'
+		$data_attr = esc_attr($type).'="'.esc_attr($id).'"' . esc_attr($attr);?>
+			<section class="content-style-border content-style-box-shadow">
+						<?php $this->checkbox($type,'Box Shadow',$data_attr.' data-shadow="enable"');?>
 							<div  class="rl_i_editor-item-content-items content-border content-box-shadow">
 								<div>
-									<label class="rl-sub-title">X Offset</label>
-									<div><input class="rl-sub-title" type="number" value="" '.$data_attr.'  data-shadow="x-offset"></div>
+									<label class="rl-sub-title">
+										<?php _e('X Offset','wppb');?>	
+									</label>
+									<div>
+										<input class="rl-sub-title" type="number" value="" <?php echo $data_attr;?> data-shadow="x-offset">
+									</div>
 								</div>
 								<div>
-									<label class="rl-sub-title">Y Offset</label>
-									<div><input class="rl-sub-title" type="number" value="" '.$data_attr.' data-shadow="y-offset"></div>
+									<label class="rl-sub-title"><?php _e('Y Offset','wppb');?></label>
+									<div><input class="rl-sub-title" type="number" value="" <?php echo $data_attr;?> data-shadow="y-offset"></div>
 								</div>
 								<div>
-									<label class="rl-sub-title">Blur</label>
-									<div><input class="rl-sub-title" type="number" value="" '.$data_attr.' data-shadow="blur"></div>
+									<label class="rl-sub-title"><?php _e('Blur','wppb');?></label>
+									<div><input class="rl-sub-title" type="number" value="" <?php echo $data_attr;?> data-shadow="blur"></div>
 								</div>
 								<div>
-									<label class="rl-sub-title">Spread</label>
-									<div><input class="rl-sub-title" type="number" value="" '.$data_attr.' data-shadow="spread"></div>
+									<label class="rl-sub-title"><?php _e('Spread','wppb');?>
+									</label>
+									<div>
+									<input class="rl-sub-title" type="number" value="" <?php echo $data_attr;?> data-shadow="spread">
+								  </div>
 								</div>
 								<div>
-									<label class="rl-sub-title">Color</label>
-									<div><label class="color-output" '.$data_attr.' data-shadow="color"></label></div>
+									<label class="rl-sub-title"><?php _e('Color','wppb');?>
+									</label>
+									<div>
+										<label class="color-output" <?php echo $data_attr;?>  data-shadow="color"></label>
+									</div>
 								</div>
 							</div>
-						</section>';
-			return $return;
-	}
+						</section>
+			
+	<?php }
+
+
 	public function margin_padding($id,$title,$type,$margin_padding,$attr=''){
-		$attr = $type."='".$id."'" .$attr;
-		$parameter = $margin_padding == "m" ? 'margin' : 'padding';
-		$return = '<div class="rl_i_editor-item-content-items title_ inline_">
-		<div class="rl_i_range-font-size"><label class="rl-sub-title">'.$title.'</label></div>
+		$attr = esc_attr($type)."='".esc_attr($id)."'" .$attr;
+		$parameter = $margin_padding == "m" ? 'margin' : 'padding';?>
+
+		<div class="rl_i_editor-item-content-items title_ inline_">
+		<div class="rl_i_range-font-size"><label class="rl-sub-title"><?php echo esc_html($title);?></label></div>
 		</div>
 			<div class="rl_i_editor-item-content-items inline_">
 				<div class="rl_i_editor-item-content-padding_ paraMeterContainer__">
 					<ul class="ul-inputs-margin-padding rl-clear">
 						<li>
-							<input class="rl-sub-title" type="number" value="" '.$attr.' data-'.$parameter.'="top">
+							<input class="rl-sub-title" type="number" value="" <?php echo $attr;?> data-<?php echo esc_attr($parameter);?>="top">
 						</li>
 						<li>
-							<input class="rl-sub-title" type="number" value="" '.$attr.' data-'.$parameter.'="right">
+							<input class="rl-sub-title" type="number" value="" <?php echo $attr;?> data-<?php echo esc_attr($parameter);?>="right">
+							
 						</li>
 						<li>
-							<input class="rl-sub-title" type="number" value="" '.$attr.' data-'.$parameter.'="bottom">
+							<input class="rl-sub-title" type="number" value="" <?php echo $attr;?> data-<?php echo esc_attr($parameter);?>="bottom">
+							
 						</li>
 						<li>
-							<input class="rl-sub-title" type="number" value="" '.$attr.' data-'.$parameter.'="left">
+							<input class="rl-sub-title" type="number" value="" <?php echo $attr;?> data-<?php echo esc_attr($parameter);?>="left">
 						</li>
+
 						<li class="padding-origin_ margin-padding-origin">
-							<input id="m__p_origin-'.$parameter.'-'.$id.'" type="checkbox" '.$attr.' data-origin="'.$parameter.'">
-							<label for="m__p_origin-'.$parameter.'-'.$id.'"><span class="dashicons dashicons-admin-links"></span></label>
+							<input id="m__p_origin-<?php echo esc_attr($parameter);?>-<?php echo esc_attr($id);?>" type="checkbox" <?php echo $attr;?> data-origin="<?php echo esc_attr($parameter);?>">
+							<label for="m__p_origin-<?php echo esc_attr($parameter);?>-<?php echo esc_attr($id);?>">
+								<span class="dashicons dashicons-admin-links">
+							</span>
+						</label>
 						</li>
+
 					</ul>							
 					<ul class="ul-inputs-text rl-clear">
-						<li>'.__('TOP','wppb').'</li>
-						<li>'.__('RIGHT','wppb').'</li>
-						<li>'.__('BOTTOM','wppb').'</li>
-						<li>'.__('LEFT','wppb').'</li>
+						<li><?php _e('TOP','wppb');?></li>
+						<li><?php _e('RIGHT','wppb');?></li>
+						<li><?php _e('BOTTOM','wppb');?></li>
+						<li><?php _e('LEFT','wppb');?></li>
 						<li></li>
 					</ul>
 				</div>
-			</div>';
-			echo $return;
-		}
+			</div>
+
+		<?php }
+
 		public function alignment($title,$id,$type,$attr='',$number_=false){
-				$attr_ = $type."='".$id."'" . $attr;
-				$return = '<div class="rl_i_editor-item-content-items item-alignment_ inline__">';
-				// $return .= '<label class="rl-sub-title">'.$title.'</label>';
-				$return .= '<div class="rl_text-alignment">
+				$attr_ = esc_attr($type)."='".esc_attr($id)."'" . esc_attr($attr);?>
+				<div class="rl_i_editor-item-content-items item-alignment_ inline__">
+				<label class="rl-sub-title"><?php echo esc_html($title);?></label>
+				<div class="rl_text-alignment">
 					<ul class="text-alignment-choice">
 						<li>
-							<input id="_alignment_label_'.$id.'_left" '.$attr_.' type="radio" name="'.$id.'" value="left">
-							<label for="_alignment_label_'.$id.'_left" class="dashicons dashicons-editor-alignleft"></label>
+							<input id="_alignment_label_<?php echo esc_attr($id);?>_left" <?php echo $attr; ?> type="radio" name="<?php echo esc_attr($id);?>" value="left">
+							<label for="_alignment_label_<?php echo esc_attr($id);?>_left" class="dashicons dashicons-editor-alignleft"></label>
 						</li>
 						<li>
-							<input id="_alignment_label_'.$id.'_center" '.$attr_.' type="radio" name="'.$id.'" value="center">
-							<label for="_alignment_label_'.$id.'_center" class="dashicons dashicons-editor-aligncenter"></label>
-						</li>';
-				if ($number_ != 2) {
-				$return .='<li>
-							<input id="_alignment_label_'.$id.'_right" '.$attr_.' type="radio" name="'.$id.'" value="right">
-							<label for="_alignment_label_'.$id.'_right" class="dashicons dashicons-editor-alignright"></label>
-						</li>';
-				}
+							<input id="_alignment_label_<?php echo esc_attr($id);?>_center" <?php echo $attr; ?> type="radio" name="<?php echo esc_attr($id);?>" value="center">
+							<label for="_alignment_label_<?php echo esc_attr($id);?>_center" class="dashicons dashicons-editor-aligncenter"></label>
+						</li>
+				<?php if ($number_ != 2) {?>
+				    <li>
+							<input id="_alignment_label_<?php echo esc_attr($id);?>_right" <?php echo $attr_; ?> type="radio" name="<?php echo esc_attr($id);?>" value="right">
+							<label for="_alignment_label_<?php echo esc_attr($id);?>_right" class="dashicons dashicons-editor-alignright"></label>
+						</li>
+				<?php }?>
 
-				$return .=	'</ul>
+				</ul>
 				</div>
-			</div>';
-			return $return;
-		}
+			</div>
+		<?php }
 // class end
 }
-
-// $wp_builder_obj = new wp_popup_builder_init();
-
-
-
-
-
-
-
-
-
-
-?>
