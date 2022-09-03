@@ -46,7 +46,7 @@ $popup_is_active = isset($popup_is_active) ? $popup_is_active : '';
 	</div>
 	<div class="status__">
 		<?php  
-		echo $wp_builder_obj->checkbox("business-idd-",__("Status : ",'wppb'),'class="wppb_popup_setting_active" data-bid="'.esc_attr($wppb_popup_id).'" '.esc_attr($popup_is_active)); 
+		$wp_builder_obj->checkbox("business-idd-",__("Status : ",'wppb'),'class="wppb_popup_setting_active" data-bid="'.esc_attr($wppb_popup_id).'" '.esc_attr($popup_is_active)); 
 		?>
 	</div>
 	<div class="save__">
@@ -164,7 +164,7 @@ $popup_is_active = isset($popup_is_active) ? $popup_is_active : '';
 			</div>
 
 			<div>
-				<input <?php if(isset($frequency['one-time']) ) echo esc_attr('checked'); ?> id="checkbox--frequency-show-time" type="radio" name="frequency" value="one-time">
+				<input <?php if(isset($frequency['one-time']) )  esc_attr('checked'); ?> id="checkbox--frequency-show-time" type="radio" name="frequency" value="one-time">
 				<label for="checkbox--frequency-show-time"><span class="dashicons dashicons-yes-alt"></span><?php _e('One Time Show On Visit Page.','wppb');?></label>
 			</div>
 			<div class="frequency-day-hour">
