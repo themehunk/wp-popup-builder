@@ -3,7 +3,7 @@
         <h1><?php _e("Build Best Popup With Wp Popup Builder Pro !", 'wppb') ?></h1>
         <a class="link-btn-front" href="https://themehunk.com/wp-popup-builder-pro/" target="_blank"><?php _e('Buy Now - $49', 'wppb') ?></a>
         <div class="wppb-divider"></div>
-        <img class="pro-feature-img" src="<?php echo WPPB_URL . 'img/wppb-pro-plugin.jpg'; ?>" alt="">
+        <img class="pro-feature-img" src="<?php echo esc_url(WPPB_URL . 'img/wppb-pro-plugin.jpg'); ?>" alt="">
         <p><?php _e('Generate more leads means more clients, just take your forms to next level', 'wppb') ?></p>
         <p class="wppb-join"><?php _e('Join our over 5,000+ users!', 'wppb') ?></p>
         <h1><?php _e('Powerful Advanced Features', 'wppb') ?></h1>
@@ -28,10 +28,10 @@
                 <p><?php _e('Display popup according to your need, This options allow you to display popup at Home, All and at Selected. Using shortcode popup can be displayed at all shortcode supported areas.', 'wppb') ?></p>
             </li>
             <li>
-                <img src="<?php echo WPPB_URL . 'img/popup-display-options.png'; ?>" alt="">
+                <img src="<?php echo esc_url(WPPB_URL . 'img/popup-display-options.png'); ?>" alt="">
             </li>
             <li>
-                <img src="<?php echo WPPB_URL . 'img/popup-sho-option.png'; ?>" alt="">
+                <img src="<?php echo esc_url(WPPB_URL . 'img/popup-sho-option.png'); ?>" alt="">
             </li>
             <li>
                 <h1><?php _e('Popup Responsive Options', 'wppb') ?></h1>
@@ -49,10 +49,10 @@
                 <p class="points_"><?php _e('Display on Page Exit', 'wppb') ?></p>
             </li>
             <li>
-                <img src="<?php echo WPPB_URL . 'img/popup-trigger.png'; ?>" alt="">
+                <img src="<?php echo esc_url(WPPB_URL . 'img/popup-trigger.png'); ?>" alt="">
             </li>
             <li>
-                <img src="<?php echo WPPB_URL . 'img/popup-show-opt2.png'; ?>" alt="">
+                <img src="<?php echo esc_url(WPPB_URL . 'img/popup-show-opt2.png'); ?>" alt="">
             </li>
             <li>
                 <h1><?php _e('Popup Frequency', 'wppb') ?></h1>

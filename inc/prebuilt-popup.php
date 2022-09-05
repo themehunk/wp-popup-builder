@@ -10,7 +10,7 @@ $jsonPopupDemo = $jsonPopupHtml = '';
 if (is_array($responseResult_) && !is_wp_error($responseResult_)) {
 	$countColumn = 0;
 	foreach ($responseResult_ as $prebuilt_value) {
-		$prebuilt_value =  $wp_builder_obj->wppb_changeFilePath($prebuilt_value, WPPB_URL . "img/");
+		$prebuilt_value =  $wp_builder_obj->wppb_changeFilePath($prebuilt_value, esc_url(WPPB_URL . "img/"));
 		$countColumn++;
 		$prebuiltData = $wp_builder_obj->wppbPopupList_json($prebuilt_value, $countColumn, count($responseResult_));
 		$jsonPopupDemo .= $prebuiltData['prebuilt-label'];
