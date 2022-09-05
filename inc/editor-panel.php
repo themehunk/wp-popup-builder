@@ -5,11 +5,9 @@ $LfbPluginPath = false;
 
 if (file_exists(WP_PLUGIN_DIR . '/lead-form-builder/lead-form-builder.php') && is_plugin_inactive('lead-form-builder/lead-form-builder.php')) {
 
-	$LfbPluginPath = '<a href="#" class="add-lead-form-plugin active-lead-form-btn">Activate Lead Form</a>';
-
+	$LfbPluginPath = '<a href="#" class="add-lead-form-plugin active-lead-form-btn">' . __("Activate Lead Form", 'wppb') . '</a>';
 } elseif (!file_exists(WP_PLUGIN_DIR . '/lead-form-builder/lead-form-builder.php')) {
-
-	$LfbPluginPath = '<a href="#" class="add-lead-form-plugin install-lead-form-btn">Install Lead Form</a>';
+	$LfbPluginPath = '<a href="#" class="add-lead-form-plugin install-lead-form-btn">' . __("Install Lead Form", 'wppb') . '</a>';
 }
 
 ?>

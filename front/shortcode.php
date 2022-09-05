@@ -1,11 +1,14 @@
-<?php 
-if ( ! defined( 'ABSPATH' ) ) exit; 
+<?php
+if (!defined('ABSPATH')) exit;
 
-class wppb_shortcode{
-	private function __construct(){
-		add_shortcode( 'wppb', array($this,'popup') );
+class wppb_shortcode
+{
+	private function __construct()
+	{
+		add_shortcode('wppb', array($this, 'popup'));
 	}
-	public static function get(){
+	public static function get()
+	{
 		return new self();
 	}
  	public function popup( $atts ,$content) {
@@ -34,6 +37,7 @@ class wppb_shortcode{
 							return $popupHtmlContent && $return_Html ? $open_popup_div.$popupHtmlContent.'</div>':'';
 					}
 			}
+
 	}
-// class end
+	// class end
 }

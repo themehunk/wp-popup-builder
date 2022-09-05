@@ -740,13 +740,9 @@ a:focus {
 .wppb-pro-panel-help a.link-btn-front {
   display: block;
   width: fit-content;
-  margin: 30px auto;
-  padding: 14px 30px;
-  background-color: #6747e6;
-  color: white;
-  font-size: 16px;
-  text-decoration: none;
+  font-size: 15px;
   letter-spacing: 1px;
+  font-weight: 500;
 }
 .wppb-pro-panel-help a.link-btn-front {
   margin: 0;
@@ -756,6 +752,101 @@ a:focus {
   letter-spacing: 0.5px;
   font-weight: 500;
 }
+/* ---------------useful plugins  */
+.wppb-pro-panel-help .th-useful-plugins {
+  display: flex;
+  flex-direction: column;
+  grid-gap: 20px;
+}
+.wppb-pro-panel-help .th-useful-plugins .row-conteinaer {
+  display: flex;
+  align-items: center;
+  box-shadow: 0px 0px 1px 1px #6648e624;
+  padding: 10px;
+}
+.wppb-pro-panel-help .th-useful-plugins .row-conteinaer .image_ {
+  width: 30%;
+}
+.wppb-pro-panel-help .th-useful-plugins .row-conteinaer .text_ {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  grid-gap: 40px;
+}
+.wppb-pro-panel-help .th-useful-plugins .row-conteinaer .text_ > div {
+  display: flex;
+  grid-gap: 20px;
+  align-items: center;
+}
+.wppb-pro-panel-help .th-useful-plugins .row-conteinaer .text_ > div a.title_ {
+  font-size: 19px;
+  text-decoration: none;
+  color: #3d434b;
+  font-weight: 500;
+}
+.wppb-pro-panel-help
+  .th-useful-plugins
+  .row-conteinaer
+  .text_
+  > div
+  span.price_ {
+  background: #e76203;
+  color: white;
+  height: 24px;
+  width: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8%;
+  font-size: 14px;
+  font-weight: bold;
+}
+.wppb-pro-panel-one .link-btn-front {
+  background: #6648e6;
+  color: white;
+  text-decoration: none;
+  padding: 6px 18px;
+  font-size: 14px;
+  border-radius: 2px;
+  font-weight: bold;
+  margin: auto;
+}
+.wppb-pro-panel-help .th-useful-plugins .row-conteinaer .image_ > a {
+  width: 128px;
+  height: 128px;
+  display: block;
+}
+.wppb-pro-panel-help .th-useful-plugins .row-conteinaer .image_ > a img {
+  width: 100%;
+  height: 100%;
+}
+
+.wppb-pro-panel-help .th-useful-plugins .row-conteinaer .text_ > div a.free_,
+.wppb-pro-panel-help .th-useful-plugins .row-conteinaer .text_ > div a.buynow_ {
+  background: #6648e6;
+  color: white;
+  text-decoration: none;
+  padding: 6px 18px;
+  font-size: 14px;
+  border-radius: 2px;
+  font-weight: bold;
+}
+h2.heading_ {
+  font-size: 18px;
+  letter-spacing: 0.5px;
+}
+.wppb-pro-panel-help .help_ {
+  display: flex;
+  flex-direction: column;
+  grid-gap: 20px;
+}
+.wppb-pro-panel-help .help_ .containe_ {
+  display: flex;
+  box-shadow: 0px 0px 1px 1px #6648e624;
+  padding: 10px;
+  flex-direction: column;
+}
+/* ---------------useful plugins  */
 .wppb-pro-panel-one > p {
   font-size: 18px;
   letter-spacing: 1px;

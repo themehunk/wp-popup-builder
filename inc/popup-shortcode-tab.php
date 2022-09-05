@@ -55,7 +55,6 @@ $popup_is_active = isset($popup_is_active) ? $popup_is_active : '';
 </section>
 <div class="wppb-popup-editor-divider"></div>
 
-
 <!-- popup display -->
 <section class="wppb-display-popup">
 		<span class="popup-display-sub-heading"><?php _e('Popup Display Option','wppb');?></span>
@@ -179,9 +178,3 @@ $popup_is_active = isset($popup_is_active) ? $popup_is_active : '';
 <section class="setting-submit-wrap">
 	<button class="wppb-popup-setting-save business_disabled" data-bid="<?php echo esc_attr($wppb_popup_id); ?>" ><?php _e('Save','wppb');?></button>
 </section>
-
-
-
-
-
-

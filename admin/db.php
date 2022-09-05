@@ -419,7 +419,7 @@ class wppb_db
         if (isset($value->id) && isset($value->form_title)) $return .= "<option value='" . $value->id . "'>" . $value->form_title . "</option>";
       }
     }
-    return $return ? $return : "<option>No Form Found</option>";
+    return $return ? $return : "<option>" . __("No Form Found", 'wppb') . "</option>";
   }
 
   public function get_lead_form_ajx()

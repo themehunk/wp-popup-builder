@@ -1,4 +1,3 @@
-
 .th-notice-slide-wrapper{
      background: #ffff;
     border: 1px solid #c3c4c7;
@@ -14,7 +13,7 @@
     display: flex;
 }
 .th-notice-slide-wrap .thunk-review-thumbnail img{
-    width:400px;
+    width:auto;
     vertical-align: middle;
 }
 .th-notice-slide-wrap .thunk-review-thumbnail {
