@@ -33,7 +33,7 @@ class wppb_shortcode{
 		 					$popupHtmlContent = $popupHtml->wppb_html( $return_Html->setting,$popupInline );
 							return $popupHtmlContent && $return_Html ? $open_popup_div.$popupHtmlContent.'</div>':'';
 					}
-				}
+			}
 	}
 // class end
 }
