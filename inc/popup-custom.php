@@ -6,6 +6,6 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 <div class="wppb-popup-custom <?php echo esc_attr(!$get_CustomPopup ?'rl-display-none':'') ?>" style="background-color:<?php echo esc_attr($popupSetData['outside-color']); ?>;">
 	<div>
-	         <?php echo $wp_builder_obj->popup_layout($popupSetData); ?>	
+	    <?php $wp_builder_obj->popup_layout($popupSetData); ?>	
 	</div>	
 </div> 

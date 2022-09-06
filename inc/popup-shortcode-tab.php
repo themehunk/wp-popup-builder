@@ -7,13 +7,21 @@ if ( ! defined( 'ABSPATH' )) exit;
 			$check_option_prev[$options_value] = true;
 		}
 	}
+
 // =========placement 
+
 $popupPlaceMent = isset($addon_option['placement']) ? $addon_option['placement'] : '';
+
 // =========device 
+
 $device = isset( $addon_option['device'] ) ? $addon_option['device'] : 'all';
+
 // =========page load  
+
 $triggerV = ['class-id'=>'','minute'=>'00','second'=>'3','pageload'=>true]; 
+
 if ( isset( $addon_option['trigger'] ) && is_array( $addon_option['trigger'] ) ) {
+	
 	foreach ($addon_option['trigger'] as $trigger_key => $trigger_value) {
 			
 			if ($trigger_key == 'page-load') {

@@ -5,8 +5,8 @@ class wp_popup_builder_init{
 function initColumn($column){
 			$popupColumn = '';
 			foreach ($column as $value) {
-					$uniqIdAttr = isset($value["id"])?'data-uniqid="'.$value["id"].'"':'';
-					$style = isset($value["style"])?'style="'.$value["style"].'"':'';
+					$uniqIdAttr = isset($value["id"])?'data-uniqid="'.esc_attr($value["id"]).'"':'';
+					$style = isset($value["style"])?'style="'.esc_attr($value["style"]).'"':'';
 					$popupValueContent = isset($value['content']) && is_array($value['content']) && !empty($value['content']) ?$this->initContent($value['content']):'';
 					$popupColumn .= '<div '.$uniqIdAttr.' data-rl-column="1" class="wppb-popup-rl-column rlEditorDropable" '.$style.'>'.$popupValueContent.'</div>';
 			}
@@ -16,13 +16,15 @@ function initColumn($column){
 function initContent($column_content){
 				$popupContent = '';
 				foreach ($column_content as $setting_value) {
-				$Style = isset($setting_value['style'])?'style="'.$setting_value['style'].'"':'';
-				$alignMent = isset($setting_value['alignment'])?'style="justify-content:'.$setting_value['alignment'].';"':'';
-				$alignMentContent = $alignMent?'data-content-alignment="'.$setting_value['alignment'].'"':'';
-				$dataLink = isset($setting_value['link'])?"data-editor-link='".$setting_value['link']."'":'';
-				$dataLinktarget = isset($setting_value['target'])?"data-editor-link-target='".$setting_value['target']."'":'';
-				$uniqIdAttr = isset($setting_value["id"])?'data-uniqid="'.$setting_value["id"].'"':'';
+				$Style = isset($setting_value['style'])?'style="'.esc_attr($setting_value['style']).'"':'';
+				$alignMent = isset($setting_value['alignment'])?'style="justify-content:'.esc_attr($setting_value['alignment']).';"':'';
+				$alignMentContent = $alignMent?'data-content-alignment="'.esc_attr($setting_value['alignment']).'"':'';
+				$dataLink = isset($setting_value['link'])?"data-editor-link='".esc_attr($setting_value['link'])."'":'';
+				$dataLinktarget = isset($setting_value['target'])?"data-editor-link-target='".esc_attr($setting_value['target'])."'":'';
+				$uniqIdAttr = isset($setting_value["id"])?'data-uniqid="'.esc_attr($setting_value["id"]).'"':'';
+
 				$contentAttr = $Style.$alignMentContent.$dataLink.$dataLinktarget.$uniqIdAttr;
+
 				if ($setting_value['type'] == 'text') {
 					$popupContent .=	'<div class="data-rl-editable-wrap" '.$alignMent.'>
 									<div class="actions_">
@@ -95,20 +97,29 @@ function initContent($column_content){
 	}
 
 	function popup_layout($popupSetData,$layout=''){
-			$overlay_image = $popupSetData['overlay-image-url']?'background-image:url('.$popupSetData['overlay-image-url'].');':'';
+
+			$overlay_image = $popupSetData['overlay-image-url']?'background-image:url('.esc_url($popupSetData['overlay-image-url']).');':'';
 			$overlayStyle = $overlay_image?$overlay_image.$popupSetData['overlay-style']:'';
 
-			$globalHeight = $popupSetData["wrapper-height"] != 'auto'?$popupSetData["wrapper-height"].'px;':$popupSetData["wrapper-height"].';';
-			$globalStyle = "padding:".$popupSetData["global-padding"].";height:".$globalHeight;
+			$globalHeight = $popupSetData["wrapper-height"] != 'auto'?esc_attr($popupSetData["wrapper-height"]).'px;':esc_attr($popupSetData["wrapper-height"]).';';
+			$globalStyle = "padding:".esc_attr($popupSetData["global-padding"]).";height:".esc_attr($globalHeight);
 
-			$return = $popupSetData["close-btn"].'<div class="wppb-popup-custom-wrapper" style="'.$popupSetData["wrapper-style"].'">
-			         <div class="wppb-popup-overlay-custom-img" data-overlay-image="'.$popupSetData['overlay-image-url'].'" style="'.$overlayStyle.'"></div>
-			          <div class="wppb-popup-custom-overlay" style="background-color:'.$popupSetData['overlay-color'].';"></div>
-			              <div class="wppb-popup-custom-content" style="'.$globalStyle.'">
-				            '.$popupSetData["content"].'
+			echo $popupSetData["close-btn"];
+
+			?>
+
+			<div class="wppb-popup-custom-wrapper" style="<?php echo esc_attr($popupSetData["wrapper-style"]);?>">
+			         <div class="wppb-popup-overlay-custom-img" data-overlay-image="<?php echo esc_attr($popupSetData['overlay-image-url']);?>" style="<?php  echo esc_attr($overlayStyle); ?>"></div>
+
+			          <div class="wppb-popup-custom-overlay" style="background-color:<?php echo esc_attr($popupSetData['overlay-color']);?>;">
+			          	
+			          </div>
+
+			              <div class="wppb-popup-custom-content" style="<?php echo esc_attr($globalStyle);?>">
+				              <?php echo $popupSetData["content"];?>
 			              </div>
-			        </div>';
-			return $return;
+			        </div>
+			        <?php 
 	}
 
 // popup page list of all popupSetData content
@@ -137,8 +148,8 @@ public function wppbPopupContent($allSetting){
 					$popupSetData['content'] =	'<div data-rl-wrap="" class="wppb-popup-rl-wrap rl-clear">'.$popupContentColumn.'</div>';
 				}
 			}else if ($setting_value['type'] == "close-btn") {
-					$uniqIdAttr = isset($setting_value["id"])?'data-uniqid="'.$setting_value["id"].'"':'';
-					$styleClose = isset( $setting_value['style'] )?"style='".$setting_value['style']."'":'';
+					$uniqIdAttr = isset($setting_value["id"])?'data-uniqid="'.esc_attr($setting_value["id"]).'"':'';
+					$styleClose = isset( $setting_value['style'] )?"style='".esc_attr($setting_value['style'])."'":'';
 					$popupSetData["close-btn"] ='<span '.$uniqIdAttr.' class="wppb-popup-close-btn dashicons dashicons-no-alt" '.$styleClose.'></span>';
 					
 				}
@@ -198,25 +209,42 @@ public function wppbPopupList($allSetting,$business_id,$isActive=false,$device_)
 // popup page list of all popupSetData json file
 public function wppbPopupList_json($allSetting,$column_making,$countPopup){
 		$imageUrl = isset($allSetting[0]['img-url']) ? $allSetting[0]['img-url'] : '';
-		$imageUrl = $imageUrl ? "<img src='".$imageUrl."'>" : '';
-		$prebuilt_id = 'wppb-prebuilt-id-'.$column_making;
+
+		$imageUrl = $imageUrl ? "<img src='".esc_url($imageUrl)."'>" : '';
+
+		$prebuilt_id = 'wppb-prebuilt-id-'.esc_attr($column_making);
+
 		$popupSetData = $this->wppbPopupContent($allSetting);
-		$attr_inbuilt = isset($popupSetData['layout']) && $popupSetData['layout'] ? 'data-layout="'.$popupSetData['layout'].'"' : '';
-		$attr_inbuilt .= isset($popupSetData['outside-color']) && $popupSetData['outside-color'] ? 'data-outside-color="'.$popupSetData['outside-color'].'"' : '';
-		$attr_inbuilt .= "data-prebuilt-id='".$prebuilt_id."'";
+
+		$attr_inbuilt = isset($popupSetData['layout']) && $popupSetData['layout'] ? 'data-layout="'.esc_attr($popupSetData['layout']).'"' : '';
+
+		$attr_inbuilt .= isset($popupSetData['outside-color']) && $popupSetData['outside-color'] ? 'data-outside-color="'.esc_attr($popupSetData['outside-color']).'"' : '';
+
+		$attr_inbuilt .= "data-prebuilt-id='".esc_attr($prebuilt_id)."'";
+
 		$popupSetData = $this->popup_layout($popupSetData);
-		$popupSetData = "<div data-layout='".$prebuilt_id."'>".$popupSetData.'</div>';
+
+		$popupSetData = "<div data-layout='".esc_attr($prebuilt_id)."'>".$popupSetData.'</div>';
+
 		$returnHtml = ['prebuilt-html'=> $popupSetData,'prebuilt-label'=>''];
+
 		if ($column_making == 1) $returnHtml['prebuilt-label'] .= '<div class="wppb-popup-row wppb-popup_clear">';
+
 		$returnHtml['prebuilt-label'] .= '<div class="wppb-popup-column-three">
 								<input id="wppb-popup-layout-label__layout--'.$column_making.'" type="radio" name="wppb-popup-layout" value="prebuilt" '.$attr_inbuilt.'>
 								<label for="wppb-popup-layout-label__layout--'.$column_making.'" class="wppb-popup-json-label">'.$imageUrl.'</label>
 						</div>';
+
 		if($countPopup == ($column_making)){
+
 			$returnHtml['prebuilt-label'] .= '</div>';
+
 		}elseif(($column_making) % 3 === 0){
+
 			$returnHtml['prebuilt-label'] .= '</div><div class="wppb-popup-row wppb-popup_clear">';
+
 		}
+		
 		return $returnHtml;
 }
 
@@ -273,8 +301,8 @@ public function wppbPopupList_json($allSetting,$column_making,$countPopup){
 			}
 			// for frequency 
 			if ( isset($option['frequency']) && $option['frequency'] ) {
-				$popup_attr .= 'data-wppb-frequency="'.$option['frequency'].'"';
-				$popup_attr .= 'data-wppb-bid="'.$value->BID.'"';
+				$popup_attr .= 'data-wppb-frequency="'.esc_attr($option['frequency']).'"';
+				$popup_attr .= 'data-wppb-bid="'.esc_attr($value->BID).'"';
 			}
 
 			if ( $shortcode || $return_ ) {
