@@ -199,6 +199,6 @@ function plugin_install_button($plugin){
 
   echo $button;
 }
-	
+    
 } // class end
  ?>

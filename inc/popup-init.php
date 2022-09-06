@@ -97,29 +97,20 @@ function initContent($column_content){
 	}
 
 	function popup_layout($popupSetData,$layout=''){
-
-			$overlay_image = $popupSetData['overlay-image-url']?'background-image:url('.esc_url($popupSetData['overlay-image-url']).');':'';
+			$overlay_image = $popupSetData['overlay-image-url']?'background-image:url('.$popupSetData['overlay-image-url'].');':'';
 			$overlayStyle = $overlay_image?$overlay_image.$popupSetData['overlay-style']:'';
 
-			$globalHeight = $popupSetData["wrapper-height"] != 'auto'?esc_attr($popupSetData["wrapper-height"]).'px;':esc_attr($popupSetData["wrapper-height"]).';';
-			$globalStyle = "padding:".esc_attr($popupSetData["global-padding"]).";height:".esc_attr($globalHeight);
+			$globalHeight = $popupSetData["wrapper-height"] != 'auto'?$popupSetData["wrapper-height"].'px;':$popupSetData["wrapper-height"].';';
+			$globalStyle = "padding:".$popupSetData["global-padding"].";height:".$globalHeight;
 
-			echo $popupSetData["close-btn"];
-
-			?>
-
-			<div class="wppb-popup-custom-wrapper" style="<?php echo esc_attr($popupSetData["wrapper-style"]);?>">
-			         <div class="wppb-popup-overlay-custom-img" data-overlay-image="<?php echo esc_attr($popupSetData['overlay-image-url']);?>" style="<?php  echo esc_attr($overlayStyle); ?>"></div>
-
-			          <div class="wppb-popup-custom-overlay" style="background-color:<?php echo esc_attr($popupSetData['overlay-color']);?>;">
-			          	
-			          </div>
-
-			              <div class="wppb-popup-custom-content" style="<?php echo esc_attr($globalStyle);?>">
-				              <?php echo $popupSetData["content"];?>
+			$return = $popupSetData["close-btn"].'<div class="wppb-popup-custom-wrapper" style="'.$popupSetData["wrapper-style"].'">
+			         <div class="wppb-popup-overlay-custom-img" data-overlay-image="'.$popupSetData['overlay-image-url'].'" style="'.$overlayStyle.'"></div>
+			          <div class="wppb-popup-custom-overlay" style="background-color:'.$popupSetData['overlay-color'].';"></div>
+			              <div class="wppb-popup-custom-content" style="'.$globalStyle.'">
+				            '.$popupSetData["content"].'
 			              </div>
-			        </div>
-			        <?php 
+			        </div>';
+			return $return;
 	}
 
 // popup page list of all popupSetData content
@@ -237,14 +228,14 @@ public function wppbPopupList_json($allSetting,$column_making,$countPopup){
 
 		if($countPopup == ($column_making)){
 
-			$returnHtml['prebuilt-label'] .= '</div>';
+		$returnHtml['prebuilt-label'] .= '</div>';
 
 		}elseif(($column_making) % 3 === 0){
 
-			$returnHtml['prebuilt-label'] .= '</div><div class="wppb-popup-row wppb-popup_clear">';
+		$returnHtml['prebuilt-label'] .= '</div><div class="wppb-popup-row wppb-popup_clear">';
 
 		}
-		
+
 		return $returnHtml;
 }
 
