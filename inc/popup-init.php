@@ -153,13 +153,15 @@ public function wppbPopupContent($allSetting){
 
 public function wppbPopupList($allSetting,$business_id,$isActive=false,$device_){
 
+    $_nonce = wp_create_nonce( 'nonce_pop' );
+
 		$popup_is_active = $isActive?"checked='checked'":"";	
 
 		$popup_name = isset($allSetting[0]['content']['popup-name']) && $allSetting[0]['content']['popup-name'] ? $allSetting[0]['content']['popup-name']:'';
 
 		$business_id = $business_id?$business_id:"";
 
-		$url    = WPPB_PAGE_URL.'&custom-popup='.$business_id;
+		$url    = WPPB_PAGE_URL.'&custom-popup='.$business_id.'&_pnonce='.esc_attr( $_nonce );
 
 		$all 	 = !$device_ || $device_ == "all" ? 'checked' : '';
 

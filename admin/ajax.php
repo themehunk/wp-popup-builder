@@ -27,24 +27,58 @@ class wppb_ajax extends wppb_db
 
 	public function insert()
 	{
+		if ( ! current_user_can( 'administrator' ) ) {
+
+		            wp_die( - 1, 403 );
+		            
+		}
+
+		check_ajax_referer( '_wppb_nonce','p_wppb_nonce');
 		$result = $this->popup_insert();
 		echo $result ? $result : 0;
 		die();
 	}
+
 	public function update()
 	{
+		if ( ! current_user_can( 'administrator' ) ) {
+
+		            wp_die( - 1, 403 );
+		            
+		}
+
+		check_ajax_referer( '_wppb_nonce','p_wppb_nonce');
+
 		$result = $this->popup_update();
+
 		echo $result ? $result : 0;
+
 		die();
+
 	}
+
 	public function delete()
 	{
+		if ( ! current_user_can( 'administrator' ) ) {
+
+		            wp_die( - 1, 403 );
+		            
+		}
+
+		check_ajax_referer( '_wppb_nonce','p_wppb_nonce');
 		$result = $this->popup_delete();
 		echo $result ? $result : 0;
 		die();
 	}
 	public function option_update()
 	{
+		if ( ! current_user_can( 'administrator' ) ) {
+
+		            wp_die( - 1, 403 );
+		            
+		}
+
+		check_ajax_referer( '_wppb_nonce','p_wppb_nonce');
 		$result = $this->opt_update();
 		echo $result ? $result : 0;
 		die();

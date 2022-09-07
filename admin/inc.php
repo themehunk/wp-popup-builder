@@ -27,6 +27,9 @@ class wppb
 	}
 	public function display_addons()
 	{
+		if ( ! current_user_can( 'manage_options' ) ) {
+				wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
+		}
 		// include_once WPPB_PATH.'inc/popup-init.php';
 		$wp_builder_obj = new wp_popup_builder_init();
 		if (isset($_GET['custom-popup'])) {
@@ -48,7 +51,7 @@ class wppb
 			wp_enqueue_style('wppb-rl', WPPB_URL . 'css/rl_i_editor.css', false);
 			wp_enqueue_media();
 			wp_enqueue_script('wppb-js', WPPB_URL . 'js/script.js', array('jquery', 'jquery-ui-draggable', 'wp-util', 'updates'), 1, true);
-			wp_localize_script('wppb-js', 'wppb_ajax_backend', array('wppb_ajax_url' => admin_url('admin-ajax.php')));
+			wp_localize_script('wppb-js', 'wppb_ajax_backend', array('wppb_ajax_url' => admin_url('admin-ajax.php'),'wppb_nonce' => wp_create_nonce( '_wppb_nonce' )));
 		}
 	}
 
