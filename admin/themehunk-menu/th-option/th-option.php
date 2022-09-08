@@ -17,7 +17,7 @@ function tab_constant(){
     'theme_brand_url' => esc_url($theme_data->get( 'AuthorURI' )),
     'welcome'=>esc_html__('ThemeHunk Marketplace', 'wp-popup-builder' ),
     'welcome_desc' => esc_html__('Grow your business free and paid ThemeHunk plugins.', 'wp-popup-builder' ),
-    'v'=> 'Version '.$theme_data->get( 'Version' )
+    'v'=> 'Version '.esc_html($theme_data->get( 'Version' ))
     );
     return $tab_array;
 }
@@ -44,7 +44,7 @@ function tab_page() {
         );
       }
 
-      $plugin_init = ( isset( $_POST['init'] ) ) ? esc_attr( $_POST['init'] ) : '';
+      $plugin_init = ( isset( $_POST['init'] ) ) ? sanitize_text_field( $_POST['init'] ) : '';
 
       $activate = activate_plugin( $plugin_init);
 
@@ -171,26 +171,26 @@ function plugin_install_button($plugin){
   $slug = $plugin['slug'];
   $upgrade_button='';
   $admin_link=$plugin['admin_link'];
- $pro_active=$plugin['plugin_active'];
+  $pro_active=$plugin['plugin_active'];
 
   $deatil_link = '<a class="plugin-detail" target="_blank" href="'.esc_url( $plugin['detail_pro'] ).'">'.esc_html__( 'View details', 'wp-popup-builder' ).'</a>
-   <span class="setting-link'.$pro_active.' setting-'.$slug.'">|</span><a class="setting-link'.$pro_active.' setting-'.$slug.'" href="'.admin_url('admin.php?page='.$admin_link).'">Settings</a>';
+   <span class="setting-link'.esc_attr($pro_active).' setting-'.esc_attr($slug).'">|</span><a class="setting-link'.esc_attr($pro_active).' setting-'.esc_attr($slug).'" href="'.admin_url('admin.php?page='.esc_attr($admin_link)).'">'._('Settings','wppb').'</a>';
 
   if($plugin['free_pro']=='Free' && $slug !='themehunk-megamenu-plus'){
   $upgrade_button ='<a class="upgrade-to-pro button" target="_blank" href="'.$plugin['detail_pro'].'">Upgrade To Pro</a>';
-  $deatil_link = '<a class="plugin-detail" target="_blank" href="'.esc_url( 'https://wordpress.org/plugins/'.$slug ).'">'.esc_html__( 'View details', 'wp-popup-builder' ).'</a>
-  <span class="setting-link'.$pro_active.' setting-'.$slug.'">|</span><a class="setting-link'.$pro_active.' setting-'.$slug.'" href="'.admin_url('admin.php?page='.$admin_link).'">Settings</a>';
-}
+  $deatil_link = '<a class="plugin-detail" target="_blank" href="'.esc_url( 'https://wordpress.org/plugins/'.esc_attr($slug )).'">'.esc_html__( 'View details', 'wp-popup-builder' ).'</a>
+  <span class="setting-link'.esc_attr($pro_active).' setting-'.esc_attr($slug).'">|</span><a class="setting-link'.esc_attr($pro_active).' setting-'.esc_attr($slug).'" href="'.admin_url('admin.php?page='.esc_attr($admin_link)).'">'._('Settings','wppb').'</a>';
+  }
 
 
 
   $button = '<div class="rcp theme_link th-row">';
-  $button .= ' <div class="th-column '.$plugin['free_pro'].'"><img src="'.esc_url( $plugin['thumb'] ).'" /> </div>';
+  $button .= ' <div class="th-column '.esc_attr($plugin['free_pro']).'"><img src="'.esc_url( $plugin['thumb'] ).'" /> </div>';
   $button .= '<div class="th-column two">';
 
   $button .= '<div class="title-plugin">
-  <h4>'.esc_html( $plugin['plugin_name'] ). ' <b class="th-'.$plugin['free_pro'].'">'.$plugin['free_pro'].'</b> </h4>';
-  $button .= '<div class="plugin-link">'.$deatil_link.'</div>';
+  <h4>'.esc_html( $plugin['plugin_name'] ). ' <b class="th-'.esc_attr($plugin['free_pro']).'">'.esc_html($plugin['free_pro']).'</b> </h4>';
+  $button .= '<div class="plugin-link">'.esc_html($deatil_link).'</div>';
   $button .= '</div>';
 
   $button .='<button data-activated="Activated" data-msg="Activating" data-init="'.esc_attr($plugin['plugin_init']).'" data-slug="'.esc_attr( $plugin['slug'] ).'" class="button '.esc_attr( $plugin['button_class'] ).'">'.esc_html($plugin['button_txt']).'</button>';

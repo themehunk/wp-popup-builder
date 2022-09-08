@@ -80,7 +80,7 @@ $tabActiveEditor = !$tabActiveOption ? 'active' : '';
 
 // preview anchor 
 
-$position_name = isset($_GET['pos-name']) ? $_GET['pos-name'] : '';
+$position_name = isset($_GET['pos-name']) ? sanitize_text_field($_GET['pos-name']) : '';
 
 $homePage_Priview = get_home_url() . "?wppb_preview=" . esc_attr($get_CustomPopup) . "&pos-name=" . esc_attr($position_name);
 

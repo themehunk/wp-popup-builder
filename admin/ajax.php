@@ -90,7 +90,7 @@ class wppb_ajax extends wppb_db
 	public function lead_form_plugin_activate()
 	{
 		$plugin_init = '/lead-form-builder/lead-form-builder.php';
-		$activate = activate_plugin($plugin_init, '', false, true);
+		$activate    = activate_plugin($plugin_init, '', false, true);
 		if (is_wp_error($activate)) {
 			wp_send_json_error(
 				array(

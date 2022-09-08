@@ -3,7 +3,6 @@ if (!defined('ABSPATH')) exit;
 
 if (!class_exists('wppb_db')) return;
 
-// if(!class_exists( 'LFB_SAVE_DB' )) require_once(LFB_PLUGIN_PATH.'inc/front-end.php');
 
 class wppb_db
 {
@@ -121,7 +120,7 @@ class wppb_db
         } else {
           if ($key && ($key == "link" || $key == "image-url" || $key == 'overlay-image-url' || $key == 'video-url' || $key == 'poster')) {
             // senetize link 
-            $value = esc_url($value);
+            $value = sanitize_url($value);
           } else if ($key == "style" || $key == "overlay-style") {
             // senetize style 
             $value = wp_kses_post($value);

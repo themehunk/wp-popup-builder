@@ -201,6 +201,7 @@ public function wppbPopupList($allSetting,$business_id,$isActive=false,$device_)
 
 // popup page list of all popupSetData json file
 public function wppbPopupList_json($allSetting,$column_making,$countPopup){
+
 		$imageUrl = isset($allSetting[0]['img-url']) ? $allSetting[0]['img-url'] : '';
 
 		$imageUrl = $imageUrl ? "<img src='".esc_url($imageUrl)."'>" : '';
@@ -258,7 +259,7 @@ public function wppbPopupList_json($allSetting,$column_making,$countPopup){
 						$return_data = true;
 					}else if( $device == 'desktop' && !$checkMobile ){ //mobile condition
 						$return_data =  true;
-					}else if ( $device == 'all' || $device == false ) { //all and if not device set
+					}else if( $device == 'all' || $device == false ){ //all and if not device set
 						$return_data =  true;
 					}
 				}
@@ -279,12 +280,12 @@ public function wppbPopupList_json($allSetting,$column_making,$countPopup){
 			}
 
 			// class and attr by trigger
-			if ( isset($option['trigger']) ) {
+			if ( isset($option['trigger']) ){
 				$trigger = $option['trigger'];
 				//for page load 
 				if ( isset($trigger['page-load']) ){
-					 if (!$trigger['page-load'] || $trigger['page-load'] == 'false') $return_ = false;;
-					}
+					 if (!$trigger['page-load'] || $trigger['page-load'] == 'false') $return_ = false;
+				}
 				//for setting like popup open delay 
 				if ( isset($trigger['time']) ) {
 					$minute_ = isset($trigger['time']['minute']) && is_numeric(isset($trigger['time']['minute'])) ? $trigger['time']['minute'] * 60 :false;
@@ -341,7 +342,7 @@ public function wppbPopupList_json($allSetting,$column_making,$countPopup){
 	public function color($title,$prop,$type,$color_id=1,$attr=''){
 		if ($title && $prop && $type) {
 
-			$typeAndProp = esc_attr($type).'="'.esc_attr($prop).'"' . esc_attr($attr);
+		  	$typeAndProp = esc_attr($type).'="'.esc_attr($prop).'"' . esc_attr($attr);
 
 			?>
 			<div class="rl_i_editor-item-content-items item-text inline__">
@@ -352,6 +353,7 @@ public function wppbPopupList_json($allSetting,$column_making,$countPopup){
 					</div>
 			</div>
 		<?php }
+
 	}
 
 	public function range_slider($title, $id, $arr, $id_two=false, $type_ = "data-global-input"){
@@ -379,11 +381,11 @@ public function wppbPopupList_json($allSetting,$column_making,$countPopup){
 
 		 		<?php echo esc_html($title);?>
 		 			
-		 		</label>
+		 	</label>
 
 			<div class="range_ rl_i_range-font-size">
-							<input data-show-range="<?php echo esc_attr($id_two);?>" type="range"  <?php echo $attr;?>>
-						</div>
+			<input data-show-range="<?php echo esc_attr($id_two);?>" type="range"  <?php echo $attr;?>>
+			</div>
 
 			<div class="data-range-output">
 							<input class="rl-sub-title" type="number" data-range-output="<?php echo esc_attr($id_two);?>"  <?php echo $attrTwo;?>>
@@ -408,7 +410,7 @@ public function wppbPopupList_json($allSetting,$column_making,$countPopup){
 
 							<?php }elseif ( isset($value[0]) ) { ?>
 
-								<option><?php echo esc_attr($value[0]);?></option>
+							<option><?php echo esc_attr($value[0]);?></option>
 
 						<?php 	}
 						}	
