@@ -283,7 +283,11 @@ if (file_exists(WP_PLUGIN_DIR . '/lead-form-builder/lead-form-builder.php') && i
 					</div>
 					<section data-toggle-action="popup-delete-opt" class="rl-popup-delete-opt rl-display-none">
 						<div>
-							<div class="popup-delete-wrap"><?php echo $popupSetData['deletebtn']; ?></div>
+							<div class="popup-delete-wrap">
+
+								<?php echo wp_kses_post($popupSetData['deletebtn']); ?>
+									
+								</div>
 							<?php $wp_builder_obj->checkbox('popup_setting_active', __('Activate', 'wppb'), 'class="wppb_popup_setting_active" data-bid="' . esc_attr($wppb_popup_id) . '"' . esc_attr($popup_is_active)); ?>
 						</div>
 					</section>
@@ -298,7 +302,7 @@ if (file_exists(WP_PLUGIN_DIR . '/lead-form-builder/lead-form-builder.php') && i
 					<div class="rl_i_editor-item-content-items title_ inline__">
 						<label class="rl-sub-title"><?php _e('Choose Lead Form', 'wppb'); ?></label>
 					</div>
-					<?php if ($LfbPluginPath) echo $LfbPluginPath; ?>
+					<?php if ($LfbPluginPath) echo wp_kses_post($LfbPluginPath); ?>
 
 					<div class="rl_i_editor-item-content-items lead-form-bulider-select <?php if ($LfbPluginPath) echo 'rl-display-none'; ?>">
 						<select>
@@ -408,7 +412,7 @@ if (file_exists(WP_PLUGIN_DIR . '/lead-form-builder/lead-form-builder.php') && i
 		</div>
 		<div class="rl_i_editor-footer">
 			<div class="rl_i_editor-footer-area">
-				<?php echo $popupSetData['savebtn']; ?>
+				<?php echo wp_kses_post($popupSetData['savebtn']); ?>
 			</div>
 		</div>
 	</div>

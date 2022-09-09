@@ -142,7 +142,7 @@ define('PAID_IMG_URL', WPPB_URL . 'img/paid/');
 				</div>
 			</div>
 			<!-- json data layout -->
-			<?php echo $jsonPopupHtml; ?>
+			<?php echo wp_kses_post($jsonPopupHtml); ?>
 			<!-- layout 3 -->
 		</section>
 		<!-- prebuilt popup section -->
@@ -208,7 +208,7 @@ define('PAID_IMG_URL', WPPB_URL . 'img/paid/');
 			</nav>
 		</div>
 		<div data-tab-active='free' data-tab-group="free-paid" class="prebuilt-free active">
-			<?php echo $jsonPopupDemo; ?>
+			<?php echo wp_kses_post($jsonPopupDemo); ?>
 		</div>
 		<div data-tab-active='paid' data-tab-group="free-paid" class="prebuilt-paid">
 			<div class="wppb-popup-row wppb-popup_clear">

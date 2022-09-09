@@ -35,7 +35,7 @@ class wppb_ajax extends wppb_db
 
 		check_ajax_referer( '_wppb_nonce','p_wppb_nonce');
 		$result = $this->popup_insert();
-		echo $result ? $result : 0;
+		echo wp_kses_post($result ? $result : 0);
 		die();
 	}
 
@@ -51,7 +51,7 @@ class wppb_ajax extends wppb_db
 
 		$result = $this->popup_update();
 
-		echo $result ? $result : 0;
+		echo wp_kses_post($result ? $result : 0);
 
 		die();
 
@@ -67,7 +67,7 @@ class wppb_ajax extends wppb_db
 
 		check_ajax_referer( '_wppb_nonce','p_wppb_nonce');
 		$result = $this->popup_delete();
-		echo $result ? $result : 0;
+		echo wp_kses_post($result ? $result : 0);
 		die();
 	}
 	public function option_update()
@@ -80,7 +80,7 @@ class wppb_ajax extends wppb_db
 
 		check_ajax_referer( '_wppb_nonce','p_wppb_nonce');
 		$result = $this->opt_update();
-		echo $result ? $result : 0;
+		echo wp_kses_post($result ? $result : 0);
 		die();
 	}
 
@@ -112,7 +112,7 @@ class wppb_ajax extends wppb_db
 	public function getLeadForm()
 	{
 		$result = $this->get_lead_form_ajx();
-		echo $result ? $result : 0;
+		echo wp_kses_post($result ? $result : 0);
 		die();
 	}
 	//shortcode 
@@ -122,7 +122,7 @@ class wppb_ajax extends wppb_db
 		if (isset($dataPost['shortcode'])) {
 			$shortcode_ = sanitize_text_field($dataPost['shortcode']);
 			$result = do_shortcode($shortcode_);
-			echo $result;
+			echo wp_kses_post($result);
 		}
 		die();
 	}
