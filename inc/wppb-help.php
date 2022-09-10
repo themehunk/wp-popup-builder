@@ -20,13 +20,13 @@
         <div class="row-conteinaer">
             <div class="image_">
                 <a target="_blank" href="<?php echo esc_url("https://themehunk.com/product/lead-form-builder-pro/") ?>">
-                    <img src="<?php echo esc_url('https://ps.w.org/lead-form-builder/assets/icon-128x128.png') ?>" alt="">
+                    <img src="<?php echo esc_url(WPPB_URL . 'img/ldfrm.png'); ?>" alt="">
                 </a>
             </div>
             <div class="text_">
                 <div>
                     <a target="_blank" href="<?php echo esc_url("https://themehunk.com/product/lead-form-builder-pro/") ?>" class="title_"><?php _e("Lead Form Builder", "wppb") ?></a>
-                    <span class="price_">$49</span>
+                    <span class="price_"><?php _e("$49", 'wppb'); ?></span>
                 </div>
                 <div>
                     <a target="_blank" href="<?php echo esc_url("https://wordpress.org/plugins/lead-form-builder/") ?>" class="free_"><?php _e("Free Download", 'wppb') ?></a>
@@ -38,13 +38,13 @@
         <div class="row-conteinaer">
             <div class="image_">
                 <a target="_blank" href="<?php echo esc_url('https://themehunk.com/advance-product-search/') ?>">
-                    <img src="<?php echo esc_url('https://ps.w.org/th-advance-product-search/assets/icon-128x128.gif') ?>" alt="">
+                    <img src="<?php echo esc_url(WPPB_URL . 'img/search.png'); ?>" alt="">
                 </a>
             </div>
             <div class="text_">
                 <div>
                     <a target="_blank" href="<?php echo esc_url("https://themehunk.com/advance-product-search/") ?>" class="title_"><?php _e("TH Advance Search", 'wppb') ?></a>
-                    <span class="price_">$49</span>
+                    <span class="price_"><?php _e("$49", 'wppb'); ?></span>
                 </div>
                 <div>
                     <a target="_blank" href="<?php echo esc_url("https://wordpress.org/plugins/th-advance-product-search/") ?>" class="free_"><?php _e("Free Download", 'wppb') ?></a>
@@ -56,13 +56,13 @@
         <div class="row-conteinaer">
             <div class="image_">
                 <a target="_blank" href="<?php echo esc_url('https://themehunk.com/th-all-in-one-woo-cart/') ?>">
-                    <img src="<?php echo esc_url("https://ps.w.org/th-all-in-one-woo-cart/assets/icon-128x128.png") ?>" alt="">
+                    <img src="<?php echo esc_url(WPPB_URL . 'img/cart.png'); ?>" alt="">
                 </a>
             </div>
             <div class="text_">
                 <div>
                     <a target="_blank" href="<?php echo esc_url('https://themehunk.com/th-all-in-one-woo-cart/') ?>" class="title_"><?php _e("TH All in One Woo Cart", 'wppb') ?></a>
-                    <span class="price_">$49</span>
+                    <span class="price_"><?php _e("$49", 'wppb'); ?></span>
                 </div>
                 <div>
                     <a target="_blank" href="<?php echo esc_url("https://wordpress.org/plugins/th-all-in-one-woo-cart/") ?>" class="free_"><?php _e("Free Download", 'wppb') ?></a>
@@ -74,13 +74,13 @@
         <div class="row-conteinaer">
             <div class="image_">
                 <a target="_blank" href="<?php echo esc_url('https://themehunk.com/th-variation-swatches/') ?>">
-                    <img src="<?php echo esc_url('https://ps.w.org/th-variation-swatches/assets/icon-128x128.gif') ?>" alt="">
+                    <img src="<?php echo esc_url(WPPB_URL . 'img/variation.png'); ?>" alt="">
                 </a>
             </div>
             <div class="text_">
                 <div>
                     <a target="_blank" href="<?php echo esc_url('https://themehunk.com/th-variation-swatches/') ?>" class="title_"><?php _e("TH Variation Swatches", 'wppb') ?></a>
-                    <span class="price_">$49</span>
+                    <span class="price_"><?php _e("$49", 'wppb'); ?></span>
                 </div>
                 <div>
                     <a target="_blank" href="<?php echo esc_url("https://wordpress.org/plugins/th-variation-swatches/") ?>" class="free_"><?php _e("Free Download", 'wppb') ?></a>
@@ -92,13 +92,13 @@
         <div class="row-conteinaer">
             <div class="image_">
                 <a target="_blank" href="<?php echo esc_url('https://themehunk.com/th-product-compare-plugin/') ?>">
-                    <img src="<?php echo esc_url("https://ps.w.org/th-product-compare/assets/icon-128x128.png") ?>" alt="">
+                    <img src="<?php echo esc_url(WPPB_URL . 'img/compare.png'); ?>" alt="">
                 </a>
             </div>
             <div class="text_">
                 <div>
-                    <a target="_blank" href="<?php echo esc_url('https://themehunk.com/th-product-compare-plugin/') ?>" class="title_"><?php _e("Th Product Compare", 'wppb') ?></a>
-                    <span class="price_">$49</span>
+                    <a target="_blank" href="<?php echo esc_url('https://themehunk.com/th-product-compare-plugin/') ?>" class="title_"><?php _e("Th Product Compare", 'wppb'); ?></a>
+                    <span class="price_"><?php _e("$49", 'wppb'); ?></span>
                 </div>
                 <div>
                     <a target="_blank" href="<?php echo esc_url("https://wordpress.org/plugins/th-product-compare/") ?>" class="free_"><?php _e("Free Download", 'wppb') ?></a>
