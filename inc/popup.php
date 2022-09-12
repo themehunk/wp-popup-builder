@@ -80,9 +80,20 @@ $tabActiveEditor = !$tabActiveOption ? 'active' : '';
 
 // preview anchor 
 
-$position_name = isset($_GET['pos-name']) ? $_GET['pos-name'] : '';
+$position_name = isset($_GET['pos-name']) ? sanitize_text_field($_GET['pos-name']) : '';
 
 $homePage_Priview = get_home_url() . "?wppb_preview=" . esc_attr($get_CustomPopup) . "&pos-name=" . esc_attr($position_name);
+
+
+$nonce = $_REQUEST['_pnonce'];
+
+if ( ! wp_verify_nonce( $nonce, 'nonce_pop' ) ) {
+
+	// This nonce is not valid.
+
+	die( __( 'Security check', 'wppb' ) ); 
+
+} else {
 
 ?>
 
@@ -144,7 +155,9 @@ $homePage_Priview = get_home_url() . "?wppb_preview=" . esc_attr($get_CustomPopu
 
 			<?php
 
-			if (!$get_CustomPopup) include_once 'prebuilt-popup.php';
+			if (!$get_CustomPopup) 
+
+			 include_once 'prebuilt-popup.php';
 
 			include_once 'popup-custom.php';
 
@@ -166,3 +179,4 @@ $homePage_Priview = get_home_url() . "?wppb_preview=" . esc_attr($get_CustomPopu
 	</div>
 
 </div>
+<?php } ?>

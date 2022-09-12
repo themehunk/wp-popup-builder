@@ -42,7 +42,7 @@ $custom_popup_all = wppb_db::getCustomPopup();
 
 				<h1><?php _e('WP Builder Popup', 'wppb'); ?></h1>
 
-				<a href="<?php echo esc_url(WPPB_PAGE_URL . '&custom-popup', 'wppb') ?>"> <span class="dashicons dashicons-edit"></span> <?php _e('Add New Popup', 'wppb'); ?></a>
+				<a href="<?php echo esc_url(WPPB_PAGE_URL . '&custom-popup&_pnonce='.esc_attr(wp_create_nonce( 'nonce_pop' )), 'wppb'); ?>"> <span class="dashicons dashicons-edit"></span> <?php _e('Add New Popup', 'wppb'); ?></a>
 
 			</div>
 

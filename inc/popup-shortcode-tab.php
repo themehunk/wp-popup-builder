@@ -163,26 +163,32 @@ $popup_is_active = isset($popup_is_active) ? $popup_is_active : '';
 </section>
 <div class="wppb-popup-editor-divider"></div>
 <section class="wppb-popup-frequency">
-		<span class="popup-display-sub-heading">Frequency</span>
+		<span class="popup-display-sub-heading"><?php _e('Frequency','wppb');?></span>
 		<div class="wrap-frequency">
 			<div>
 				<input <?php if(isset($frequency['every-page']) ) esc_attr('checked'); ?> id="checkbox--frequency-every-page" type="radio" name="frequency" value="every-page">
-				<label for="checkbox--frequency-every-page"><span class="dashicons dashicons-yes-alt"></span><?php _e('Every Time Site Reload.','wppb');?></label>
+				<label for="checkbox--frequency-every-page">
+				<span class="dashicons dashicons-yes-alt"></span><?php _e('Every Time Site Reload.','wppb');?>
+			    </label>
 			</div>
 
 			<div>
 				<input <?php if(isset($frequency['one-time']) )  esc_attr('checked'); ?> id="checkbox--frequency-show-time" type="radio" name="frequency" value="one-time">
-				<label for="checkbox--frequency-show-time"><span class="dashicons dashicons-yes-alt"></span><?php _e('One Time Show On Visit Page.','wppb');?></label>
+				<label for="checkbox--frequency-show-time">
+					<span class="dashicons dashicons-yes-alt"></span><?php _e('One Time Show On Visit Page.','wppb');?>
+				</label>
 			</div>
 			<div class="frequency-day-hour">
 				<input type="radio" name="frequency" value="after-time">
-				<label><span class="dashicons dashicons-lock"></span><?php _e('How Much Time After Show Popup.','wppb');?> </label>
+				<label><span class="dashicons dashicons-lock"></span><?php _e('How Much Time After Show Popup.','wppb');?></label>
 			</div>
 
 		</div>
 </section>
 
 <div class="wppb-popup-editor-divider"></div>
+
 <section class="setting-submit-wrap">
-	<button class="wppb-popup-setting-save business_disabled" data-bid="<?php echo esc_attr($wppb_popup_id); ?>" ><?php _e('Save','wppb');?></button>
+	<button class="wppb-popup-setting-save business_disabled" data-bid="<?php echo esc_attr($wppb_popup_id); ?>" ><?php _e('Save','wppb');?>
+	</button>
 </section>

@@ -10,7 +10,7 @@ $jsonPopupDemo = $jsonPopupHtml = '';
 if (is_array($responseResult_) && !is_wp_error($responseResult_)) {
 	$countColumn = 0;
 	foreach ($responseResult_ as $prebuilt_value) {
-		$prebuilt_value =  $wp_builder_obj->wppb_changeFilePath($prebuilt_value, esc_url(WPPB_URL . "img/"));
+		$prebuilt_value =  $wp_builder_obj->wppb_changeFilePath($prebuilt_value, WPPB_URL . "img/");
 		$countColumn++;
 		$prebuiltData = $wp_builder_obj->wppbPopupList_json($prebuilt_value, $countColumn, count($responseResult_));
 		$jsonPopupDemo .= $prebuiltData['prebuilt-label'];
@@ -38,9 +38,6 @@ define('PAID_IMG_URL', WPPB_URL . 'img/paid/');
 			<input type="text" name="wppb-popup-name">
 		</div>
 	</div>
-
-
-
 
 	<!-- popup name  -->
 	<div data-tab-active='choose-layout' data-tab-group="prebuilt-layout" class="prebulit-demo-popup rl_i_editor-item-content-i rl_i_editor-item-content-choose-layout">
@@ -145,7 +142,7 @@ define('PAID_IMG_URL', WPPB_URL . 'img/paid/');
 				</div>
 			</div>
 			<!-- json data layout -->
-			<?php echo $jsonPopupHtml; ?>
+			<?php echo wp_kses_post($jsonPopupHtml); ?>
 			<!-- layout 3 -->
 		</section>
 		<!-- prebuilt popup section -->
@@ -211,141 +208,141 @@ define('PAID_IMG_URL', WPPB_URL . 'img/paid/');
 			</nav>
 		</div>
 		<div data-tab-active='free' data-tab-group="free-paid" class="prebuilt-free active">
-			<?php echo $jsonPopupDemo; ?>
+			<?php echo wp_kses_post($jsonPopupDemo); ?>
 		</div>
 		<div data-tab-active='paid' data-tab-group="free-paid" class="prebuilt-paid">
 			<div class="wppb-popup-row wppb-popup_clear">
 				<div class="wppb-popup-column-three">
-					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "40percent-thumb.png", "wppb") ?>"></label>
+					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "40percent-thumb.png", "wppb"); ?>"></label>
 				</div>
 				<div class="wppb-popup-column-three">
-					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "baby-offer-thumb.png", "wppb") ?>"></label>
+					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "baby-offer-thumb.png", "wppb"); ?>"></label>
 				</div>
 				<div class="wppb-popup-column-three">
-					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "barber-thumb.png", "wppb") ?>"></label>
-				</div>
-			</div>
-
-
-			<div class="wppb-popup-row wppb-popup_clear">
-				<div class="wppb-popup-column-three">
-					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "bottom-bar-thumb.jpg", "wppb") ?>"></label>
-				</div>
-				<div class="wppb-popup-column-three">
-					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "bottom-info-bar-layout.png", "wppb") ?>"></label>
-				</div>
-				<div class="wppb-popup-column-three">
-					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "child-care-thumb.png", "wppb") ?>"></label>
+					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "barber-thumb.png", "wppb"); ?>"></label>
 				</div>
 			</div>
 
 
 			<div class="wppb-popup-row wppb-popup_clear">
 				<div class="wppb-popup-column-three">
-					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "clickme-thumb.png", "wppb") ?>"></label>
+					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "bottom-bar-thumb.jpg", "wppb"); ?>"></label>
 				</div>
 				<div class="wppb-popup-column-three">
-					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "cup-cream-thumb.png", "wppb") ?>"></label>
+					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "bottom-info-bar-layout.png", "wppb"); ?>"></label>
 				</div>
 				<div class="wppb-popup-column-three">
-					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "dressling-thumb.png", "wppb") ?>"></label>
-				</div>
-			</div>
-
-
-			<div class="wppb-popup-row wppb-popup_clear">
-				<div class="wppb-popup-column-three">
-					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "ebook-thumb.png", "wppb") ?>"></label>
-				</div>
-				<div class="wppb-popup-column-three">
-					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "exit-popup-thumb.png", "wppb") ?>"></label>
-				</div>
-				<div class="wppb-popup-column-three">
-					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "fashion-sale-thumb.png", "wppb") ?>"></label>
+					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "child-care-thumb.png", "wppb"); ?>"></label>
 				</div>
 			</div>
 
 
 			<div class="wppb-popup-row wppb-popup_clear">
 				<div class="wppb-popup-column-three">
-					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "fashion-thumb.png", "wppb") ?>"></label>
+					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "clickme-thumb.png", "wppb"); ?>"></label>
 				</div>
 				<div class="wppb-popup-column-three">
-					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "full-width-img.png", "wppb") ?>"></label>
+					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "cup-cream-thumb.png", "wppb"); ?>"></label>
 				</div>
 				<div class="wppb-popup-column-three">
-					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "halloween-thumb.png", "wppb") ?>"></label>
-				</div>
-			</div>
-
-
-			<div class="wppb-popup-row wppb-popup_clear">
-				<div class="wppb-popup-column-three">
-					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "herbal-thumb.png", "wppb") ?>"></label>
-				</div>
-				<div class="wppb-popup-column-three">
-					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "ice-cream-thumb.png", "wppb") ?>"></label>
-				</div>
-				<div class="wppb-popup-column-three">
-					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "joinus-thumb.png", "wppb") ?>"></label>
+					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "dressling-thumb.png", "wppb"); ?>"></label>
 				</div>
 			</div>
 
 
 			<div class="wppb-popup-row wppb-popup_clear">
 				<div class="wppb-popup-column-three">
-					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "left-bottom.png", "wppb") ?>"></label>
+					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "ebook-thumb.png", "wppb"); ?>"></label>
 				</div>
 				<div class="wppb-popup-column-three">
-					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "left-center.png", "wppb") ?>"></label>
+					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "exit-popup-thumb.png", "wppb"); ?>"></label>
 				</div>
 				<div class="wppb-popup-column-three">
-					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "pizza-right-thumb.png", "wppb") ?>"></label>
+					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "fashion-sale-thumb.png", "wppb"); ?>"></label>
+				</div>
+			</div>
+
+
+			<div class="wppb-popup-row wppb-popup_clear">
+				<div class="wppb-popup-column-three">
+					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "fashion-thumb.png", "wppb"); ?>"></label>
+				</div>
+				<div class="wppb-popup-column-three">
+					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "full-width-img.png", "wppb"); ?>"></label>
+				</div>
+				<div class="wppb-popup-column-three">
+					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "halloween-thumb.png", "wppb"); ?>"></label>
+				</div>
+			</div>
+
+
+			<div class="wppb-popup-row wppb-popup_clear">
+				<div class="wppb-popup-column-three">
+					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "herbal-thumb.png", "wppb"); ?>"></label>
+				</div>
+				<div class="wppb-popup-column-three">
+					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "ice-cream-thumb.png", "wppb"); ?>"></label>
+				</div>
+				<div class="wppb-popup-column-three">
+					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "joinus-thumb.png", "wppb"); ?>"></label>
+				</div>
+			</div>
+
+
+			<div class="wppb-popup-row wppb-popup_clear">
+				<div class="wppb-popup-column-three">
+					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "left-bottom.png", "wppb"); ?>"></label>
+				</div>
+				<div class="wppb-popup-column-three">
+					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "left-center.png", "wppb"); ?>"></label>
+				</div>
+				<div class="wppb-popup-column-three">
+					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "pizza-right-thumb.png", "wppb"); ?>"></label>
 				</div>
 			</div>
 
 			<div class="wppb-popup-row wppb-popup_clear">
 				<div class="wppb-popup-column-three">
-					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "right-bottom.png", "wppb") ?>"></label>
+					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "right-bottom.png", "wppb"); ?>"></label>
 				</div>
 				<div class="wppb-popup-column-three">
-					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "right-center.png", "wppb") ?>"></label>
+					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "right-center.png", "wppb"); ?>"></label>
 				</div>
 				<div class="wppb-popup-column-three">
-					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "scroll-page-thumb.jpg", "wppb") ?>"></label>
-				</div>
-			</div>
-
-			<div class="wppb-popup-row wppb-popup_clear">
-				<div class="wppb-popup-column-three">
-					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "shoes-thumb.png", "wppb") ?>"></label>
-				</div>
-				<div class="wppb-popup-column-three">
-					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "social-botom-thumb.png", "wppb") ?>"></label>
-				</div>
-				<div class="wppb-popup-column-three">
-					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "social-left-thumb.png", "wppb") ?>"></label>
+					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "scroll-page-thumb.jpg", "wppb"); ?>"></label>
 				</div>
 			</div>
 
 			<div class="wppb-popup-row wppb-popup_clear">
 				<div class="wppb-popup-column-three">
-					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "social-right-thumb.png", "wppb") ?>"></label>
+					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "shoes-thumb.png", "wppb"); ?>"></label>
 				</div>
 				<div class="wppb-popup-column-three">
-					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "subscribe-right.jpg", "wppb") ?>"></label>
+					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "social-botom-thumb.png", "wppb"); ?>"></label>
 				</div>
 				<div class="wppb-popup-column-three">
-					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "tasteofindia-thumb.png", "wppb") ?>"></label>
+					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "social-left-thumb.png", "wppb"); ?>"></label>
 				</div>
 			</div>
 
 			<div class="wppb-popup-row wppb-popup_clear">
 				<div class="wppb-popup-column-three">
-					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "top-bar-thumb.png", "wppb") ?>"></label>
+					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "social-right-thumb.png", "wppb"); ?>"></label>
 				</div>
 				<div class="wppb-popup-column-three">
-					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "top-info-bar-layout.png", "wppb") ?>"></label>
+					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "subscribe-right.jpg", "wppb"); ?>"></label>
+				</div>
+				<div class="wppb-popup-column-three">
+					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "tasteofindia-thumb.png", "wppb"); ?>"></label>
+				</div>
+			</div>
+
+			<div class="wppb-popup-row wppb-popup_clear">
+				<div class="wppb-popup-column-three">
+					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "top-bar-thumb.png", "wppb"); ?>"></label>
+				</div>
+				<div class="wppb-popup-column-three">
+					<label class="wppb-popup-json-label lock"><img src="<?php echo esc_url(PAID_IMG_URL . "top-info-bar-layout.png", "wppb"); ?>"></label>
 				</div>
 			</div>
 
@@ -356,7 +353,8 @@ define('PAID_IMG_URL', WPPB_URL . 'img/paid/');
 	<!-- prebuilt json file  -->
 
 	<div class="wp-popup-name-layout-name-init">
-		<button class="wppb-popup-name-init business_disabled"><?php _e('NEXT', 'wppb'); ?></button>
+		<button class="wppb-popup-name-init business_disabled"><?php _e('NEXT', 'wppb'); ?>
+		</button>
 	</div>
 
 </section>

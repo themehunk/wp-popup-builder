@@ -97,29 +97,20 @@ function initContent($column_content){
 	}
 
 	function popup_layout($popupSetData,$layout=''){
-
-			$overlay_image = $popupSetData['overlay-image-url']?'background-image:url('.esc_url($popupSetData['overlay-image-url']).');':'';
+			$overlay_image = $popupSetData['overlay-image-url']?'background-image:url('.$popupSetData['overlay-image-url'].');':'';
 			$overlayStyle = $overlay_image?$overlay_image.$popupSetData['overlay-style']:'';
 
-			$globalHeight = $popupSetData["wrapper-height"] != 'auto'?esc_attr($popupSetData["wrapper-height"]).'px;':esc_attr($popupSetData["wrapper-height"]).';';
-			$globalStyle = "padding:".esc_attr($popupSetData["global-padding"]).";height:".esc_attr($globalHeight);
+			$globalHeight = $popupSetData["wrapper-height"] != 'auto'?$popupSetData["wrapper-height"].'px;':$popupSetData["wrapper-height"].';';
+			$globalStyle = "padding:".$popupSetData["global-padding"].";height:".$globalHeight;
 
-			echo $popupSetData["close-btn"];
-
-			?>
-
-			<div class="wppb-popup-custom-wrapper" style="<?php echo esc_attr($popupSetData["wrapper-style"]);?>">
-			         <div class="wppb-popup-overlay-custom-img" data-overlay-image="<?php echo esc_attr($popupSetData['overlay-image-url']);?>" style="<?php  echo esc_attr($overlayStyle); ?>"></div>
-
-			          <div class="wppb-popup-custom-overlay" style="background-color:<?php echo esc_attr($popupSetData['overlay-color']);?>;">
-			          	
-			          </div>
-
-			              <div class="wppb-popup-custom-content" style="<?php echo esc_attr($globalStyle);?>">
-				              <?php echo $popupSetData["content"];?>
+			$return = $popupSetData["close-btn"].'<div class="wppb-popup-custom-wrapper" style="'.$popupSetData["wrapper-style"].'">
+			         <div class="wppb-popup-overlay-custom-img" data-overlay-image="'.$popupSetData['overlay-image-url'].'" style="'.$overlayStyle.'"></div>
+			          <div class="wppb-popup-custom-overlay" style="background-color:'.$popupSetData['overlay-color'].';"></div>
+			              <div class="wppb-popup-custom-content" style="'.$globalStyle.'">
+				            '.$popupSetData["content"].'
 			              </div>
-			        </div>
-			        <?php 
+			        </div>';
+			return $return;
 	}
 
 // popup page list of all popupSetData content
@@ -162,13 +153,15 @@ public function wppbPopupContent($allSetting){
 
 public function wppbPopupList($allSetting,$business_id,$isActive=false,$device_){
 
+    $_nonce = wp_create_nonce( 'nonce_pop' );
+
 		$popup_is_active = $isActive?"checked='checked'":"";	
 
 		$popup_name = isset($allSetting[0]['content']['popup-name']) && $allSetting[0]['content']['popup-name'] ? $allSetting[0]['content']['popup-name']:'';
 
 		$business_id = $business_id?$business_id:"";
 
-		$url    = WPPB_PAGE_URL.'&custom-popup='.$business_id;
+		$url    = WPPB_PAGE_URL.'&custom-popup='.$business_id.'&_pnonce='.esc_attr( $_nonce );
 
 		$all 	 = !$device_ || $device_ == "all" ? 'checked' : '';
 
@@ -208,6 +201,7 @@ public function wppbPopupList($allSetting,$business_id,$isActive=false,$device_)
 
 // popup page list of all popupSetData json file
 public function wppbPopupList_json($allSetting,$column_making,$countPopup){
+
 		$imageUrl = isset($allSetting[0]['img-url']) ? $allSetting[0]['img-url'] : '';
 
 		$imageUrl = $imageUrl ? "<img src='".esc_url($imageUrl)."'>" : '';
@@ -237,14 +231,14 @@ public function wppbPopupList_json($allSetting,$column_making,$countPopup){
 
 		if($countPopup == ($column_making)){
 
-			$returnHtml['prebuilt-label'] .= '</div>';
+		$returnHtml['prebuilt-label'] .= '</div>';
 
 		}elseif(($column_making) % 3 === 0){
 
-			$returnHtml['prebuilt-label'] .= '</div><div class="wppb-popup-row wppb-popup_clear">';
+		$returnHtml['prebuilt-label'] .= '</div><div class="wppb-popup-row wppb-popup_clear">';
 
 		}
-		
+
 		return $returnHtml;
 }
 
@@ -265,7 +259,7 @@ public function wppbPopupList_json($allSetting,$column_making,$countPopup){
 						$return_data = true;
 					}else if( $device == 'desktop' && !$checkMobile ){ //mobile condition
 						$return_data =  true;
-					}else if ( $device == 'all' || $device == false ) { //all and if not device set
+					}else if( $device == 'all' || $device == false ){ //all and if not device set
 						$return_data =  true;
 					}
 				}
@@ -286,12 +280,12 @@ public function wppbPopupList_json($allSetting,$column_making,$countPopup){
 			}
 
 			// class and attr by trigger
-			if ( isset($option['trigger']) ) {
+			if ( isset($option['trigger']) ){
 				$trigger = $option['trigger'];
 				//for page load 
 				if ( isset($trigger['page-load']) ){
-					 if (!$trigger['page-load'] || $trigger['page-load'] == 'false') $return_ = false;;
-					}
+					 if (!$trigger['page-load'] || $trigger['page-load'] == 'false') $return_ = false;
+				}
 				//for setting like popup open delay 
 				if ( isset($trigger['time']) ) {
 					$minute_ = isset($trigger['time']['minute']) && is_numeric(isset($trigger['time']['minute'])) ? $trigger['time']['minute'] * 60 :false;
@@ -348,7 +342,7 @@ public function wppbPopupList_json($allSetting,$column_making,$countPopup){
 	public function color($title,$prop,$type,$color_id=1,$attr=''){
 		if ($title && $prop && $type) {
 
-			$typeAndProp = esc_attr($type).'="'.esc_attr($prop).'"' . esc_attr($attr);
+		  	$typeAndProp = esc_attr($type).'="'.esc_attr($prop).'"' . esc_attr($attr);
 
 			?>
 			<div class="rl_i_editor-item-content-items item-text inline__">
@@ -359,6 +353,7 @@ public function wppbPopupList_json($allSetting,$column_making,$countPopup){
 					</div>
 			</div>
 		<?php }
+
 	}
 
 	public function range_slider($title, $id, $arr, $id_two=false, $type_ = "data-global-input"){
@@ -386,11 +381,11 @@ public function wppbPopupList_json($allSetting,$column_making,$countPopup){
 
 		 		<?php echo esc_html($title);?>
 		 			
-		 		</label>
+		 	</label>
 
 			<div class="range_ rl_i_range-font-size">
-							<input data-show-range="<?php echo esc_attr($id_two);?>" type="range"  <?php echo $attr;?>>
-						</div>
+			<input data-show-range="<?php echo esc_attr($id_two);?>" type="range"  <?php echo $attr;?>>
+			</div>
 
 			<div class="data-range-output">
 							<input class="rl-sub-title" type="number" data-range-output="<?php echo esc_attr($id_two);?>"  <?php echo $attrTwo;?>>
@@ -415,7 +410,7 @@ public function wppbPopupList_json($allSetting,$column_making,$countPopup){
 
 							<?php }elseif ( isset($value[0]) ) { ?>
 
-								<option><?php echo esc_attr($value[0]);?></option>
+							<option><?php echo esc_attr($value[0]);?></option>
 
 						<?php 	}
 						}	

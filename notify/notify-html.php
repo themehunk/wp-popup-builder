@@ -1,4 +1,4 @@
-<div class="notice th-notice-slide-wrapper" style="display:<?php echo $display; ?>;">
+<div class="notice th-notice-slide-wrapper" style="display:<?php echo esc_attr($display); ?>">
     <div class="th-notice-slide-wrap">
         <?php
         if ($theme !== 'amaz-store') { ?>

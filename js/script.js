@@ -10,12 +10,14 @@
       this_btn.addClass("rlLoading");
       let saveData = Wppb_save._saveData();
 
-      let data_ = { action: "custom_insert", htmldata: saveData };
+      let data_ = { action: "custom_insert", htmldata: saveData, p_wppb_nonce:wppb_ajax_backend.wppb_nonce };
       let returnData = Wppb_save._ajaxFunction(data_);
       returnData.success(function (response) {
+        
         if (response && response != 0) {
+      
           let pathName =
-            window.location.pathname + window.location.search + "=" + response;
+          window.location.pathname + window.location.search + "&custom-popup=" + response;
           window.history.replaceState(null, null, pathName);
           location.reload();
         }
@@ -28,7 +30,7 @@
       this_btn.addClass("rlLoading");
       let saveData = Wppb_save._saveData();
       let bid = this_btn.data("bid");
-      let data_ = { action: "custom_update", htmldata: saveData, bid: bid };
+      let data_ = { action: "custom_update", htmldata: saveData, bid: bid, p_wppb_nonce:wppb_ajax_backend.wppb_nonce };
       let returnData = Wppb_save._ajaxFunction(data_);
       returnData.success(function (response) {
         if (response || response == 0) {
@@ -309,7 +311,7 @@
           let confirmBtn = $(this);
           confirmBtn.addClass("rlLoading");
           e.preventDefault();
-          let data_ = { action: "delete_popup", bid: bid };
+          let data_ = { action: "delete_popup", bid: bid, p_wppb_nonce:wppb_ajax_backend.wppb_nonce };
           let returnData = Wppb_save._ajaxFunction(data_);
           returnData.success(function (response) {
             if (response || response == 0) {
@@ -379,6 +381,7 @@
         action: "popup_active",
         bid: popup_id,
         is_active: isActive,
+        p_wppb_nonce:wppb_ajax_backend.wppb_nonce,
       };
       let returnData = Wppb_save._ajaxFunction(data_);
       returnData.success(function (response) {
@@ -505,7 +508,7 @@
       let button = $(this);
       button.addClass("rlLoading");
       let bid = button.data("bid");
-      let data_ = { action: "option_update", popup_id: bid, option: optData };
+      let data_ = { action: "option_update", popup_id: bid, option: optData, p_wppb_nonce:wppb_ajax_backend.wppb_nonce };
       let returnData = Wppb_save._ajaxFunction(data_);
       returnData.success(function (response) {
         // console.log(response);
