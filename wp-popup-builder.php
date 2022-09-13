@@ -25,7 +25,7 @@ if (!function_exists('wppb_loaded_pro')) {
     $instance  = wppb::get();
     $load_Files =  wppb::load_file();
     foreach ($load_Files as $value) {
-      include_once(WPPB_PATH . 'admin/' . $value . '.php');
+      include_once(WPPB_PATH . 'admin/' . esc_html($value) . '.php');
     }
     wppb_shortcode::get();
     wppb_load::get();

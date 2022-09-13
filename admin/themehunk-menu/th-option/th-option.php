@@ -1,6 +1,8 @@
 <?php
 class themehunk_plugin_option{
+
 function __construct(){
+
     // AJAX.
     add_action( 'wp_ajax_th_activeplugin',array($this,'th_activeplugin') );
   }
@@ -13,10 +15,10 @@ function get_plugin(){
 function tab_constant(){
     $theme_data = wp_get_theme();
     $tab_array = array();
-    $tab_array['header'] = array('theme_brand' => __('ThemeHunk','wp-popup-builder'),
+    $tab_array['header'] = array('theme_brand' => __('ThemeHunk','wppb'),
     'theme_brand_url' => esc_url($theme_data->get( 'AuthorURI' )),
-    'welcome'=>esc_html__('ThemeHunk Marketplace', 'wp-popup-builder' ),
-    'welcome_desc' => esc_html__('Grow your business free and paid ThemeHunk plugins.', 'wp-popup-builder' ),
+    'welcome'=>esc_html__('ThemeHunk Marketplace', 'wppb' ),
+    'welcome_desc' => esc_html__('Grow your business free and paid ThemeHunk plugins.', 'wppb' ),
     'v'=> 'Version '.esc_html($theme_data->get( 'Version' ))
     );
     return $tab_array;
@@ -39,7 +41,7 @@ function tab_page() {
         wp_send_json_error(
           array(
             'success' => false,
-            'message' => __( 'No plugin specified', 'wp-popup-builder' ),
+            'message' => __( 'No plugin specified', 'wppb' ),
           )
         );
       }
@@ -60,7 +62,7 @@ function tab_page() {
       wp_send_json_success(
         array(
           'success' => true,
-          'message' => __( 'Plugin Successfully Activated', 'wp-popup-builder' ),
+          'message' => __( 'Plugin Successfully Activated', 'wppb' ),
         )
       );
 
@@ -82,12 +84,12 @@ function tab_page() {
                $plugin_init = $plugin['active_filename'];
                $image_slug = $slug;
                $pro_text = $admin_link = $docs = ''; 
-               $pluginArr['free_pro'] = 'Free';
-                $pro_active = '';
-                $pluginArr['admin_link'] = $plugin['admin_link'];
+               $pluginArr['free_pro'] = __('Free','wppb');
+               $pro_active = '';
+               $pluginArr['admin_link'] = $plugin['admin_link'];
 
            if( file_exists($pro_path)) {
-               $pluginArr['free_pro'] = 'Pro';
+               $pluginArr['free_pro'] = __('Pro','wppb');
                $plugin_init = $plugin['pro-plugin']['init'];
                $pluginArr['admin_link'] = $plugin['pro-plugin']['admin_link'];
                $admin_link = $plugin['pro-plugin']['admin_link'];
@@ -105,14 +107,14 @@ function tab_page() {
 
              if ( is_plugin_active( $plugin_init ) ) {
                    $button_class = 'button disabled '.$slug;
-                   $button_txt = esc_html__( 'Activated', 'wp-popup-builder' );
+                   $button_txt = esc_html__( 'Activated', 'wppb' );
                    $detail_link = $install_url = '';
                    $pro_active = 1; 
 
                 }
 
             if ( ! is_plugin_active( $plugin_init ) ){
-                    $button_txt = esc_html__( 'Install Now', 'wp-popup-builder' );
+                    $button_txt = esc_html__( 'Install Now', 'wppb' );
                     if ( ! $status ) {
                         $install_url = wp_nonce_url(
                             add_query_arg(
@@ -129,12 +131,12 @@ function tab_page() {
                         $install_url = add_query_arg(array(
                             'action' => 'activate',
                             'plugin' => rawurlencode( $plugin_init ),
-                            'plugin_status' => 'all',
+                            'plugin_status' => esc_html__( 'all', 'wppb' ),
                             'paged' => '1',
                             '_wpnonce' => wp_create_nonce('activate-plugin_' . $plugin_init ),
                         ), network_admin_url('plugins.php'));
                         $button_class = 'activate-now button-primary '.$slug;
-                        $button_txt = esc_html__( 'Activate Now', 'wp-popup-builder' );
+                        $button_txt = esc_html__( 'Activate Now', 'wppb' );
                     }
                 }
                 $detail_link = add_query_arg(
@@ -151,10 +153,10 @@ function tab_page() {
                     $pluginArr['plugin_name'] =  $plugin['name'];
                     $pluginArr['pro_text']= $pro_text;
                     $pluginArr['slug']= $slug;
-                    $pluginArr['thumb']= "https://ps.w.org/". $image_slug."/assets/".$plugin['img'];
+                    $pluginArr['thumb']= esc_url("https://ps.w.org/". $image_slug."/assets/".$plugin['img']);
                     $pluginArr['plugin_init']= $plugin_init;
                     $pluginArr['detail_pro']= $plugin['details'];
-                   $pluginArr['detail_link']= $detail_link;
+                    $pluginArr['detail_link']= $detail_link;
                     $pluginArr['button_txt']= $button_txt;
                     $pluginArr['button_class']= $button_class;
                     $pluginArr['plugin_active']= $pro_active;
@@ -162,10 +164,10 @@ function tab_page() {
 
                    $this->plugin_install_button($pluginArr);
         }
+
     } // plugin check
+
 }
-
-
 /*** Plugin Butons ***/
 function plugin_install_button($plugin){
   $slug = $plugin['slug'];
@@ -197,7 +199,7 @@ function plugin_install_button($plugin){
   $button .=  $upgrade_button;
   $button .= '</div></div>';
 
-  echo $button;
+  echo wp_kses_post($button);
 }
     
 } // class end

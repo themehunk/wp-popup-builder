@@ -126,7 +126,7 @@ public function wppbPopupContent($allSetting){
 				'global-padding'	=>'23px 37px',
 				'layout' 			=> '',
 				'close-btn' 		=> '',
-				'popup-name' 		=> 'New Popup name'
+				'popup-name' 		=> __('New Popup name','wppb'),
 			);
 		foreach ($allSetting as $setting_value) {
 			if (isset($setting_value['content']) && is_array($setting_value['content'])) {
@@ -365,6 +365,7 @@ public function wppbPopupList_json($allSetting,$column_making,$countPopup){
  			$attr .= isset( $arr['max'] ) ?'max="'.esc_attr($arr['max']).'"': ''; 
 
  			$attr .= isset( $arr['value'] ) ?'value="'.esc_attr($arr['value']).'"': '';
+ 			
  			$attr .= $attrTwo = isset( $arr['attr'] ) ? $arr['attr'] : '';
 
  			$id_two = !$id_two ? $id : $id_two;
@@ -388,7 +389,7 @@ public function wppbPopupList_json($allSetting,$column_making,$countPopup){
 			</div>
 
 			<div class="data-range-output">
-							<input class="rl-sub-title" type="number" data-range-output="<?php echo esc_attr($id_two);?>"  <?php echo $attrTwo;?>>
+			<input class="rl-sub-title" type="number" data-range-output="<?php echo esc_attr($id_two);?>"  <?php echo $attrTwo;?>>
 			</div>
 			</div>
 

@@ -23,20 +23,24 @@ class wppb
 
 		add_submenu_page( 'themehunk-plugins', __('Wp Popup Builder', 'wppb'), __('Wp Popup Builder', 'wppb'), 'manage_options', 'wppb', array($this, 'display_addons'),51 );
 
-		//add_menu_page(__('Wp Popup Builder', 'wppb'), __('Wp Popup Builder', 'wppb'), 'wppb_manager', 'wppb', array($this, 'display_addons'), WPPB_URL . 'img/wppb-pro-icon.png');
 	}
 	public function display_addons()
 	{
 		if ( ! current_user_can( 'manage_options' ) ) {
 				wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
 		}
-		// include_once WPPB_PATH.'inc/popup-init.php';
+
 		$wp_builder_obj = new wp_popup_builder_init();
+		
 		if (isset($_GET['custom-popup'])) {
+
 			include_once WPPB_PATH . "inc/popup.php";
+
 		} else {
+
 			include_once WPPB_PATH . "inc/popups-page.php";
 		}
+
 	}
 
 	public function enqueue_admin_script($hook)
