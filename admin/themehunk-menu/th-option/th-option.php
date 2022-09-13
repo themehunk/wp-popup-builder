@@ -176,12 +176,12 @@ function plugin_install_button($plugin){
   $pro_active=$plugin['plugin_active'];
 
   $deatil_link = '<a class="plugin-detail" target="_blank" href="'.esc_url( $plugin['detail_pro'] ).'">'.esc_html__( 'View details', 'wp-popup-builder' ).'</a>
-   <span class="setting-link'.esc_attr($pro_active).' setting-'.esc_attr($slug).'">|</span><a class="setting-link'.esc_attr($pro_active).' setting-'.esc_attr($slug).'" href="'.admin_url('admin.php?page='.esc_attr($admin_link)).'">'._('Settings','wppb').'</a>';
+   <span class="setting-link'.esc_attr($pro_active).' setting-'.esc_attr($slug).'">|</span><a class="setting-link'.esc_attr($pro_active).' setting-'.esc_attr($slug).'" href="'.admin_url('admin.php?page='.esc_attr($admin_link)).'">'.__('Settings','wppb').'</a>';
 
   if($plugin['free_pro']=='Free' && $slug !='themehunk-megamenu-plus'){
   $upgrade_button ='<a class="upgrade-to-pro button" target="_blank" href="'.$plugin['detail_pro'].'">Upgrade To Pro</a>';
   $deatil_link = '<a class="plugin-detail" target="_blank" href="'.esc_url( 'https://wordpress.org/plugins/'.esc_attr($slug )).'">'.esc_html__( 'View details', 'wp-popup-builder' ).'</a>
-  <span class="setting-link'.esc_attr($pro_active).' setting-'.esc_attr($slug).'">|</span><a class="setting-link'.esc_attr($pro_active).' setting-'.esc_attr($slug).'" href="'.admin_url('admin.php?page='.esc_attr($admin_link)).'">'._('Settings','wppb').'</a>';
+  <span class="setting-link'.esc_attr($pro_active).' setting-'.esc_attr($slug).'">|</span><a class="setting-link'.esc_attr($pro_active).' setting-'.esc_attr($slug).'" href="'.admin_url('admin.php?page='.esc_attr($admin_link)).'">'.__('Settings','wppb').'</a>';
   }
 
 
@@ -192,7 +192,7 @@ function plugin_install_button($plugin){
 
   $button .= '<div class="title-plugin">
   <h4>'.esc_html( $plugin['plugin_name'] ). ' <b class="th-'.esc_attr($plugin['free_pro']).'">'.esc_html($plugin['free_pro']).'</b> </h4>';
-  $button .= '<div class="plugin-link">'.esc_html($deatil_link).'</div>';
+  $button .= '<div class="plugin-link">'.wp_kses_post($deatil_link).'</div>';
   $button .= '</div>';
 
   $button .='<button data-activated="Activated" data-msg="Activating" data-init="'.esc_attr($plugin['plugin_init']).'" data-slug="'.esc_attr( $plugin['slug'] ).'" class="button '.esc_attr( $plugin['button_class'] ).'">'.esc_html($plugin['button_txt']).'</button>';

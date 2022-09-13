@@ -385,11 +385,11 @@ public function wppbPopupList_json($allSetting,$column_making,$countPopup){
 		 	</label>
 
 			<div class="range_ rl_i_range-font-size">
-			<input data-show-range="<?php echo esc_attr($id_two);?>" type="range"  <?php echo $attr;?>>
+			<input data-show-range="<?php echo esc_attr($id_two);?>" type="range"  <?php echo wp_kses_post($attr);?>>
 			</div>
 
 			<div class="data-range-output">
-			<input class="rl-sub-title" type="number" data-range-output="<?php echo esc_attr($id_two);?>"  <?php echo $attrTwo;?>>
+			<input class="rl-sub-title" type="number" data-range-output="<?php echo esc_attr($id_two);?>"  <?php echo wp_kses_post($attrTwo);?>>
 			</div>
 			</div>
 

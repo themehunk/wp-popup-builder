@@ -12,8 +12,10 @@ class ThemeHunk_Notify{
 
     function __construct(){
 
-		if(isset($_GET['notice-disable']) && $_GET['notice-disable'] == true){
+		if(isset($_GET['notice-disable']) && sanitize_text_field($_GET['notice-disable']) == true){
+
 		add_action('admin_init', array($this,'set_cookie'));
+
 		}
 
 

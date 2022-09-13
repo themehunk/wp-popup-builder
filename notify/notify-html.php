@@ -6,7 +6,7 @@
             <div class="thunk-notice">
                 <div class="thunk-review-thumbnail">
                     <a href="https://themehunk.com/product/amaz-store/" target="_blank">
-                        <img src="<?php echo esc_url(WPPB_URL); ?>notify/assets/images/amaz-store.png" alt="Amaz Store - Free Shopping WordPress Theme" />
+                        <img src="<?php echo esc_url(WPPB_URL .'notify/assets/images/amaz-store.png');?>" alt="Amaz Store - Free Shopping WordPress Theme" />
                     </a>
                 </div>
                 <div class="thunk-notice-text">
