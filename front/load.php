@@ -45,7 +45,12 @@ class wppb_load
 
 					$popupData = $popupInitObj->show_popup_part_start($value);
 
-					if ($popupData) echo $popupData;
+					if ($popupData) {
+
+						echo wp_kses_post($popupData);
+					}
+
+						
 					
 				}
 			}

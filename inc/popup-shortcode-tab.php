@@ -100,7 +100,7 @@ $popup_is_active = isset($popup_is_active) ? $popup_is_active : '';
 		<div class="wppb-popup-placement">
 			<ul class="rl-clear">
 				<li>
-					<input id='popup--device-all' type="radio" name="popup-device" value="all" <?php if( $device == "all" )echo "checked"; ?> >
+					<input id='popup--device-all' type="radio" name="popup-device" value="all" <?php if( $device == "all" ) echo esc_attr("checked"); ?> >
 					<label for='popup--device-all'><span class="dashicons dashicons-desktop"></span><span><?php _e('All Device','wppb');?></span></label>
 				</li>
 				<li>

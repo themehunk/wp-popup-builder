@@ -117,7 +117,7 @@ if ( ! wp_verify_nonce( $nonce, 'nonce_pop' ) ) {
 
 		<div class="wppb-popup-cmn-nav-item">
 
-			<a class="wppb_icon_button" href="<?php _e(esc_url(WPPB_PAGE_URL), 'wppb') ?>">
+			<a class="wppb_icon_button" href="<?php echo esc_url(WPPB_PAGE_URL); ?>">
 				<span class="dashicons dashicons-arrow-left-alt"></span><span><?php _e('Back', 'wppb'); ?></span>
 			</a>
 
@@ -174,7 +174,12 @@ if ( ! wp_verify_nonce( $nonce, 'nonce_pop' ) ) {
 
 	<div class="wppb-popup-option wppb-popup-tab-container <?php echo esc_attr($tabActiveOption); ?>" data-tab-active='option' data-tab-group="main-nav">
 
-		<?php if (isset($wppb_popup_id)) include_once 'popup-shortcode-tab.php' ?>
+		<?php if (isset($wppb_popup_id)){
+
+		include_once 'popup-shortcode-tab.php'; 
+
+        }
+		?>
 
 	</div>
 
