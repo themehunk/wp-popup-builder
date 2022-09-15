@@ -208,7 +208,7 @@ define('WPPB_ADIMG_URL', WPPB_URL . 'img/paid/');
 			</nav>
 		</div>
 		<div data-tab-active='free' data-tab-group="free-paid" class="prebuilt-free active">
-			<?php echo wp_kses_post($jsonPopupDemo); ?>
+			<?php echo $jsonPopupDemo; ?>
 		</div>
 		<div data-tab-active='paid' data-tab-group="free-paid" class="prebuilt-paid">
 			<div class="wppb-popup-row wppb-popup_clear">
