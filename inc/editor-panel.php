@@ -285,7 +285,7 @@ if (file_exists(WP_PLUGIN_DIR . '/lead-form-builder/lead-form-builder.php') && i
 						<div>
 							<div class="popup-delete-wrap">
 
-								<?php echo wp_kses_post($popupSetData['deletebtn']); ?>
+								<?php echo $popupSetData['deletebtn']; ?>
 									
 								</div>
 							<?php $wp_builder_obj->checkbox('popup_setting_active', __('Activate', 'wppb'), 'class="wppb_popup_setting_active" data-bid="' . esc_attr($wppb_popup_id) . '"' . esc_attr($popup_is_active)); ?>
@@ -412,7 +412,7 @@ if (file_exists(WP_PLUGIN_DIR . '/lead-form-builder/lead-form-builder.php') && i
 		</div>
 		<div class="rl_i_editor-footer">
 			<div class="rl_i_editor-footer-area">
-				<?php echo wp_kses_post($popupSetData['savebtn']); ?>
+				<?php echo $popupSetData['savebtn']; ?>
 			</div>
 		</div>
 	</div>
