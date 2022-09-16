@@ -1,7 +1,6 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit;
 ?>
-
 <input type="hidden" name="popup-url" value="<?php echo esc_attr(WPPB_URL); ?>">
 
 <input type="hidden" data-global-save="global-content" value='<?php echo esc_attr($popupSetData["global_content"]); ?>'>

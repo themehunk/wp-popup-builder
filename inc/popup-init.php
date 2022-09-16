@@ -342,14 +342,12 @@ public function wppbPopupList_json($allSetting,$column_making,$countPopup){
 	public function color($title,$prop,$type,$color_id=1,$attr=''){
 		if ($title && $prop && $type) {
 
-		  	$typeAndProp = esc_attr($type).'="'.esc_attr($prop).'"' . esc_attr($attr);
-
 			?>
 			<div class="rl_i_editor-item-content-items item-text inline__">
 			   <label class="rl-sub-title"><?php echo esc_html($title);?></label>
 				
 					<div>
-						<label class="color-output" data-input-color="<?php echo esc_attr($color_id);?>" <?php echo $typeAndProp;?>></label>
+						<label class="color-output" data-input-color="<?php echo esc_attr($color_id);?>" <?php echo esc_attr($type).'="'.esc_attr($prop).'"' . esc_attr($attr);?>></label>
 					</div>
 			</div>
 		<?php }
@@ -359,18 +357,6 @@ public function wppbPopupList_json($allSetting,$column_making,$countPopup){
 	public function range_slider($title, $id, $arr, $id_two=false, $type_ = "data-global-input"){
 
  			$title_ = isset( $arr['title'] ) ? $arr['title'] : ''; 
-
- 			$attr  = isset( $arr['min'] ) ?'min="'.esc_attr($arr['min']).'"': ''; 
-
- 			$attr .= isset( $arr['max'] ) ?'max="'.esc_attr($arr['max']).'"': ''; 
-
- 			$attr .= isset( $arr['value'] ) ?'value="'.esc_attr($arr['value']).'"': '';
- 			
- 			$attr .= $attrTwo = isset( $arr['attr'] ) ? $arr['attr'] : '';
-
- 			$id_two = !$id_two ? $id : $id_two;
-
- 			$attr .=  $type_.'="'.esc_attr($id).'"';
 
  			$container = isset( $arr['container-class'] ) ? $arr['container-class'] : '';
 
@@ -385,11 +371,11 @@ public function wppbPopupList_json($allSetting,$column_making,$countPopup){
 		 	</label>
 
 			<div class="range_ rl_i_range-font-size">
-			<input data-show-range="<?php echo esc_attr($id_two);?>" type="range"  <?php echo wp_kses_post($attr);?>>
+			<input data-show-range="<?php echo esc_attr($id_two);?>" type="range"  min="<?php echo esc_attr($arr['min']);?>"  max="<?php echo esc_attr($arr['max']);?>" value="<?php echo esc_attr($arr['value']);?>" <?php echo esc_attr($type_).'="'.esc_attr($id).'"'?>>
 			</div>
 
 			<div class="data-range-output">
-			<input class="rl-sub-title" type="number" data-range-output="<?php echo esc_attr($id_two);?>"  <?php echo wp_kses_post($attrTwo);?>>
+			<input class="rl-sub-title" type="number" data-range-output="<?php echo esc_attr($id_two);?>" value="<?php echo esc_attr($arr['value']);?>" >
 			</div>
 			</div>
 
@@ -432,11 +418,13 @@ public function wppbPopupList_json($allSetting,$column_making,$countPopup){
 
 					<div class="wppb-popup-checkbox-container">
 
-						<label class="wppb-popup-checkbox-title rl-sub-title"><?php echo esc_html($title);?></label>
+						<label class="wppb-popup-checkbox-title rl-sub-title">
+
+						<?php echo esc_html($title);?></label>
 
 						<div class="wppb-popup-checkbox">
 
-							<input id="wppb_popup__checkbox__label_id-<?php echo esc_attr($id);?>" type="checkbox" <?php echo $attr;?>>
+							<input id="wppb_popup__checkbox__label_id-<?php echo esc_attr($id);?>" type="checkbox" <?php echo $attr; ?>>
 
 							<label for="wppb_popup__checkbox__label_id-<?php echo esc_attr($id);?>"></label>
 
@@ -453,17 +441,16 @@ public function wppbPopupList_json($allSetting,$column_making,$countPopup){
 
 		public function border($id,$type,$attr = ''){
 		$data_attr = esc_attr($type).'="'.esc_attr($id).'"' . esc_attr($attr);
-		$border = $this->select($data_attr.' data-border="border-style"',[ ['solid','solid'],['dashed','dashed'],['dotted','dotted'],['double','double'],['groove','groove'],['ridge','ridge'] ]);
 		?>
 			<section class="content-style-border">
 
-					<?php echo $this->checkbox($id,"Border",$data_attr.' data-border="border-enable"');
+					<?php $this->checkbox($id,"Border",$data_attr.' data-border="border-enable"');
 					?>
 
 					<div  class="rl_i_editor-item-content-items content-border">
 						<div>
 							<label class="rl-sub-title"><?php _e('Border Width(<small>px</small>)','wppb');?></label>
-							<div><input class="rl-sub-title" type="number" value="" <?php echo $data_attr;?> data-border="width"></div>
+							<div><input class="rl-sub-title" type="number" value="" <?php echo esc_attr($type).'="'.esc_attr($id).'"' . esc_attr($attr);?> data-border="width"></div>
 						</div>
 						<div>
 
@@ -471,7 +458,7 @@ public function wppbPopupList_json($allSetting,$column_making,$countPopup){
 							</label>
 
 							<div>
-								<input class="rl-sub-title" type="number" value="" <?php echo $data_attr;?> data-border="radius">
+								<input class="rl-sub-title" type="number" value="" <?php echo esc_attr($type).'="'.esc_attr($id).'"' . esc_attr($attr);?> data-border="radius">
 							</div>
 
 						</div>
@@ -480,7 +467,7 @@ public function wppbPopupList_json($allSetting,$column_making,$countPopup){
 								<label class="rl-sub-title"><?php _e('Border Color','wppb');?>
 								</label>
 							 <div>
-								<label class="color-output" <?php echo $data_attr;?> data-input-color="border-color">	
+								<label class="color-output" <?php echo esc_attr($type).'="'.esc_attr($id).'"' . esc_attr($attr);?> data-input-color="border-color">	
 								</label>
 						   </div>
 						</div>
@@ -489,7 +476,7 @@ public function wppbPopupList_json($allSetting,$column_making,$countPopup){
 							    <label class="rl-sub-title">
 								<?php _e('Border Style','wppb');?>	
 								</label>
-							<div><?php echo $border; ?></div>
+							<div><?php $this->select($data_attr.' data-border="border-style"',[ ['solid','solid'],['dashed','dashed'],['dotted','dotted'],['double','double'],['groove','groove'],['ridge','ridge'] ]); ?></div>
 						</div>
 					</div>
 				</section>
@@ -500,36 +487,36 @@ public function wppbPopupList_json($allSetting,$column_making,$countPopup){
 	public function box_shadow($id,$type,$attr=''){
 		$data_attr = esc_attr($type).'="'.esc_attr($id).'"' . esc_attr($attr);?>
 			<section class="content-style-border content-style-box-shadow">
-						<?php $this->checkbox($type,'Box Shadow',$data_attr.' data-shadow="enable"');?>
+						<?php echo $this->checkbox($type,'Box Shadow',$data_attr.' data-shadow="enable"');?>
 							<div  class="rl_i_editor-item-content-items content-border content-box-shadow">
 								<div>
 									<label class="rl-sub-title">
 										<?php _e('X Offset','wppb');?>	
 									</label>
 									<div>
-										<input class="rl-sub-title" type="number" value="" <?php echo $data_attr;?> data-shadow="x-offset">
+										<input class="rl-sub-title" type="number" value="" <?php echo esc_attr($type).'="'.esc_attr($id).'"' . esc_attr($attr);?> data-shadow="x-offset">
 									</div>
 								</div>
 								<div>
 									<label class="rl-sub-title"><?php _e('Y Offset','wppb');?></label>
-									<div><input class="rl-sub-title" type="number" value="" <?php echo $data_attr;?> data-shadow="y-offset"></div>
+									<div><input class="rl-sub-title" type="number" value="" <?php echo esc_attr($type).'="'.esc_attr($id).'"' . esc_attr($attr);?> data-shadow="y-offset"></div>
 								</div>
 								<div>
 									<label class="rl-sub-title"><?php _e('Blur','wppb');?></label>
-									<div><input class="rl-sub-title" type="number" value="" <?php echo $data_attr;?> data-shadow="blur"></div>
+									<div><input class="rl-sub-title" type="number" value="" <?php echo esc_attr($type).'="'.esc_attr($id).'"' . esc_attr($attr);?> data-shadow="blur"></div>
 								</div>
 								<div>
 									<label class="rl-sub-title"><?php _e('Spread','wppb');?>
 									</label>
 									<div>
-									<input class="rl-sub-title" type="number" value="" <?php echo $data_attr;?> data-shadow="spread">
+									<input class="rl-sub-title" type="number" value="" <?php echo esc_attr($type).'="'.esc_attr($id).'"' . esc_attr($attr);?> data-shadow="spread">
 								  </div>
 								</div>
 								<div>
 									<label class="rl-sub-title"><?php _e('Color','wppb');?>
 									</label>
 									<div>
-										<label class="color-output" <?php echo $data_attr;?>  data-shadow="color"></label>
+										<label class="color-output" <?php echo esc_attr($type).'="'.esc_attr($id).'"' . esc_attr($attr);?>  data-shadow="color"></label>
 									</div>
 								</div>
 							</div>
@@ -549,22 +536,22 @@ public function wppbPopupList_json($allSetting,$column_making,$countPopup){
 				<div class="rl_i_editor-item-content-padding_ paraMeterContainer__">
 					<ul class="ul-inputs-margin-padding rl-clear">
 						<li>
-							<input class="rl-sub-title" type="number" value="" <?php echo $attr;?> data-<?php echo esc_attr($parameter);?>="top">
+							<input class="rl-sub-title" type="number" value="" <?php echo esc_attr($type)."='".esc_attr($id)."'" .$attr;?> data-<?php echo esc_attr($parameter);?>="top">
 						</li>
 						<li>
-							<input class="rl-sub-title" type="number" value="" <?php echo $attr;?> data-<?php echo esc_attr($parameter);?>="right">
+							<input class="rl-sub-title" type="number" value="" <?php echo esc_attr($type)."='".esc_attr($id)."'" .$attr;?> data-<?php echo esc_attr($parameter);?>="right">
 							
 						</li>
 						<li>
-							<input class="rl-sub-title" type="number" value="" <?php echo $attr;?> data-<?php echo esc_attr($parameter);?>="bottom">
+							<input class="rl-sub-title" type="number" value="" <?php echo esc_attr($type)."='".esc_attr($id)."'" .$attr;?> data-<?php echo esc_attr($parameter);?>="bottom">
 							
 						</li>
 						<li>
-							<input class="rl-sub-title" type="number" value="" <?php echo $attr;?> data-<?php echo esc_attr($parameter);?>="left">
+							<input class="rl-sub-title" type="number" value="" <?php echo esc_attr($type)."='".esc_attr($id)."'" .$attr;?> data-<?php echo esc_attr($parameter);?>="left">
 						</li>
 
 						<li class="padding-origin_ margin-padding-origin">
-							<input id="m__p_origin-<?php echo esc_attr($parameter);?>-<?php echo esc_attr($id);?>" type="checkbox" <?php echo $attr;?> data-origin="<?php echo esc_attr($parameter);?>">
+							<input id="m__p_origin-<?php echo esc_attr($parameter);?>-<?php echo esc_attr($id);?>" type="checkbox" <?php echo esc_attr($type)."='".esc_attr($id)."'" .$attr;?> data-origin="<?php echo esc_attr($parameter);?>">
 							<label for="m__p_origin-<?php echo esc_attr($parameter);?>-<?php echo esc_attr($id);?>">
 								<span class="dashicons dashicons-admin-links">
 							</span>

@@ -261,7 +261,7 @@ if (file_exists(WP_PLUGIN_DIR . '/lead-form-builder/lead-form-builder.php') && i
 							<div class="rl_i_editor-item-content-items item-text inline__">
 								<label class="rl-sub-title"><?php _e('Font Weight', 'wppb'); ?></label>
 								<div>
-									<?php echo $wp_builder_obj->select('data-editor-input="font-weight"', [[200, 200], [300, 300], [400, 400], [500, 500], [600, 600], [700, 700], [800, 800], [900, 900]]); ?>
+									<?php $wp_builder_obj->select('data-editor-input="font-weight"', [[200, 200], [300, 300], [400, 400], [500, 500], [600, 600], [700, 700], [800, 800], [900, 900]]); ?>
 
 								</div>
 							</div>

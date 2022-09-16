@@ -108,7 +108,7 @@ if ( ! wp_verify_nonce( $nonce, 'nonce_pop' ) ) {
 			<?php if (isset($wppb_popup_id)) { ?>
 
 			<a class="wppb_icon_button wppb-popup-tab <?php echo esc_attr($tabActiveOption); ?>" data-tab='option' data-tab-group="main-nav" href="#">
-					<span><?php _e('Setting', 'wppb'); ?></span>
+			<span><?php _e('Setting', 'wppb'); ?></span>
 			</a>
 
 			<?php } ?>
@@ -136,7 +136,7 @@ if ( ! wp_verify_nonce( $nonce, 'nonce_pop' ) ) {
 
 			if (!$get_CustomPopup) 
 
-			 include_once 'prebuilt-popup.php';
+			include_once 'prebuilt-popup.php';
 
 			include_once 'popup-custom.php';
 
@@ -158,7 +158,7 @@ if ( ! wp_verify_nonce( $nonce, 'nonce_pop' ) ) {
 		include_once 'popup-shortcode-tab.php'; 
 
         }
-		?>
+	?>
 
 	</div>
 
