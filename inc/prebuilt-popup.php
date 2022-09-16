@@ -142,7 +142,7 @@ define('WPPB_ADIMG_URL', WPPB_URL . 'img/paid/');
 				</div>
 			</div>
 			<!-- json data layout -->
-			<?php echo wp_kses_post($jsonPopupHtml); ?>
+			<?php echo $jsonPopupHtml; ?>
 			<!-- layout 3 -->
 		</section>
 		<!-- prebuilt popup section -->

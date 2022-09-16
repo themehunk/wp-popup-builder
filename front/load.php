@@ -47,7 +47,7 @@ class wppb_load
 
 					if ($popupData) {
 
-						echo wp_kses_post($popupData);
+						echo $popupData;
 					}
 
 						
