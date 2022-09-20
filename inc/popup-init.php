@@ -110,7 +110,9 @@ function initContent($column_content){
 				            '.$popupSetData["content"].'
 			              </div>
 			        </div>';
+     
 			return $return;
+
 	}
 
 // popup page list of all popupSetData content
@@ -381,62 +383,91 @@ public function wppbPopupList_json($allSetting,$column_making,$countPopup){
 
 		 <?php }
 
-		public function select($attr,$option){ ?>
-
-				<select class='rl-sub-title' <?php echo $attr;?>>
-
-				<?php if ( is_array($option) ) {
-
+			public function select($attr, $option){
+				$return = "<select class='rl-sub-title' " . $attr . ">";
+				if (is_array($option)) {
 					foreach ($option as $value) {
+						if (isset($value[0]) && isset($value[1])) {
+							$selected = isset($value[2]) ? 'selected="selected"' : '';
+							$return	.= "<option value='" . $value[1] . "' " . $selected . ">" . $value[0] . "</option>";
+						} elseif (isset($value[0])) {
+							$return	.= "<option>" . $value[0] . "</option>";
+						}
 
-							if ( isset($value[0]) && isset($value[1]) ) {
-								$selected = isset($value[2]) ? 'selected="selected"':'';?>
+					}
 
-							<option value='<?php echo esc_attr($value[1]);?>' <?php echo esc_attr($selected);?>><?php echo esc_attr($value[0]);?>
-							</option>
+				}
+				$return	.= "</select>";
 
-							<?php }elseif ( isset($value[0]) ) { ?>
+				$arr = array( 
 
-							<option><?php echo esc_attr($value[0]);?></option>
+					'select' => array(
+                 'class'  => array(),
+                 'data-global-input'  => array(),
+                 'data-cmn'  => array(),
+                 'data-editor-input'  => array(),
+                 'data-lead-form'  => array(),
+                 'data-border'  => array(),
+                 'data-border'  => array(),
 
-						<?php 	}
-						}	
-					}	
 
-					?>
-		</select>
-		
-	<?php }
+					), 
+					'option' => array(
+                  'value'  => array(),
+                  'selected'  => array(), 
+					), 
+				);
+
+				echo wp_kses($return, $arr );
+
+			}
     
-    public function checkbox($id,$title,$attr){ 
+   
+		public function checkbox($id, $title, $attr)
+	  {
 
-    	?>
-
-			<div  class="rl_i_editor-item-content-items title_ inline__">
-
+		   $return = '<div  class="rl_i_editor-item-content-items title_ inline__">
 			<div class="rl_i_range-font-size">
-
 					<div class="wppb-popup-checkbox-container">
-
-						<label class="wppb-popup-checkbox-title rl-sub-title">
-
-						<?php echo esc_html($title);?></label>
-
+						<label class="wppb-popup-checkbox-title rl-sub-title">' . $title . '</label>
 						<div class="wppb-popup-checkbox">
-
-							<input id="wppb_popup__checkbox__label_id-<?php echo esc_attr($id);?>" type="checkbox" <?php echo $attr; ?>>
-
-							<label for="wppb_popup__checkbox__label_id-<?php echo esc_attr($id);?>"></label>
-
+							<input id="wppb_popup__checkbox__label_id-' . $id . '" type="checkbox" ' . $attr . '>
+							<label for="wppb_popup__checkbox__label_id-' . $id . '"></label>
 						</div>
-
 					</div>
-
 				</div>
+				</div>';
 
-			</div>
+				$arr = array( 
 
-		<?php }
+					'div' => array(
+                  'class'  => array(),
+					), 
+
+					'label'=> array(
+                  'class'  => array(),
+                  'for'   => array(),
+					), 
+
+					'input' => array(
+                 'class'  => array(),
+                 'id'  => array(),
+                 'type'  => array(),
+                 'data-global-input'  => array(),
+                 'data-editor-input'  => array(),
+                 'data-bid'  => array(),
+                 'data-lead-form'  => array(),
+                 'data-border'  => array(),
+                 'data-shadow'  => array(),
+
+
+					) 
+ 
+				);
+
+				echo wp_kses($return, $arr );
+
+  	}
 
 
 		public function border($id,$type,$attr = ''){
@@ -524,77 +555,149 @@ public function wppbPopupList_json($allSetting,$column_making,$countPopup){
 			
 	<?php }
 
-
-	public function margin_padding($id,$title,$type,$margin_padding,$attr=''){
-		$attr = esc_attr($type)."='".esc_attr($id)."'" .$attr;
-		$parameter = $margin_padding == "m" ? 'margin' : 'padding';?>
-
-		<div class="rl_i_editor-item-content-items title_ inline_">
-		<div class="rl_i_range-font-size"><label class="rl-sub-title"><?php echo esc_html($title);?></label></div>
+		public function margin_padding($id, $title, $type, $margin_padding, $attr = '')
+	  {
+		$attr = $type . "='" . $id . "'" . $attr;
+		$parameter = $margin_padding == "m" ? 'margin' : 'padding';
+		$return = '<div class="rl_i_editor-item-content-items title_ inline_">
+		<div class="rl_i_range-font-size"><label class="rl-sub-title">' . $title . '</label></div>
 		</div>
 			<div class="rl_i_editor-item-content-items inline_">
 				<div class="rl_i_editor-item-content-padding_ paraMeterContainer__">
 					<ul class="ul-inputs-margin-padding rl-clear">
 						<li>
-							<input class="rl-sub-title" type="number" value="" <?php echo esc_attr($type)."='".esc_attr($id)."'" .$attr;?> data-<?php echo esc_attr($parameter);?>="top">
+							<input class="rl-sub-title" type="number" value="" ' . $attr . ' data-' . $parameter . '="top">
 						</li>
 						<li>
-							<input class="rl-sub-title" type="number" value="" <?php echo esc_attr($type)."='".esc_attr($id)."'" .$attr;?> data-<?php echo esc_attr($parameter);?>="right">
-							
+							<input class="rl-sub-title" type="number" value="" ' . $attr . ' data-' . $parameter . '="right">
 						</li>
 						<li>
-							<input class="rl-sub-title" type="number" value="" <?php echo esc_attr($type)."='".esc_attr($id)."'" .$attr;?> data-<?php echo esc_attr($parameter);?>="bottom">
-							
+							<input class="rl-sub-title" type="number" value="" ' . $attr . ' data-' . $parameter . '="bottom">
 						</li>
 						<li>
-							<input class="rl-sub-title" type="number" value="" <?php echo esc_attr($type)."='".esc_attr($id)."'" .$attr;?> data-<?php echo esc_attr($parameter);?>="left">
+							<input class="rl-sub-title" type="number" value="" ' . $attr . ' data-' . $parameter . '="left">
 						</li>
-
 						<li class="padding-origin_ margin-padding-origin">
-							<input id="m__p_origin-<?php echo esc_attr($parameter);?>-<?php echo esc_attr($id);?>" type="checkbox" <?php echo esc_attr($type)."='".esc_attr($id)."'" .$attr;?> data-origin="<?php echo esc_attr($parameter);?>">
-							<label for="m__p_origin-<?php echo esc_attr($parameter);?>-<?php echo esc_attr($id);?>">
-								<span class="dashicons dashicons-admin-links">
-							</span>
-						</label>
+							<input id="m__p_origin-' . $parameter . '-' . $id . '" type="checkbox" ' . $attr . ' data-origin="' . $parameter . '">
+							<label for="m__p_origin-' . $parameter . '-' . $id . '"><span class="dashicons dashicons-admin-links"></span></label>
 						</li>
-
 					</ul>							
 					<ul class="ul-inputs-text rl-clear">
-						<li><?php _e('TOP','wppb');?></li>
-						<li><?php _e('RIGHT','wppb');?></li>
-						<li><?php _e('BOTTOM','wppb');?></li>
-						<li><?php _e('LEFT','wppb');?></li>
+						<li>' . __('TOP', 'wppb') . '</li>
+						<li>' . __('RIGHT', 'wppb') . '</li>
+						<li>' . __('BOTTOM', 'wppb') . '</li>
+						<li>' . __('LEFT', 'wppb') . '</li>
 						<li></li>
 					</ul>
 				</div>
-			</div>
+			</div>';
 
-		<?php }
+		   $arr = array( 
 
-		public function alignment($title,$id,$type,$attr='',$number_=false){
-				$attr_ = esc_attr($type)."='".esc_attr($id)."'" . esc_attr($attr);?>
-				<div class="rl_i_editor-item-content-items item-alignment_ inline__">
-				<label class="rl-sub-title"><?php echo esc_html($title);?></label>
-				<div class="rl_text-alignment">
+					'div' => array(
+                  'class'  => array(),
+					), 
+
+					'label'=> array(
+                  'class'  => array(),
+                  'for'   => array(),
+					),
+
+					'ul'=> array(
+                  'class'  => array(), 
+                 
+					), 
+
+					'li'=> array(
+                  'class'  => array(),    
+					),
+          'span'=> array(
+                  'class'  => array(),    
+					),
+					'input' => array(
+                 'class'  => array(),
+                 'id'  => array(),
+                 'type'  => array(),
+                 'value'  => array(),
+                 'data-global-input'  => array(),
+                 'data-editor-input'  => array(),
+                 'data-cmn'  => array(),
+                 'data-lead-form'  => array(),
+                 'data-padding'  => array(),
+                 'data-margin'  => array(),
+                 'data-origin' => array(),
+                 
+					) 
+ 
+				);
+
+				echo wp_kses($return, $arr );
+	  }
+
+
+			public function alignment($title, $id, $type, $attr = '', $number_ = false)
+	{
+		$attr_ = $type . "='" . $id . "'" . $attr;
+		$return = '<div class="rl_i_editor-item-content-items item-alignment_ inline__">';
+		// $return .= '<label class="rl-sub-title">'.$title.'</label>';
+		$return .= '<div class="rl_text-alignment">
 					<ul class="text-alignment-choice">
 						<li>
-							<input id="_alignment_label_<?php echo esc_attr($id);?>_left" <?php echo $attr; ?> type="radio" name="<?php echo esc_attr($id);?>" value="left">
-							<label for="_alignment_label_<?php echo esc_attr($id);?>_left" class="dashicons dashicons-editor-alignleft"></label>
+							<input id="_alignment_label_' . $id . '_left" ' . $attr_ . ' type="radio" name="' . $id . '" value="left">
+							<label for="_alignment_label_' . $id . '_left" class="dashicons dashicons-editor-alignleft"></label>
 						</li>
 						<li>
-							<input id="_alignment_label_<?php echo esc_attr($id);?>_center" <?php echo $attr; ?> type="radio" name="<?php echo esc_attr($id);?>" value="center">
-							<label for="_alignment_label_<?php echo esc_attr($id);?>_center" class="dashicons dashicons-editor-aligncenter"></label>
-						</li>
-				<?php if ($number_ != 2) {?>
-				    <li>
-							<input id="_alignment_label_<?php echo esc_attr($id);?>_right" <?php echo $attr_; ?> type="radio" name="<?php echo esc_attr($id);?>" value="right">
-							<label for="_alignment_label_<?php echo esc_attr($id);?>_right" class="dashicons dashicons-editor-alignright"></label>
-						</li>
-				<?php }?>
+							<input id="_alignment_label_' . $id . '_center" ' . $attr_ . ' type="radio" name="' . $id . '" value="center">
+							<label for="_alignment_label_' . $id . '_center" class="dashicons dashicons-editor-aligncenter"></label>
+						</li>';
+		if ($number_ != 2) {
+			$return .= '<li>
+							<input id="_alignment_label_' . $id . '_right" ' . $attr_ . ' type="radio" name="' . $id . '" value="right">
+							<label for="_alignment_label_' . $id . '_right" class="dashicons dashicons-editor-alignright"></label>
+						</li>';
+		}
 
-				</ul>
+		$return .=	'</ul>
 				</div>
-			</div>
-		<?php }
-// class end
+			</div>';
+		  $arr = array( 
+
+					'div' => array(
+                  'class'  => array(),
+					), 
+
+					'label'=> array(
+                  'class'  => array(),
+                  'for'   => array(),
+					),
+
+					'ul'=> array(
+                  'class'  => array(), 
+                 
+					), 
+
+					'li'=> array(
+                  'class'  => array(),    
+					),
+          'span'=> array(
+                  'class'  => array(),    
+					),
+					'input' => array(
+                 'class'  => array(),
+                 'id'  => array(),
+                 'type'  => array(),
+                 'value'  => array(),
+                 'data-global-input'  => array(),
+                 'data-editor-input'  => array(),
+                 'data-lead-form'  => array(),
+                 'checked'  => array(),
+                 
+                 
+					) 
+ 
+				);
+
+				echo wp_kses($return, $arr );
+	}
+
 }
