@@ -225,7 +225,7 @@ if (file_exists(WP_PLUGIN_DIR . '/lead-form-builder/lead-form-builder.php') && i
 									<textarea data-editor-input='title'></textarea>
 								</div>
 								<?php
-								// text color/ background-color / font-size / letter-spacing / line height
+								
 								$wp_builder_obj->color(__('Text Color', 'wppb'), 'color', 'data-editor-input');
 								$wp_builder_obj->color(__('Background Color', 'wppb'), 'background-color', 'data-editor-input');
 								$wp_builder_obj->range_slider(__("Font Size(px)", 'wppb'), 'font-size', ['title' => 'px', 'min' => 10, 'value' => 30, 'max' => 100, "container-class" => 'item-text'], false, 'data-editor-input');
@@ -285,7 +285,7 @@ if (file_exists(WP_PLUGIN_DIR . '/lead-form-builder/lead-form-builder.php') && i
 						<div>
 							<div class="popup-delete-wrap">
 
-								<?php echo $popupSetData['deletebtn']; ?>
+								<?php echo wp_kses($popupSetData['deletebtn'],array( 'button' => array('class'=> array(),'data-bid'=> array()))); ?>
 									
 								</div>
 							<?php $wp_builder_obj->checkbox('popup_setting_active', __('Activate', 'wppb'), 'class="wppb_popup_setting_active" data-bid="' . esc_attr($wppb_popup_id) . '"' . esc_attr($popup_is_active)); ?>
@@ -302,9 +302,10 @@ if (file_exists(WP_PLUGIN_DIR . '/lead-form-builder/lead-form-builder.php') && i
 					<div class="rl_i_editor-item-content-items title_ inline__">
 						<label class="rl-sub-title"><?php _e('Choose Lead Form', 'wppb'); ?></label>
 					</div>
-					<?php if ($LfbPluginPath) echo wp_kses_post($LfbPluginPath); ?>
 
-					<div class="rl_i_editor-item-content-items lead-form-bulider-select <?php if ($LfbPluginPath) echo 'rl-display-none'; ?>">
+					<?php if ($LfbPluginPath) echo wp_kses($LfbPluginPath,array( 'a' => array('class'=> array(),'href'=> array()))); ?>
+
+					<div class="rl_i_editor-item-content-items lead-form-bulider-select <?php if ($LfbPluginPath) echo esc_attr('rl-display-none'); ?>">
 						<select>
 							<option><?php _e('Select Form', 'wppb'); ?></option>
 							<?php echo wppb_db::lead_form_opt(); ?>
@@ -332,27 +333,27 @@ if (file_exists(WP_PLUGIN_DIR . '/lead-form-builder/lead-form-builder.php') && i
 							<?php
 							//heading section
 							$wp_builder_obj->header_title(__('Heading Setting', 'wppb'));
-							$wp_builder_obj->checkbox("form-heading-enable", __("Heading Enable", 'wppb'), 'data-lead-form="form-heading-enable"');
-							echo "<div class='lead-form-heading-section'>";
-							$wp_builder_obj->color(__('Color', 'wppb'), 'color', 'data-lead-form', 'lf-heading-color');
-							$wp_builder_obj->range_slider(__('Font Size(px)', 'wppb'), 'lf-heading-font-size', ['title' => 'px', 'min' => "10", 'max' => 100, 'value' => 10], false, 'data-lead-form');
-							echo "</div>";
-							//label text section
+							$wp_builder_obj->checkbox("form-heading-enable", __("Heading Enable", 'wppb'), 'data-lead-form="form-heading-enable"');?>
+							<div class='lead-form-heading-section'>
+							<?php $wp_builder_obj->color(__('Color', 'wppb'), 'color', 'data-lead-form', 'lf-heading-color');
+							$wp_builder_obj->range_slider(__('Font Size(px)', 'wppb'), 'lf-heading-font-size', ['title' => 'px', 'min' => "10", 'max' => 100, 'value' => 10], false, 'data-lead-form');?>
+							</div>
+							<?php
 							$wp_builder_obj->header_title(__('Label Setting', 'wppb'));
-							$wp_builder_obj->checkbox("form-label-enable", __("Label Enable", 'wppb'), 'data-lead-form="form-label-enable"');
-							echo "<div class='lead-form-label-section'>";
-							$wp_builder_obj->color(__('Color', 'wppb'), 'color', 'data-lead-form', 'lf-label-color');
-							$wp_builder_obj->range_slider(__('Font Size(px)', 'wppb'), 'lf-label-font-size', ['title' => 'px', 'min' => "10", 'max' => 100, 'value' => 10], false, 'data-lead-form');
-							echo "</div>";
-							// radio checkbox input text section
-							echo "<div class='lead-form-radio-text-section'>";
+							$wp_builder_obj->checkbox("form-label-enable", __("Label Enable", 'wppb'), 'data-lead-form="form-label-enable"');?>
+							<div class='lead-form-label-section'>
+							<?php $wp_builder_obj->color(__('Color', 'wppb'), 'color', 'data-lead-form', 'lf-label-color');
+							$wp_builder_obj->range_slider(__('Font Size(px)', 'wppb'), 'lf-label-font-size', ['title' => 'px', 'min' => "10", 'max' => 100, 'value' => 10], false, 'data-lead-form');?>
+							</div>
+						
+							<div class='lead-form-radio-text-section'><?php 
 							$wp_builder_obj->header_title(__('Radio Checkbox Field Setting', 'wppb'));
 							$wp_builder_obj->color(__('Color', 'wppb'), 'lf-radio-checkbox-text-color', 'data-lead-form', 'lf-radio-checkbox-text-color');
 							$wp_builder_obj->range_slider(__('Font Size(px)', 'wppb'), 'lf-radio-checkbox-text-font-size', ['title' => 'px', 'min' => 10, 'max' => 100, 'value' => 10], false, 'data-lead-form');
-							$wp_builder_obj->margin_padding('lf-radio-checkbox-text-margin', __('Input Margin(px)', 'wppb'), 'data-lead-form', 'm');
-							echo "</div>";
+							$wp_builder_obj->margin_padding('lf-radio-checkbox-text-margin', __('Input Margin(px)', 'wppb'), 'data-lead-form', 'm');?>
+							</div>
 
-							//field text section
+							<?php 
 							$wp_builder_obj->header_title(__('Field Setting', 'wppb'));
 							$wp_builder_obj->color(__('Color', 'wppb'), 'color', 'data-lead-form', 'lf-field-color');
 							$wp_builder_obj->color(__('Background Color', 'wppb'), 'background-color', 'data-lead-form', 'lf-field-background-color');
@@ -370,7 +371,7 @@ if (file_exists(WP_PLUGIN_DIR . '/lead-form-builder/lead-form-builder.php') && i
 							<div class="rl_i_editor-item-content-items item-text inline__">
 								<label class="rl-sub-title"><?php _e('Font Weight', 'wppb'); ?></label>
 								<div>
-									<?php echo $wp_builder_obj->select('data-lead-form="submit-font-weight"', [[200, 200], [300, 300], [400, 400], [500, 500], [600, 600], [700, 700], [800, 800], [900, 900]]); ?>
+									<?php $wp_builder_obj->select('data-lead-form="submit-font-weight"', [[200, 200], [300, 300], [400, 400], [500, 500], [600, 600], [700, 700], [800, 800], [900, 900]]); ?>
 								</div>
 							</div>
 							<?php
@@ -400,8 +401,7 @@ if (file_exists(WP_PLUGIN_DIR . '/lead-form-builder/lead-form-builder.php') && i
 							$wp_builder_obj->header_title(__('Container Setting', 'wppb'));
 							$wp_builder_obj->range_slider(__('Width(%)', 'wppb'), 'shortcode-container-width', ['title' => '%', 'min' => "20", 'max' => 100, 'value' => 100], false, 'data-shortcode');
 							$wp_builder_obj->range_slider(__('Height(%)', 'wppb'), 'shortcode-container-height', ['title' => '%', 'min' => "20", 'max' => 1000, 'value' => 100], false, 'data-shortcode');
-							// $wp_builder_obj->color(__('Background Color', 'wppb'), 'background-color', 'data-shortcode', 'form-bg-color');
-							// $wp_builder_obj->border('shortcode-form-border', 'data-shortcode');
+							
 							?>
 						</div>
 					</div>
@@ -412,7 +412,9 @@ if (file_exists(WP_PLUGIN_DIR . '/lead-form-builder/lead-form-builder.php') && i
 		</div>
 		<div class="rl_i_editor-footer">
 			<div class="rl_i_editor-footer-area">
-				<?php echo $popupSetData['savebtn']; ?>
+
+				<?php echo wp_kses($popupSetData['savebtn'],array( 'button' => array('class'=> array(),'data-bid'=> array()))); ?>
+
 			</div>
 		</div>
 	</div>
