@@ -112,7 +112,7 @@ class wppb_ajax extends wppb_db
 	public function getLeadForm()
 	{
 		$result = $this->get_lead_form_ajx();
-		echo wp_kses_post($result ? $result : 0);
+		echo do_shortcode( '[lead-form form-id='.$result.']' ); 
 		die();
 	}
 	//shortcode 

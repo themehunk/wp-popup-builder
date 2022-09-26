@@ -25,7 +25,7 @@ if ($get_CustomPopup) {
 	if (isset($custom_popup_all[0])) {
 		$customAddon = $custom_popup_all[0];
 		if (isset($customAddon->boption) && $customAddon->boption != '') $addon_option = unserialize($customAddon->boption);
-		$popup_is_active = $customAddon->is_active ? "checked='checked'" : "";
+		$popup_is_active = $customAddon->is_active ? " checked='checked'" : "";
 		$allSetting = unserialize($customAddon->setting);
 		$wppb_popup_id = $customAddon->BID;
 		$popupSetData['savebtn'] = '<button data-bid="' . esc_attr($wppb_popup_id) . '" class="wppb_popup_updateAddon">' . __('Update', 'wppb') . '</button>';
@@ -40,11 +40,11 @@ if ($get_CustomPopup) {
 					}
 				} elseif ($setting_value['type'] == 'wrap') {
 					$data_layout = $popupSetData['layout'] == 'layout-3' || $popupSetData['layout'] == 'layout-2' ? 'two-column' : '';
-					$uniqIdAttr = isset($setting_value["id"]) ? 'data-uniqid="' . esc_attr($setting_value["id"]) . '"' : '';
+					$uniqIdAttr = isset($setting_value["id"]) ? ' data-uniqid="' . esc_attr($setting_value["id"]) . '"' : '';
 					$popupSetData["content"] .= '<div ' . $uniqIdAttr . ' data-rl-wrap="' . $popupSetData['layout'] . '" class="wppb-popup-rl-wrap rl-clear ' . $data_layout . '">' . $wp_builder_obj->initColumn($setting_value['content']) . '</div>';
 				}
 			} else if ($setting_value['type'] == "close-btn") {
-				$uniqIdAttr = isset($setting_value["id"]) ? 'data-uniqid="' . esc_attr($setting_value["id"]) . '"' : '';
+				$uniqIdAttr = isset($setting_value["id"]) ? ' data-uniqid="' . esc_attr($setting_value["id"]) . '"' : '';
 				$styleClose = isset($setting_value['style']) ? "style='" . esc_attr($setting_value['style']) . "'" : '';
 				$popupSetData["close-btn"] = '<span ' . $uniqIdAttr . ' class="wppb-popup-close-btn dashicons dashicons-no-alt" ' . $styleClose . '></span>';
 			}
@@ -108,7 +108,7 @@ if ( ! wp_verify_nonce( $nonce, 'nonce_pop' ) ) {
 			<?php if (isset($wppb_popup_id)) { ?>
 
 			<a class="wppb_icon_button wppb-popup-tab <?php echo esc_attr($tabActiveOption); ?>" data-tab='option' data-tab-group="main-nav" href="#">
-			<span><?php _e('Setting', 'wppb'); ?></span>
+					<span><?php _e('Setting', 'wppb'); ?></span>
 			</a>
 
 			<?php } ?>
@@ -136,7 +136,7 @@ if ( ! wp_verify_nonce( $nonce, 'nonce_pop' ) ) {
 
 			if (!$get_CustomPopup) 
 
-			include_once 'prebuilt-popup.php';
+			 include_once 'prebuilt-popup.php';
 
 			include_once 'popup-custom.php';
 
@@ -158,7 +158,7 @@ if ( ! wp_verify_nonce( $nonce, 'nonce_pop' ) ) {
 		include_once 'popup-shortcode-tab.php'; 
 
         }
-	?>
+		?>
 
 	</div>
 

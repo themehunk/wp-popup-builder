@@ -18,6 +18,8 @@ if (!function_exists('wppb_loaded_pro')) {
   include_once(WPPB_PATH . 'admin/inc.php');
   include_once(WPPB_PATH . 'front/shortcode.php');
   include_once(WPPB_PATH . 'front/load.php');
+
+
   add_action('plugins_loaded', 'wppb_loaded');
 
   function wppb_loaded()

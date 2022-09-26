@@ -7,6 +7,7 @@ include_once WPPB_PATH . 'inc/popup-init.php';
 class wppb
 {
 	private static $instance;
+	
 
 	private function __construct()
 	{

@@ -916,6 +916,7 @@
             seperateInputData1
           );
         } else if (seperateInputData1 == "text-alignment-choice") {
+
           let getAlignment = clickedObj.css("text-align");
           if (seperateInput.val() == getAlignment) {
             seperateInput.prop("checked", true);
@@ -1129,13 +1130,14 @@
             imageCheckbox.prop("checked", false);
           }
         } else if (dataInput == "background-position") {
-          let getElemStyle = $(
-            ".wppb-popup-custom .wppb-popup-overlay-custom-img"
-          ).attr("style");
-          let saparateStyle =
-            Custom_popup_editor._inlineCssSeparate(getElemStyle);
-          if (
-            "background-position" in saparateStyle &&
+          let getElemStyle = $(".wppb-popup-custom .wppb-popup-overlay-custom-img").attr("style");
+          let saparateStyle =false;
+          try {
+            let saparateStyle = Custom_popup_editor._inlineCssSeparate(getElemStyle);          }
+          catch(err) {
+          }
+
+          if (saparateStyle && "background-position" in saparateStyle &&
             sepInput.val() == saparateStyle["background-position"]
           ) {
             sepInput.prop("checked", true);
@@ -1514,7 +1516,7 @@
       Custom_popup_editor._resetSettingOpen();
       Custom_popup_editor._resetSettingOnClick();
       $(".rl-lead-form-panel").slideDown("fast");
-      clickedObj.addClass("rl-editable-key-action");
+      $('rl-lead-form-panel').addClass("rl-editable-key-action");
 
       if (getForm.data("form-id")) {
         $(".rl-lead-form-panel .lead-form-bulider-select select").val(
@@ -2193,8 +2195,9 @@
         .open();
     },
     _inlineCssSeparate: function (inline_css) {
+
       let saparateStyle = [];
-      if (inline_css != "" && inline_css.search(";") > -1) {
+      if (inline_css !='undefined' && inline_css != "" && inline_css.search(";") > -1) {
         inline_css.split(";").forEach((value_, index_) => {
           if (value_.search(":") > -1) {
             let getCss = value_.split(":");
@@ -2239,7 +2242,8 @@
     },
     _checkStyle: function (element, style_) {
       let getElemStyle = element.attr("style");
-      if (getElemStyle) {
+      if (getElemStyle !='undefined' && getElemStyle) {
+        
         let saparateStyle =
           Custom_popup_editor._inlineCssSeparate(getElemStyle);
         return style_ in saparateStyle ? saparateStyle[style_] : false;
@@ -2647,8 +2651,19 @@
       );
     },
   };
-
+  const getStylesAttr = $("[wppb-add-style]");
+  if (getStylesAttr.length) {
+    $.each(getStylesAttr, function () {
+      const element = $(this);
+      const getStyleAttr = element.attr("wppb-add-style");
+      if ("" !== getStyleAttr) {
+        element.attr("style", getStyleAttr);
+      }
+      element.removeAttr("wppb-add-style");
+    });
+  }
   Custom_popup_editor.init();
+
   Wppb_save.init();
   Wppb_shortcode_api.bind();
 })(jQuery);

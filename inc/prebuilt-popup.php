@@ -17,6 +17,7 @@ if (is_array($responseResult_) && !is_wp_error($responseResult_)) {
 		$jsonPopupHtml .= $prebuiltData['prebuilt-html'];
 	}
 }
+
 define('WPPB_ADIMG_URL', WPPB_URL . 'img/paid/');
 ?>
 <section class="wppb-popup-name-layout">
@@ -142,7 +143,7 @@ define('WPPB_ADIMG_URL', WPPB_URL . 'img/paid/');
 				</div>
 			</div>
 			<!-- json data layout -->
-			<?php echo $jsonPopupHtml; ?>
+			<?php echo wp_kses($jsonPopupHtml,$wp_builder_obj->editor_wp_kes()); ?>
 			<!-- layout 3 -->
 		</section>
 		<!-- prebuilt popup section -->
@@ -208,7 +209,9 @@ define('WPPB_ADIMG_URL', WPPB_URL . 'img/paid/');
 			</nav>
 		</div>
 		<div data-tab-active='free' data-tab-group="free-paid" class="prebuilt-free active">
-			<?php echo $jsonPopupDemo; ?>
+
+
+		<?php echo wp_kses($jsonPopupDemo,$wp_builder_obj->editor_wp_kes()); ?>
 		</div>
 		<div data-tab-active='paid' data-tab-group="free-paid" class="prebuilt-paid">
 			<div class="wppb-popup-row wppb-popup_clear">

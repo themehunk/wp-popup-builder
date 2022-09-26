@@ -19,9 +19,10 @@ class wppb_db
   public static function getCustomPopup($bid = "")
   {
     if ($bid && is_numeric($bid)) {
-      $querystr = "SELECT * FROM " . self::$table . " WHERE addon_name='custom_popup' AND BID='" . $bid . "'";
+
+      $querystr = self::$db->prepare("SELECT * FROM " . self::$table . " WHERE addon_name=%s AND BID= %d ",'custom_popup',$bid);
     } else if ($bid == '') {
-      $querystr = "SELECT * FROM " . self::$table . " WHERE addon_name='custom_popup' ORDER BY BID DESC";
+      $querystr = self::$db->prepare("SELECT * FROM " . self::$table . " WHERE addon_name=%s ORDER BY BID DESC",'custom_popup');
     }
     $pageposts = isset($querystr) ? self::$db->get_results($querystr) : '';
     return !empty($pageposts) ? $pageposts : false;
@@ -87,7 +88,7 @@ class wppb_db
   //get popup for all pages,pages,post
   public static function popup_pages()
   {
-    $querystr = "SELECT BID,setting,boption,addon_name FROM " . self::$table . " WHERE setting !='' AND boption!='' AND is_active = 1";
+    $querystr = $wpdb->prepare("SELECT BID,setting,boption,addon_name FROM " . self::$table . " WHERE setting !='' AND boption!='' AND is_active = %d ",1);
     $pageposts = self::$db->get_results($querystr);
     return !empty($pageposts) ? $pageposts : false;
   }
@@ -97,11 +98,11 @@ class wppb_db
   {
     if ($bid && is_numeric($bid)) {
       if ($popup_page) {
-        return  self::$db->get_row("SELECT BID,setting,boption,addon_name FROM " . self::$table . " WHERE BID='" . $bid . "' AND is_active='1'");
+        return  self::$db->get_row(self::$db->prepare( "SELECT BID,setting,boption,addon_name FROM " . self::$table . " WHERE BID = %d AND is_active=%d",$bid,1));
       } else if ($preview) {
-        return  self::$db->get_row("SELECT addon_name,setting FROM " . self::$table . " WHERE BID='" . $bid . "' ");
+        return  self::$db->get_row(self::$db->prepare("SELECT addon_name,setting FROM " . self::$table . " WHERE BID=%d ",$bid));
       } else {
-        return  self::$db->get_row("SELECT addon_name,setting FROM " . self::$table . " WHERE BID='" . $bid . "' AND is_active='1'");
+        return  self::$db->get_row(self::$db->prepare("SELECT addon_name,setting FROM " . self::$table . " WHERE BID='" . $bid . "' AND is_active=%d",1));
       }
     }
   }
@@ -223,7 +224,7 @@ class wppb_db
         $popupContent['style'] .= "#" . $parentId . ' .' . $uniqIdAttr . '{' . $setting_value['style'] . ';}';
       }
 
-      $alignMent = isset($setting_value['alignment']) ? 'style="justify-content:' . $setting_value['alignment'] . ';"' : '';
+      $alignMent = isset($setting_value['alignment']) ? 'wppb-add-style="justify-content:' . $setting_value['alignment'] . ';"' : '';
       $dataLink = isset($setting_value['link']) ? $setting_value['link'] : '';
       $dataLinktarget = isset($setting_value['target']) && $setting_value['target'] ? "target='_blank'" : '';
       $uniqIdAttr = $setting_value['type'] == 'heading' ? $uniqIdAttr . " text-heading" : $uniqIdAttr;
@@ -424,8 +425,8 @@ class wppb_db
   public function get_lead_form_ajx()
   {
     if (isset($_POST['form_id']) && is_numeric($_POST['form_id']) && self::lead_form_front_end()) {
-      $form_id = intval($_POST['form_id']);
-      return self::lead_form_front_end()->lfb_show_front_end_forms($form_id);
+      return  intval($_POST['form_id']);      
+      //self::lead_form_front_end()->lfb_show_front_end_forms($form_id);
     }
   }
 
