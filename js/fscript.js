@@ -362,5 +362,17 @@
       );
     },
   };
+
+  const getStylesAttr = $("[wppb-add-style]");
+  if (getStylesAttr.length) {
+    $.each(getStylesAttr, function () {
+      const element = $(this);
+      const getStyleAttr = element.attr("wppb-add-style");
+      if ("" !== getStyleAttr) {
+        element.attr("style", getStyleAttr);
+      }
+      element.removeAttr("wppb-add-style");
+    });
+  }
   Business_front.init();
 })(jQuery);
