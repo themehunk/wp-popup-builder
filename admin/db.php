@@ -88,7 +88,7 @@ class wppb_db
   //get popup for all pages,pages,post
   public static function popup_pages()
   {
-    $querystr = $wpdb->prepare("SELECT BID,setting,boption,addon_name FROM " . self::$table . " WHERE setting !='' AND boption!='' AND is_active = %d ",1);
+    $querystr = self::$db->prepare("SELECT BID,setting,boption,addon_name FROM " . self::$table . " WHERE setting !='' AND boption!='' AND is_active = %d ",1);
     $pageposts = self::$db->get_results($querystr);
     return !empty($pageposts) ? $pageposts : false;
   }
