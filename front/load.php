@@ -23,12 +23,14 @@ class wppb_load
 			$return_Html = wppb_db::Popup_show($popupId, true);
 
 			if (isset($return_Html->setting)) {
-
+				$popupInitObj = new wp_popup_builder_init();
 				$popupHtml = new wppb_db();
 
 				$popupHtmlContent = $popupHtml->wppb_html($return_Html->setting);
 
-				echo $popupHtmlContent && $return_Html ? '<div data-option="1" class="wppb-popup-open popup active">' . $popupHtmlContent . '</div>' : '';
+				$html_content = $popupHtmlContent && $return_Html ? '<div data-option="1" class="wppb-popup-open popup active">' . $popupHtmlContent . '</div>' : '';
+
+				echo wp_kses($html_content,$popupInitObj->editor_wp_kes());
 			}
 		}
 	}
@@ -47,7 +49,7 @@ class wppb_load
 
 					if ($popupData) {
 
-						echo $popupData;
+						echo wp_kses($popupData,$popupInitObj->editor_wp_kes());
 					}
 
 						

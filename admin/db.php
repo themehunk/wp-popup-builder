@@ -324,8 +324,8 @@ class wppb_db
     // $return = $popupSetData["close-btn"].'<div id="wrapper-'.$popupSetData["global-content-id"].'" class="wppb-popup-custom-wrapper" style="'.$popupSetData["wrapper-style"].'">
     $return = $popupSetData["close-btn"] . '<div id="wrapper-' . $popupSetData["global-content-id"] . '" class="wppb-popup-custom-wrapper">
             <input type="hidden" name="popup-setting-front" value="' . $popupSetData["front-setting"] . '">
-             <div class="wppb-popup-overlay-custom-img" style="' . $overlayStyle . '"></div>
-              <div class="wppb-popup-custom-overlay" style="background-color:' . $popupSetData['overlay-color'] . ';"></div>
+             <div class="wppb-popup-overlay-custom-img" wppb-add-style="' . $overlayStyle . '"></div>
+              <div class="wppb-popup-custom-overlay" wppb-add-style="background-color:' . $popupSetData['overlay-color'] . ';"></div>
                   <div id="' . $popupSetData["global-content-id"] . '" class="wppb-popup-custom-content">
                   ' . $popupSetData["content"] . '
                   </div>
@@ -335,7 +335,7 @@ class wppb_db
     if ($popupSetData['style']) {
       $style    = $popupSetData['style'];
       $style_res = !$inline ? $style . '@media only screen and (max-width: 480px){' . $this->_responsiveCss($style) . '}' : '';
-      $forInline = $inline ? "<textarea style='display:none;' class='wppb-popup-css-one-no_res' data-wrapper='" . $popupSetData["wrapper-style"] . "'>" . $style . "</textarea>" : '';
+      $forInline = $inline ? "<textarea wppb-add-style='display:none;' class='wppb-popup-css-one-no_res' data-wrapper='" . $popupSetData["wrapper-style"] . "'>" . $style . "</textarea>" : '';
       $internal_Css = "<div class='wppb-popup-style-internal-stylesheet'>
                   " . $forInline . "
                     <style>" . $style_res . "</style>
@@ -426,7 +426,6 @@ class wppb_db
   {
     if (isset($_POST['form_id']) && is_numeric($_POST['form_id']) && self::lead_form_front_end()) {
       return  intval($_POST['form_id']);      
-      //self::lead_form_front_end()->lfb_show_front_end_forms($form_id);
     }
   }
 

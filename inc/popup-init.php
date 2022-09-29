@@ -57,7 +57,11 @@ class wp_popup_builder_init {
 			'overlay-image-url'=>true,
 			'overlay-style'=>true,
 			'overlay-color'=>true,
-			
+			'data-option'=>true,
+			'data-wppb-frequency'=>true,
+			'data-wppb-bid'=>true,
+			'popup-delay-open'=>true,
+			'style'=>array(),
 			);
 	
 		$arr['span'] = $attribute;
@@ -69,6 +73,7 @@ class wp_popup_builder_init {
 		$arr['form'] = $attribute;
 		$arr['input'] = $attribute;
 		$arr['textarea'] = $attribute;
+		$arr['style'] = $attribute;
 		return $arr;
 	}
 
