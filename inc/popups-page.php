@@ -82,7 +82,7 @@ $custom_popup_all = wppb_db::getCustomPopup();
 					
 					$device = isset($bOption['device']) ? $bOption['device'] : false;
 
-					$wp_builder_obj->wppbPopupList($allSetting, $business_id, $popupValue->is_active, $device);
+					$wp_builder_obj->wppbPopupList($allSetting, $business_id, $device, $popupValue->is_active);
 				     }
 
                   } ?>
