@@ -286,7 +286,7 @@ class wp_popup_builder_init {
 
 	// popup page list of all popupSetData
 
-	public function wppbPopupList($allSetting, $business_id, $isActive = false, $device_) {
+	public function wppbPopupList($allSetting, $business_id, $device_, $isActive = false) {
 
 		$_nonce = wp_create_nonce('nonce_pop');
 
