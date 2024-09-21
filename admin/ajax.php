@@ -126,9 +126,9 @@ class wppb_ajax extends wppb_db
 	public function shortcode_Api_Add()
 	{
 		check_ajax_referer( '_wppb_nonce','nonce');
-		$dataPost = sanitize_text_field($_POST);
+		$dataPost = $_POST;
 		if (isset($dataPost['shortcode'])) {
-			echo $shortcode_ = $dataPost['shortcode'];
+			$shortcode_ = sanitize_text_field($dataPost['shortcode']);
 			$result = do_shortcode($shortcode_);
 			echo wp_kses_post($result);
 		}
