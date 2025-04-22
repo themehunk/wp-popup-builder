@@ -3,8 +3,8 @@ Contributors: ThemeHunk
 Author URI: : https://www.themehunk.com/
 Tags: popup,wp popup, popup maker, popup builder, popups,marketing
 Requires at least: 5.5
-Tested up to: 6.6
-Stable tag: 1.3.6
+Tested up to: 6.8
+Stable tag: 1.3.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -129,6 +129,9 @@ Just upload the `wp-popup-builder.zip` to the `/wp-content/plugins/` directory, 
 
 
 == Changelog ==
+
+= 1.3.7 =
+* Update: Tested with WordPress 6.8.
 
 = 1.3.6 =
 * Fix : In ajax manage_option permission added.
