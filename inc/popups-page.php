@@ -71,13 +71,13 @@ $custom_popup_all = wppb_db::getCustomPopup();
 
 				foreach ($custom_popup_all as $popupValue) {
 
-					$allSetting = unserialize($popupValue->setting);
+					$allSetting = unserialize($popupValue->setting, ['allowed_classes' => false]);
 
 					$business_id 	   		= isset($popupValue->BID) ? $popupValue->BID : "";
 
 					if ($popupValue->boption != '') {
 
-						$bOption = unserialize($popupValue->boption);
+						$bOption = unserialize($popupValue->boption, ['allowed_classes' => false]);
 					}
 					
 					$device = isset($bOption['device']) ? $bOption['device'] : false;

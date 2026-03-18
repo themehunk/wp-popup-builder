@@ -24,9 +24,9 @@ if ($get_CustomPopup) {
 	$custom_popup_all = wppb_db::getCustomPopup($get_CustomPopup);
 	if (isset($custom_popup_all[0])) {
 		$customAddon = $custom_popup_all[0];
-		if (isset($customAddon->boption) && $customAddon->boption != '') $addon_option = unserialize($customAddon->boption);
+		if (isset($customAddon->boption) && $customAddon->boption != '') $addon_option = unserialize($customAddon->boption, ['allowed_classes' => false]);
 		$popup_is_active = $customAddon->is_active ? " checked='checked'" : "";
-		$allSetting = unserialize($customAddon->setting);
+		$allSetting = unserialize($customAddon->setting, ['allowed_classes' => false]);
 		$wppb_popup_id = $customAddon->BID;
 		$popupSetData['savebtn'] = '<button data-bid="' . esc_attr($wppb_popup_id) . '" class="wppb_popup_updateAddon">' . __('Update', 'wppb') . '</button>';
 		$popupSetData['deletebtn'] = '<button data-bid="' . esc_attr($wppb_popup_id) . '" class="wppb_popup_deleteAddon">' . __('Delete', 'wppb') . '</button>';
@@ -64,7 +64,7 @@ $position_name = isset($_GET['pos-name']) ? sanitize_text_field($_GET['pos-name'
 $homePage_Priview = get_home_url() . "?wppb_preview=" . esc_attr($get_CustomPopup) . "&pos-name=" . esc_attr($position_name);
 
 
-$nonce = $_REQUEST['_pnonce'];
+$nonce = isset($_REQUEST['_pnonce']) ? $_REQUEST['_pnonce'] : '';
 
 if ( ! wp_verify_nonce( $nonce, 'nonce_pop' ) ) {
 

@@ -383,7 +383,7 @@ class wp_popup_builder_init {
 	public function show_popup_part_start($value, $shortcode = false) {
 		$return_data = false;
 		$cookieFilter = true;
-		$option = unserialize($value->boption);
+		$option = unserialize($value->boption, ['allowed_classes' => false]);
 		if (isset($_COOKIE['wppb-fr-' . $value->BID]) && isset($option['frequency']) && $_COOKIE['wppb-fr-' . $value->BID] == $option['frequency']) {
 			$cookieFilter = false;
 		}
