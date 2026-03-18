@@ -82,11 +82,11 @@ if ( ! wp_verify_nonce( $nonce, 'nonce_pop' ) ) {
 		<div class="reserConfirm_inner">
 			<div class="resetWrapper">
 				<div class="resetHeader">
-					<span><?php _e('Popup Will Delete Permanentally.', 'wppb'); ?></span>
+					<span><?php esc_html_e('Popup Will Delete Permanentally.', 'wppb'); ?></span>
 				</div>
 				<div class="resetFooter">
-					<a class="wppbPopup popup deny" href="#"><span class="dashicons dashicons-dismiss"></span><?php _e('No', 'wppb'); ?></a>
-					<a class="wppbPopup popup confirm" href="#"><span class="dashicons dashicons-yes-alt"></span><?php _e('Yes', 'wppb'); ?></a>
+					<a class="wppbPopup popup deny" href="#"><span class="dashicons dashicons-dismiss"></span><?php esc_html_e('No', 'wppb'); ?></a>
+					<a class="wppbPopup popup confirm" href="#"><span class="dashicons dashicons-yes-alt"></span><?php esc_html_e('Yes', 'wppb'); ?></a>
 				</div>
 			</div>
 		</div>
@@ -97,18 +97,18 @@ if ( ! wp_verify_nonce( $nonce, 'nonce_pop' ) ) {
 		<div class="wppb-popup-cmn-nav-item">
 
 			<a class="wppb_icon_button" href="<?php echo esc_url(WPPB_PAGE_URL); ?>">
-				<span class="dashicons dashicons-arrow-left-alt"></span><span><?php _e('Back', 'wppb'); ?></span>
+				<span class="dashicons dashicons-arrow-left-alt"></span><span><?php esc_html_e('Back', 'wppb'); ?></span>
 			</a>
 
 			<a class="wppb_icon_button wppb-popup-tab <?php echo esc_attr($tabActiveEditor); ?>" data-tab='setting' data-tab-group="main-nav" href="#">
 				<span class="dashicons dashicons-edit"></span>
-				<span><?php _e('Edit Popup', 'wppb'); ?></span>
+				<span><?php esc_html_e('Edit Popup', 'wppb'); ?></span>
 			</a>
 
 			<?php if (isset($wppb_popup_id)) { ?>
 
 			<a class="wppb_icon_button wppb-popup-tab <?php echo esc_attr($tabActiveOption); ?>" data-tab='option' data-tab-group="main-nav" href="#">
-					<span><?php _e('Setting', 'wppb'); ?></span>
+					<span><?php esc_html_e('Setting', 'wppb'); ?></span>
 			</a>
 
 			<?php } ?>
@@ -119,7 +119,7 @@ if ( ! wp_verify_nonce( $nonce, 'nonce_pop' ) ) {
 
 			<a class="popup-preview" href="<?php echo esc_url($homePage_Priview); ?>" target="_blank">
 			<span class="dashicons dashicons-visibility"></span>
-			<span><?php _e("Preview", "wppb");?></span>
+			<span><?php esc_html_e("Preview", "wppb");?></span>
 		    </a>
 
 		<?php }
